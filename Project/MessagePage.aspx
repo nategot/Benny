@@ -10,7 +10,7 @@
     <br />
     <br />
     <div>
-        <asp:Button ID="RegisterBTN" runat="server" Text="Register" 
+        <asp:Button ID="RegisterBTN" runat="server" Text="Log In" 
             Visible="false" CssClass="myButton"  onclick="RegisterBTN_Click" />
         <asp:Button ID="BackeBtn" CssClass="myButton"  runat="server" Text="Back" Visible="false" 
             onclick="BackeBtn_Click" />

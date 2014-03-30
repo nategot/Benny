@@ -38,7 +38,7 @@ public partial class RegisterNewUser : System.Web.UI.Page
         else
         {
             MessageBox.Show("the User was added Successfully", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Response.Redirect("http://localhost:62142/Project/Home.aspx");
+            Response.Redirect("Project/Home.aspx");
         }
     }
 }
