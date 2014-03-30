@@ -165,7 +165,7 @@
 
         function JoinEvent(a) {
          alert(a);
-            
+         response.sendRedirect("www.one.co.il");
         }
  
     </script>
