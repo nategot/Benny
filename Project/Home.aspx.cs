@@ -78,11 +78,20 @@ public partial class Home : System.Web.UI.Page
     //go to join event page and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
+        int Eventnum;
+       
         if (Session["Fname"] != null)
         {
-            Button btn = (Button)sender;
-            int Eventnum = int.Parse(btn.ID);
-
+            if (eventNumHF.Value != "")
+            {
+                Eventnum = int.Parse(eventNumHF.Value);
+            }
+            else
+            {
+             Button btn = (Button)sender;
+             Eventnum = int.Parse(btn.ID);
+            }
+         
             HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
             HttpContext.Current.Session["EventNumber"] = Eventnum;
             Response.Redirect("joinEvent.aspx");
@@ -151,4 +160,5 @@ public partial class Home : System.Web.UI.Page
             }
         }
     }
+   
 }
