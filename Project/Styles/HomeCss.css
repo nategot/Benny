@@ -1,0 +1,20 @@
+﻿
+
+
+.HomeMap
+{
+    border: 2px ridge #999999;
+    height: 500px;
+    width: 800px;
+}
+
+.infoWindow
+{ 
+    color:Blue;
+    font-weight: bold; font-family: 'Arial Rounded MT Bold'; text-decoration: underline; }
+
+
+#content
+{
+    background-color:Fuchsia;
+}
