@@ -9,12 +9,13 @@
 }
 
 .infoWindow
-{ 
-    color:Blue;
-    font-weight: bold; font-family: 'Arial Rounded MT Bold'; text-decoration: underline; }
-
-
+{ }
+   
 #content
-{
-    background-color:Fuchsia;
-}
+{ color:Blue;
+    font-weight: bold; 
+    font-family: 'Arial Rounded MT Bold'; 
+    }
+
+
+

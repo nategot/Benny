@@ -149,13 +149,9 @@
                 icon: image
    
             });
-//            var contentString = '<div id="content">' +
-//      '<h1>' + poiPoint.Name + '</h1>' +
-//      '<div id="bodyContent">' +
-//      '<p>' + poiPoint.Description + '</p><img src ="pic/soccer_icon.png" style="width: 200px"/></div> </div>';
 
-            var contentString = '<div id="content" class="infoWindow">' + '<h1 style="color:Blue; font-weight: bold; font-family: Arial Rounded MT Bold; text-decoration: underline;">' + '</h1>' + '<img src ="' + poiPoint.ImageUrl + '" style="width: 80px"/></br></br>' + poiPoint.Description + '<div id="bodyContent" style="color:Black">'
-              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' +  '</div>' + '<p><input type="button" onclick="JoinEvent()" id="BtnJoin" value="Join"/><p>' + '</div>';
+            var contentString = '<div id="content" > <img src ="' + poiPoint.ImageUrl + '" style="width: 80px"/></br><h1>' + poiPoint.Description + '</h1><div id="bodyContent" style="color:Black">'
+              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' + '</div>' + '<p><input type="button" class="myButton" onclick="JoinEvent(' + poiPoint.EventNum + ')" id="btnJoinMap" value="Join"/><p>' + '</div>';
 
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
@@ -167,8 +163,8 @@
            
         }
 
-        function JoinEvent() {
-         alert("'+poiPoint.EventNum+'");
+        function JoinEvent(a) {
+         alert(a);
             
         }
  
