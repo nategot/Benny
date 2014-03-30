@@ -35,6 +35,7 @@
                     Age:
                 </td>
                 <td>
+                    
                     <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="ageTXT"
                         Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
                     </asp:NumericUpDownExtender>
@@ -56,8 +57,10 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div>   
+     <asp:HiddenField ID="eventNumHF" runat="server" />
     <br />
+
     <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
@@ -152,8 +155,8 @@
             });
 
             var contentString = '<div id="content" > <img src ="' + poiPoint.ImageUrl + '" style="width: 80px"/></br><h1>' + poiPoint.Description + '</h1><div id="bodyContent" style="color:Black">'
-              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' + '</div>' + '<p><input type="button" class="myButton" onclick="JoinEvent(' + poiPoint.EventNum + ')" id="btnJoinMap" value="Join"/><p>' + '</div>';
-
+              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' + '</div>' + '<p><asp:Button ID="joinBtnInfoW" class="myButton" runat="server" Text="JOIN" onclick="JoinBtn_Click" /><input type="button" class="myButton" onclick="JoinEvent(' + poiPoint.EventNum + ')" id="btnJoinMap" value="Join"/><p>' + '</div>';
+                                                                                                           
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
@@ -164,9 +167,10 @@
            
         }
 
-        function JoinEvent(a) {
-         alert(a);
-            
+        function JoinEvent(num) {
+      
+         var a = document.getElementById("MainContent_eventNumHF");
+         a.value = num;
         }
  
     </script>

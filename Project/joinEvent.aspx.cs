@@ -12,7 +12,10 @@ public partial class joinEvent : System.Web.UI.Page
 {
     string eventNum;
     protected void Page_Load(object sender, EventArgs e)
-    {   //load the event detail 
+    {
+        
+     
+        //load the event detail 
         if (Session["EventNumber"] == null) return;
         eventNum = (Session["EventNUmber"]).ToString();
 

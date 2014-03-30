@@ -7,6 +7,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
     <script src="Scripts/MapScriptJoinEvent.js" type="text/javascript"></script>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 259px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
@@ -25,7 +31,7 @@
         <br />
         <table id="eventDetailTable">
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="AdminLbl" runat="server" Text="Admin:"></asp:Label>
                 </td>
                 <td>
@@ -33,7 +39,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="MaxPlayerLbl" runat="server" Text="Max Participants:"></asp:Label>
                 </td>
                 <td>
@@ -41,7 +47,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="datatimelbl" runat="server" Text="Date & Time:"></asp:Label>
                 </td>
                 <td>
@@ -49,7 +55,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="EventTypelbl" runat="server" Text="Event Type:"></asp:Label>
                 </td>
                 <td>
@@ -57,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="AgeLbl" runat="server" Text="Age Range:"></asp:Label>
                 </td>
                 <td>
@@ -65,7 +71,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="locationLbl" runat="server" Text="Location:"></asp:Label>
                 </td>
                 <td>
@@ -73,7 +79,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="Frequencylbl" runat="server" Text="Frequency:"></asp:Label>
                 </td>
                 <td>
@@ -81,7 +87,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:Label ID="commentLbl" runat="server" Text="Admin Comments:"></asp:Label>
                 </td>
                 <td>
@@ -89,14 +95,14 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style1">
                     <asp:HiddenField ID="latHF" runat="server" />
                     <asp:HiddenField ID="lngHF" runat="server" />
                     <br />
                 </td>
             </tr>
             <tr>
-                <td id="map-canvas">
+                <td id="map-canvas" class="style1" colspan="2">
                 </td>
             </tr>
         </table>
