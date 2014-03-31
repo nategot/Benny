@@ -1,4 +1,5 @@
-﻿function initialize() {
+﻿
+function initialize() {
 
     // center the map in Ruppin
     var ruppinPos = new Object();
@@ -18,6 +19,7 @@
         title: 'Ruppin'
     });
     getPOIList();
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -78,25 +80,10 @@ function showPOI(poiPoint) {
 
 }
 
-function JoinEvent(num, lat, lng) {
 
-    var a = document.getElementById("MainContent_eventNumHF");
-    a.value = num;
-    var EventPos = new Object();
-    EventPos.lat = lat;
-    EventPos.long = lng;
-    var pos = new google.maps.LatLng(EventPos.lat, EventPos.long);
 
-    var contentString = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes" onclick="JoinBtn_Click" /><div/>';
 
-    infowindow2 = new google.maps.InfoWindow({
-        content: contentString,
-        position: pos
-
-    });
-    //            infowindow1.close(map);
-    infowindow2.open(map);
-}
 
 function CloseInfo()
 { infowindow2.close(map); }
+        

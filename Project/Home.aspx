@@ -27,7 +27,8 @@
                         <asp:ListItem>Running</asp:ListItem>
                         <asp:ListItem>Cycling</asp:ListItem>
                         <asp:ListItem>Volleyball</asp:ListItem>
-                    </asp:DropDownList>&nbsp&nbsp&nbsp
+                    </asp:DropDownList>
+                    &nbsp&nbsp&nbsp
                 </td>
                 <td>
                     Age:
@@ -47,18 +48,19 @@
                     <asp:TextBox ID="freeSearch" runat="server"></asp:TextBox>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 </td>
                 <td>
-                    <asp:Button ID="searchBtn" class="myButton" runat="server" Text="Search" OnClick="searchBtn_Click" height="35px" Width="100px" />&nbsp&nbsp
+                    <asp:Button ID="searchBtn" class="myButton" runat="server" Text="Search" OnClick="searchBtn_Click"
+                        Height="35px" Width="100px" />&nbsp&nbsp
                 </td>
                 <td>
-                    <asp:Button ID="MapviewBTN" runat="server" class="myButton" Text="Map View" OnClick="MapviewBTN_Click" height="35px" Width="100px" />
+                    <asp:Button ID="MapviewBTN" runat="server" class="myButton" Text="Map View" OnClick="MapviewBTN_Click"
+                        Height="35px" Width="100px" />
                 </td>
             </tr>
         </table>
     </div>
-     <asp:HiddenField ID="eventNumHF" runat="server" />
-    <br />
-    <br />
     <asp:HiddenField ID="eventNumHF" runat="server" />
+    <br />
+    <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="searchBtn" />
@@ -94,16 +96,16 @@
             EventPos.long = lng;
             var pos = new google.maps.LatLng(EventPos.lat, EventPos.long);
 
-            var contentString = '<div id="content" > <img src ="' + poiPoint.ImageUrl + '" style="width: 80px"/></br><h1>' + poiPoint.Description + '</h1><div id="bodyContent" style="color:Black">'
-              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' + '</div>' + '<p><asp:Button ID="joinBtnInfoW" class="myButton" runat="server" Text="JOIN" onclick="JoinBtn_Click" /><input type="button" class="myButton" onclick="JoinEvent(' + poiPoint.EventNum + ')" id="btnJoinMap" value="Join"/><p>' + '</div>';
+            var contster = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes" onclick="JoinBtn_Click" /><div/>';
 
             infowindow2 = new google.maps.InfoWindow({
-                content: contentString,
+                content: contster,
                 position: pos
 
             });
 
             infowindow2.open(map);
         }
+
     </script>
 </asp:Content>
