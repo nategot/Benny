@@ -6,7 +6,7 @@ body
 {
     /*background: #b6b7bc;*/
     background-image: url('pic/MainBackground.jpg');
-    font-size: .80em;
+    font-size: 16px;
     font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
     padding: 0px;
@@ -308,14 +308,14 @@ div.accountInfo
     padding-right: 10px;
 }
 
-/* <a href="#" class="myButton" > green< a > */
+/* --------------------------------------- */
 
 .myButton
 {
     -moz-box-shadow: 5px 5px 10px 0px #276873;
     -webkit-box-shadow: 5px 5px 10px 0px #276873;
     box-shadow: 5px 5px 10px 0px #276873;
-    background-color: #336699;
+    background-color: #3a4f63;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     border-radius: 20px;
@@ -331,7 +331,7 @@ div.accountInfo
 
 .myButton:hover
 {
-    background-color: #408c99;
+    background-color: #bfcbd6;
 }
 
 .myButton:active
@@ -343,11 +343,59 @@ div.accountInfo
 .ErroerLBL
 {
     color: Red;
-    font-size: x-large;
+    font-size: large;
 }
 
 .btnCh
 {
-    height: 15px;
-     width: 15px;
+    height: 18px;
+    width: 18px;
+    vertical-align: middle;
 }
+
+#search input[type="text"]
+        {
+            background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+            border: 1px solid #d1d1d1;
+            font: bold 14px Arial,Helvetica,Sans-serif;
+            color:Black;
+            width: 50px;
+            padding: 6px 15px 6px 35px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+            -webkit-transition: all 0.7s ease 0s;
+            -moz-transition: all 0.7s ease 0s;
+            -o-transition: all 0.7s ease 0s;
+            transition: all 0.7s ease 0s;
+        }
+        
+        #search input[type="text"]:focus
+        {
+            width: 75px;
+        }
+        
+        .ggg
+        {
+            background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+            border: 1px solid #d1d1d1;
+            font: bold 14px Arial,Helvetica,Sans-serif;
+            color:Black;
+            padding: 6px 15px 6px 35px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+            -webkit-transition: all 0.7s ease 0s;
+            -moz-transition: all 0.7s ease 0s;
+            -o-transition: all 0.7s ease 0s;
+            transition: all 0.7s ease 0s;
+            background: transparent;
+        }

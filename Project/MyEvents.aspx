@@ -6,7 +6,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
     <script src="Scripts/MapScript.js" type="text/javascript"></script>
 </asp:Content>
-<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+<%--<asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
  
@@ -70,4 +70,4 @@
         <div id="map-canvas" style="border: 2px ridge #999999; height: 600px; width: 800px">
         </div>
     </asp:PlaceHolder>
-</asp:Content>
+</asp:Content>--%>

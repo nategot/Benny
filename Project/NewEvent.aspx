@@ -13,13 +13,13 @@
         Create New Event</h1>
     <br />
     <br />
-    <table style="float: left">
+    <table style="float: left" id="search">
         <tr>
             <td>
                 Category:
             </td>
             <td colspan="3">
-                <asp:DropDownList ID="categoryDDL" runat="server">
+                <asp:DropDownList ID="categoryDDL" runat="server" CssClass="ggg">
                     <asp:ListItem Value="1">Soccer</asp:ListItem>
                     <asp:ListItem Value="2">Basketball</asp:ListItem>
                     <asp:ListItem Value="3">Tennis</asp:ListItem>
@@ -61,7 +61,7 @@
                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="dateTB"
                     PopupButtonID="calanderBTN" Format="dd/MM/yyyy">
                 </asp:CalendarExtender>
-                <asp:TextBox ID="dateTB" runat="server"></asp:TextBox>
+                <asp:TextBox ID="dateTB" runat="server" CssClass="ggg"></asp:TextBox>
                 <asp:ImageButton ID="calanderBTN" runat="server" ImageUrl="Images/Calendar.png" Width="16px" />
             </td>
         </tr>
@@ -119,7 +119,7 @@
                 <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="commentsTB"
                     WatermarkText="Add your comment here">
                 </asp:TextBoxWatermarkExtender>
-                <asp:TextBox ID="commentsTB" runat="server" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="commentsTB" runat="server" TextMode="MultiLine" CssClass="ggg"></asp:TextBox>
             </td>
         </tr>
         <tr>
