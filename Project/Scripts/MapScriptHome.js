@@ -1,13 +1,12 @@
-﻿
-function initialize() {
+﻿function initialize() {
 
     // center the map in Ruppin
     var ruppinPos = new Object();
     ruppinPos.lat = 32.343193;
     ruppinPos.long = 34.911908;
-    var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
+    myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
     var mapOptions = {
-        zoom: 30,
+        zoom: 6,
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.Map
     }
@@ -64,18 +63,40 @@ function showPOI(poiPoint) {
 
     });
 
-    var contentString = '<div id="content"><h1>' + poiPoint.Description + '<div id="bodyContent">'
-              + '<p>Age Range:' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p> <p>Adress:' + poiPoint.Address + '</p>' + '<p>Time&Date:' + poiPoint.Time + '</p>  </div></div>';
+    var contentString = '<div id="content" > <img src ="' + poiPoint.ImageUrl + '" style="width: 80px"/></br><h1>' + poiPoint.Description + '</h1><div id="bodyContent" style="color:Black">'
+              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' + '</div><input type="button" class="myButton" onclick="JoinEvent(' + poiPoint.EventNum + ',' + poiPoint.Point.Lat + ',' + poiPoint.Point.Lng + ')" id="btnJoinMap" value="Join"/><p>' + '</div>';
 
-
-    var infowindow = new google.maps.InfoWindow({
+    var infowindow1 = new google.maps.InfoWindow({
         content: contentString
     });
 
     google.maps.event.addListener(marker, 'click', function () {
-        infowindow.open(map, marker);
+        infowindow1.open(map, marker);
     });
 
+
+
 }
-       
- 
+
+function JoinEvent(num, lat, lng) {
+
+    var a = document.getElementById("MainContent_eventNumHF");
+    a.value = num;
+    var EventPos = new Object();
+    EventPos.lat = lat;
+    EventPos.long = lng;
+    var pos = new google.maps.LatLng(EventPos.lat, EventPos.long);
+
+    var contentString = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes" onclick="JoinBtn_Click" /><div/>';
+
+    infowindow2 = new google.maps.InfoWindow({
+        content: contentString,
+        position: pos
+
+    });
+    //            infowindow1.close(map);
+    infowindow2.open(map);
+}
+
+function CloseInfo()
+{ infowindow2.close(map); }
