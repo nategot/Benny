@@ -13,7 +13,7 @@
         Create New Event</h1>
     <br />
     <br />
-    <table style="float: left" id="search">
+    <table style="float: left">
         <tr>
             <td>
                 Category:
@@ -61,7 +61,7 @@
                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="dateTB"
                     PopupButtonID="calanderBTN" Format="dd/MM/yyyy">
                 </asp:CalendarExtender>
-                <asp:TextBox ID="dateTB" runat="server" CssClass="ggg"></asp:TextBox>
+                <asp:TextBox ID="dateTB" runat="server" ></asp:TextBox>
                 <asp:ImageButton ID="calanderBTN" runat="server" ImageUrl="pic/Calendar.png" Width="16px" />
             </td>
         </tr>

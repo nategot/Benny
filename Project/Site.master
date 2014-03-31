@@ -18,6 +18,7 @@
             <div class="loginDisplay" style="float: right">
                 <a href="Login.aspx" id="HeadLoginStatus" runat="server">
                     <asp:Label ID="LogInLbl" runat="server" Text="Log In"></asp:Label></a>
+                <asp:Image ID="userImage" runat="server" Width="50" Height="100"/>   
             </div>
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
