@@ -39,8 +39,8 @@
                     Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
                 </asp:NumericUpDownExtender>
                 <asp:TextBox ID="NOP" Text="8" runat="server" Width="40"></asp:TextBox>
-                <input type="image" class="btnCh" id="downArrow" src="Images/down.gif"  />
-                <input type="image" class="btnCh" id="upArrow" src="Images/up.gif"  />
+                <input type="image" class="btnCh" id="downArrow" src="pic/down.gif"  />
+                <input type="image" class="btnCh" id="upArrow" src="pic/up.gif"  />
             </td>
         </tr>
         <tr>
@@ -62,7 +62,7 @@
                     PopupButtonID="calanderBTN" Format="dd/MM/yyyy">
                 </asp:CalendarExtender>
                 <asp:TextBox ID="dateTB" runat="server" CssClass="ggg"></asp:TextBox>
-                <asp:ImageButton ID="calanderBTN" runat="server" ImageUrl="Images/Calendar.png" Width="16px" />
+                <asp:ImageButton ID="calanderBTN" runat="server" ImageUrl="pic/Calendar.png" Width="16px" />
             </td>
         </tr>
         <tr>

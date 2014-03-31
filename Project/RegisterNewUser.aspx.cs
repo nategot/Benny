@@ -23,7 +23,7 @@ public partial class RegisterNewUser : System.Web.UI.Page
         U1.Age = int.Parse(Age.Text);
         U1.City = City.Text;
         U1.Email = Email.Text;
-        //שמירת תמונה?
+        //save pic
         string path2 = Server.MapPath("." + "/Images/");
         string fname2 = path2 + imageFileUp.FileName;
         imageFileUp.SaveAs(fname2);

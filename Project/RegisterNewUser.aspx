@@ -83,7 +83,7 @@
                     ErrorMessage="The Password and Confirmation Password must match." ValidationGroup="RegisterUserValidationGroup">*</asp:CompareValidator>
             </p>
             <p>
-                <asp:Image ID="Image1" runat="server" ImageUrl="Images/EmptyProfile.jpg" />
+                <asp:Image ID="Image1" runat="server" ImageUrl="pic/EmptyProfile.jpg" />
                 <br />
                 <asp:FileUpload ID="imageFileUp" runat="server" />
             </p>
