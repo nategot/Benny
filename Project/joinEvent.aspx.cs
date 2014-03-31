@@ -13,8 +13,6 @@ public partial class joinEvent : System.Web.UI.Page
     string eventNum;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-     
         //load the event detail 
         if (Session["EventNumber"] == null) return;
         eventNum = (Session["EventNUmber"]).ToString();
@@ -57,6 +55,7 @@ public partial class joinEvent : System.Web.UI.Page
       
         EventOnAir EV = new EventOnAir();
         DataTable dtUser = EV.ReadUserInEvent(eventNum);
+        int num =dtUser.Rows.Count;
 
         //adding the num coulm
         DataColumn dc = new DataColumn("num");
@@ -64,7 +63,7 @@ public partial class joinEvent : System.Web.UI.Page
         dtUser.Columns.Add(dc);
         dc.SetOrdinal(0);
 
-        for (int i = 0; i < int.Parse(ANS_MaxPlayerLbl.Text); i++)
+        for (int i = 0; i < int.Parse(ANS_MaxPlayerLbl.Text) - num; i++)
          {
              DataRow NewRow = dtUser.NewRow();
              dtUser.Rows.Add(NewRow); 
@@ -95,6 +94,5 @@ public partial class joinEvent : System.Web.UI.Page
         int num = U1.InsertToEvent(eventNum);
         Response.Redirect("joinEvent.aspx");
     }
-
 
 }

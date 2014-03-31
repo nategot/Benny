@@ -13,7 +13,8 @@
     var mapOptions = {
         zoom: 17,
         center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.MAP
+        mapTypeId: google.maps.MapTypeId.Map
+        
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 

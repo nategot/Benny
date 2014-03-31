@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Join Event" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="JoinEvent.aspx.cs" Inherits="joinEvent" %>
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=he" type="text/javascript"></script>
     <script src="Scripts/MapScriptJoinEvent.js" type="text/javascript"></script>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
 </asp:Content>
