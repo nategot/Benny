@@ -15,7 +15,7 @@ public partial class NewEvent : System.Web.UI.Page
     {   // if the user is not login go to login
         if (Session["Fname"] == null)
         {
-            Response.Redirect("MessagePae.aspx?ans=notLogin");
+            Response.Redirect("MessagePage.aspx?ans=notLogin");
         }
         //load the age range according to the user age
          dt = (DataTable)HttpContext.Current.Session["UserDeatail"];

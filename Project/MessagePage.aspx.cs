@@ -15,7 +15,7 @@ public partial class MessagePage : System.Web.UI.Page
 
         switch (ans)
         { case "notLogin" :
-                massageLBL.Text = "Only registered users can join event";
+                massageLBL.Text = "You have to log in in order to join event";
                 RegisterBTN.Visible = true;
                 BackeBtn.Visible = true;
               break;
