@@ -41,8 +41,9 @@ public partial class Home : System.Web.UI.Page
 
             // adding the join btn
             Button JoinBtn = new Button();
-            JoinBtn.Text = " Join Now";
+            JoinBtn.Text = "Join Now";
             JoinBtn.CssClass = "myButton";
+            JoinBtn.Style.Add("height","30px");
             JoinBtn.Click += new EventHandler(JoinBtn_Click);
             JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
             GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);

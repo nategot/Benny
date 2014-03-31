@@ -93,7 +93,7 @@ public partial class joinEvent : System.Web.UI.Page
         User U1 = new User();
         U1.Email = dt.Rows[0]["Email"].ToString();
         int num = U1.InsertToEvent(eventNum);
-        Response.Redirect("MyEvents.aspx");
+        Response.Redirect("joinEvent.aspx");
     }
 
 

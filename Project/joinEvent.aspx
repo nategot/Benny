@@ -1,18 +1,9 @@
 ﻿<%@ Page Title="Join Event" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="JoinEvent.aspx.cs" Inherits="joinEvent" %>
-
-
-
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
     <script src="Scripts/MapScriptJoinEvent.js" type="text/javascript"></script>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .style1
-        {
-            width: 259px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
@@ -31,7 +22,7 @@
         <br />
         <table id="eventDetailTable">
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="AdminLbl" runat="server" Text="Admin:"></asp:Label>
                 </td>
                 <td>
@@ -39,7 +30,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="MaxPlayerLbl" runat="server" Text="Max Participants:"></asp:Label>
                 </td>
                 <td>
@@ -47,7 +38,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="datatimelbl" runat="server" Text="Date & Time:"></asp:Label>
                 </td>
                 <td>
@@ -55,7 +46,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="EventTypelbl" runat="server" Text="Event Type:"></asp:Label>
                 </td>
                 <td>
@@ -63,7 +54,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="AgeLbl" runat="server" Text="Age Range:"></asp:Label>
                 </td>
                 <td>
@@ -71,7 +62,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="locationLbl" runat="server" Text="Location:"></asp:Label>
                 </td>
                 <td>
@@ -79,7 +70,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="Frequencylbl" runat="server" Text="Frequency:"></asp:Label>
                 </td>
                 <td>
@@ -87,7 +78,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:Label ID="commentLbl" runat="server" Text="Admin Comments:"></asp:Label>
                 </td>
                 <td>
@@ -95,34 +86,37 @@
                 </td>
             </tr>
             <tr>
-                <td class="style1">
+                <td>
                     <asp:HiddenField ID="latHF" runat="server" />
                     <asp:HiddenField ID="lngHF" runat="server" />
                     <br />
                 </td>
             </tr>
             <tr>
-                <td id="map-canvas" class="style1" colspan="2">
+                <td id="map-canvas" colspan="2">
                 </td>
             </tr>
         </table>
     </div>
     <div id="rightdiv" style="float: right; padding-right: 80px;">
         <br />
-        <asp:GridView ID="playerTableGrv" runat="server" BackColor="White" BorderColor="White"
-            BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" GridLines="None">
-            <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
-            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
-            <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
-            <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#F1F1F1" />
-            <SortedAscendingHeaderStyle BackColor="#594B9C" />
-            <SortedDescendingCellStyle BackColor="#CAC9C9" />
-            <SortedDescendingHeaderStyle BackColor="#33276A" />
+        <asp:GridView ID="playerTableGrv" runat="server" CellPadding="4" 
+            GridLines="None" ForeColor="#333333">
+            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+            <EditRowStyle BackColor="#999999" />
+            <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
+            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#E9E7E2" />
+            <SortedAscendingHeaderStyle BackColor="#506C8C" />
+            <SortedDescendingCellStyle BackColor="#FFFDF8" />
+            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
     </div>
+    <br />
     <div class="divvv">
-        <asp:Button ID="joinBTN" runat="server" Text="Join Now!" OnClick="joinBTN_Click" />
+        <asp:Button ID="joinBTN" CssClass="myButton" runat="server" Text="Join Now!" OnClick="joinBTN_Click" />
     </div>
 </asp:Content>

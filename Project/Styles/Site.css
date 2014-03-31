@@ -312,6 +312,8 @@ div.accountInfo
 
 .myButton
 {
+    height:35px;
+    width:100px;
     -moz-box-shadow: 5px 5px 10px 0px #276873;
     -webkit-box-shadow: 5px 5px 10px 0px #276873;
     box-shadow: 5px 5px 10px 0px #276873;
@@ -340,6 +342,7 @@ div.accountInfo
     top: 1px;
 }
 
+
 .ErroerLBL
 {
     color: Red;
@@ -355,12 +358,12 @@ div.accountInfo
 
 #search input[type="text"]
         {
-            background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+            
             border: 1px solid #d1d1d1;
             font: bold 14px Arial,Helvetica,Sans-serif;
             color:Black;
             width: 50px;
-            padding: 6px 15px 6px 35px;
+            padding: 6px 15px 6px 15px;
             -webkit-border-radius: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
@@ -372,6 +375,7 @@ div.accountInfo
             -moz-transition: all 0.7s ease 0s;
             -o-transition: all 0.7s ease 0s;
             transition: all 0.7s ease 0s;
+            text-align:center;
         }
         
         #search input[type="text"]:focus
@@ -381,11 +385,11 @@ div.accountInfo
         
         .ggg
         {
-            background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+            
             border: 1px solid #d1d1d1;
             font: bold 14px Arial,Helvetica,Sans-serif;
             color:Black;
-            padding: 6px 15px 6px 35px;
+            padding: 6px 15px 6px 15px;
             -webkit-border-radius: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
