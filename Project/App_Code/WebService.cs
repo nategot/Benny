@@ -43,7 +43,7 @@ public class WebService : System.Web.Services.WebService
         EventOnAir ev = new EventOnAir();
         List<EventOnAir> eventsList = new List<EventOnAir>();
         DataTable dt = ev.readTable();
-        
+
         for (int i = 0; i < dt.Rows.Count; i++)
         {
             EventOnAir evTemp = new EventOnAir();
@@ -52,7 +52,7 @@ public class WebService : System.Web.Services.WebService
             evTemp.MaxAge = int.Parse(dt.Rows[i]["MaxAge"].ToString());
             evTemp.MinAge = int.Parse(dt.Rows[i]["MinAge"].ToString());
             evTemp.NumOfParti = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
-            evTemp.ImageUrl= dt.Rows[i]["ImageUrl"].ToString();
+            evTemp.ImageUrl = dt.Rows[i]["ImageUrl"].ToString();
             evTemp.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
             evTemp.IsPrivate1 = bool.Parse(dt.Rows[0]["Private"].ToString());
             evTemp.DateTime = DateTime.Parse(dt.Rows[i]["Time"].ToString());
@@ -60,24 +60,18 @@ public class WebService : System.Web.Services.WebService
             evTemp.Description = dt.Rows[i]["Description"].ToString();
             evTemp.Comments = dt.Rows[i]["Comments"].ToString();
             evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
-          
+
 
             //add the  event to the list
             eventsList.Add(evTemp);
         }
-        
+
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(eventsList);
         return jsonString;
     }
 
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
-    public  void SendEvntNum(string eventjoin)
-    {
-        
-        
-    }
+
 
 }

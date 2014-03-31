@@ -108,13 +108,16 @@ public partial class Home : System.Web.UI.Page
         if (GridView1.Visible)
         {
             GridView1.Visible = false;
+            searchPholder.Visible = false;
             MapPlaceHolder.Visible = true;
             MapviewBTN.Text = "Table View";
+            
 
         }
         else
         {
             GridView1.Visible = true;
+            searchPholder.Visible = true;
             MapPlaceHolder.Visible = false;
             MapviewBTN.Text = "Map View";
 

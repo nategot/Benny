@@ -12,52 +12,60 @@
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
     <br />
-    <div id="search" class="search" style="font-size: 16px; font-weight: bold;">
-        <table>
-            <tr>
-                <td>
-                    Category:
-                </td>
-                <td>
-                    <asp:DropDownList ID="catgoryDdl" runat="server" CssClass="ggg">
-                        <asp:ListItem>All</asp:ListItem>
-                        <asp:ListItem>Soccer</asp:ListItem>
-                        <asp:ListItem>Basketball</asp:ListItem>
-                        <asp:ListItem>Tennis</asp:ListItem>
-                        <asp:ListItem>Running</asp:ListItem>
-                        <asp:ListItem>Cycling</asp:ListItem>
-                        <asp:ListItem>Volleyball</asp:ListItem>
-                    </asp:DropDownList>
-                    &nbsp&nbsp&nbsp
-                </td>
-                <td>
-                    Age:
-                </td>
-                <td>
-                    <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="ageTXT"
-                        Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
-                    </asp:NumericUpDownExtender>
-                    <asp:TextBox ID="ageTXT" runat="server"></asp:TextBox>
-                    <asp:ImageButton ID="downArrow" runat="server" CssClass="btnCh" src="pic/down.gif" />
-                    <asp:ImageButton ID="upArrow" src="pic/up.gif" CssClass="btnCh" runat="server" />&nbsp&nbsp&nbsp
-                </td>
-                <td>
-                    City:
-                </td>
-                <td>
-                    <asp:TextBox ID="freeSearch" runat="server"></asp:TextBox>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                </td>
-                <td>
+    <asp:PlaceHolder ID="searchPholder" runat="server">
+        <div id="search" class="search">
+            <table>
+                <tr>
+                    <td>
+                        Category:
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="catgoryDdl" runat="server" CssClass="ggg">
+                            <asp:ListItem>All</asp:ListItem>
+                            <asp:ListItem>Soccer</asp:ListItem>
+                            <asp:ListItem>Basketball</asp:ListItem>
+                            <asp:ListItem>Tennis</asp:ListItem>
+                            <asp:ListItem>Running</asp:ListItem>
+                            <asp:ListItem>Cycling</asp:ListItem>
+                            <asp:ListItem>Volleyball</asp:ListItem>
+                        </asp:DropDownList>
+                        &nbsp&nbsp&nbsp
+                    </td>
+                    <td>
+                        Age:
+                    </td>
+                    <td>
+                        <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="ageTXT"
+                            Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
+                        </asp:NumericUpDownExtender>
+                        <asp:TextBox ID="ageTXT" runat="server"></asp:TextBox>
+                        <asp:ImageButton ID="downArrow" runat="server" CssClass="btnCh" src="pic/down.gif" />
+                        <asp:ImageButton ID="upArrow" src="pic/up.gif" CssClass="btnCh" runat="server" />&nbsp&nbsp&nbsp
+                    </td>
+                    <td>
+                        City:
+                    </td>
+                    <td>
+                        <asp:TextBox ID="freeSearch" runat="server"></asp:TextBox>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    </td>
+                    <%--   <td>
                     <asp:Button ID="searchBtn" class="myButton" runat="server" Text="Search" OnClick="searchBtn_Click"
                         Height="35px" Width="100px" />&nbsp&nbsp
-                </td>
-                <td>
+                </td>--%>
+                    <%--   <td>
                     <asp:Button ID="MapviewBTN" runat="server" class="myButton" Text="Map View" OnClick="MapviewBTN_Click"
                         Height="35px" Width="100px" />
-                </td>
-            </tr>
-        </table>
-    </div>
+                </td>--%>
+                </tr>
+            </table>
+        </div>
+        <div style="float: left">
+            <asp:Button ID="searchBtn" class="myButton" runat="server" Text="Search" OnClick="searchBtn_Click"
+                Height="35px" Width="100px" />&nbsp&nbsp</div>
+    </asp:PlaceHolder>
+    <div>
+        <asp:Button ID="MapviewBTN" runat="server" class="myButton" Text="Map View" OnClick="MapviewBTN_Click"
+            Height="35px" Width="100px" /></div>
     <asp:HiddenField ID="eventNumHF" runat="server" />
     <br />
     <br />
