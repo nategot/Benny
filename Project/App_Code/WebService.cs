@@ -71,7 +71,37 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
+       [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
+    public string setPOI(double lat, double lng, int nop, int category, bool type, string freuncy,int maxAge,int minAge,string adrees,string time,string comments)
+    {
+        EventOnAir ev = new EventOnAir();
+        ev.Point = new Point(lat,lng);
+        ev.Address = adrees;
+        ev.MaxAge = maxAge;
+        ev.MinAge = minAge;
+        ev.NumOfParti = nop;
+        ev.Catedory = category;
+        ev.IsPrivate1 = bool.Parse(type.ToString());
+        ev.DateTimeStr = time;
+        ev.Address = adrees;
+        ev.Comments = comments;
+        //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
 
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("ok");
+        try
+        {
+            ev.insert();
+            jsonString = js.Serialize("ok");
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("error in treasure.setPOI --- " + ex.Message);
+        }
+
+        return jsonString;
+    }
 
 }
