@@ -71,23 +71,25 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
+
+    //mobile
        [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
-    public string setPOI(double lat, double lng, int nop, int category, bool type, string freuncy,int maxAge,int minAge,string adrees,string time,string comments)
+    public string setPOI(string lat, string lng, string nop, string category, string type, string freuncy, string maxAge, string minAge, string adrees, string time, string comments)
     {
         EventOnAir ev = new EventOnAir();
-        ev.Point = new Point(lat,lng);
+        ev.Point = new Point(double.Parse(lat), double.Parse(lng));
         ev.Address = adrees;
-        ev.MaxAge = maxAge;
-        ev.MinAge = minAge;
-        ev.NumOfParti = nop;
-        ev.Catedory = category;
+        ev.MaxAge = int.Parse(maxAge);
+        ev.MinAge = int.Parse(minAge);
+        ev.NumOfParti = int.Parse(nop);
+        ev.Catedory =int.Parse(category);
         ev.IsPrivate1 = bool.Parse(type.ToString());
         ev.DateTimeStr = time;
         ev.Address = adrees;
         ev.Comments = comments;
-        //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
+      //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize("ok");
