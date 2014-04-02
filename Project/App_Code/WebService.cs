@@ -76,19 +76,19 @@ public class WebService : System.Web.Services.WebService
        [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
-    public string setPOI(string lat, string lng, string nop, string category, string type, string freuncy, string maxAge, string minAge, string adrees, string time, string comments)
+    public string setPOI(double lat, double lng, int nop, int category, string type, int freuncy, int minAge, int maxAge , string address, string time, string comments)
     {
         EventOnAir ev = new EventOnAir();
-        ev.Point = new Point(double.Parse(lat), double.Parse(lng));
-        ev.Address = adrees;
-        ev.MaxAge = int.Parse(maxAge);
-        ev.MinAge = int.Parse(minAge);
-        ev.NumOfParti = int.Parse(nop);
-        ev.Catedory =int.Parse(category);
+        ev.Point = new Point(lat, lng);
+        ev.Address = address;
+        ev.MaxAge = maxAge;
+        ev.MinAge = minAge;
+        ev.NumOfParti = nop;
+        ev.Catedory =category;
         ev.IsPrivate1 = bool.Parse(type.ToString());
         ev.DateTimeStr = time;
-        ev.Address = adrees;
         ev.Comments = comments;
+        ev.Frequency = freuncy;
       //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
 
         JavaScriptSerializer js = new JavaScriptSerializer();
