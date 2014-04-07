@@ -3,7 +3,8 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <script src="http://maps.google.com/maps/api/js?sensor=false&language=he"></script>
+    <%--<script src="http://maps.google.com/maps/api/js?sensor=false&language=he"></script>--%>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src="Scripts/MapScriptNewEvent2.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -39,8 +40,8 @@
                     Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
                 </asp:NumericUpDownExtender>
                 <asp:TextBox ID="NOP" Text="8" runat="server" Width="40"></asp:TextBox>
-                <input type="image" class="btnCh" id="downArrow" src="pic/down.gif"  />
-                <input type="image" class="btnCh" id="upArrow" src="pic/up.gif"  />
+                <input type="image" class="btnCh" id="downArrow" src="pic/down.gif" />
+                <input type="image" class="btnCh" id="upArrow" src="pic/up.gif" />
             </td>
         </tr>
         <tr>
@@ -49,7 +50,7 @@
             </td>
             <td colspan="3">
                 <input type="text" value="" id="locationTB" />
-                <input type="button"  id="getPosition" class="myButton" value="Find" />
+                <input type="button" id="getPosition" class="myButton" value="Find" />
             </td>
         </tr>
         <tr>
@@ -61,7 +62,7 @@
                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="dateTB"
                     PopupButtonID="calanderBTN" Format="dd/MM/yyyy">
                 </asp:CalendarExtender>
-                <asp:TextBox ID="dateTB" runat="server" ></asp:TextBox>
+                <asp:TextBox ID="dateTB" runat="server"></asp:TextBox>
                 <asp:ImageButton ID="calanderBTN" runat="server" ImageUrl="pic/Calendar.png" Width="16px" />
             </td>
         </tr>
@@ -125,14 +126,15 @@
         <tr>
             <td>
                 <br />
-                <asp:Button ID="confirmBTN" CssClass="myButton"  runat="server" Text="Confirm & Publish"
+                <asp:Button ID="confirmBTN" CssClass="myButton" runat="server" Text="Confirm & Publish"
                     OnClick="confirmBTN_Click" />
             </td>
             <td colspan="3">
                 <br />
                 <asp:HiddenField ID="CityHIde" runat="server" />
                 <asp:HiddenField ID="LatLOngHIde" runat="server" />
-                <asp:Button ID="inviteBTN" CssClass="myButton" runat="server" Text="Invite from list" Visible="false" />
+                <asp:Button ID="inviteBTN" CssClass="myButton" runat="server" Text="Invite from list"
+                    Visible="false" />
             </td>
         </tr>
     </table>

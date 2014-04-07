@@ -160,7 +160,7 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
-    public string UserToEvent(string Email, string eventnum)
+    public string UserToEvent(string Email, string EventNum)
     {  
         
         JavaScriptSerializer js = new JavaScriptSerializer();
@@ -169,10 +169,14 @@ public class WebService : System.Web.Services.WebService
         {
             User U1 = new User();
             U1.Email = Email;
-            int num = U1.InsertToEvent(eventnum);
+            int num = U1.InsertToEvent(EventNum);
             if (num>0)
             {
-                 jsonString = js.Serialize("Successe");
+                 jsonString = js.Serialize("Success");
+            }
+            else
+            {
+                jsonString = js.Serialize("Event is full!!!");
             }
         }
         catch (Exception ex)
