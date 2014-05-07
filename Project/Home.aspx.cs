@@ -16,14 +16,18 @@ public partial class Home : System.Web.UI.Page
     DataTable dt;
     protected void Page_Load(object sender, EventArgs e)
     {
+        LoadTable(); 
+        
+    }
+
+    protected void LoadTable()
+    {
         string ageRange;
         EventOnAir Ev = new EventOnAir();
         MapPlaceHolder.Visible = false;
         dt = Ev.readTable();
         GridView1.DataSource = dt;
         GridView1.DataBind();
-
-
 
         //load the user age
         if (Session["UserDeatail"] != null)
@@ -38,12 +42,11 @@ public partial class Home : System.Web.UI.Page
             ageRange += "-" + dt.Rows[i]["MaxAge"].ToString();
             GridView1.Rows[i].Cells[6].Text = ageRange;
 
-
             // adding the join btn
             Button JoinBtn = new Button();
             JoinBtn.Text = "Join Now";
             JoinBtn.CssClass = "myButton";
-            JoinBtn.Style.Add("height","30px");
+            JoinBtn.Style.Add("height", "30px");
             JoinBtn.Click += new EventHandler(JoinBtn_Click);
             JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
             GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
@@ -66,7 +69,6 @@ public partial class Home : System.Web.UI.Page
         GridView1.HeaderRow.Cells[6].Text = "Age Range";
         GridView1.HeaderRow.Cells[7].Text = "";
 
-
         //adding the image
         for (int i = 0; i < dt.Rows.Count; i++)
         {
@@ -75,6 +77,7 @@ public partial class Home : System.Web.UI.Page
             GridView1.Rows[i].Cells[0].Controls.Add(imsel);
         }
     }
+
 
     //go to join event page and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)

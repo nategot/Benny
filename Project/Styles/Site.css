@@ -6,7 +6,7 @@ body
 {
     /*background: #b6b7bc;*/
     background-image: url('pic/MainBackground.jpg');
-    background-size:100%;
+    background-size:100% 100%;
     background-repeat:no-repeat;
     font-size: 16px;
     font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
@@ -96,12 +96,10 @@ first child of the left and right table columns */
 }
 .page
 {
-    width: 960px;
+    width: 100%;
+    height:100%;
     background-color: #fff;
-    margin: 20px auto 0px auto;
-    border: 1px solid #496077;
-    border-style: ridge;
-    border-width: medium; 
+    margin: 0px auto 0px auto;
     background-image: url('pic/6.png');
 }
 
@@ -112,6 +110,8 @@ first child of the left and right table columns */
     padding: 0px;
     background: #4b6c9e;
     width: 100%;
+    background-image: url('../Images/blue.jpg');
+    background-size:100% 100%;
 }
 
 .header h1
@@ -131,7 +131,7 @@ first child of the left and right table columns */
 {
     padding: 0px 12px;
     margin: 12px 8px 8px 8px;
-    min-height: 420px;
+    min-height: 543px;
 }
 
 .leftCol
@@ -145,7 +145,7 @@ first child of the left and right table columns */
 .footer
 {
     color: #4e5766;
-    padding: 8px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
     margin: 0px auto;
     text-align: center;
     line-height: normal;
@@ -314,28 +314,28 @@ div.accountInfo
 
 .myButton
 {
-    height:35px;
-    width:100px;
+    font-size:medium;
     -moz-box-shadow: 5px 5px 10px 0px #276873;
-    -webkit-box-shadow: 5px 5px 10px 0px #276873;
-    box-shadow: 5px 5px 10px 0px #276873;
+    -webkit-box-shadow: 5px 5px 10px 0px #bfcbd6;
+    box-shadow: 5px 5px 10px 0px #5C646B;
     background-color: #3a4f63;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     border-radius: 20px;
     display: inline-block;
     cursor: pointer;
-    color: #ffffff;
+    color: #ECF0F5;
     font-family: Trebuchet MS;
     font-weight: bold;
     font-style: italic;
     text-decoration: none;
-    text-shadow: 3px 3px 0px #3d768a;
+    
 }
 
 .myButton:hover
 {
     background-color: #bfcbd6;
+    color:#465c71;
 }
 
 .myButton:active
@@ -343,7 +343,6 @@ div.accountInfo
     position: relative;
     top: 1px;
 }
-
 
 .ErroerLBL
 {
@@ -359,26 +358,26 @@ div.accountInfo
 }
 
 #search input[type="text"]
-        {
-            
-            border: 1px solid #d1d1d1;
-            font: bold 14px Arial,Helvetica,Sans-serif;
-            color:Black;
-            width: 50px;
-            padding: 6px 15px 6px 15px;
-            -webkit-border-radius: 20px;
-            -moz-border-radius: 20px;
-            border-radius: 20px;
-            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-            -webkit-transition: all 0.7s ease 0s;
-            -moz-transition: all 0.7s ease 0s;
-            -o-transition: all 0.7s ease 0s;
-            transition: all 0.7s ease 0s;
-            text-align:center;
-        }
+{
+    
+    border: 1px solid #d1d1d1;
+    font: bold 14px Arial,Helvetica,Sans-serif;
+    color: Black;
+    width: 50px;
+    padding: 6px 15px 6px 15px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    text-align: center;
+}
         
         #search input[type="text"]:focus
         {
@@ -387,11 +386,11 @@ div.accountInfo
         
         .ggg
         {
-            
+           
             border: 1px solid #d1d1d1;
             font: bold 14px Arial,Helvetica,Sans-serif;
             color:Black;
-            padding: 6px 15px 6px 15px;
+            padding: 6px 15px 6px 35px;
             -webkit-border-radius: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
