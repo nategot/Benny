@@ -19,6 +19,7 @@ public partial class Home : System.Web.UI.Page
     {
         LoadTable();
         EditGridView();
+        
     }
 
     protected void LoadTable()
@@ -81,8 +82,28 @@ public partial class Home : System.Web.UI.Page
     protected void AddNumOfRegister( int i )
     {
         string NumOfRegister = dt.Rows[i]["NumOfRegister"].ToString();
+        string NumOfParticipants = dt.Rows[i]["NumOfParticipants"].ToString();
 
-        GridView1.Rows[i].Cells[2].Text = NumOfRegister+  "/" + GridView1.Rows[i].Cells[2].Text ;
+        GridView1.Rows[i].Cells[2].Text = NumOfRegister + "/" + NumOfParticipants;
+
+        if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
+        {
+            GridView1.Rows[i].BackColor=System.Drawing.Color.Red;
+            Image ImageFUll = new Image();
+            ImageFUll.ImageUrl = "Images/Full.png";
+            GridView1.Rows[i].Cells[7].Controls.Clear();
+            GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
+        }
+
+        else if ((int.Parse(NumOfParticipants)) - (int.Parse(NumOfRegister)) <= 2)//if event is allmost full
+        { GridView1.Rows[i].BackColor = System.Drawing.Color.Blue; }
+
+        //else if (int.Parse(NumOfRegister) == 1)//if event is new 
+        //{
+        //    GridView1.Rows[i].BackColor = System.Drawing.Color.Green;
+        //}
+        
+
     }
 
 
