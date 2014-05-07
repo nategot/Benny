@@ -39,10 +39,6 @@ public class EventOnAir
     }
 
 
-    //private double lat;
-    //private double lng;
-
-
     //prop
     #region
     public string Description
@@ -167,6 +163,8 @@ public class EventOnAir
 
         return dbs.dt;
     }
+
+
 
 
 
