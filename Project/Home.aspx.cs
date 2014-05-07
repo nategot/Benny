@@ -14,16 +14,16 @@ using System.Collections.Specialized;
 public partial class Home : System.Web.UI.Page
 {
     DataTable dt;
+    EventOnAir Ev = new EventOnAir();
     protected void Page_Load(object sender, EventArgs e)
     {
-        LoadTable(); 
-        
+        LoadTable();
+        EditGridView();
     }
 
     protected void LoadTable()
     {
-        string ageRange;
-        EventOnAir Ev = new EventOnAir();
+        
         MapPlaceHolder.Visible = false;
         dt = Ev.readTable();
         GridView1.DataSource = dt;
@@ -36,40 +36,72 @@ public partial class Home : System.Web.UI.Page
             ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
         }
 
+
+    }
+
+    //edit the gridview coulom
+    protected void EditGridView()
+    {
+        string ageRange;
         for (int i = 0; i < dt.Rows.Count; i++)
-        {   //edit the age range
+        {
+            //edit the age range
             ageRange = dt.Rows[i]["MinAge"].ToString();
             ageRange += "-" + dt.Rows[i]["MaxAge"].ToString();
             GridView1.Rows[i].Cells[6].Text = ageRange;
-
-            // adding the join btn
-            Button JoinBtn = new Button();
-            JoinBtn.Text = "Join Now";
-            JoinBtn.CssClass = "myButton";
-            JoinBtn.Style.Add("height", "30px");
-            JoinBtn.Click += new EventHandler(JoinBtn_Click);
-            JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
-            GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
 
             //hide if private
             CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[10].Controls[0];
             if (cb.Checked)
             { GridView1.Rows[i].Visible = false; }
 
+            
+
             //hide EventNumber & Comments & private& lat lng
-            for (int r = 8; r < 14; r++)
+            for (int r = 8; r < 15; r++)
             {
                 GridView1.Rows[i].Cells[r].Visible = false;
                 GridView1.HeaderRow.Cells[r].Visible = false;
             }
+            AddJoinBtn(i);
+            AddNumOfRegister(i);
         }
 
         GridView1.HeaderRow.Cells[0].Text = "";
         GridView1.HeaderRow.Cells[2].Text = "Max Partic.";
         GridView1.HeaderRow.Cells[6].Text = "Age Range";
         GridView1.HeaderRow.Cells[7].Text = "";
+        AddImage();
+        
 
-        //adding the image
+        
+    }
+
+    //adding the number pf register player
+    protected void AddNumOfRegister( int i )
+    {
+        string NumOfRegister = dt.Rows[i]["NumOfRegister"].ToString();
+
+        GridView1.Rows[i].Cells[2].Text = NumOfRegister+  "/" + GridView1.Rows[i].Cells[2].Text ;
+    }
+
+
+
+    // adding the join btn
+    protected void AddJoinBtn(int i)
+    {
+        Button JoinBtn = new Button();
+        JoinBtn.Text = "Join Now";
+        JoinBtn.CssClass = "myButton";
+        JoinBtn.Style.Add("height", "30px");
+        JoinBtn.Click += new EventHandler(JoinBtn_Click);
+        JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
+        GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
+    }
+
+    //adding the image
+    protected void AddImage()
+    {
         for (int i = 0; i < dt.Rows.Count; i++)
         {
             Image imsel = new Image();
@@ -78,12 +110,11 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-
     //go to join event page and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
         int Eventnum;
-       
+
         if (Session["Fname"] != null)
         {
             if (eventNumHF.Value != "")
@@ -92,10 +123,10 @@ public partial class Home : System.Web.UI.Page
             }
             else
             {
-             Button btn = (Button)sender;
-             Eventnum = int.Parse(btn.ID);
+                Button btn = (Button)sender;
+                Eventnum = int.Parse(btn.ID);
             }
-         
+
             HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
             HttpContext.Current.Session["EventNumber"] = Eventnum;
             Response.Redirect("joinEvent.aspx");
@@ -115,7 +146,7 @@ public partial class Home : System.Web.UI.Page
             searchPholder.Visible = false;
             MapPlaceHolder.Visible = true;
             MapviewBTN.Text = "Table View";
-            
+
 
         }
         else
@@ -167,5 +198,5 @@ public partial class Home : System.Web.UI.Page
             }
         }
     }
-   
+
 }
