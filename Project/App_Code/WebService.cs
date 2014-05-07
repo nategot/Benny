@@ -72,6 +72,132 @@ public class WebService : System.Web.Services.WebService
     }
 
 
+    //mobile
+    //add event
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+    public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments)
+    {
+        EventOnAir ev = new EventOnAir();
+        ev.Point = new Point(lat, lng);
+        ev.Address = address;
+        ev.MaxAge = maxAge;
+        ev.MinAge = minAge;
+        ev.NumOfParti = nop;
+        ev.Catedory = category;
+        ev.IsPrivate1 = bool.Parse(type.ToString());
+        ev.DateTimeStr = time;
+        ev.Comments = comments;
+        ev.Frequency = frequecy;
+        //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("ok");
+        try
+        {
+            ev.insert();
+            jsonString = js.Serialize("ok");
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("error in treasure.setPOI --- " + ex.Message);
+        }
+
+        return jsonString;
+    }
+
+    //add user
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+    public int Adduser(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
+    {
+        User U1 = new User();
+        U1.UserName = UserName;
+        U1.UserPassword = Password;
+        U1.Fname = FirstName;
+        U1.Lname = LastName;
+        U1.Age = Age;
+        U1.City = City;
+        U1.Email = Email;
+        U1.ImageUrl = "Images\\" + imageUrl;
+      
+        int numEfect = U1.InsertNewUser();
+        return numEfect;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+    public string Login(string Email, string Password)
+    {
+        User u = new User();
+        u.UserPassword = Password;
+        u.Email = Email;
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("Worng Email or Password ");
+        try
+        {
+            DataTable dt = u.CheckPass();
+            if (dt.Rows.Count != 0)
+            {
+                if (dt.Rows[0]["UserPassword"].ToString() == u.UserPassword)
+                { jsonString = js.Serialize("ok"); }   
+            }
+           
+          
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("error in treasure.Login --- " + ex.Message);
+        }
+        return jsonString;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+    public string UserToEvent(string Email, string EventNum)
+    {  
+        
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(" faild");
+        try
+        {
+            User U1 = new User();
+            U1.Email = Email;
+            int num = U1.InsertToEvent(EventNum);
+            if (num>0)
+            {
+                 jsonString = js.Serialize("Success");
+            }
+            else
+            {
+                jsonString = js.Serialize("Event is full!!!");
+            }
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("error in treasure.Login --- " + ex.Message);
+        }
+
+        return jsonString;
+ 
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
