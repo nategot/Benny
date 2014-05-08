@@ -71,7 +71,8 @@
                     // Scale at 75% of parent element.
                     autoScale: 70
                 });
-            });        </script>
+            });
+        </script>
     </head>
     <body>
         <div id="wrapper">
