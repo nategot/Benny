@@ -89,7 +89,6 @@ public partial class joinEvent : System.Web.UI.Page
         if (Session["UserDeatail"] == null) return;
         DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
        
-      //  User Newuser = new User();
         User U1 = new User();
         U1.Email = dt.Rows[0]["Email"].ToString();
         int num = U1.InsertToEvent(eventNum);

@@ -15,16 +15,21 @@ public partial class Home : System.Web.UI.Page
 {
     DataTable dt;
     EventOnAir Ev = new EventOnAir();
+    string Eventnum="27";
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadTable();
         EditGridView();
         CategoryFilter(sender, e);
+        //Join(null, null);
     }
 
+    #region
     protected void LoadTable()
     {
-        
+
         MapPlaceHolder.Visible = false;
         dt = Ev.readTable();
         GridView1.DataSource = dt;
@@ -56,7 +61,7 @@ public partial class Home : System.Web.UI.Page
             if (cb.Checked)
             { GridView1.Rows[i].Visible = false; }
 
-            
+
 
             //hide EventNumber & Comments & private& lat lng
             for (int r = 8; r < 15; r++)
@@ -75,7 +80,7 @@ public partial class Home : System.Web.UI.Page
         GridView1.HeaderRow.Cells[6].Text = "Age Range";
         GridView1.HeaderRow.Cells[7].Text = "";
         AddImage();
-      
+
     }
 
     protected void CategoryFilter(object sender, EventArgs e)
@@ -93,7 +98,7 @@ public partial class Home : System.Web.UI.Page
     }
 
     //adding the number pf register player
-    protected void AddNumOfRegister( int i )
+    protected void AddNumOfRegister(int i)
     {
         string NumOfRegister = dt.Rows[i]["NumOfRegister"].ToString();
         string NumOfParticipants = dt.Rows[i]["NumOfParticipants"].ToString();
@@ -102,7 +107,7 @@ public partial class Home : System.Web.UI.Page
 
         if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
         {
-            GridView1.Rows[i].BackColor=System.Drawing.Color.Red;
+            GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
             Image ImageFUll = new Image();
             ImageFUll.ImageUrl = "Images/Full.png";
             GridView1.Rows[i].Cells[7].Controls.Clear();
@@ -116,11 +121,8 @@ public partial class Home : System.Web.UI.Page
         //{
         //    GridView1.Rows[i].BackColor = System.Drawing.Color.Green;
         //}
-        
 
     }
-
-
 
     // adding the join btn
     protected void AddJoinBtn(int i)
@@ -131,7 +133,13 @@ public partial class Home : System.Web.UI.Page
         JoinBtn.Style.Add("height", "30px");
         JoinBtn.Click += new EventHandler(JoinBtn_Click);
         JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
-        GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
+    //    GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
+        
+        string idEv= dt.Rows[i]["EventNumber"].ToString();
+      //  GridView1.Rows[i].Cells[7].Text = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='SmallMap()'>   <asp:Button ID='"+idEv+"' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' />  </a>";
+       // GridView1.Rows[i].Cells[7].Text = "<asp:Button ID='" + idEv + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click'/>";
+        Label1.Text = "<asp:Button ID='" + idEv + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' />" ;
+   
     }
 
     //adding the image
@@ -148,23 +156,22 @@ public partial class Home : System.Web.UI.Page
     //go to join event page and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
-        int Eventnum;
-
+       
         if (Session["Fname"] != null)
         {
             if (eventNumHF.Value != "")
             {
-                Eventnum = int.Parse(eventNumHF.Value);
+                Eventnum = (eventNumHF.Value);
             }
             else
             {
                 Button btn = (Button)sender;
-                Eventnum = int.Parse(btn.ID);
+                Eventnum = (btn.ID);
             }
-
-            HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            HttpContext.Current.Session["EventNumber"] = Eventnum;
-            Response.Redirect("joinEvent.aspx");
+            Join(null, null);
+            //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
+            //HttpContext.Current.Session["EventNumber"] = Eventnum;
+            //Response.Redirect("joinEvent.aspx");
         }
         else
         {
@@ -196,7 +203,8 @@ public partial class Home : System.Web.UI.Page
 
     //sort func
     protected void searchBtn_Click(object sender, EventArgs e)
-    {   //sort by city
+    {
+        //sort by city
         string cityStr = freeSearch.Text;
 
         for (int i = 0; i < dt.Rows.Count; i++)
@@ -234,4 +242,90 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
+    #endregion  //home page
+
+
+
+    #region  //join event pop up code
+
+    // load the event detail to show
+    protected void Join(object sender, EventArgs e)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (dt.Rows[i]["EventNumber"].ToString() == Eventnum)
+            {
+                latHF.Value = dt.Rows[i]["Lat"].ToString();
+                lngHF.Value = dt.Rows[i]["Lng"].ToString();
+                ANS_MaxPlayerLbl.Text = dt.Rows[i]["NumOfParticipants"].ToString();
+                iconImg.ImageUrl = dt.Rows[i]["ImageUrl"].ToString();
+                ANS_datatimelbl.Text = dt.Rows[i]["Time"].ToString();
+                ANS_locationLbl.Text = dt.Rows[i]["Address"].ToString();
+                ANS_commentLbl.Text = dt.Rows[i]["Comments"].ToString();
+                ANS_Frequency.Text = dt.Rows[i]["Frequncy"].ToString();
+                ANS_AgeLbl.Text = dt.Rows[i]["MinAge"].ToString() + "-" + dt.Rows[i]["MaxAge"].ToString();
+                EventNameLbl.Text = dt.Rows[i]["Description"].ToString();
+                User u = new User();
+                u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
+                DataTable dtName = u.CheckUserName();
+                ANS_AdminLbl.Text = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
+                bool ansTemp = (bool)dt.Rows[0]["Private"];
+                string temp = "Public";
+                if (ansTemp)
+                temp = "Private";
+                ANS_EventTypelbl.Text = temp;
+            }
+        }
+
+        //load the users that register to this event
+
+
+        EventOnAir EV = new EventOnAir();
+        DataTable dtUser = EV.ReadUserInEvent(Eventnum);
+        int num = dtUser.Rows.Count;
+
+        //adding the num coulm
+        DataColumn dc = new DataColumn("num");
+        dc.DataType = typeof(int);
+        dtUser.Columns.Add(dc);
+        dc.SetOrdinal(0);
+
+        for (int i = 0; i < int.Parse(ANS_MaxPlayerLbl.Text) - num; i++)
+        {
+            DataRow NewRow = dtUser.NewRow();
+            dtUser.Rows.Add(NewRow);
+        }
+
+        playerTableGrv.DataSource = dtUser;
+        playerTableGrv.DataBind();
+        playerTableGrv.HeaderRow.Cells[0].Text = "";
+
+        //add the num of row like the num of players
+        for (int i = 0; i < playerTableGrv.Rows.Count; i++)
+        {
+            playerTableGrv.Rows[i].Cells[0].Text = (i + 1).ToString();
+        }
+
+    }
+
+
+
+
+    // adding the user to the event
+    protected void joinBTN_Click(object sender, EventArgs e)
+    {
+        if (Session["UserDeatail"] == null) return;
+        DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+
+        User U1 = new User();
+        U1.Email = dt.Rows[0]["Email"].ToString();
+        int num = U1.InsertToEvent(Eventnum);
+        Response.Redirect("joinEvent.aspx");
+    }
+    #endregion
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Join(null, null);
+    }
 }
