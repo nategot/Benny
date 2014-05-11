@@ -26,6 +26,7 @@
                             <asp:ListItem>Basketball</asp:ListItem>
                             <asp:ListItem>Tennis</asp:ListItem>
                             <asp:ListItem>Running</asp:ListItem>
+                            <asp:ListItem>Swimming</asp:ListItem>
                             <asp:ListItem>Cycling</asp:ListItem>
                             <asp:ListItem>Volleyball</asp:ListItem>
                         </asp:DropDownList>

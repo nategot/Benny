@@ -19,7 +19,7 @@ public partial class Home : System.Web.UI.Page
     {
         LoadTable();
         EditGridView();
-        
+        CategoryFilter(sender, e);
     }
 
     protected void LoadTable()
@@ -68,14 +68,28 @@ public partial class Home : System.Web.UI.Page
             AddNumOfRegister(i);
         }
 
+        
+
         GridView1.HeaderRow.Cells[0].Text = "";
         GridView1.HeaderRow.Cells[2].Text = "Max Partic.";
         GridView1.HeaderRow.Cells[6].Text = "Age Range";
         GridView1.HeaderRow.Cells[7].Text = "";
         AddImage();
-        
+      
+    }
 
-        
+    protected void CategoryFilter(object sender, EventArgs e)
+    {
+        NameValueCollection coll = Request.QueryString;
+        String ans = coll["ans"];
+
+        if (ans != null)
+        {
+            catgoryDdl.SelectedValue = ans;
+            ageTXT.Text = "0";
+            searchBtn_Click(sender, e);
+        }
+
     }
 
     //adding the number pf register player
