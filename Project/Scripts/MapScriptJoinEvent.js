@@ -1,6 +1,6 @@
 ﻿function initialize() {
 
-    // center the map in Ruppin
+   
     var ruppinPos = new Object();
     var a = document.getElementById("MainContent_latHF");
     var latH = a.value;

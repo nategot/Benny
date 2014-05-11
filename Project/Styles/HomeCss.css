@@ -4,7 +4,7 @@
 {
     border: 2px ridge #999999;
     height: 500px;
-    width:  900px;
+    width: 900px;
 }
 
 .infoWindow
@@ -19,8 +19,9 @@
 }
 
 .search
-{font-size: 16px;
-  font-weight: bold;
-   float: left;
+{
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
 }
 

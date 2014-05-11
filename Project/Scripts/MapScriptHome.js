@@ -86,4 +86,7 @@ function showPOI(poiPoint) {
 
 function CloseInfo()
 { infowindow2.close(map); }
-        
+
+
+
+
