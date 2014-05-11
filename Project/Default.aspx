@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <!doctype html>
-    <html lang="en">
+    <html>
     <head>
         <title>Killer Carousel Example</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
