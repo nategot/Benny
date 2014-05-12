@@ -81,8 +81,9 @@ public partial class Home : System.Web.UI.Page
 
 
         GridView1.HeaderRow.Cells[0].Text = "";
-        GridView1.HeaderRow.Cells[2].Text = "Max Partic.";
-        GridView1.HeaderRow.Cells[6].Text = "Age Range";
+        GridView1.HeaderRow.Cells[2].Text = "Participants";
+        GridView1.HeaderRow.Cells[4].Text = "Frequency";
+        GridView1.HeaderRow.Cells[6].Text = "Age";
         GridView1.HeaderRow.Cells[7].Text = "";
         AddImage();
 

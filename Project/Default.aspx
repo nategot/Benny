@@ -40,36 +40,46 @@
             <div class="kc-wrap">
                 <div class="kc-item">
                     <asp:ImageButton ID="Soccer" ImageUrl="Styles/pic/1.png" runat="server" OnClick="CategoryFilter" />
+                    <br /><br />
                     <p>
                         Soccer</p>
                 </div>
                 <div class="kc-item">
                     <asp:ImageButton ID="Basketball" ImageUrl="Styles/pic/2.png" runat="server" OnClick="CategoryFilter" />
+                    <br /><br />
                     <p>
                         Basketball</p>
                 </div>
                 <div class="kc-item">
                     <asp:ImageButton ID="Tennis" ImageUrl="Styles/pic/3.png" runat="server" OnClick="CategoryFilter" />
+                    <br /><br />
                     <p>
                         Tennis</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Running" ImageUrl="Styles/pic/04.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Running" ImageUrl="Styles/pic/4.png" runat="server" OnClick="CategoryFilter" />
                     <p>
                         Running</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Swimming" ImageUrl="Styles/pic/05.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Swimming" ImageUrl="Styles/pic/5.png" runat="server" OnClick="CategoryFilter" />
                     <p>
                         Swimming</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Cycling" ImageUrl="Styles/pic/06.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Cycling" ImageUrl="Styles/pic/6.png" runat="server" OnClick="CategoryFilter" />
+                    <br /><br />
                     <p>
                         Cycling</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Volleyball" ImageUrl="Styles/pic/7.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Surfing" ImageUrl="Styles/pic/7.png" runat="server" OnClick="CategoryFilter" />
+                    <p>
+                        Surfing</p>
+                </div>
+                <div class="kc-item">
+                    <asp:ImageButton ID="Volleyball" ImageUrl="Styles/pic/8.png" runat="server" OnClick="CategoryFilter" />
+                    <br /><br />
                     <p>
                         Volleyball</p>
                 </div>

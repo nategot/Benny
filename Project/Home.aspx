@@ -33,6 +33,7 @@
                             <asp:ListItem>Running</asp:ListItem>
                             <asp:ListItem>Swimming</asp:ListItem>
                             <asp:ListItem>Cycling</asp:ListItem>
+                            <asp:ListItem>Surfing</asp:ListItem>
                             <asp:ListItem>Volleyball</asp:ListItem>
                         </asp:DropDownList>
                         &nbsp&nbsp&nbsp
