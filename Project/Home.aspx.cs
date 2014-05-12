@@ -33,6 +33,8 @@ public partial class Home : System.Web.UI.Page
 
      
     #region
+
+
     protected void LoadTable()
     {
         MapPlaceHolder.Visible = false;
@@ -50,6 +52,8 @@ public partial class Home : System.Web.UI.Page
             ageTXT.Text = "0";
     }
 
+
+
     //edit the gridview coulom
     protected void EditGridView()
     {
@@ -66,8 +70,6 @@ public partial class Home : System.Web.UI.Page
             if (cb.Checked)
             { GridView1.Rows[i].Visible = false; }
 
-
-
             //hide EventNumber & Comments & private& lat lng
             for (int r = 8; r < 15; r++)
             {
@@ -76,9 +78,8 @@ public partial class Home : System.Web.UI.Page
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
+            Chekdate(i);
         }
-
-
 
         GridView1.HeaderRow.Cells[0].Text = "";
         GridView1.HeaderRow.Cells[2].Text = "Participants";
@@ -87,6 +88,32 @@ public partial class Home : System.Web.UI.Page
         GridView1.HeaderRow.Cells[7].Text = "";
         AddImage();
 
+    }
+
+    //chek date if todat or tomorrow
+    protected void Chekdate(int i)
+    {  
+        DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+        if (DateTime.Today.Day == time.Day)
+        {
+            GridView1.Rows[i].Cells[3].Text = "Today!";
+            // GridView1.Rows[i].Cells[3].ForeColor = System.Drawing.Color.Red;
+
+        }
+        else if (DateTime.Today.Day - time.Day == -1)
+        {
+            GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
+        }
+    }
+
+    //onmouse over color 
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='grey'");
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#ffffff'");
+        }
     }
 
     //load the category
@@ -340,4 +367,6 @@ public partial class Home : System.Web.UI.Page
     #endregion
 
 
+
+ 
 }

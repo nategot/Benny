@@ -36,6 +36,7 @@ public partial class NewEvent : System.Web.UI.Page
 
         string[] latlagArr = new string[2];
         string timedate;
+        string message;
         EventOnAir ev = new EventOnAir();
 
         if (LatLOngHIde.Value != "")
@@ -65,16 +66,27 @@ public partial class NewEvent : System.Web.UI.Page
         ev.IsPrivate1 = bool.Parse(EventTypeRBL.SelectedValue);
         ev.Comments = commentsTB.Text;
 
+
         int numEfect = ev.insert();
         if (numEfect == 0)
         {
-            MessageBox.Show("the Event wasnt added ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            message = "The Event wasnt added!";
+            ShowPopup(message);
+
         }
         else
         {
-            MessageBox.Show("the Event was added Successfully", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Response.Redirect("Home.aspx");//לשנות לMYEVNTS
+            message = "The Event was added Successfully!";
+            ShowPopup(message);
+
+            //Response.Redirect("Home.aspx");//לשנות לMYEVNTS
         }
 
     }
+
+    protected void ShowPopup(string message)
+    {
+        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);
+    }
+
 }
