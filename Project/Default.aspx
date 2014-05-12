@@ -1,51 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="_Default" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <!doctype html>
-    <html>
-    <head>
-        <title>Killer Carousel Example</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
-        <!-- Include jQuery -->
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <!-- Include KillerCarousel CSS -->
         <link href="Styles/killercarousel.css" rel="stylesheet" type="text/css" />
-        <!-- Include KillerCarousel JavaScript -->
         <script src="Scripts/killercarousel.js" type="text/javascript"></script>
-        <!-- Various page styles. -->
-        <%--<style type="text/css">
-            body
-            {
-                font-family: arial, sans-serif;
-                color: #444;
-                font-size: 16px;
-                padding: 0px;
-                margin: 0px;
-            }
-            p
-            {
-                line-height: 20px;
-            }
-            code
-            {
-                font-weight: bold;
-                color: #f44;
-            }
-            a
-            {
-                color: #3d8dde;
-            }
-            #wrapper
-            {
-                padding: 10px;
-            }
-        </style>--%>
-        <!-- Styles for the Carousel -->
-        <style type="text/css">
+        
+<%--        <style type="text/css">
             /* CSS for images inside item wrapper */
             .kc-item img
             {
@@ -54,7 +16,7 @@
                 pointer-events: none; /* Make images non-selectable. */
                 width: 100%; /* Make images expand to wrapper size (used in 2d modes). */
             }
-        </style>
+        </style>--%>
         <script type="text/javascript">            // Create the carousel.
             $(function () {
                 $('.kc-wrap').KillerCarousel({
@@ -69,12 +31,12 @@
                     // Looping mode.
                     infiniteLoop: true,
                     // Scale at 75% of parent element.
-                    autoScale: 70
+                    autoScale: 50
                 });
             });
         </script>
-    </head>
-    <body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
         <div id="wrapper">
             <div class="kc-wrap">
                 <div class="kc-item">
@@ -93,17 +55,17 @@
                         Tennis</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Running" ImageUrl="Styles/pic/4.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Running" ImageUrl="Styles/pic/04.png" runat="server" OnClick="CategoryFilter" />
                     <p>
                         Running</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Swimming" ImageUrl="Styles/pic/5.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Swimming" ImageUrl="Styles/pic/05.png" runat="server" OnClick="CategoryFilter" />
                     <p>
                         Swimming</p>
                 </div>
                 <div class="kc-item">
-                    <asp:ImageButton ID="Cycling" ImageUrl="Styles/pic/6.png" runat="server" OnClick="CategoryFilter" />
+                    <asp:ImageButton ID="Cycling" ImageUrl="Styles/pic/06.png" runat="server" OnClick="CategoryFilter" />
                     <p>
                         Cycling</p>
                 </div>
@@ -114,6 +76,4 @@
                 </div>
             </div>
         </div>
-    </body>
-    </html>
 </asp:Content>
