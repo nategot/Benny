@@ -16,7 +16,7 @@ public partial class Home : System.Web.UI.Page
     DataTable dt;
     EventOnAir Ev = new EventOnAir();
     string Eventnum;
-    bool firstTime;
+    
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -31,7 +31,7 @@ public partial class Home : System.Web.UI.Page
 
     }
 
-
+     
     #region
     protected void LoadTable()
     {
@@ -157,17 +157,18 @@ public partial class Home : System.Web.UI.Page
 
     //go to join event page and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)
-    {
-
-   // StringBuilder strScript = new StringBuilder();
+    {// StringBuilder strScript = new StringBuilder();
    //// strScript.Append("$('a[data-reveal-id]').live('click', function(e) {e.preventDefault();var modalLocation = $(this).attr('data-reveal-id')$('#'+modalLocation).reveal($(this).data());}));");
    // strScript.Append("$(document).ready(function(){");
    // strScript.Append("alert('FDSF')"); 
-
    // strScript.Append("});");
    // ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "function()", strScript.ToString(), true);
-         
- 
+   // ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);
+       
+
+   
+       
+        //ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup();", true); 
 
         if (Session["Fname"] != null)
         {
