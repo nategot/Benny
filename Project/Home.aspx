@@ -11,14 +11,12 @@
     <link href="Styles/reveal.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery.reveal.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
-    <%--
-    <script src="Scripts/MapScriptJoinEvent.js" type="text/javascript"></script> --%>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
-    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+   
     <br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search">
@@ -214,17 +212,9 @@
         <div class="HomeMap" id="mapholder">
         </div>
         <</asp:PlaceHolder>
-    <a href="#" class="big-link" data-reveal-id="myModal" onclick="SmallMap()">Fade and
-        Pop </a>
-    <br />
-    <br />
-    <a href="#" class="big-link" data-reveal-id="myModal" data-animation="fade">Fade
-    </a>
-    <br />
-    <asp:HyperLink ID="HyperLink1" class="big-link" runat="server"  onclick="SmallMap()" data-reveal-id="myModal" >HyperLink</asp:HyperLink>
-    <br />
-    <a href="#" class="big-link" data-reveal-id="myModal" data-animation="none">None
-    </a>
+ <%--   <a href="#" class="big-link" data-reveal-id="myModal" onclick="SmallMap()">Fade and
+        Pop </a>--%>
+
     <script type="text/javascript">
         function JoinEvent(num, lat, lng) {
 
@@ -249,42 +239,37 @@
 
 
         function SmallMap() {
+            var ruppinPos = new Object();
+            var a = document.getElementById("MainContent_latHF");
+            var latH = a.value;
+            var b = document.getElementById("MainContent_lngHF");
+            var lngH = b.value;
 
-   alert("df");
-    var ruppinPos = new Object();
-    var a = document.getElementById("MainContent_latHF");
-    var latH = a.value;
-    var b = document.getElementById("MainContent_lngHF");
-    var lngH = b.value;
+            ruppinPos.lat = latH;
+            ruppinPos.long = lngH;
+            var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
+            var mapOptions = {
+                zoom: 17,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.Map
 
-    ruppinPos.lat = latH;
-    ruppinPos.long = lngH;
-    var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
-    var mapOptions = {
-        zoom: 17,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.Map
+            }
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    }
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var marker1 = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Ruppin'
+            });
 
-    var marker1 = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: 'Ruppin'
-    });
+        }
 
-}
+        google.maps.event.addDomListener(window, 'load', initialize);
 
-google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-
-function findme(pathList2) {
-    pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
-    map.setCenter(pos);
-}
+        function findme(pathList2) {
+            pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
+            map.setCenter(pos);
+        }
 
     </script>
 </asp:Content>

@@ -28,7 +28,7 @@ public partial class Login : System.Web.UI.Page
             {
                 HttpContext.Current.Session["Fname"] = dt.Rows[0]["Fname"].ToString();
                 HttpContext.Current.Session["UserDeatail"] = dt;
-                Response.Redirect("Home.aspx");
+                Response.Redirect("Default.aspx");
 
             }
 

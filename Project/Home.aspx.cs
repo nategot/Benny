@@ -15,21 +15,26 @@ public partial class Home : System.Web.UI.Page
 {
     DataTable dt;
     EventOnAir Ev = new EventOnAir();
-    string Eventnum="27";
+    string Eventnum;
+    bool firstTime;
 
 
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadTable();
         EditGridView();
-        CategoryFilter(sender, e);
+        if (!(Page.IsPostBack))
+        {
+            CategoryFilter();
+        }
         //Join(null, null);
+
     }
+
 
     #region
     protected void LoadTable()
     {
-
         MapPlaceHolder.Visible = false;
         dt = Ev.readTable();
         GridView1.DataSource = dt;
@@ -41,8 +46,8 @@ public partial class Home : System.Web.UI.Page
             DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
             ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
         }
-
-
+        else
+            ageTXT.Text = "0";
     }
 
     //edit the gridview coulom
@@ -73,7 +78,7 @@ public partial class Home : System.Web.UI.Page
             AddNumOfRegister(i);
         }
 
-        
+
 
         GridView1.HeaderRow.Cells[0].Text = "";
         GridView1.HeaderRow.Cells[2].Text = "Max Partic.";
@@ -83,21 +88,16 @@ public partial class Home : System.Web.UI.Page
 
     }
 
-    protected void CategoryFilter(object sender, EventArgs e)
+    //load the category
+    protected void CategoryFilter()
     {
         NameValueCollection coll = Request.QueryString;
         String ans = coll["ans"];
-
-        if (ans != null)
-        {
-            catgoryDdl.SelectedValue = ans;
-            ageTXT.Text = "0";
-            searchBtn_Click(sender, e);
-        }
-
+        catgoryDdl.SelectedValue = ans;
+        searchBtn_Click(null, null);
     }
 
-    //adding the number pf register player
+    //adding the number of register player
     protected void AddNumOfRegister(int i)
     {
         string NumOfRegister = dt.Rows[i]["NumOfRegister"].ToString();
@@ -107,15 +107,15 @@ public partial class Home : System.Web.UI.Page
 
         if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
         {
-            GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
+            //GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
             Image ImageFUll = new Image();
             ImageFUll.ImageUrl = "Images/Full.png";
             GridView1.Rows[i].Cells[7].Controls.Clear();
             GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
         }
 
-        else if ((int.Parse(NumOfParticipants)) - (int.Parse(NumOfRegister)) <= 2)//if event is allmost full
-        { GridView1.Rows[i].BackColor = System.Drawing.Color.Blue; }
+        //else if ((int.Parse(NumOfParticipants)) - (int.Parse(NumOfRegister)) <= 2)//if event is allmost full
+        //{ GridView1.Rows[i].BackColor = System.Drawing.Color.Blue; }
 
         //else if (int.Parse(NumOfRegister) == 1)//if event is new 
         //{
@@ -124,22 +124,24 @@ public partial class Home : System.Web.UI.Page
 
     }
 
-    // adding the join btn
+    //adding the join btn
     protected void AddJoinBtn(int i)
     {
         Button JoinBtn = new Button();
         JoinBtn.Text = "Join Now";
         JoinBtn.CssClass = "myButton";
         JoinBtn.Style.Add("height", "30px");
+        //JoinBtn.Style.Add("visibility","hidden");
         JoinBtn.Click += new EventHandler(JoinBtn_Click);
         JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
-    //    GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
-        
-        string idEv= dt.Rows[i]["EventNumber"].ToString();
-      //  GridView1.Rows[i].Cells[7].Text = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='SmallMap()'>   <asp:Button ID='"+idEv+"' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' />  </a>";
-       // GridView1.Rows[i].Cells[7].Text = "<asp:Button ID='" + idEv + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click'/>";
-        Label1.Text = "<asp:Button ID='" + idEv + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' />" ;
-   
+        GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
+
+        //string idEv = dt.Rows[i]["EventNumber"].ToString();
+        GridView1.Rows[i].Cells[6].Text = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='SmallMap()'>  join </a>";
+        //  GridView1.Rows[i].Cells[6].Text = "<asp:HyperLink ID='HyperLink1' class='big-link' runat='server'  onclick='SmallMap()'  data-reveal-id='myModal' ><asp:Button ID='" + "88" + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' /></asp:HyperLink>";
+
+      
+
     }
 
     //adding the image
@@ -156,7 +158,17 @@ public partial class Home : System.Web.UI.Page
     //go to join event page and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
-       
+
+   // StringBuilder strScript = new StringBuilder();
+   //// strScript.Append("$('a[data-reveal-id]').live('click', function(e) {e.preventDefault();var modalLocation = $(this).attr('data-reveal-id')$('#'+modalLocation).reveal($(this).data());}));");
+   // strScript.Append("$(document).ready(function(){");
+   // strScript.Append("alert('FDSF')"); 
+
+   // strScript.Append("});");
+   // ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "function()", strScript.ToString(), true);
+         
+ 
+
         if (Session["Fname"] != null)
         {
             if (eventNumHF.Value != "")
@@ -170,7 +182,7 @@ public partial class Home : System.Web.UI.Page
             }
             Join(null, null);
             //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            //HttpContext.Current.Session["EventNumber"] = Eventnum;
+            ////HttpContext.Current.Session["EventNumber"] = Eventnum;
             //Response.Redirect("joinEvent.aspx");
         }
         else
@@ -218,6 +230,7 @@ public partial class Home : System.Web.UI.Page
         }
 
         //sort by catgory 
+
         string catgory = catgoryDdl.SelectedItem.ToString();
         int num = 0;
         for (int i = 0; i < dt.Rows.Count; i++)
@@ -237,7 +250,6 @@ public partial class Home : System.Web.UI.Page
             {
                 if (age < int.Parse(dt.Rows[i]["MinAge"].ToString()) || age > int.Parse(dt.Rows[i]["MaxAge"].ToString()))
                 { GridView1.Rows[i].Visible = false; }
-
             }
         }
     }
@@ -272,9 +284,10 @@ public partial class Home : System.Web.UI.Page
                 bool ansTemp = (bool)dt.Rows[0]["Private"];
                 string temp = "Public";
                 if (ansTemp)
-                temp = "Private";
+                    temp = "Private";
                 ANS_EventTypelbl.Text = temp;
             }
+
         }
 
         //load the users that register to this event
@@ -311,7 +324,7 @@ public partial class Home : System.Web.UI.Page
 
 
 
-    // adding the user to the event
+    //adding the user to the event
     protected void joinBTN_Click(object sender, EventArgs e)
     {
         if (Session["UserDeatail"] == null) return;
@@ -324,8 +337,5 @@ public partial class Home : System.Web.UI.Page
     }
     #endregion
 
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        Join(null, null);
-    }
+
 }
