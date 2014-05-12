@@ -6,7 +6,6 @@
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <link href="Styles/killercarousel.css" rel="stylesheet" type="text/css" />
         <script src="Scripts/killercarousel.js" type="text/javascript"></script>
-        
 <%--        <style type="text/css">
             /* CSS for images inside item wrapper */
             .kc-item img
