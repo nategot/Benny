@@ -16,7 +16,6 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
-   
     <br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search">
@@ -88,9 +87,6 @@
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <div id="myModal" class="reveal-modal">
-                <div class="title">
-                    Join Event
-                </div>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
                     SelectCommand="SELECT [UserName] FROM [UsersInEvent] WHERE ([EventNumber] = @EventNumber)">
                     <SelectParameters>
@@ -98,90 +94,102 @@
                             Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
-                <div>
-                    <asp:Label ID="EventNameLbl" CssClass="EventNameLbl" runat="server" Font-Size="XX-Large"
-                        Font-Italic="True" Font-Bold="True"></asp:Label>
-                    <asp:Image ID="iconImg" runat="server" />
-                </div>
-                <div id="leftdiv" style="float: left">
-                    <br />
-                    <table id="eventDetailTable">
-                        <tr>
-                            <td>
-                                <asp:Label ID="AdminLbl" runat="server" Text="Admin:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_AdminLbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="MaxPlayerLbl" runat="server" Text="Max Participants:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_MaxPlayerLbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="datatimelbl" runat="server" Text="Date & Time:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_datatimelbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="EventTypelbl" runat="server" Text="Event Type:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_EventTypelbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="AgeLbl" runat="server" Text="Age Range:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_AgeLbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="locationLbl" runat="server" Text="Location:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_locationLbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="Frequencylbl" runat="server" Text="Frequency:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_Frequency" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label ID="commentLbl" runat="server" Text="Admin Comments:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label ID="ANS_commentLbl" runat="server"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:HiddenField ID="latHF" runat="server" />
-                                <asp:HiddenField ID="lngHF" runat="server" />
-                                <br />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="map-canvas" colspan="2">
-                            </td>
-                        </tr>
-                    </table>
+                <table style="float: left;">
+                    <tr>
+                        <td>
+                            <div class="title">
+                                <asp:Label ID="EventNameLbl" runat="server"></asp:Label>
+                                <asp:Image ID="iconImg" runat="server" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="leftdiv" style="float: left">
+                                <table id="eventDetailTable">
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="AdminLbl" runat="server" CssClass="aa" Text="Admin:"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_AdminLbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="MaxPlayerLbl" runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_MaxPlayerLbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="datatimelbl" runat="server" Text="Date & Time:" CssClass="aa"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_datatimelbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="EventTypelbl" runat="server" Text="Event Type:" CssClass="aa"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_EventTypelbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="AgeLbl" runat="server" Text="Age Range:" CssClass="aa"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_AgeLbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="locationLbl" runat="server" Text="Location:" CssClass="aa"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_locationLbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="Frequencylbl" runat="server" Text="Frequency:" CssClass="aa"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_Frequency" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Label ID="commentLbl" runat="server" Text="Admin Comments:" CssClass="aa"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="ANS_commentLbl" runat="server" CssClass="aa"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:HiddenField ID="latHF" runat="server" />
+                                            <asp:HiddenField ID="lngHF" runat="server" />
+                                            <br />
+                                        </td>
+                                    </tr>
+                                   
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr>
+                                        <td>
+                                            <asp:Button ID="joinBTN" CssClass="btnjoin" runat="server" Text="Join Now!" OnClick="joinBTN_Click" />
+                                        </td>
+                                    </tr>
+                </table>
+                <div id="map-canvas" class="map">
                 </div>
                 <div id="rightdiv" style="float: right; padding-right: 80px;">
                     <br />
@@ -201,9 +209,6 @@
                     </asp:GridView>
                 </div>
                 <br />
-                <div class="divvv">
-                    <asp:Button ID="joinBTN" CssClass="myButton" runat="server" Text="Join Now!" OnClick="joinBTN_Click" />
-                </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
         </ContentTemplate>
@@ -212,10 +217,15 @@
         <div class="HomeMap" id="mapholder">
         </div>
         <</asp:PlaceHolder>
- <%--   <a href="#" class="big-link" data-reveal-id="myModal" onclick="SmallMap()">Fade and
+    <%--   <a href="#" class="big-link" data-reveal-id="myModal" onclick="SmallMap()">Fade and
         Pop </a>--%>
-
     <script type="text/javascript">
+
+        //        function ShowPopup(message) {
+        //            alert(message);
+        //        };
+
+
         function JoinEvent(num, lat, lng) {
 
             var a = document.getElementById("MainContent_eventNumHF");
@@ -270,6 +280,8 @@
             pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
             map.setCenter(pos);
         }
+
+
 
     </script>
 </asp:Content>
