@@ -18,7 +18,7 @@
     </asp:ToolkitScriptManager>
     <br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
-        <div id="search" class="search">
+        <div id="search" class="search" style="margin-left: 155px">
             <table>
                 <tr>
                     <td>
@@ -73,7 +73,10 @@
         </Triggers>
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" HorizontalAlign="Center">
+                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" 
+                HorizontalAlign="Center" onrowdatabound="GridView1_RowDataBound" 
+                BorderColor="#999999" BorderStyle="Solid" > 
+               
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
