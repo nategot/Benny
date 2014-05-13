@@ -90,6 +90,7 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
+
             <div id="myModal" class="reveal-modal">
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
                     SelectCommand="SELECT [UserName] FROM [UsersInEvent] WHERE ([EventNumber] = @EventNumber)">
@@ -188,12 +189,12 @@
                         </td>
                     </tr>
                      <tr>
-                                        <td>
+                                     <td>
                                             <asp:Button ID="joinBTN" CssClass="btnjoin" runat="server" Text="Join Now!" OnClick="joinBTN_Click" />
                                         </td>
                                     </tr>
                 </table>
-                <div id="map-canvas" class="map">
+                <div id="map-canvas" class="map" style="float: left";>
                 </div>
                 <div id="rightdiv" style="float: right; padding-right: 80px;">
                     <br />
@@ -224,11 +225,6 @@
     <%--   <a href="#" class="big-link" data-reveal-id="myModal" onclick="SmallMap()">Fade and
         Pop </a>--%>
     <script type="text/javascript">
-
-        //        function ShowPopup(message) {
-        //            alert(message);
-        //        };
-
 
         function JoinEvent(num, lat, lng) {
 

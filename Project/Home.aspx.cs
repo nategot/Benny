@@ -197,7 +197,7 @@ public partial class Home : System.Web.UI.Page
    
        
         //ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup();", true); 
-
+        CategoryFilter();
         if (Session["Fname"] != null)
         {
             if (eventNumHF.Value != "")
@@ -349,8 +349,6 @@ public partial class Home : System.Web.UI.Page
         }
 
     }
-
-
 
 
     //adding the user to the event

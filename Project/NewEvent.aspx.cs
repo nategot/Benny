@@ -28,8 +28,6 @@ public partial class NewEvent : System.Web.UI.Page
             dateTB.Text = (DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year).ToString();
         }
 
-
-
     }
     protected void confirmBTN_Click(object sender, EventArgs e)
     {
@@ -72,13 +70,12 @@ public partial class NewEvent : System.Web.UI.Page
         {
             message = "The Event wasnt added!";
             ShowPopup(message);
-
         }
         else
         {
             message = "The Event was added Successfully!";
-            ShowPopup(message);
 
+            ShowPopup(message);
             //Response.Redirect("Home.aspx");//לשנות לMYEVNTS
         }
 
