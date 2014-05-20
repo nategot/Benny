@@ -83,9 +83,9 @@
             <td style="width: 163px; height: 20px; vertical-align: top;">
                 <asp:TextBox ID="sliderTwo" runat="server" />
                 <asp:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server" BehaviorID="multiHandleSliderExtenderTwo"
-                    TargetControlID="sliderTwo" Minimum="0" Maximum="100" TooltipText="{0}" Orientation="Horizontal"
+                    TargetControlID="sliderTwo"  Minimum="0" Maximum="100" TooltipText="{0}" Orientation="Horizontal"
                     EnableHandleAnimation="true" EnableKeyboard="false" EnableMouseWheel="false"
-                    ShowHandleDragStyle="true" ShowHandleHoverStyle="true" Length="160">
+                    ShowHandleDragStyle="true" ShowHandleHoverStyle="true" Length="160" IsReadOnly="False">
                     <MultiHandleSliderTargets>
                         <asp:MultiHandleSliderTarget ControlID="MinAgeTxt" />
                         <asp:MultiHandleSliderTarget ControlID="MaxAgeTxt" />
