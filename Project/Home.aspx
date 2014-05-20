@@ -74,10 +74,8 @@
         </Triggers>
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" 
-                HorizontalAlign="Center" onrowdatabound="GridView1_RowDataBound" 
-                BorderColor="#999999" BorderStyle="Solid" > 
-               
+                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" HorizontalAlign="Center"
+                OnRowDataBound="GridView1_RowDataBound" BorderColor="#999999" BorderStyle="Solid">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
@@ -90,12 +88,15 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-            <div id="myModal" class="reveal-modal">
-                <div id="contect">
+            <div id="myModal" class="reveal-modal" style="float: left">
+                <div>
+                    <div id="contect">
+                     
+                    </div>
+                    <div id="map-canvas" class="map" >
+                    </div>
+                    '<asp:Button ID="joinBtn" class="btnjoin" runat="server" Text="join" onclick="JoinBtn_Click" />
                 </div>
-                <div id="map-canvas" class="map" style="float: left">
-                </div>
-                <br />
                 <a class="close-reveal-modal">&#215;</a>
             </div>
         </ContentTemplate>
@@ -154,6 +155,7 @@
                     poiList = $.parseJSON(data.d);
                     document.getElementById('contect').innerHTML = "";
                     str = '';
+                    //load deatil
                     str = buildListItem(poiList[0]); // add item to the list in the main events page
                     $("#contect").append(str);
                     $("#contect").collapsibleset('refresh');
@@ -166,32 +168,35 @@
         }
 
 
+
         function buildListItem(poiPoint) {
 
             var strT = "";
             strT += '<div data-role="collapsible"  data-mini="true"  data-content-theme="a" data-iconpos="right"  >';
-            strT += ' <div class="title">' + poiPoint.Description + '</div> <br />'
-
-            strT += ' <table> <tr> <td><div> <asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp;';
-            strT += '<asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td></tr></table>';
-
-
-            strT += '<asp:Label ID="MaxPlayerLbl" runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label ID="ANS_MaxPlayerLbl" runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>'
-
+            strT += ' <table ><tr><td><div class="title">' + poiPoint.Description + '</div> <br />'
             strT += '<p class="aa" ><img src = "' + poiPoint.ImageUrl + '"style="width: 30px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
-            strT += poiPoint.DateTimeStr + '</p><p>' + poiPoint.Address + '</p>';
-            strT += '<p><h4> Number of partic: ' + poiPoint.NumOfParti + '</h4></p>';
-            strT += '<p><h4>  Age range: ' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</h4></p>';
-            strT += '<p><h4> Comments: ' + poiPoint.Comments + '</h4></p>';
-            strT += '<asp:Button ID="joinBtn" class="myButton" runat="server" Text="join" onclick="JoinBtn_Click" />';
-            strT += '</br></div>';
+            strT += ' <div> <asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp;';
+            strT += '<asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label> <br />';
+            strT += '<asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp;'
+            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label> <br />'
+            strT += '<asp:Label  runat="server" CssClass="aa" Text="Date & Time:"></asp:Label>&nbsp;&nbsp;'
+            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.DateTimeStr + ' </asp:Label> <br />'
+            strT += '<asp:Label  runat="server" CssClass="aa" Text="Age Range:"></asp:Label>&nbsp;&nbsp;'
+            strT += '<asp:Label  runat="server" CssClass="bbb">' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</asp:Label><br />'
+            strT += '<asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp;'
+            strT += ' <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label><br />'
+            strT += '<asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;'
+            strT += '  <asp:Label  runat="server" CssClass="bbb" >' + "Frequency" + '</asp:Label><br />'
+            strT += ' <asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp;'
+            strT += '  <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label><br /><br />'
+            strT += '</br></td> <td class="tt">' + buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti); +'</td></tr>  </table></div>';
+         
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
             //load table
-            strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
-
+                        
+//                      
 
             //build map
             var ruppinPos = new Object();
@@ -201,7 +206,7 @@
             ruppinPos.long = lngH;
             var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
             var mapOptions = {
-                zoom: 17,
+                zoom: 11,
                 center: myLatlng,
                 mapTypeId: google.maps.MapTypeId.Map
 
@@ -213,14 +218,22 @@
                 map: map,
                 title: ''
             });
-           
 
+            
             return strT;
+            
         }
 
         function buildBoard(PlayerList, numRows) {
-            str = "<table border='15' cellpadding='0' cellspacing='0'>";
 
+            str = "<table class='CSSTableGenerator'>";
+
+            str += "<tr>";
+            str += "<td>";
+            str += "</td>";
+            str += "<td>Username";
+            str += "</td> ";
+            str += "</tr>";
             for (row = 0; row < numRows; row++) {
 
                 str += "<tr>";
@@ -233,11 +246,17 @@
                     str += PlayerList[row];
                     str += "</td>";
                 }
+                else {
+                    str += "<td>";
+                    str += "-";
+                    str += "</td>";
+                }
 
                 str += "</tr>";
             }
 
             str += "</table>";
+
             return str;
         } //buildBoard
 
