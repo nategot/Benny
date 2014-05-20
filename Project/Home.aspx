@@ -74,8 +74,10 @@
         </Triggers>
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" HorizontalAlign="Center"
-                OnRowDataBound="GridView1_RowDataBound" BorderColor="#999999" BorderStyle="Solid">
+                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" 
+                HorizontalAlign="Center" onrowdatabound="GridView1_RowDataBound" 
+                BorderColor="#999999" BorderStyle="Solid" > 
+               
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
@@ -184,6 +186,9 @@
             strT += '<p><h4> Comments: ' + poiPoint.Comments + '</h4></p>';
             strT += '<asp:Button ID="joinBtn" class="myButton" runat="server" Text="join" onclick="JoinBtn_Click" />';
             strT += '</br></div>';
+            //save the event num
+            var a = document.getElementById("MainContent_eventNumHF");
+            a.value = poiPoint.EventNum;
             //load table
             strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
 
@@ -208,7 +213,7 @@
                 map: map,
                 title: ''
             });
-
+           
 
             return strT;
         }
