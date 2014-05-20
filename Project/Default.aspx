@@ -6,16 +6,6 @@
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <link href="Styles/killercarousel.css" rel="stylesheet" type="text/css" />
         <script src="Scripts/killercarousel.js" type="text/javascript"></script>
-<%--        <style type="text/css">
-            /* CSS for images inside item wrapper */
-            .kc-item img
-            {
-                visibility: hidden;
-                position: absolute;
-                pointer-events: none; /* Make images non-selectable. */
-                width: 100%; /* Make images expand to wrapper size (used in 2d modes). */
-            }
-        </style>--%>
         <script type="text/javascript">            // Create the carousel.
             $(function () {
                 $('.kc-wrap').KillerCarousel({
