@@ -90,140 +90,23 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-
+          <%--  //popup--%>
             <div id="myModal" class="reveal-modal">
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
-                    SelectCommand="SELECT [UserName] FROM [UsersInEvent] WHERE ([EventNumber] = @EventNumber)">
-                    <SelectParameters>
-                        <asp:SessionParameter DefaultValue="0" Name="EventNumber" SessionField="EventNumber"
-                            Type="Int32" />
-                    </SelectParameters>
-                </asp:SqlDataSource>
-                <table style="float: left;">
-                    <tr>
-                        <td>
-                            <div class="title">
-                                <asp:Label ID="EventNameLbl" runat="server"></asp:Label>
-                                <asp:Image ID="iconImg" runat="server" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="leftdiv" style="float: left">
-                                <table id="eventDetailTable">
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="AdminLbl" runat="server" CssClass="aa" Text="Admin:"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_AdminLbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="MaxPlayerLbl" runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_MaxPlayerLbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="datatimelbl" runat="server" Text="Date & Time:" CssClass="aa"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_datatimelbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="EventTypelbl" runat="server" Text="Event Type:" CssClass="aa"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_EventTypelbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="AgeLbl" runat="server" Text="Age Range:" CssClass="aa"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_AgeLbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="locationLbl" runat="server" Text="Location:" CssClass="aa"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_locationLbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="Frequencylbl" runat="server" Text="Frequency:" CssClass="aa"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_Frequency" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Label ID="commentLbl" runat="server" Text="Admin Comments:" CssClass="aa"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="ANS_commentLbl" runat="server" CssClass="aa"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:HiddenField ID="latHF" runat="server" />
-                                            <asp:HiddenField ID="lngHF" runat="server" />
-                                            <br />
-                                        </td>
-                                    </tr>
-                                   
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                     <tr>
-                                     <td>
-                                            <asp:Button ID="joinBTN" CssClass="btnjoin" runat="server" Text="Join Now!" OnClick="joinBTN_Click" />
-                                        </td>
-                                    </tr>
-                </table>
-                <div id="map-canvas" class="map" style="float: left";>
+            <div id="contet"> </div>
+              <div id="map-canvas" class="map" style="float: left";>
                 </div>
-                <div id="rightdiv" style="float: right; padding-right: 80px;">
-                    <br />
-                    <asp:GridView ID="playerTableGrv" runat="server" CellPadding="4" GridLines="None"
-                        ForeColor="#333333">
-                        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                        <EditRowStyle BackColor="#999999" />
-                        <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                        <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                        <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                        <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                    </asp:GridView>
-                </div>
-                <br />
+                   <br />
                 <a class="close-reveal-modal">&#215;</a>
-            </div>
+            </div>  
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:PlaceHolder ID="MapPlaceHolder" runat="server">
         <div class="HomeMap" id="mapholder">
         </div>
         <</asp:PlaceHolder>
-    <%--   <a href="#" class="big-link" data-reveal-id="myModal" onclick="SmallMap()">Fade and
-        Pop </a>--%>
+         <div id="dialog" style="display: none">
+    </div>
+    
     <script type="text/javascript">
 
         function JoinEvent(num, lat, lng) {
@@ -246,15 +129,64 @@
             infowindow2.open(map);
         }
 
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        function findme(pathList2) {
+            pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
+            map.setCenter(pos);
+        }
+
+        ////join event popup
+        function loadEventDetail(num) {
+            getOneEvent(num);
+        }
+
+        function getOneEvent(eventNum) {
+            var dataString = '{eventNum:"' + eventNum + '"}';
+            $.ajax({ // ajax call starts
+                url: 'WebService.asmx/getOneEvent',   // server side method
+                // parameters passed to the server
+                type: 'POST',
+                data: dataString,
+                dataType: 'json', // Choosing a JSON datatype
+                contentType: 'application/json; charset = utf-8',
+                success: function (data) // Variable data contains the data we get from server side
+                {
+                    poiList = $.parseJSON(data.d);
+                    document.getElementById('contect').innerHTML = "";
+                    str = '';
+                    str = buildListItem(poiList[0]); // add item to the list in the main events page
+                    $("#contect").append(str);
+                    $("#contect").collapsibleset('refresh');
+
+                }, // end of success
+                error: function (e) {
+                    alert("failed in getTarget :( " + e.responseText);
+                } // end of error
+            }) // end of ajax call
+        }
 
 
-        function SmallMap() {
+        function buildListItem(poiPoint) {
+
+            var strT = "";
+            strT += '<div data-role="collapsible"  data-mini="true"  data-content-theme="a" data-iconpos="right"  >';
+            strT += '<p><h5><img src = "' + poiPoint.ImageUrl + '"style="width: 30px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+            strT += poiPoint.DateTimeStr + '</p><p>' + poiPoint.Address + '</p></h5>';
+            strT += '<p><h3 class="aa">' + poiPoint.Description + '</h3><p>';
+            strT += '<p><h4> Number of partic: ' + poiPoint.NumOfParti + '</h4></p>';
+            strT += '<p><h4>  Age range: ' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</h4></p>';
+            strT += '<p><h4> Comments: ' + poiPoint.Comments + '</h4></p>';
+            strT += '<asp:Button ID="joinBtn" class="myButton" runat="server" Text="join" onclick="JoinBtn_Click" />';
+            strT += '</br></div>';
+             //load table
+            strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
+       
+           
+            //build map
             var ruppinPos = new Object();
-            var a = document.getElementById("MainContent_latHF");
-            var latH = a.value;
-            var b = document.getElementById("MainContent_lngHF");
-            var lngH = b.value;
-
+            var latH = poiPoint.Point.Lat;
+            var lngH = poiPoint.Point.Lng;
             ruppinPos.lat = latH;
             ruppinPos.long = lngH;
             var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
@@ -269,19 +201,36 @@
             var marker1 = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
-                title: 'Ruppin'
+                title: ''
             });
 
+            
+            return strT;
         }
 
-        google.maps.event.addDomListener(window, 'load', initialize);
+        function buildBoard(PlayerList, numRows) {
+            str = "<table border='15' cellpadding='0' cellspacing='0'>";
 
-        function findme(pathList2) {
-            pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
-            map.setCenter(pos);
-        }
+            for (row = 0; row < numRows; row++) {
 
+                   str += "<tr>";
+                    str += "<td>";
+                    str += row + 1;
+                    str += "</td>";
 
+                    if (PlayerList[row]!=undefined) {
+                    str += "<td>";
+                    str += PlayerList[row];
+                    str += "</td>";
+                    }
+                    
+                str += "</tr>";
+            }
+
+            str += "</table>";
+            alert(str);
+            return str;
+        } //buildBoard
 
     </script>
 </asp:Content>

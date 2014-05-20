@@ -192,9 +192,52 @@ public class WebService : System.Web.Services.WebService
 
 
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
+    public string getOneEvent(string eventNum)
+    {
 
+        EventOnAir ev = new EventOnAir();
+        List<EventOnAir> eventsList = new List<EventOnAir>();
+        DataTable dt = ev.readTable();
 
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (  dt.Rows[i]["EventNumber"].ToString()==eventNum )
+            {
+            EventOnAir evTemp = new EventOnAir();
+            evTemp.Point = new Point(double.Parse(dt.Rows[i]["Lat"].ToString()), double.Parse(dt.Rows[i]["Lng"].ToString()));
+            evTemp.Address = dt.Rows[i]["Address"].ToString();
+            evTemp.MaxAge = int.Parse(dt.Rows[i]["MaxAge"].ToString());
+            evTemp.MinAge = int.Parse(dt.Rows[i]["MinAge"].ToString());
+            evTemp.NumOfParti = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
+            evTemp.ImageUrl = dt.Rows[i]["ImageUrl"].ToString();
+            evTemp.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
+            evTemp.IsPrivate1 = bool.Parse(dt.Rows[0]["Private"].ToString());
+            evTemp.DateTime = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+            evTemp.DateTimeStr = (dt.Rows[i]["Time"].ToString());
+            evTemp.Description = dt.Rows[i]["Description"].ToString();
+            evTemp.Comments = dt.Rows[i]["Comments"].ToString();
+            evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
+
+            DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
+            for (int r = 0; r < dtUS.Rows.Count; r++)
+            {
+                evTemp.PlayerList.Add(dtUS.Rows[r][0].ToString());
+            }
+        
+            eventsList.Add(evTemp);   //add the  event to the list
+          
+            }
+
+            
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(eventsList);
+        return jsonString;
+    }
 
 
 

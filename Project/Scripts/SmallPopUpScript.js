@@ -3,7 +3,7 @@
         $(function () {
             $("#dialog").html(message);
             $("#dialog").dialog({
-                title: "------------------------------",
+                title: "-------------------------",
                 buttons: {
                     Close: function () {
                         $(this).dialog('close');
