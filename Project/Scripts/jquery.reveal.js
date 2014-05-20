@@ -6,10 +6,12 @@
  * http://www.opensource.org/licenses/mit-license.php
 */
 
-//function ShowPopup() {
+//function ShowPopup1() {
 //    alert("kk");
+//}
 
-    (function ($) {
+
+(function ($) {
 
         /*---------------------------
         Defaults for Reveal

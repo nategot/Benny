@@ -1,6 +1,6 @@
 ﻿
 function initialize() {
-
+    var poiList;
     // center the map in Ruppin
     var ruppinPos = new Object();
     ruppinPos.lat = 32.343193;
@@ -86,6 +86,7 @@ function showPOI(poiPoint) {
 
 function CloseInfo()
 { infowindow2.close(map); }
+
 
 
 

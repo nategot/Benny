@@ -31,6 +31,14 @@ public class EventOnAir
     private string imageUrl;
     private string description;
     private string eventNum;
+    public List<string> playerList = new List<string>();
+   
+
+    public List<string> PlayerList
+    {
+        get { return playerList; }
+        set { playerList = value; }
+    }
 
     public string EventNum
     {

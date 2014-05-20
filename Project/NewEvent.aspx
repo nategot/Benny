@@ -55,7 +55,7 @@
                 Location:
             </td>
             <td colspan="3">
-                <%--<input id="pac-input" class="controls" type="text" placeholder="Search Box">--%>
+              
                 <input type="text" value="" id="locationTB" placeholder="Enter a location" />
                 <input type="button" id="getPosition" class="myButton" value="Find" />
             </td>

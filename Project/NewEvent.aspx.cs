@@ -12,7 +12,10 @@ public partial class NewEvent : System.Web.UI.Page
 {
     DataTable dt;
     protected void Page_Load(object sender, EventArgs e)
-    {   // if the user is not login go to login
+    {
+        string message = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='SmallMap()'>  join </a>";
+        ShowPopup("<asp:HyperLink ID='HyperLink1' class='big-link' runat='server'  onclick='SmallMap()'  data-reveal-id='myModal' ><asp:Button ID='" + "88" + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' /></asp:HyperLink>");
+        // if the user is not login go to login
         if (Session["Fname"] == null)
         {
             Response.Redirect("MessagePage.aspx?ans=notLogin");
@@ -27,8 +30,7 @@ public partial class NewEvent : System.Web.UI.Page
 
             dateTB.Text = (DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year).ToString();
         }
-
-
+     
 
     }
     protected void confirmBTN_Click(object sender, EventArgs e)
@@ -72,13 +74,12 @@ public partial class NewEvent : System.Web.UI.Page
         {
             message = "The Event wasnt added!";
             ShowPopup(message);
-
         }
         else
         {
             message = "The Event was added Successfully!";
+            
             ShowPopup(message);
-
             //Response.Redirect("Home.aspx");//לשנות לMYEVNTS
         }
 
