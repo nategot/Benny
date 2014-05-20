@@ -90,13 +90,14 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-          <%--  //popup--%>
+
             <div id="myModal" class="reveal-modal">
-            <div id="contet"> </div>
+            <div id="contect"> </div>
               <div id="map-canvas" class="map" style="float: left";>
                 </div>
                    <br />
                 <a class="close-reveal-modal">&#215;</a>
+                
             </div>  
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -179,7 +180,7 @@
             strT += '<p><h4> Comments: ' + poiPoint.Comments + '</h4></p>';
             strT += '<asp:Button ID="joinBtn" class="myButton" runat="server" Text="join" onclick="JoinBtn_Click" />';
             strT += '</br></div>';
-             //load table
+           //load table
             strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
        
            
@@ -228,7 +229,6 @@
             }
 
             str += "</table>";
-            alert(str);
             return str;
         } //buildBoard
 

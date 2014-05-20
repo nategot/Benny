@@ -195,7 +195,6 @@ public partial class Home : System.Web.UI.Page
                 Button btn = (Button)sender;
                 Eventnum = (btn.ID);
             }
-            //Join(null, null);
             //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
             ////HttpContext.Current.Session["EventNumber"] = Eventnum;
             //Response.Redirect("joinEvent.aspx");
@@ -273,69 +272,7 @@ public partial class Home : System.Web.UI.Page
 
 
 
-    //#region  //join event pop up code
-
-    //// load the event detail to show
-    //protected void Join(object sender, EventArgs e)
-    //{
-    //    for (int i = 0; i < dt.Rows.Count; i++)
-    //    {
-    //        if (dt.Rows[i]["EventNumber"].ToString() == Eventnum)
-    //        {
-    //            latHF.Value = dt.Rows[i]["Lat"].ToString();
-    //            lngHF.Value = dt.Rows[i]["Lng"].ToString();
-    //            ANS_MaxPlayerLbl.Text = dt.Rows[i]["NumOfParticipants"].ToString();
-    //            iconImg.ImageUrl = dt.Rows[i]["ImageUrl"].ToString();
-    //            ANS_datatimelbl.Text = dt.Rows[i]["Time"].ToString();
-    //            ANS_locationLbl.Text = dt.Rows[i]["Address"].ToString();
-    //            ANS_commentLbl.Text = dt.Rows[i]["Comments"].ToString();
-    //            ANS_Frequency.Text = dt.Rows[i]["Frequncy"].ToString();
-    //            ANS_AgeLbl.Text = dt.Rows[i]["MinAge"].ToString() + "-" + dt.Rows[i]["MaxAge"].ToString();
-    //            EventNameLbl.Text = dt.Rows[i]["Description"].ToString();
-    //            User u = new User();
-    //            u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
-    //            DataTable dtName = u.CheckUserName();
-    //            ANS_AdminLbl.Text = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
-    //            bool ansTemp = (bool)dt.Rows[0]["Private"];
-    //            string temp = "Public";
-    //            if (ansTemp)
-    //                temp = "Private";
-    //            ANS_EventTypelbl.Text = temp;
-    //        }
-
-    //    }
-
-    //    //load the users that register to this event
-
-
-    //    EventOnAir EV = new EventOnAir();
-    //    DataTable dtUser = EV.ReadUserInEvent(Eventnum);
-    //    int num = dtUser.Rows.Count;
-
-    //    //adding the num coulm
-    //    DataColumn dc = new DataColumn("num");
-    //    dc.DataType = typeof(int);
-    //    dtUser.Columns.Add(dc);
-    //    dc.SetOrdinal(0);
-
-    //    for (int i = 0; i < int.Parse(ANS_MaxPlayerLbl.Text) - num; i++)
-    //    {
-    //        DataRow NewRow = dtUser.NewRow();
-    //        dtUser.Rows.Add(NewRow);
-    //    }
-
-    //    playerTableGrv.DataSource = dtUser;
-    //    playerTableGrv.DataBind();
-    //    playerTableGrv.HeaderRow.Cells[0].Text = "";
-
-    //    //add the num of row like the num of players
-    //    for (int i = 0; i < playerTableGrv.Rows.Count; i++)
-    //    {
-    //        playerTableGrv.Rows[i].Cells[0].Text = (i + 1).ToString();
-    //    }
-
-    //}
-
+   
 
     //adding the user to the event
     protected void joinBTN_Click(object sender, EventArgs e)
