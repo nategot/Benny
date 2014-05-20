@@ -21,6 +21,7 @@ public partial class Home : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         LoadTable();
         EditGridView();
         if (!(Page.IsPostBack))

@@ -11,6 +11,8 @@
 </head>
 <body>
     <form runat="server">
+    <asp:HiddenField ID="loginF" runat="server" />
+
     <div class="page">
         <div class="header">
             <div class="title">
