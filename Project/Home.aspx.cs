@@ -155,18 +155,8 @@ public partial class Home : System.Web.UI.Page
     //adding the join btn
     protected void AddJoinBtn(int i)
     {
-     //   Button JoinBtn = new Button();
-     //   JoinBtn.Text = "Join Now";
-     //   JoinBtn.CssClass = "myButton";
-     //   JoinBtn.Style.Add("height", "30px");
-     //   JoinBtn.Click += new EventHandler(JoinBtn_Click);
-     //   JoinBtn.ID = dt.Rows[i]["EventNumber"].ToString();
-     // GridView1.Rows[i].Cells[7].Controls.Add(JoinBtn);
-
         string idEv = dt.Rows[i]["EventNumber"].ToString();
         GridView1.Rows[i].Cells[7].Text = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='loadEventDetail("+idEv+")'>  join </a>";
-       
-
     }
 
     //adding the image
@@ -186,18 +176,18 @@ public partial class Home : System.Web.UI.Page
         CategoryFilter();
         if (Session["Fname"] != null)
         {
-            if (eventNumHF.Value != "")
-            {
-                Eventnum = (eventNumHF.Value);
-            }
-            else
-            {
-                Button btn = (Button)sender;
-                Eventnum = (btn.ID);
-            }
-            //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            ////HttpContext.Current.Session["EventNumber"] = Eventnum;
-            //Response.Redirect("joinEvent.aspx");
+           Eventnum = (eventNumHF.Value);
+
+            if (Session["UserDeatail"] == null) return;
+            DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+
+            User U1 = new User();
+            U1.Email = dt.Rows[0]["Email"].ToString();
+            int num = U1.InsertToEvent(Eventnum);
+
+            HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
+            HttpContext.Current.Session["EventNumber"] = Eventnum;
+            Response.Redirect("joinEvent.aspx");
         }
         else
         {
@@ -206,6 +196,7 @@ public partial class Home : System.Web.UI.Page
     }
 
     //changing from map view to table view
+
     protected void MapviewBTN_Click(object sender, EventArgs e)
     {
         if (GridView1.Visible)
@@ -214,8 +205,6 @@ public partial class Home : System.Web.UI.Page
             searchPholder.Visible = false;
             MapPlaceHolder.Visible = true;
             MapviewBTN.Text = "Table View";
-
-
         }
         else
         {
@@ -223,7 +212,6 @@ public partial class Home : System.Web.UI.Page
             searchPholder.Visible = true;
             MapPlaceHolder.Visible = false;
             MapviewBTN.Text = "Map View";
-
         }
     }
 
@@ -275,16 +263,24 @@ public partial class Home : System.Web.UI.Page
    
 
     //adding the user to the event
-    protected void joinBTN_Click(object sender, EventArgs e)
-    {
-        if (Session["UserDeatail"] == null) return;
-        DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+    //protected void joinBTN_Click(object sender, EventArgs e)
+    //{
+    //    if (Session["Fname"] != null)
+    //    {
 
-        User U1 = new User();
-        U1.Email = dt.Rows[0]["Email"].ToString();
-        int num = U1.InsertToEvent(Eventnum);
-        Response.Redirect("joinEvent.aspx");
-    }
+    //        if (Session["UserDeatail"] == null) return;
+    //        DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+
+    //        User U1 = new User();
+    //        U1.Email = dt.Rows[0]["Email"].ToString();
+    //        int num = U1.InsertToEvent(Eventnum);
+    //        Response.Redirect("joinEvent.aspx");
+    //    }
+    //    else
+    //    {
+    //        Response.Redirect("MessagePage.aspx?ans=notLogin");
+    //    }
+    //}
     //#endregion
 
 

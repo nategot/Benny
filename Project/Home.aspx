@@ -180,6 +180,9 @@
             strT += '<p><h4> Comments: ' + poiPoint.Comments + '</h4></p>';
             strT += '<asp:Button ID="joinBtn" class="myButton" runat="server" Text="join" onclick="JoinBtn_Click" />';
             strT += '</br></div>';
+            //save the event num
+            var a = document.getElementById("MainContent_eventNumHF");
+            a.value = poiPoint.EventNum;
            //load table
             strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
        
@@ -204,8 +207,7 @@
                 map: map,
                 title: ''
             });
-
-            
+           
             return strT;
         }
 
