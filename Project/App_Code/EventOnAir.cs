@@ -31,8 +31,20 @@ public class EventOnAir
     private string imageUrl;
     private string description;
     private string eventNum;
+    private string adminFullName;
     public List<string> playerList = new List<string>();
-   
+
+
+
+
+    //prop
+    #region
+    public string AdminFullName
+    {
+        get { return adminFullName; }
+        set { adminFullName = value; }
+    }
+ 
 
     public List<string> PlayerList
     {
@@ -45,10 +57,6 @@ public class EventOnAir
         get { return eventNum; }
         set { eventNum = value; }
     }
-
-
-    //prop
-    #region
     public string Description
     {
         get { return description; }

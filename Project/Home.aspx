@@ -74,10 +74,8 @@
         </Triggers>
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" 
-                HorizontalAlign="Center" onrowdatabound="GridView1_RowDataBound" 
-                BorderColor="#999999" BorderStyle="Solid" > 
-               
+                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" HorizontalAlign="Center"
+                OnRowDataBound="GridView1_RowDataBound" BorderColor="#999999" BorderStyle="Solid">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
@@ -90,24 +88,22 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-
             <div id="myModal" class="reveal-modal">
-            <div id="contect"> </div>
-              <div id="map-canvas" class="map" style="float: left";>
+                <div id="contect">
                 </div>
-                   <br />
+                <div id="map-canvas" class="map" style="float: left">
+                </div>
+                <br />
                 <a class="close-reveal-modal">&#215;</a>
-                
-            </div>  
+            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:PlaceHolder ID="MapPlaceHolder" runat="server">
         <div class="HomeMap" id="mapholder">
         </div>
         <</asp:PlaceHolder>
-         <div id="dialog" style="display: none">
+    <div id="dialog" style="display: none">
     </div>
-    
     <script type="text/javascript">
 
         function JoinEvent(num, lat, lng) {
@@ -172,18 +168,26 @@
 
             var strT = "";
             strT += '<div data-role="collapsible"  data-mini="true"  data-content-theme="a" data-iconpos="right"  >';
-            strT += '<p><h5><img src = "' + poiPoint.ImageUrl + '"style="width: 30px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
-            strT += poiPoint.DateTimeStr + '</p><p>' + poiPoint.Address + '</p></h5>';
-            strT += '<p><h3 class="aa">' + poiPoint.Description + '</h3><p>';
+            strT += ' <div class="title">' + poiPoint.Description + '</div> <br />'
+
+            strT += ' <table> <tr> <td><div> <asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp;';
+            strT += '<asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td></tr></table>';
+
+
+            strT += '<asp:Label ID="MaxPlayerLbl" runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp;'
+            strT += '<asp:Label ID="ANS_MaxPlayerLbl" runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>'
+
+            strT += '<p class="aa" ><img src = "' + poiPoint.ImageUrl + '"style="width: 30px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+            strT += poiPoint.DateTimeStr + '</p><p>' + poiPoint.Address + '</p>';
             strT += '<p><h4> Number of partic: ' + poiPoint.NumOfParti + '</h4></p>';
             strT += '<p><h4>  Age range: ' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</h4></p>';
             strT += '<p><h4> Comments: ' + poiPoint.Comments + '</h4></p>';
             strT += '<asp:Button ID="joinBtn" class="myButton" runat="server" Text="join" onclick="JoinBtn_Click" />';
             strT += '</br></div>';
-           //load table
+            //load table
             strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
-       
-           
+
+
             //build map
             var ruppinPos = new Object();
             var latH = poiPoint.Point.Lat;
@@ -205,7 +209,7 @@
                 title: ''
             });
 
-            
+
             return strT;
         }
 
@@ -214,17 +218,17 @@
 
             for (row = 0; row < numRows; row++) {
 
-                   str += "<tr>";
-                    str += "<td>";
-                    str += row + 1;
-                    str += "</td>";
+                str += "<tr>";
+                str += "<td>";
+                str += row + 1;
+                str += "</td>";
 
-                    if (PlayerList[row]!=undefined) {
+                if (PlayerList[row] != undefined) {
                     str += "<td>";
                     str += PlayerList[row];
                     str += "</td>";
-                    }
-                    
+                }
+
                 str += "</tr>";
             }
 

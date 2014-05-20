@@ -5,8 +5,8 @@
 body
 {
     /*background: #b6b7bc;*/
-    background-size:100% 100%;
-    background-repeat:no-repeat;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     font-size: 16px;
     font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
     margin: 0px;
@@ -90,13 +90,13 @@ first child of the left and right table columns */
 ----------------------------------------------------------*/
 #imgLogo
 {
- width: 330px;
- height: 130px;
+    width: 330px;
+    height: 130px;
 }
 .page
 {
     width: 100%;
-    height:100%;
+    height: 100%;
     background-color: #fff;
     margin: 0px auto 0px auto;
     background-image: url('pic/background.png');
@@ -110,7 +110,7 @@ first child of the left and right table columns */
     background: #4b6c9e;
     width: 100%;
     background-image: url('../Images/blue.jpg');
-    background-size:100% 100%;
+    background-size: 100% 100%;
 }
 
 .header h1
@@ -267,6 +267,16 @@ div.accountInfo
     text-align: left;
     width: auto;
 }
+.titleEv
+{
+    text-align: center; /*Apply this class to some text to unlock the secrets of the third dimension!*/
+    font-family: 'Times New Roman' , Times, sans-serif;
+    line-height: 1em;
+    color: #faf5fa;
+    font-weight: bold;
+    font-size: 60px;
+    text-shadow: 0px 0px 0 rgb(162,157,162),1px 1px 0 rgb(128,123,128),2px 2px 0 rgb(94,89,94),3px 3px 0 rgb(60,55,60), 4px 4px 0 rgb(26,21,26),5px 5px 4px rgba(0,0,0,0.2),5px 5px 1px rgba(0,0,0,0.5),0px 0px 4px rgba(0,0,0,.2);
+}
 
 .loginDisplay
 {
@@ -313,7 +323,7 @@ div.accountInfo
 
 .myButton
 {
-    font-size:medium;
+    font-size: medium;
     -moz-box-shadow: 5px 5px 10px 0px #276873;
     -webkit-box-shadow: 5px 5px 10px 0px #bfcbd6;
     box-shadow: 5px 5px 10px 0px #5C646B;
@@ -328,13 +338,12 @@ div.accountInfo
     font-weight: bold;
     font-style: italic;
     text-decoration: none;
-    
 }
 
 .myButton:hover
 {
     background-color: #bfcbd6;
-    color:#465c71;
+    color: #465c71;
 }
 
 .myButton:active
@@ -358,7 +367,6 @@ div.accountInfo
 
 #search input[type="text"]
 {
-    
     border: 1px solid #d1d1d1;
     font: bold 14px Arial,Helvetica,Sans-serif;
     color: Black;
@@ -377,29 +385,33 @@ div.accountInfo
     transition: all 0.7s ease 0s;
     text-align: center;
 }
-        
-        #search input[type="text"]:focus
-        {
-            width: 75px;
-        }
-        
-        .ggg
-        {
-           
-            border: 1px solid #d1d1d1;
-            font: bold 14px Arial,Helvetica,Sans-serif;
-            color:Black;
-            padding: 6px 15px 6px 35px;
-            -webkit-border-radius: 20px;
-            -moz-border-radius: 20px;
-            border-radius: 20px;
-            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-            -webkit-transition: all 0.7s ease 0s;
-            -moz-transition: all 0.7s ease 0s;
-            -o-transition: all 0.7s ease 0s;
-            transition: all 0.7s ease 0s;
-            background: transparent;
-        }
+
+#search input[type="text"]:focus
+{
+    width: 75px;
+}
+
+.ggg
+{
+    border: 1px solid #d1d1d1;
+    font: bold 14px Arial,Helvetica,Sans-serif;
+    color: Black;
+    padding: 6px 15px 6px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    background: transparent;
+}
+
+divdivv
+{
+    width:100%
+}

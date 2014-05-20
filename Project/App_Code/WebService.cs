@@ -220,6 +220,11 @@ public class WebService : System.Web.Services.WebService
             evTemp.Description = dt.Rows[i]["Description"].ToString();
             evTemp.Comments = dt.Rows[i]["Comments"].ToString();
             evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
+           
+                User u = new User();
+            u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
+            DataTable dtName = u.CheckUserName();
+            evTemp.AdminFullName = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
 
             DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
             for (int r = 0; r < dtUS.Rows.Count; r++)
