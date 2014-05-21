@@ -130,11 +130,13 @@ function getUserInfo() {
       //  email = "555@gmail.com";
         password = response.id;
         imageUrl = response.pic;
-        alert(firstName);
-        AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
+        //alert(firstName);
         var a = document.getElementById("loginF");
         a.value = email;
-        alert(a.value);
+
+        AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
+        
+        //alert(a.value);
     });
 
     
