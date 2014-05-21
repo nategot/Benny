@@ -33,7 +33,7 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Home.aspx" Text="Home" />
                         <asp:MenuItem NavigateUrl="~/MyEvents.aspx" Text="My Events"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/NewEvent.aspx" Text="Create New Event" Value="0"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/NewEvent.aspx" Text="Create New Event" ></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About" />
                     </Items>
                 </asp:Menu>
