@@ -221,7 +221,7 @@ public class WebService : System.Web.Services.WebService
             evTemp.Comments = dt.Rows[i]["Comments"].ToString();
             evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
            
-                User u = new User();
+            User u = new User();
             u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
             DataTable dtName = u.CheckUserName();
             evTemp.AdminFullName = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
