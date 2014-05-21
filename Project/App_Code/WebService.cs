@@ -122,7 +122,7 @@ public class WebService : System.Web.Services.WebService
         U1.City = City;
         U1.Email = Email;
         U1.ImageUrl = "Images\\" + imageUrl;
-      
+
         int numEfect = U1.InsertNewUser();
         return numEfect;
     }
@@ -144,10 +144,10 @@ public class WebService : System.Web.Services.WebService
             if (dt.Rows.Count != 0)
             {
                 if (dt.Rows[0]["UserPassword"].ToString() == u.UserPassword)
-                { jsonString = js.Serialize("ok"); }   
+                { jsonString = js.Serialize("ok"); }
             }
-           
-          
+
+
         }
         catch (Exception ex)
         {
@@ -161,8 +161,8 @@ public class WebService : System.Web.Services.WebService
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
     public string UserToEvent(string Email, string EventNum)
-    {  
-        
+    {
+
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(" faild");
         try
@@ -170,9 +170,9 @@ public class WebService : System.Web.Services.WebService
             User U1 = new User();
             U1.Email = Email;
             int num = U1.InsertToEvent(EventNum);
-            if (num>0)
+            if (num > 0)
             {
-                 jsonString = js.Serialize("Success");
+                jsonString = js.Serialize("Success");
             }
             else
             {
@@ -185,12 +185,7 @@ public class WebService : System.Web.Services.WebService
         }
 
         return jsonString;
- 
     }
-
-
-
-
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -204,39 +199,44 @@ public class WebService : System.Web.Services.WebService
 
         for (int i = 0; i < dt.Rows.Count; i++)
         {
-            if (  dt.Rows[i]["EventNumber"].ToString()==eventNum )
+            if (dt.Rows[i]["EventNumber"].ToString() == eventNum)
             {
-            EventOnAir evTemp = new EventOnAir();
-            evTemp.Point = new Point(double.Parse(dt.Rows[i]["Lat"].ToString()), double.Parse(dt.Rows[i]["Lng"].ToString()));
-            evTemp.Address = dt.Rows[i]["Address"].ToString();
-            evTemp.MaxAge = int.Parse(dt.Rows[i]["MaxAge"].ToString());
-            evTemp.MinAge = int.Parse(dt.Rows[i]["MinAge"].ToString());
-            evTemp.NumOfParti = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
-            evTemp.ImageUrl = dt.Rows[i]["ImageUrl"].ToString();
-            evTemp.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
-            evTemp.IsPrivate1 = bool.Parse(dt.Rows[0]["Private"].ToString());
-            evTemp.DateTime = DateTime.Parse(dt.Rows[i]["Time"].ToString());
-            evTemp.DateTimeStr = (dt.Rows[i]["Time"].ToString());
-            evTemp.Description = dt.Rows[i]["Description"].ToString();
-            evTemp.Comments = dt.Rows[i]["Comments"].ToString();
-            evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
-           
-            User u = new User();
-            u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
-            DataTable dtName = u.CheckUserName();
-            evTemp.AdminFullName = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
+                EventOnAir evTemp = new EventOnAir();
+                evTemp.Point = new Point(double.Parse(dt.Rows[i]["Lat"].ToString()), double.Parse(dt.Rows[i]["Lng"].ToString()));
+                evTemp.Address = dt.Rows[i]["Address"].ToString();
+                evTemp.MaxAge = int.Parse(dt.Rows[i]["MaxAge"].ToString());
+                evTemp.MinAge = int.Parse(dt.Rows[i]["MinAge"].ToString());
+                evTemp.NumOfParti = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
+                evTemp.ImageUrl = dt.Rows[i]["ImageUrl"].ToString();
+                evTemp.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
+                evTemp.IsPrivate1 = bool.Parse(dt.Rows[0]["Private"].ToString());
+                evTemp.DateTime = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+                evTemp.DateTimeStr = (dt.Rows[i]["Time"].ToString());
+                evTemp.Description = dt.Rows[i]["Description"].ToString();
+                evTemp.Comments = dt.Rows[i]["Comments"].ToString();
+                evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
 
-            DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
-            for (int r = 0; r < dtUS.Rows.Count; r++)
-            {
-                evTemp.PlayerList.Add(dtUS.Rows[r][0].ToString());
-            }
-        
-            eventsList.Add(evTemp);   //add the  event to the list
-          
-            }
+                User u = new User();
+                u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
+                DataTable dtName = u.CheckUserName();
+                if (dtName.Rows.Count == 1)
+                {
+                    evTemp.AdminFullName = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
+                }
+                else
+                {
+                    evTemp.AdminFullName = "";
+                }
 
-            
+                DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
+                for (int r = 0; r < dtUS.Rows.Count; r++)
+                {
+                    evTemp.PlayerList.Add(dtUS.Rows[r][0].ToString());
+                }
+
+                eventsList.Add(evTemp);   //add the  event to the list
+
+            }
         }
 
         JavaScriptSerializer js = new JavaScriptSerializer();
