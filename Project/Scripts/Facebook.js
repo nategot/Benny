@@ -1,4 +1,5 @@
-﻿// This is called with the results from from FB.getLoginStatus().
+﻿
+// This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -9,17 +10,23 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         //testAPI();
-        Login();
+        //getUserInfo();
+        alert(1111);
+        //Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
+        alert(2222);
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
+        alert(3333);
     }
+    Login();
+
 }
 
 // This function is called when someone finishes with the Login
@@ -31,7 +38,7 @@ function checkLoginState() {
     });
 }
 
-window.fbAsyncInit = function () {
+window.fbAsyncInit = function () { 
     FB.init({
         appId: '295645690612011',
         cookie: true,  // enable cookies to allow the server to access 
@@ -55,17 +62,16 @@ window.fbAsyncInit = function () {
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
     });
-
 };
 
 // Load the SDK asynchronously
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-} (document, 'script', 'facebook-jssdk'));
+//(function (d, s, id) {
+//    var js, fjs = d.getElementsByTagName(s)[0];
+//    if (d.getElementById(id)) return;
+//    js = d.createElement(s); js.id = id;
+//    js.src = "//connect.facebook.net/en_US/sdk.js";
+//    fjs.parentNode.insertBefore(js, fjs);
+//} (document, 'script', 'facebook-jssdk'));
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
@@ -122,11 +128,13 @@ function getUserInfo() {
         userName = response.username;
         email = response.email;
       //  email = "555@gmail.com";
-        password = "555";
-        imageUrl = "neta";
+        password = response.id;
+        imageUrl = response.pic;
+        alert(firstName);
         AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
         var a = document.getElementById("loginF");
         a.value = email;
+        alert(a.value);
     });
 
     
@@ -149,7 +157,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
               
             }
             else {
-                //alert("Register faild"); ;
+                alert("Register faild"); ;
             }
 
         }, // end of success

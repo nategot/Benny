@@ -11,8 +11,8 @@
 </head>
 <body>
     <form runat="server">
+    <div id="fb-root"></div>
     <asp:HiddenField ID="loginF" runat="server" />
-
     <div class="page">
         <div class="header">
             <div class="title">
@@ -23,7 +23,7 @@
                     <asp:Label ID="LogInLbl" runat="server" Text="Log In"></asp:Label></a>
                 <asp:Image ID="userImage" runat="server" Width="50" Height="100"/>  --%>
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true"
-                    data-auto-logout-link="true">
+                    data-auto-logout-link="true" onclick="Login()">
                 </div>
                 <div id="status"></div>
             </div>
