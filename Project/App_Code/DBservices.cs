@@ -170,6 +170,12 @@ public class DBservices
         {
             int numEffected = cmd.ExecuteNonQuery(); // execute the command
             return numEffected;
+        } 
+        catch (SqlException ex)
+        {
+            return -1;
+           
+            throw (ex);
         }
         catch (Exception ex)
         {
@@ -177,6 +183,7 @@ public class DBservices
             // write to log
             throw (ex);
         }
+       
 
         finally
         {

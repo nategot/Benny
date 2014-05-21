@@ -17,8 +17,6 @@ public partial class Home : System.Web.UI.Page
     EventOnAir Ev = new EventOnAir();
     string Eventnum;
     
-
-
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -28,11 +26,8 @@ public partial class Home : System.Web.UI.Page
         {
             CategoryFilter();
         }
-        //Join(null, null);
-
     }
-
-     
+ 
     #region
 
 
@@ -91,7 +86,7 @@ public partial class Home : System.Web.UI.Page
 
     }
 
-    //chek date if todat or tomorrow
+    //chek date if todaט or tomorrow
     protected void Chekdate(int i)
     {  
         DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
@@ -157,7 +152,7 @@ public partial class Home : System.Web.UI.Page
     protected void AddJoinBtn(int i)
     {
         string idEv = dt.Rows[i]["EventNumber"].ToString();
-        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='loadEventDetail("+idEv+")'>  join </a>";
+        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  join </a>";
     }
 
     //adding the image
@@ -171,10 +166,10 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-    //go to join event page and sends the event num
+    //go to join event  and sends the event num
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
-        CategoryFilter();
+        //CategoryFilter();
         if (Session["Fname"] != null)
         {
            Eventnum = (eventNumHF.Value);
@@ -185,10 +180,23 @@ public partial class Home : System.Web.UI.Page
             User U1 = new User();
             U1.Email = dt.Rows[0]["Email"].ToString();
             int num = U1.InsertToEvent(Eventnum);
-
-            HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            HttpContext.Current.Session["EventNumber"] = Eventnum;
-            Response.Redirect("joinEvent.aspx");
+            //pop register
+            if (num>=1)
+            {
+                ShowPopup("you have added to the event Successfully");  
+            }
+            else if (num==-1)
+            {
+                ShowPopup("You Are already register to this event"); 
+            }
+            else if (num==0)
+            {
+                ShowPopup("Error register faild  please try agin later");
+            }
+            
+            //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
+            //HttpContext.Current.Session["EventNumber"] = Eventnum;
+            //Response.Redirect("joinEvent.aspx");
         }
         else
         {
@@ -257,33 +265,14 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-    #endregion  //home page
 
-
-
-   
-
-    //adding the user to the event
-    //protected void joinBTN_Click(object sender, EventArgs e)
-    //{
-    //    if (Session["Fname"] != null)
-    //    {
-
-    //        if (Session["UserDeatail"] == null) return;
-    //        DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
-
-    //        User U1 = new User();
-    //        U1.Email = dt.Rows[0]["Email"].ToString();
-    //        int num = U1.InsertToEvent(Eventnum);
-    //        Response.Redirect("joinEvent.aspx");
-    //    }
-    //    else
-    //    {
-    //        Response.Redirect("MessagePage.aspx?ans=notLogin");
-    //    }
-    //}
-    //#endregion
-
+    protected void ShowPopup(string message) //popup message
+    {
+        //ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);
+         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
+    }
+     
+    #endregion  
 
 
 
