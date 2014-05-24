@@ -99,7 +99,7 @@ first child of the left and right table columns */
     height: 100%;
     background-color: #fff;
     margin: 0px auto 0px auto;
-    background-image: url('pic/background.png');
+    background-image: url('pic/background1.png');
 }
 
 .header
@@ -111,6 +111,7 @@ first child of the left and right table columns */
     width: 100%;
     background-image: url('../Images/blue.jpg');
     background-size: 100% 100%;
+    height: 100px;
 }
 
 .header h1
@@ -266,6 +267,7 @@ div.accountInfo
     float: left;
     text-align: left;
     width: auto;
+    height: 100px;
 }
 .titleEv
 {
@@ -409,5 +411,105 @@ div.accountInfo
     -o-transition: all 0.7s ease 0s;
     transition: all 0.7s ease 0s;
     background: transparent;
+}
+.helloediv
+{
+    background-color: #6633FF;
+    width: 230px;
+    height: 45px;
+    text-align: center;
+    font-size: 35px;
+    position: absolute;
+    font-family: Tahoma;
+    line-height: 1em;
+    color: #fff9d6;
+    font-weight: bold;
+    -moz-transform: scale(1) rotate(-10deg) translateX(4px) translateY(4px);
+    -webkit-transform: scale(1) rotate(-10deg) translateX(4px) translateY(4px);
+    -o-transform: scale(1) rotate(-10deg) translateX(4px) translateY(4px);
+    -ms-transform: scale(1) rotate(-10deg) translateX(4px) translateY(4px);
+    transform: scale(1) rotate(-10deg) translateX(4px) translateY(4px);
+    outline: 10px outset #FFFFFF;
+    outline-offset: 1px;
+}
+
+
+.helloediv2
+{
+    background-color: transparent;
+    height: 50px;
+    width: 100%;
+    text-align: left;
+    font-size: 32px;
+    position: absolute;
+    font-family: Tahoma;
+    line-height: 1em;
+    color: #fff9d6;
+    font-weight: bold;
+    padding-top: 13px;
+}
+
+
+.addeventtitle
+{
+    text-align: center;
+    font-size: 45px;
+    color: White;
+    font-weight: bold;
+    line-height: 1em;
+    
+}
+
+.addeventable
+{
+    width: 45%;
+    padding-left: 10%;
+    color:White;
+}
+
+
+.addeventinput
+{
+    border: 0 !important; /*Removes border*/
+    -webkit-appearance: none; /*Removes default chrome and safari style*/
+    -moz-appearance: none; /* Removes Default Firefox style*/
+    background: #33CCFF url(pic/body.png) no-repeat 90% center;
+    width: 120px; /*Width of select dropdown to give space for arrow image*/
+    text-indent: 0.01px; /* Removes default arrow from firefox*/
+    text-overflow: ""; /*Removes default arrow from firefox*/ /*My custom style for fonts*/
+    color: #FFF;
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: inset 0 0 5px rgba(000,000,000, 0.5);
+    color: Black;
+}
+
+
+
+.radiobuttonlist1
+{
+    color: #33CCFF;
+}
+
+
+
+
+#mapholder
+{
+    -moz-box-shadow: 8px 6px 16px #000000;
+    -webkit-box-shadow: 8px 6px 16px #000000;
+    box-shadow: 8px 6px 16px #000000;
+    left: 10%;
+}
+
+
+
+.reasonList
+{
+    display: inline;
+    text-align: right;
+    font-family: Comic Sans MS;
+    font-style: italic;
+    color: White;
 }
 

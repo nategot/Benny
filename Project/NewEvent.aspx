@@ -12,21 +12,24 @@
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+
+    <br /><br /> <br /><br /> <br /><br /> <br /><br /> <br /><br /> <br /><br />
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
-    <h1>
+    <h1 class="addeventtitle">
         Create New Event</h1>
     <br />
     <br />
     <div id="dialog" style="display: none">
     </div>
-    <table style="float: left">
+    <table class="addeventable"  style="float: left" >
         <tr>
             <td>
-                Category:
+                <asp:Label CssClass="addeventlabla" runat="server" Text="Label"> Category:</asp:Label>
+               
             </td>
             <td colspan="3">
-                <asp:DropDownList ID="categoryDDL" runat="server" CssClass="ggg">
+                <asp:DropDownList ID="categoryDDL"  runat="server" CssClass="addeventinput">
                     <asp:ListItem Value="1">Soccer</asp:ListItem>
                     <asp:ListItem Value="2">Basketball</asp:ListItem>
                     <asp:ListItem Value="3">Tennis</asp:ListItem>
@@ -39,48 +42,54 @@
         </tr>
         <tr>
             <td>
-                Number of Participants:
+              <asp:Label  CssClass="addeventlabla" runat="server" Text="Label">  Number of Participants:</asp:Label>
+               
             </td>
             <td colspan="3">
                 <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="NOP"
                     Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
                 </asp:NumericUpDownExtender>
-                <asp:TextBox ID="NOP" Text="8" runat="server" Width="40"></asp:TextBox>
+                <asp:TextBox ID="NOP" Text="8" runat="server" Width="40" CssClass="addeventinput"></asp:TextBox>
                 <input type="image" class="btnCh" id="downArrow" src="pic/down.gif" />
                 <input type="image" class="btnCh" id="upArrow" src="pic/up.gif" />
             </td>
         </tr>
         <tr>
             <td>
-                Location:
+             <asp:Label  CssClass="addeventlabla" runat="server" Text="Label">   Location:</asp:Label>
+
+               
             </td>
             <td colspan="3">
               
-                <input type="text" value="" id="locationTB" placeholder="Enter a location" />
+                <input type="text" value="" class="addeventinput" id="locationTB" placeholder="Enter a location" />
                 <input type="button" id="getPosition" class="myButton" value="Find" />
             </td>
         </tr>
         <tr>
             <td>
-                Date & Time:
+              <asp:Label CssClass="addeventlabla" runat="server" Text="Label"> Date & Time:</asp:Label>
+               
             </td>
             <td colspan="3">
-                <asp:TextBox ID="timeTB" runat="server" Width="40" Text="18:00"></asp:TextBox>
+                <asp:TextBox ID="timeTB" runat="server" CssClass="addeventinput" Width="40" Text="18:00"></asp:TextBox>
                 <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="dateTB"
                     PopupButtonID="calanderBTN" Format="dd/MM/yyyy">
                 </asp:CalendarExtender>
-                <asp:TextBox ID="dateTB" runat="server"></asp:TextBox>
+                <asp:TextBox ID="dateTB" runat="server" CssClass="addeventinput" ></asp:TextBox>
                 <asp:ImageButton ID="calanderBTN" runat="server" ImageUrl="pic/Calendar.png" Width="16px" />
             </td>
         </tr>
         <tr>
             <td>
-                Age Range:
+             <asp:Label CssClass="addeventlabla" runat="server" Text="Label"> Age Range: </asp:Label>
+                
             </td>
             <td>
                 <asp:TextBox ID="MinAgeTxt" runat="server" Width="30" Text="25" />
             </td>
             <td style="width: 163px; height: 20px; vertical-align: top;">
+
                 <asp:TextBox ID="sliderTwo" runat="server" />
                 <asp:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server" BehaviorID="multiHandleSliderExtenderTwo"
                     TargetControlID="sliderTwo"  Minimum="0" Maximum="100" TooltipText="{0}" Orientation="Horizontal"
@@ -98,36 +107,39 @@
         </tr>
         <tr>
             <td>
-                Event Type:
+             <asp:Label  CssClass="addeventlabla" runat="server" Text="Label">  Event Type: </asp:Label>
+               
             </td>
             <td colspan="3">
-                <asp:RadioButtonList ID="EventTypeRBL" runat="server" RepeatDirection="Horizontal">
-                    <asp:ListItem Value="false" Selected>Public</asp:ListItem>
-                    <asp:ListItem Value="true">Private</asp:ListItem>
+                <asp:RadioButtonList ID="EventTypeRBL" runat="server" RepeatDirection="Horizontal" CssClass="ListItem1">
+                    <asp:ListItem  Value="false" Selected="True" >Public</asp:ListItem>
+                    <asp:ListItem  Value="true">Private</asp:ListItem>
                 </asp:RadioButtonList>
             </td>
         </tr>
         <tr>
             <td>
-                Frequency:
+             <asp:Label   CssClass="addeventlabla" runat="server" Text="Label">  Frequency: </asp:Label>
+                
             </td>
             <td colspan="3">
-                <asp:RadioButtonList ID="FrequRBL" runat="server" RepeatDirection="Horizontal">
-                    <asp:ListItem Value="1" Selected>Once</asp:ListItem>
-                    <asp:ListItem Value="2">Every Week</asp:ListItem>
+                <asp:RadioButtonList ID="FrequRBL"  runat="server" RepeatDirection="Horizontal"  style="width:270px;color:White">
+                    <asp:ListItem  Value="1" Selected="True">Once</asp:ListItem >
+                    <asp:ListItem  Value="2">Every Week</asp:ListItem>
                     <asp:ListItem Value="3">Every Month</asp:ListItem>
                 </asp:RadioButtonList>
             </td>
         </tr>
         <tr>
             <td>
-                Comment:
+              <asp:Label ID="Label1"   CssClass="addeventlabla" runat="server" Text="Label">  Comment: </asp:Label>
+               
             </td>
             <td colspan="3">
-                <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" TargetControlID="commentsTB"
+                <asp:TextBoxWatermarkExtender  ID="TextBoxWatermarkExtender2" runat="server"  TargetControlID="commentsTB"
                     WatermarkText="Add your comment here">
                 </asp:TextBoxWatermarkExtender>
-                <asp:TextBox ID="commentsTB" runat="server" TextMode="MultiLine" CssClass="ggg"></asp:TextBox>
+                <asp:TextBox ID="commentsTB" runat="server" class="addeventinput" TextMode="MultiLine" ></asp:TextBox>
             </td>
         </tr>
         <tr>
