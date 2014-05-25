@@ -12,10 +12,9 @@
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-
-    <br /><br /> <br /><br /> <br /><br /> <br /><br /> <br /><br /> <br /><br />
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
+     <br /><br /> <br /> <br /><br /><br />
     <h1 class="addeventtitle">
         Create New Event</h1>
     <br />

@@ -11,19 +11,19 @@ function statusChangeCallback(response) {
         // Logged into your app and Facebook.
         //testAPI();
         //getUserInfo();
-        alert(1111);
+        //alert(1111);
         //Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
-        alert(2222);
+        //alert(2222);
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
-        alert(3333);
+        //alert(3333);
     }
     Login();
 
@@ -159,7 +159,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
               
             }
             else {
-                alert("Register faild"); ;
+                //alert("Register faild"); ;
             }
 
         }, // end of success
