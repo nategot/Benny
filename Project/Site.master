@@ -20,14 +20,15 @@
             <div class="title">
                 <img alt="icon" id="imgLogo" src="pic/logo.png" style="height: 100px; width:auto" />
             </div>
-            <div class="loginDisplay" style="float: right">
+            <div class="loginDisplay" style="float: right; width: 200px;">
                 <%-- <a href="Login.aspx" id="HeadLoginStatus" runat="server">
                     <asp:Label ID="LogInLbl" runat="server" Text="Log In"></asp:Label></a>
                 <asp:Image ID="userImage" runat="server" Width="50" Height="100"/>  --%>
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true"
                     data-auto-logout-link="true" onclick="Login()">
+                
                 </div>
-                <div id="status"></div>
+                <div id="status" style="text-align: left; display: none;"></div>
             </div>
             <div class="clear hideSkiplink">
               <%--  <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
