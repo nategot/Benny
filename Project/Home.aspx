@@ -12,10 +12,16 @@
     <script src="Scripts/jquery.reveal.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+    <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
+    <div id="Div1" style="display: none">
+    </div>
     <br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
@@ -91,11 +97,10 @@
             <div id="myModal" class="reveal-modal" style="float: left">
                 <div>
                     <div id="contect">
-                     
                     </div>
-                    <div id="map-canvas" class="map" >
+                    <div id="map-canvas" class="map">
                     </div>
-                    '<asp:Button ID="joinBtn" class="btnjoin" runat="server" Text="join" onclick="JoinBtn_Click" />
+                    <asp:Button ID="joinBtn" class="btnjoin" runat="server" Text="join" OnClick="JoinBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -186,17 +191,17 @@
             strT += '<asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp;'
             strT += ' <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label><br />'
             strT += '<asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;'
-            strT += '  <asp:Label  runat="server" CssClass="bbb" >' + "Frequency" + '</asp:Label><br />'
-            strT += ' <asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp;'
-            strT += '  <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label><br /><br />'
+            strT += '<asp:Label  runat="server" CssClass="bbb" >' + "Frequency" + '</asp:Label><br />'
+            strT += '<asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp;'
+            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label><br /><br />'
             strT += '</br></td> <td class="tt">' + buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti); +'</td></tr>  </table></div>';
-         
+
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
             //load table
-                        
-//                      
+
+            //                      
 
             //build map
             var ruppinPos = new Object();
@@ -219,9 +224,9 @@
                 title: ''
             });
 
-            
+
             return strT;
-            
+
         }
 
         function buildBoard(PlayerList, numRows) {

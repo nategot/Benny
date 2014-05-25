@@ -20,7 +20,8 @@ public class User
     private string userName;
     private string fname;
     private string userPassword;
-
+   
+    #region //prop
     public int UserId
     {
         get { return userId; }
@@ -112,5 +113,6 @@ public class User
         DBservices dbs = new DBservices();
         return dbs.InsertToEvent(this,eventnum);
     }
+#endregion
     
 }

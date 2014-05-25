@@ -11,12 +11,17 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Session["Fname"] != null)
-        //{
-        //    LogInLbl.Text = "Hello! " + (Session["Fname"]).ToString();
-        //    DataTable dt = (DataTable)Session["UserDeatail"];
-        //    userImage.ImageUrl = dt.Rows[0]["Picture"].ToString();
-        //}
+        User u = new User();
+        u.Email = loginF.Value;
+        DataTable dt = u.CheckPass();
+        if (dt.Rows.Count != 0)
+        {
+
+            HttpContext.Current.Session["Fname"] = dt.Rows[0]["Fname"].ToString();
+            HttpContext.Current.Session["UserDeatail"] = dt;
+        }
+        
     }
 
+   
 }

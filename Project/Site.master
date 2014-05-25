@@ -13,6 +13,8 @@
 </head>
 <body>
     <form runat="server">
+    <div id="fb-root"></div>
+    <asp:HiddenField ID="loginF" runat="server" />
     <div class="page">
         <div class="header">
             <div class="title">
@@ -23,7 +25,7 @@
                     <asp:Label ID="LogInLbl" runat="server" Text="Log In"></asp:Label></a>
                 <asp:Image ID="userImage" runat="server" Width="50" Height="100"/>  --%>
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true"
-                    data-auto-logout-link="true">
+                    data-auto-logout-link="true" onclick="Login()">
                 </div>
                 <div id="status"></div>
             </div>
@@ -33,7 +35,7 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Home.aspx" Text="Home" />
                         <asp:MenuItem NavigateUrl="~/MyEvents.aspx" Text="My Events"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/NewEvent.aspx" Text="Create New Event" Value="0"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/NewEvent.aspx" Text="Create New Event" ></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About" />
                     </Items>
                 </asp:Menu>--%>

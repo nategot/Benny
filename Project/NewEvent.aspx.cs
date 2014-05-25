@@ -13,8 +13,7 @@ public partial class NewEvent : System.Web.UI.Page
     DataTable dt;
     protected void Page_Load(object sender, EventArgs e)
     {
-        string message = "<a href='#' class='big-link' data-reveal-id='myModal'  onclick='SmallMap()'>  join </a>";
-        ShowPopup("<asp:HyperLink ID='HyperLink1' class='big-link' runat='server'  onclick='SmallMap()'  data-reveal-id='myModal' ><asp:Button ID='" + "88" + "' CssClass='myButton' runat='server' Text='Join Now!' OnClick='joinBTN_Click' /></asp:HyperLink>");
+       
         // if the user is not login go to login
         if (Session["Fname"] == null)
         {

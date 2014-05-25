@@ -1,4 +1,5 @@
-﻿// This is called with the results from from FB.getLoginStatus().
+﻿
+// This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
@@ -9,17 +10,23 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         //testAPI();
-        Login();
+        //getUserInfo();
+        alert(1111);
+        //Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
+        alert(2222);
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
+        alert(3333);
     }
+    Login();
+
 }
 
 // This function is called when someone finishes with the Login
@@ -31,7 +38,7 @@ function checkLoginState() {
     });
 }
 
-window.fbAsyncInit = function () {
+window.fbAsyncInit = function () { 
     FB.init({
         appId: '295645690612011',
         cookie: true,  // enable cookies to allow the server to access 
@@ -55,17 +62,16 @@ window.fbAsyncInit = function () {
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
     });
-
 };
 
 // Load the SDK asynchronously
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-} (document, 'script', 'facebook-jssdk'));
+//(function (d, s, id) {
+//    var js, fjs = d.getElementsByTagName(s)[0];
+//    if (d.getElementById(id)) return;
+//    js = d.createElement(s); js.id = id;
+//    js.src = "//connect.facebook.net/en_US/sdk.js";
+//    fjs.parentNode.insertBefore(js, fjs);
+//} (document, 'script', 'facebook-jssdk'));
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
@@ -90,7 +96,7 @@ function testAPI() {
 /*--------------NIR-----------------*/
 
 function Login() {
-    alert("login");
+
     FB.login(function (response) {
         if (response.authResponse) {
             getUserInfo();
@@ -103,17 +109,62 @@ function Login() {
 }
 
 function getUserInfo() {
-    alert("getUserInfo");
-	    FB.api('/me', function(response) {
-            var str="<b>Name</b> : "+response.name+"<br>";
-	  	    str +="<b>Link: </b>"+response.link+"<br>";
-	  	    str +="<b>Username:</b> "+response.username+"<br>";
-	  	    str +="<b>id: </b>"+response.id+"<br>";
-	  	    str +="<b>Email:</b> "+response.email+"<br>";
-	  	    str +="<input type='button' value='Get Photo' onclick='getPhoto();'/>";
-	  	    str +="<input type='button' value='Logout' onclick='Logout();'/>";
-	  	    //document.getElementById('status').innerHTML = str;
-	  	    document.getElementById('status').innerHTML =
-        'Hello, ' + response.email + '!';
-	  	});
-    }
+    FB.api('/me', function (response) {
+//        var str = "<b>Name</b> : " + response.name + "<br>";
+//        str += "<b>Link: </b>" + response.link + "<br>";
+//        str += "<b>Username:</b> " + response.username + "<br>";
+//        str += "<b>id: </b>" + response.id + "<br>";
+//        str += "<b>Email:</b> " + response.email + "<br>";
+//        str += "<input type='button' value='Get Photo' onclick='getPhoto();'/>";
+//        str += "<input type='button' value='Logout' onclick='Logout();'/>";
+//        document.getElementById('status').innerHTML = str;
+        document.getElementById('status').innerHTML = 'Hello, ' + response.pic_small_with_logo + '!';
+        
+
+        firstName = response.first_name;
+        lastName = response.last_name;
+        age = 27;
+        city = response.hometown_location;
+        userName = response.username;
+        email = response.email;
+      //  email = "555@gmail.com";
+        password = response.id;
+        imageUrl = response.pic;
+        //alert(firstName);
+        var a = document.getElementById("loginF");
+        a.value = email;
+
+        AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
+        
+        //alert(a.value);
+    });
+
+    
+}
+
+function AddUser(firstName, lastName, age, city, userName, email, Password, imageUrl) {
+    //alert(firstName + lastName + age + city + userName + email + Password + imageUrl);
+    var dataString = '{UserName:"' + userName + '",' + 'Password:"' + Password + '",' + 'FirstName:"' + firstName + '",' + 'LastName:"' + lastName + '",' + 'Age:' + age + ',' + 'City:"' + city + '",' + 'Email:"' + email + '",' + 'imageUrl:"' + imageUrl + '"}';
+
+    $.ajax({ // ajax call starts
+        url: 'http://localhost:63588/Project/WebService.asmx/Adduser', // server side method
+        data: dataString,    // the parameters sent to the server
+        type: 'POST',
+        dataType: 'json', // Choosing a JSON datatype
+        contentType: 'application/json; charset = utf-8',
+        success: function (data) // Variable data contains the data we get from serverside
+        {
+            ans = $.parseJSON(data.d);
+            if (ans == 1) {
+              
+            }
+            else {
+                alert("Register faild"); ;
+            }
+
+        }, // end of success
+        error: function (e) {
+            alert("error in jason");
+        } // end of error
+    }) // end of ajax call
+}
