@@ -191,7 +191,7 @@
             strT += '<asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp;'
             strT += ' <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label><br />'
             strT += '<asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label  runat="server" CssClass="bbb" >' + "Frequency" + '</asp:Label><br />'
+            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label><br />'
             strT += '<asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp;'
             strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label><br /><br />'
             strT += '</br></td> <td class="tt">' + buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti); +'</td></tr>  </table></div>';

@@ -38,9 +38,10 @@ public class DBservices
         {
             con = connect(conectionStr);
         }
-        catch (Exception ex)
+        catch (Exception )
         {
-            throw (ex);
+            return 0; 
+            
         }
 
         String cStr = BuildInsertCommand(p);      // helper method to build the insert string
@@ -56,7 +57,7 @@ public class DBservices
         {
             return 0;
             // write to log
-            throw (ex);
+            MessageBox.Show("the Event wasnt added"+ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
 
         finally

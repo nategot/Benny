@@ -24,6 +24,7 @@ public class EventOnAir
     private double minAge;
     private double maxAge;
     private int frequency;
+    private string frequencyStr;
     private bool IsPrivate;
     private int adminId;
     private Point point;
@@ -39,6 +40,11 @@ public class EventOnAir
 
     //prop
     #region
+    public string FrequencyStr
+    {
+        get { return frequencyStr; }
+        set { frequencyStr = value; }
+    }
     public string AdminFullName
     {
         get { return adminFullName; }
