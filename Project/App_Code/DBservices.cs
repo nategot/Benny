@@ -268,7 +268,31 @@ public class DBservices
 
     }
 
-    // Read from the DB into a table (event)
+    // Read from the DB into a table (Mtevent)
+    public DataTable ReadMyEvent(User u)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        DataSet tblGetAdminName = new DataSet();
+        SqlDataAdapter adpt1;
+
+        SqlCommand MySPCommand = new SqlCommand("GetMyEvents", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEmail = new SqlParameter("@userEmail", SqlDbType.NChar);
+        parEmail.Value = (u.Email);
+        parEmail.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEmail);
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+
+        adpt1.Fill(tblGetAdminName, "T2");
+        con.Close();
+        return tblGetAdminName.Tables["T2"];
+
+    }
+
+    // Read from the DB into a table (home-event)
     public DBservices ReadFromDataBase(string conString, string tableName)
     {
 

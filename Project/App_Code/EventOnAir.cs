@@ -135,16 +135,7 @@ public class EventOnAir
         get { return adminId; }
         set { adminId = value; }
     }
-    //public double Lat
-    //{
-    //    get { return lat; }
-    //    set { lat = value; }
-    //}
-    //public double Lng
-    //{
-    //    get { return lng; }
-    //    set { lng = value; }
-    //}
+
     #endregion //prop
 
 
@@ -185,6 +176,8 @@ public class EventOnAir
 
         return dbs.dt;
     }
+
+
 
 
 
