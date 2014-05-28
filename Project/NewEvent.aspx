@@ -61,7 +61,7 @@
             </td>
             <td colspan="3">
               
-                <input type="text" value="" class="addeventinput" id="locationTB" placeholder="Enter a location" />
+                <input type="text" value="" style="width:160px" class="addeventinput" id="locationTB" placeholder="Enter a location" />
                 <input type="button" id="getPosition" class="myButton" value="Find" />
             </td>
         </tr>
@@ -110,10 +110,19 @@
                
             </td>
             <td colspan="3">
-                <asp:RadioButtonList ID="EventTypeRBL" runat="server" RepeatDirection="Horizontal" CssClass="ListItem1">
+                <%--<asp:RadioButtonList ID="EventTypeRBL" runat="server" RepeatDirection="Horizontal" CssClass="ListItem1">
                     <asp:ListItem  Value="false" Selected="True" >Public</asp:ListItem>
                     <asp:ListItem  Value="true">Private</asp:ListItem>
-                </asp:RadioButtonList>
+                </asp:RadioButtonList>--%>
+
+                <asp:DropDownList ID="EventTypeRBL" Width="200px" runat="server" CssClass="addeventinput">
+                    <asp:ListItem Value="1">Public</asp:ListItem>
+                    <asp:ListItem Value="2">Private</asp:ListItem>
+                   
+                   
+                </asp:DropDownList>
+
+
             </td>
         </tr>
         <tr>
@@ -122,11 +131,19 @@
                 
             </td>
             <td colspan="3">
-                <asp:RadioButtonList ID="FrequRBL"  runat="server" RepeatDirection="Horizontal"  style="width:270px;color:White">
+               <%-- <asp:RadioButtonList ID="FrequRBL"  runat="server" RepeatDirection="Horizontal"  style="width:290px;color:White">
                     <asp:ListItem  Value="1" Selected="True">Once</asp:ListItem >
                     <asp:ListItem  Value="2">Every Week</asp:ListItem>
                     <asp:ListItem Value="3">Every Month</asp:ListItem>
-                </asp:RadioButtonList>
+                </asp:RadioButtonList>--%>
+
+                <asp:DropDownList ID="FrequRBL"  Width="200px" runat="server" CssClass="addeventinput">
+                    <asp:ListItem Value="1">Once</asp:ListItem>
+                    <asp:ListItem Value="2">Every Week</asp:ListItem>
+                    <asp:ListItem Value="3">Every Month</asp:ListItem>
+                   
+                </asp:DropDownList>
+
             </td>
         </tr>
         <tr>
@@ -135,10 +152,10 @@
                
             </td>
             <td colspan="3">
-                <asp:TextBoxWatermarkExtender  ID="TextBoxWatermarkExtender2" runat="server"  TargetControlID="commentsTB"
+                <asp:TextBoxWatermarkExtender  ID="TextBoxWatermarkExtender2"  runat="server"  TargetControlID="commentsTB" 
                     WatermarkText="Add your comment here">
                 </asp:TextBoxWatermarkExtender>
-                <asp:TextBox ID="commentsTB" runat="server" class="addeventinput" TextMode="MultiLine" ></asp:TextBox>
+                <asp:TextBox ID="commentsTB" runat="server" class="addeventinput" TextMode="MultiLine" style="width:200px; height:40px;" ></asp:TextBox>
             </td>
         </tr>
         <tr>

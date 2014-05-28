@@ -90,4 +90,16 @@
             </div>
         </div>
     </div>
+    <br />
+    <div>
+        <div class='social-wrap'>
+            <ul>
+                <li><a class='facebook' href='http://www.facebook.com/' target='_blaank'>Facebook</a></li>
+                <li><a class='twitter' href='http://twitter.com/' target='_blaank'>Twitter</a></li>
+                <li><a class='google-p' href='https://plus.google.com/' target='_blaank'>Google Plus</a></li>
+                <li><a class='rss' href='#' target='_blaank'>Rss</a></li>
+            </ul>
+        </div>
+    </div>
+    <br />  <br />  <br />
 </asp:Content>

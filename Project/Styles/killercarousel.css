@@ -59,6 +59,7 @@
     top: 0px;
     width: 100%;
     height: 0px;
+    text-align:center;
 }
 
 /* The wrapping element of navigation buttons (if used) */
@@ -98,5 +99,75 @@
     position: absolute;
     pointer-events: none; /* Make images non-selectable. */
     width: 100%; /* Make images expand to wrapper size (used in 2d modes). */
+}
+
+
+.social-wrap {
+margin:0px 0px 0px 0px;
+padding:0px 0px 0px 0px;
+}
+.social-wrap ul li{
+list-style:none;
+border-bottom:none;
+margin:0px 0px 0px 0px;
+padding:0px 0px 0px 0px;
+}
+.social-wrap li a {
+margin:5px 5px 0px 5px;
+padding:0px 0px 0px 0px;
+width:60px;
+height:60px;
+float:left;
+text-indent:-99999px;
+background: #191919;
+border:solid 1px #222121;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright:5px;
+-moz-border-radius-bottomleft:5px;
+-moz-border-radius-bottomright:5px;
+-webkit-border-top-left-radius:5px;
+-webkit-border-top-right-radius:5px;
+-webkit-border-bottom-left-radius:5px;
+-webkit-border-bottom-right-radius:5px;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;
+}
+.social-wrap li a.facebook {
+background: #191919 url(http://4.bp.blogspot.com/-njqMpTvxYbs/UFM2yXm-AnI/AAAAAAAAEFU/yfm_dKxQ2hs/s1600/facebook.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.facebook:hover {
+background: #191919 url(http://4.bp.blogspot.com/-njqMpTvxYbs/UFM2yXm-AnI/AAAAAAAAEFU/yfm_dKxQ2hs/s1600/facebook.png) no-repeat -0px -0px;
+}
+.social-wrap li a.twitter {
+background: #191919 url(http://2.bp.blogspot.com/-BtalCDk0UGg/UFM206t5yfI/AAAAAAAAEFk/1cwjqImigQo/s1600/twitter-1.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.twitter:hover {
+background: #191919 url(http://2.bp.blogspot.com/-BtalCDk0UGg/UFM206t5yfI/AAAAAAAAEFk/1cwjqImigQo/s1600/twitter-1.png) no-repeat -0px -0px;
+}
+.social-wrap li a.google-p {
+background:#191919 url(http://1.bp.blogspot.com/-qITbsA3n7_w/UFM2z36eMnI/AAAAAAAAEFc/PK9Cmf7JZd4/s1600/google.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.google-p:hover {
+background: #191919 url(http://1.bp.blogspot.com/-qITbsA3n7_w/UFM2z36eMnI/AAAAAAAAEFc/PK9Cmf7JZd4/s1600/google.png) no-repeat -0px -0px;
+}
+.social-wrap li a.rss {
+background:#191919 url(http://1.bp.blogspot.com/-xmXWc6_8mxw/UFM21nVC47I/AAAAAAAAEFs/Ydce5M-vkvw/s1600/twitter.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.rss:hover {
+background: #191919 url(http://1.bp.blogspot.com/-xmXWc6_8mxw/UFM21nVC47I/AAAAAAAAEFs/Ydce5M-vkvw/s1600/twitter.png) no-repeat -0px -0px;
 }
 

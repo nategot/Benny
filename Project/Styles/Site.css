@@ -30,6 +30,8 @@ a:active
     color: #034af3;
 }
 
+
+
 p
 {
     margin-bottom: 10px;
@@ -485,6 +487,11 @@ div.accountInfo
     color: Black;
 }
 
+.addeventinput:link 
+{
+    color:yellow;
+}
+
 
 
 .radiobuttonlist1
@@ -502,6 +509,8 @@ div.accountInfo
     box-shadow: 8px 6px 16px #000000;
     left: 10%;
 }
+
+
 
 
 
