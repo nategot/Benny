@@ -86,17 +86,15 @@ public partial class Home : System.Web.UI.Page
 
     }
 
-    //chek date if todaט or tomorrow
+    //chek date if today or tomorrow
     protected void Chekdate(int i)
     {  
         DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
-        if (DateTime.Today.Day == time.Day)
+        if (DateTime.Today == time)
         {
             GridView1.Rows[i].Cells[3].Text = "Today!";
-            // GridView1.Rows[i].Cells[3].ForeColor = System.Drawing.Color.Red;
-
         }
-        else if (DateTime.Today.Day - time.Day == -1)
+        else if (DateTime.Today == DateTime.Today.AddDays(1))
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
         }
@@ -268,7 +266,7 @@ public partial class Home : System.Web.UI.Page
 
     protected void ShowPopup(string message) //popup message
     {
-        //ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);
+       
          ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
      

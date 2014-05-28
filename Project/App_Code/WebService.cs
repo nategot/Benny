@@ -212,6 +212,7 @@ public class WebService : System.Web.Services.WebService
                 evTemp.IsPrivate1 = bool.Parse(dt.Rows[0]["Private"].ToString());
                 evTemp.DateTime = DateTime.Parse(dt.Rows[i]["Time"].ToString());
                 evTemp.DateTimeStr = (dt.Rows[i]["Time"].ToString());
+                evTemp.FrequencyStr = (dt.Rows[i]["Frequncy"].ToString());
                 evTemp.Description = dt.Rows[i]["Description"].ToString();
                 evTemp.Comments = dt.Rows[i]["Comments"].ToString();
                 evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();

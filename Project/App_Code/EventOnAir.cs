@@ -24,6 +24,7 @@ public class EventOnAir
     private double minAge;
     private double maxAge;
     private int frequency;
+    private string frequencyStr;
     private bool IsPrivate;
     private int adminId;
     private Point point;
@@ -39,6 +40,11 @@ public class EventOnAir
 
     //prop
     #region
+    public string FrequencyStr
+    {
+        get { return frequencyStr; }
+        set { frequencyStr = value; }
+    }
     public string AdminFullName
     {
         get { return adminFullName; }
@@ -129,16 +135,7 @@ public class EventOnAir
         get { return adminId; }
         set { adminId = value; }
     }
-    //public double Lat
-    //{
-    //    get { return lat; }
-    //    set { lat = value; }
-    //}
-    //public double Lng
-    //{
-    //    get { return lng; }
-    //    set { lng = value; }
-    //}
+
     #endregion //prop
 
 
@@ -179,6 +176,8 @@ public class EventOnAir
 
         return dbs.dt;
     }
+
+
 
 
 

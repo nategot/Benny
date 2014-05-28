@@ -88,7 +88,7 @@ public class User
     }
 
 
-
+#endregion
     public int InsertNewUser()
     {
         DBservices dbs = new DBservices();
@@ -113,6 +113,12 @@ public class User
         DBservices dbs = new DBservices();
         return dbs.InsertToEvent(this,eventnum);
     }
-#endregion
+    //read the Myevent table
+    public DataTable ReadMyEvent()
+    {
+        DBservices dbs = new DBservices();
+        return dbs.ReadMyEvent(this);
+    }
+
     
 }

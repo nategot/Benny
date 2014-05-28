@@ -32,6 +32,8 @@ public partial class NewEvent : System.Web.UI.Page
      
 
     }
+
+    //insert new event 
     protected void confirmBTN_Click(object sender, EventArgs e)
     {
 
