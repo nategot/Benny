@@ -13,11 +13,11 @@
     -ms-user-select: none; /* Disable IE10/11 default actions */
     -ms-touch-action: none;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     background-position: center;
     width: 100%; /* This makes wrapper scale vertically in proportion to width */
-    padding-bottom: 33%;
-  
+    padding-bottom: 20%;
+    padding-top:15%;
 }
 .kc-horizon
 {
@@ -102,7 +102,9 @@
 }
 
 
-.social-wrap {
+.social-wrap 
+{
+   
 margin:0px 0px 0px 0px;
 padding:0px 0px 0px 0px;
 }

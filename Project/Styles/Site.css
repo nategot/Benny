@@ -10,7 +10,7 @@ body
     margin: 0px;
     padding: 0px;
     color: #696969;
-    background-image: url('../Images/blue.jpg');
+    background-image: url('../Images/bluefadetovivid.jpeg');
     background-size: 100% 100%;
 }
 
@@ -100,8 +100,7 @@ first child of the left and right table columns */
     width: 100%;
     height: 100%;
     margin: 0px auto 0px auto;
-    background-image: url('../Images/bluefadetovivid.jpeg');
-    background-size: 100% 100%;
+    
 }
 
 .header
@@ -127,16 +126,16 @@ first child of the left and right table columns */
 
 #menu
 {
-    width:100%;
+    margin-bottom: 5%;
 }
 
 .main
 {
     padding: 0px 12px;
     margin: 12px 8px 8px 8px;
-    min-height: 543px;
+    
+    
 }
-
 .leftCol
 {
     padding: 6px 0px;
@@ -147,11 +146,10 @@ first child of the left and right table columns */
 
 .footer
 {
-    color: #4e5766;
-    padding: 0px 0px 0px 0px;
-    margin: 0px auto;
+    position: relative;
     text-align: center;
     line-height: normal;
+    
 }
 
 Label

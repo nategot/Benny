@@ -32,7 +32,7 @@
             <div id="facebookLogin" style="float: right;">
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true"
                     data-auto-logout-link="true" onclick="Login()">
-                </div> 
+                </div>
                 <div id="status" style="text-align: left; display: none;">
                 </div>
             </div>
@@ -49,44 +49,44 @@
             </div>--%>
         </div>
         <div id="menu">
-        <ul class="ca-menu">
-            <li><a href="Home.aspx"><span class="ca-icon">
-                <img class="ca-icon" src="Styles/menuCss/home.png" /></span>
-                <div class="ca-content">
-                    <h2 class="ca-main">
-                        Home</h2>
-                    <h3 class="ca-sub">
-                        Home</h3>
-                </div>
-            </a></li>
-            <li><a href="MyEvents.aspx"><span class="ca-icon">
-                <img class="ca-icon" src="Styles/menuCss/calendar_month_checkmark.png" /></span>
-                <div class="ca-content">
-                    <h2 class="ca-main">
-                        My Events</h2>
-                    <h3 class="ca-sub">
-                        My Events</h3>
-                </div>
-            </a></li>
-            <li><a href="NewEvent.aspx"><span class="ca-icon">
-                <img class="ca-icon" src="Styles/menuCss/browser_new_window.png" /></span>
-                <div class="ca-content">
-                    <h2 class="ca-main">
-                        Create New Event</h2>
-                    <h3 class="ca-sub">
-                        Create New Event</h3>
-                </div>
-            </a></li>
-            <li><a href="About.aspx"><span class="ca-icon">
-                <img class="ca-icon" src="Styles/menuCss/info.png" /></span>
-                <div class="ca-content">
-                    <h2 class="ca-main">
-                        About</h2>
-                    <h3 class="ca-sub">
-                        About</h3>
-                </div>
-            </a></li>
-        </ul>
+            <ul class="ca-menu">
+                <li><a href="Home.aspx"><span class="ca-icon">
+                    <img class="ca-icon" src="Styles/menuCss/home.png" /></span>
+                    <div class="ca-content">
+                        <h2 class="ca-main">
+                            Home</h2>
+                        <h3 class="ca-sub">
+                            Home</h3>
+                    </div>
+                </a></li>
+                <li><a href="MyEvents.aspx"><span class="ca-icon">
+                    <img class="ca-icon" src="Styles/menuCss/calendar_month_checkmark.png" /></span>
+                    <div class="ca-content">
+                        <h2 class="ca-main">
+                            My Events</h2>
+                        <h3 class="ca-sub">
+                            My Events</h3>
+                    </div>
+                </a></li>
+                <li><a href="NewEvent.aspx"><span class="ca-icon">
+                    <img class="ca-icon" src="Styles/menuCss/browser_new_window.png" /></span>
+                    <div class="ca-content">
+                        <h2 class="ca-main">
+                            Create New<br />Event</h2>
+                        <h3 class="ca-sub">
+                            Create New<br />Event</h3>
+                    </div>
+                </a></li>
+                <li><a href="About.aspx"><span class="ca-icon">
+                    <img class="ca-icon" src="Styles/menuCss/info.png" /></span>
+                    <div class="ca-content">
+                        <h2 class="ca-main">
+                            About</h2>
+                        <h3 class="ca-sub">
+                            About</h3>
+                    </div>
+                </a></li>
+            </ul>
         </div>
         <div class="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
@@ -95,6 +95,15 @@
         </div>
     </div>
     <div class="footer">
+        <div class='social-wrap'>
+            <ul>
+                <li><a class='facebook' href='http://www.facebook.com/' target='_blaank'>Facebook</a></li>
+                <li><a class='twitter' href='http://twitter.com/' target='_blaank'>Twitter</a></li>
+                <li><a class='google-p' href='https://plus.google.com/' target='_blaank'>Google Plus</a></li>
+                <li><a class='rss' href='#' target='_blaank'>Rss</a></li>
+            </ul>
+        </div>
+        <br />
     </div>
     </form>
 </body>
