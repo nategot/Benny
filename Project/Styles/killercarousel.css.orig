@@ -1,0 +1,183 @@
+/* Rev 1311271343 */
+
+/*
+    Main carousel wrapper.
+*/
+.kc-wrap
+{
+    /* Various commands to stop items being selected when mouse-dragging/touching. */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; /* Disable IE10/11 default actions */
+    -ms-touch-action: none;
+    overflow: hidden;
+    position: absolute;
+    background-position: center;
+    width: 100%; /* This makes wrapper scale vertically in proportion to width */
+    padding-bottom: 20%;
+    padding-top:15%;
+}
+.kc-horizon
+{
+    visibility: hidden;
+}
+/* 
+    This wraps carousel items.
+*/
+.kc-item
+{
+    position: absolute; /* These sizes are from the examples - change as appropriate */
+    width: 256px;
+    height: 256px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    visibility: hidden;
+    text-align: center;
+    font-size:x-large;
+    color:white;
+}
+
+
+/*
+    Item Shadows are made from three sections, bottom, left and right.
+    This appears to give better performance than using CSS shadows, and minimizes the
+    pixel area of shadow drawn.
+    The image URLs used for the shadows will actually be copied into <img> elements.
+    You can of course change the images if required.
+*/
+
+/*
+    Reflection.
+    This is applied to an inserted <canvas> element that is the reflection.
+*/
+
+.kc-reflection
+{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 0px;
+    text-align:center;
+}
+
+/* The wrapping element of navigation buttons (if used) */
+.kc-nav-wrap
+{
+    display: inline-block;
+    position: absolute;
+    z-index: 1000;
+}
+/* Navigation button */
+.kc-nav-button, .kc-nav-button-active
+{
+    width: 16px;
+    height: 16px;
+    background-color: #888;
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.5);
+}
+/* Navigation button active */
+.kc-nav-button.active
+{
+    background-color: #fff;
+}
+
+/* No margin on  last one. */
+.kc-nav-button.last
+{
+    margin-right: 0;
+}
+
+.kc-item img
+{
+    visibility: hidden;
+    position: absolute;
+    pointer-events: none; /* Make images non-selectable. */
+    width: 100%; /* Make images expand to wrapper size (used in 2d modes). */
+}
+
+
+<<<<<<< HEAD
+.social-wrap 
+{
+   
+=======
+
+
+.social-wrap {
+>>>>>>> 41abc4ab326585d5afb70139c7b1b1f7bc48423e
+margin:0px 0px 0px 0px;
+padding:0px 0px 0px 0px;
+text-align:center;
+width:100%;
+}
+.social-wrap ul li{
+list-style:none;
+border-bottom:none;
+margin:0px 0px 0px 0px;
+padding:0px 0px 0px 0px;
+}
+.social-wrap li a {
+margin:5px 5px 0px 5px;
+padding:0px 0px 0px 0px;
+width:60px;
+height:60px;
+float:left;
+text-indent:-99999px;
+background: #191919;
+border:solid 1px #222121;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright:5px;
+-moz-border-radius-bottomleft:5px;
+-moz-border-radius-bottomright:5px;
+-webkit-border-top-left-radius:5px;
+-webkit-border-top-right-radius:5px;
+-webkit-border-bottom-left-radius:5px;
+-webkit-border-bottom-right-radius:5px;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;
+}
+.social-wrap li a.facebook {
+background: #191919 url(http://4.bp.blogspot.com/-njqMpTvxYbs/UFM2yXm-AnI/AAAAAAAAEFU/yfm_dKxQ2hs/s1600/facebook.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.facebook:hover {
+background: #191919 url(http://4.bp.blogspot.com/-njqMpTvxYbs/UFM2yXm-AnI/AAAAAAAAEFU/yfm_dKxQ2hs/s1600/facebook.png) no-repeat -0px -0px;
+}
+.social-wrap li a.twitter {
+background: #191919 url(http://2.bp.blogspot.com/-BtalCDk0UGg/UFM206t5yfI/AAAAAAAAEFk/1cwjqImigQo/s1600/twitter-1.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.twitter:hover {
+background: #191919 url(http://2.bp.blogspot.com/-BtalCDk0UGg/UFM206t5yfI/AAAAAAAAEFk/1cwjqImigQo/s1600/twitter-1.png) no-repeat -0px -0px;
+}
+.social-wrap li a.google-p {
+background:#191919 url(http://1.bp.blogspot.com/-qITbsA3n7_w/UFM2z36eMnI/AAAAAAAAEFc/PK9Cmf7JZd4/s1600/google.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.google-p:hover {
+background: #191919 url(http://1.bp.blogspot.com/-qITbsA3n7_w/UFM2z36eMnI/AAAAAAAAEFc/PK9Cmf7JZd4/s1600/google.png) no-repeat -0px -0px;
+}
+.social-wrap li a.rss {
+background:#191919 url(http://1.bp.blogspot.com/-xmXWc6_8mxw/UFM21nVC47I/AAAAAAAAEFs/Ydce5M-vkvw/s1600/twitter.png) no-repeat -0px -88px;
+-webkit-transition:All 0.3s ease-out;
+-moz-transition:All 0.3s ease-out;
+-o-transition:All 0.3s ease-out;
+}
+.social-wrap li a.rss:hover {
+background: #191919 url(http://1.bp.blogspot.com/-xmXWc6_8mxw/UFM21nVC47I/AAAAAAAAEFs/Ydce5M-vkvw/s1600/twitter.png) no-repeat -0px -0px;
+}
+
