@@ -11,7 +11,7 @@
         $(function () {
             $('.kc-wrap').KillerCarousel({
                 // Default natural width of carousel.
-                width: 900,
+                width: 800,
                 // Item spacing in 3d (has CSS3 3d) mode.
                 spacing3d: 175,
                 // Item spacing in 2d (no CSS3 3d) mode. 
@@ -21,21 +21,12 @@
                 // Looping mode.
                 infiniteLoop: true,
                 // Scale at 75% of parent element.
-                autoScale: 50
+                autoScale: 45
             });
         });
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <%--    <div style="width: 100%">
-        <div class="helloediv">
-            Hello there,
-        </div>
-        
-        <div class="helloediv2"><br />
-            Select your sport
-        </div>
-    </div>--%>
     <div id="wrapper">
         <div class="kc-wrap">
             <div class="kc-item">
@@ -91,14 +82,12 @@
         </div>
     </div>
     
-       <%-- <div class='social-wrap'>
-            <ul>
-                <li><a class='facebook' href='http://www.facebook.com/' target='_blaank'>Facebook</a></li>
-                <li><a class='twitter' href='http://twitter.com/' target='_blaank'>Twitter</a></li>
-                <li><a class='google-p' href='https://plus.google.com/' target='_blaank'>Google Plus</a></li>
-                <li><a class='rss' href='#' target='_blaank'>Rss</a></li>
-            </ul>
-        </div>--%>
-    
-
+    <%--<div class='social-wrap'>
+        <ul>
+            <li><a class='facebook' href='http://www.facebook.com/' target='_blaank'>Facebook</a></li>
+            <li><a class='twitter' href='http://twitter.com/' target='_blaank'>Twitter</a></li>
+            <li><a class='google-p' href='https://plus.google.com/' target='_blaank'>Google Plus</a></li>
+            <li><a class='rss' href='#' target='_blaank'>Rss</a></li>
+        </ul>
+    </div>--%>
 </asp:Content>
