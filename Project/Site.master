@@ -94,7 +94,7 @@
         <div class="clear">
         </div>
     </div>
-    <div class="footer">
+    <%--<div class="footer">
         <div class='social-wrap'>
             <ul>
                 <li><a class='facebook' href='http://www.facebook.com/' target='_blaank'>Facebook</a></li>
@@ -103,8 +103,7 @@
                 <li><a class='rss' href='#' target='_blaank'>Rss</a></li>
             </ul>
         </div>
-        <br />
-    </div>
+    </div>--%>
     </form>
 </body>
 </html>

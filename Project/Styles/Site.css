@@ -11,7 +11,8 @@ body
     padding: 0px;
     color: #696969;
     background-image: url('../Images/bluefadetovivid.jpeg');
-    background-size: 100% 100%;
+    background-size:cover;
+    background-repeat:no-repeat;
 }
 
 a:link, a:visited
@@ -133,7 +134,7 @@ first child of the left and right table columns */
 {
     padding: 0px 12px;
     margin: 12px 8px 8px 8px;
-    
+    height: 70%;
     
 }
 .leftCol
@@ -146,9 +147,11 @@ first child of the left and right table columns */
 
 .footer
 {
-    position: relative;
+    position:absolute;
     text-align: center;
     line-height: normal;
+    padding-left: 90%;
+    padding-top: 7%;
     
 }
 

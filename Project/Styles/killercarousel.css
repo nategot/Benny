@@ -3,8 +3,10 @@
 /*
     Main carousel wrapper.
 */
+
 .kc-wrap
 {
+    
     /* Various commands to stop items being selected when mouse-dragging/touching. */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -15,7 +17,7 @@
     overflow: hidden;
     position: absolute;
     background-position: center;
-    width: 100%; /* This makes wrapper scale vertically in proportion to width */
+    width: 98%; /* This makes wrapper scale vertically in proportion to width */
     padding-bottom: 20%;
     padding-top:15%;
 }
@@ -54,7 +56,7 @@
 
 .kc-reflection
 {
-    position: absolute;
+    
     left: 0px;
     top: 0px;
     width: 100%;
@@ -101,23 +103,25 @@
     width: 100%; /* Make images expand to wrapper size (used in 2d modes). */
 }
 
-
 .social-wrap 
 {
-   
-margin:0px 0px 0px 0px;
-padding:0px 0px 0px 0px;
+    position:absolute;
+    
+direction: rtl;
+padding-top: 30%;
 text-align:center;
-width:100%;
+
+
 }
 .social-wrap ul li{
 list-style:none;
 border-bottom:none;
 margin:0px 0px 0px 0px;
 padding:0px 0px 0px 0px;
+
 }
 .social-wrap li a {
-margin:5px 5px 0px 5px;
+
 padding:0px 0px 0px 0px;
 width:60px;
 height:60px;
