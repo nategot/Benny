@@ -133,7 +133,7 @@
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
                     <div style="width:100%;  height:250px;"> &nbsp;
-                    </div>
+                    </div> 
                     <a href="#" class="topopup">
                         <asp:Button  CssClass="btnjoin1" runat="server" Text="Participants" /></a>
                          <asp:Button ID="joinBtn" class="btnjoin2" runat="server" Text="join" OnClick="JoinBtn_Click" />
