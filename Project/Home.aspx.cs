@@ -194,7 +194,7 @@ public partial class Home : System.Web.UI.Page
             
             //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
             //HttpContext.Current.Session["EventNumber"] = Eventnum;
-            //Response.Redirect("joinEvent.aspx");
+            Response.Redirect("MyEvents.aspx");
         }
         else
         {
