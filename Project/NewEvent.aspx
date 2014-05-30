@@ -116,8 +116,8 @@
                 </asp:RadioButtonList>--%>
 
                 <asp:DropDownList ID="EventTypeRBL" Width="200px" runat="server" CssClass="addeventinput">
-                    <asp:ListItem Value="1">Public</asp:ListItem>
-                    <asp:ListItem Value="2">Private</asp:ListItem>
+                    <asp:ListItem Value="false">Public</asp:ListItem>
+                    <asp:ListItem Value="true">Private</asp:ListItem>
                    
                    
                 </asp:DropDownList>

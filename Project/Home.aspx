@@ -264,10 +264,7 @@
 
         function buildBoard(PlayerList, numRows) {
 
-            st = ''
-
-
-
+            st = '';
             str += '<div id="chatlist" class="mousescroll"><ul class="ca-menup">';
 
             for (row = 0; row < numRows; row++) {
@@ -296,15 +293,6 @@
             document.getElementById("prtis").innerHTML = str;
 
             return st;
-
-
-
-
-
-
-
-
-
 
         } //buildBoard
 

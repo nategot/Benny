@@ -22,15 +22,8 @@ public partial class NewEvent : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
-            //load the age range according to the user age
-            dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
-            MaxAgeTxt.Text = (int.Parse(dt.Rows[0]["Age"].ToString()) + 5).ToString();
-            MinAgeTxt.Text = (int.Parse(dt.Rows[0]["Age"].ToString()) - 5).ToString();
-
-            dateTB.Text = (DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year).ToString();
+            loadUserDetail();
         }
-     
-
     }
 
     //insert new event 
@@ -56,7 +49,9 @@ public partial class NewEvent : System.Web.UI.Page
             ev.Address = address;
         }
 
-        DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+        try
+        {
+            DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
         ev.AdminID = int.Parse(dt.Rows[0]["UserId"].ToString());
 
         ev.Catedory = int.Parse(categoryDDL.SelectedValue);
@@ -70,6 +65,14 @@ public partial class NewEvent : System.Web.UI.Page
         ev.Comments = commentsTB.Text;
 
 
+        }
+        catch (Exception ex )
+        {
+            
+           ShowPopup( ex.Message);
+        } 
+        
+
         int numEfect = ev.insert();
         if (numEfect == 0)
         {
@@ -81,11 +84,22 @@ public partial class NewEvent : System.Web.UI.Page
             message = "The Event was added Successfully!";
             
             ShowPopup(message);
-            //Response.Redirect("Home.aspx");//לשנות לMYEVNTS
+            Response.Redirect("MyEvents.aspx");
         }
 
     }
 
+    //load the age range according to the user age
+    protected void loadUserDetail()
+    {   
+        dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+        MaxAgeTxt.Text = (int.Parse(dt.Rows[0]["Age"].ToString()) + 5).ToString();
+        MinAgeTxt.Text = (int.Parse(dt.Rows[0]["Age"].ToString()) - 5).ToString();
+
+        dateTB.Text = (DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year).ToString();
+    }
+
+    //pop up
     protected void ShowPopup(string message)
     {
         ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);

@@ -36,8 +36,6 @@ public class EventOnAir
     public List<string> playerList = new List<string>();
 
 
-
-
     //prop
     #region
     public string FrequencyStr
@@ -176,11 +174,6 @@ public class EventOnAir
 
         return dbs.dt;
     }
-
-
-
-
-
 
 
 }

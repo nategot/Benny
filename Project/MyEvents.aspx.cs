@@ -24,8 +24,6 @@ public partial class MyEvents : System.Web.UI.Page
             Response.Redirect("MessagePage.aspx?ans=notLogin");
         }
 
-       
-
         LoadTable();
         EditGridView();
         if (!(Page.IsPostBack))
@@ -71,11 +69,6 @@ public partial class MyEvents : System.Web.UI.Page
             ageRange = dt.Rows[i]["MinAge"].ToString();
             ageRange += "-" + dt.Rows[i]["MaxAge"].ToString();
             GridView1.Rows[i].Cells[6].Text = ageRange;
-
-            //hide if private
-            CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[10].Controls[0];
-            if (cb.Checked)
-            { GridView1.Rows[i].Visible = false; }
 
             //hide EventNumber & Comments & private& lat lng& Email
             for (int r = 8; r < 16; r++)
