@@ -10,19 +10,38 @@
     <link href="Styles/HomeCss.css" rel="stylesheet" type="text/css" />
     <link href="Styles/reveal.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery.reveal.js" type="text/javascript"></script>
+    <link href="Styles/listOfuSERS.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
         rel="stylesheet" type="text/css" />
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
+    <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
+    <style>
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            $('#description').perfectScrollbar({
+                wheelSpeed: 200,
+                wheelPropagation: false
+            });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
     <div id="Div1" style="display: none">
     </div>
-    <br /><br /><br /> <br /> <br /><br /><br />
+    <br />
+    <br />
+    <br />
+    <br />
+   <br />
+    <br />
+    <br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
@@ -96,13 +115,32 @@
             </asp:GridView>
             <div id="myModal" class="reveal-modal" style="float: left">
                 <div>
-                    <div id="contect">
+                    <div id="toPopup">
+                        <div class="close">
+                        </div>
+                        <span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
+                        <div id="popup_content">
+                        </div>
+                        <div id="prtis">
+                        </div>
                     </div>
-                    <div id="map-canvas" class="map">
+                    <div class="loader">
                     </div>
-                    <asp:Button ID="joinBtn" class="btnjoin" runat="server" Text="join" OnClick="JoinBtn_Click" />
+                    <div id="backgroundPopup">
+                    </div>
+                    <div id="contect" style="float: left">
+                    </div>
+                    <div id="map-canvas" class="map" style="float: left">
+                    </div>
+                    <div style="width:100%;  height:250px;"> &nbsp;
+                    </div>
+                    <a href="#" class="topopup">
+                        <asp:Button  CssClass="btnjoin1" runat="server" Text="Participants" /></a>
+                         <asp:Button ID="joinBtn" class="btnjoin2" runat="server" Text="join" OnClick="JoinBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
+            </div>
+            
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -165,6 +203,7 @@
                     $("#contect").append(str);
                     $("#contect").collapsibleset('refresh');
 
+
                 }, // end of success
                 error: function (e) {
                     alert("failed in getTarget :( " + e.responseText);
@@ -177,24 +216,18 @@
         function buildListItem(poiPoint) {
 
             var strT = "";
-            strT += '<div data-role="collapsible"  data-mini="true"  data-content-theme="a" data-iconpos="right"  >';
-            strT += ' <table ><tr><td><div class="title">' + poiPoint.Description + '</div> <br />'
-            strT += '<p class="aa" ><img src = "' + poiPoint.ImageUrl + '"style="width: 30px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
-            strT += ' <div> <asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp;';
-            strT += '<asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label> <br />';
-            strT += '<asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label> <br />'
-            strT += '<asp:Label  runat="server" CssClass="aa" Text="Date & Time:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.DateTimeStr + ' </asp:Label> <br />'
-            strT += '<asp:Label  runat="server" CssClass="aa" Text="Age Range:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label  runat="server" CssClass="bbb">' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</asp:Label><br />'
-            strT += '<asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp;'
-            strT += ' <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label><br />'
-            strT += '<asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label><br />'
-            strT += '<asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp;'
-            strT += '<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label><br /><br />'
-            strT += '</br></td> <td class="tt">' + buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti); +'</td></tr>  </table></div>';
+            strT += ' <table>';
+            strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="title"> ' + poiPoint.Description + '</asp:Label> <img src = "' + poiPoint.ImageUrl + '"style="width: 30px" class="imgtitel"/> </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp; <asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>  </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Date & Time:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.DateTimeStr + ' </asp:Label>  </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Age Range:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb">' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</asp:Label> </td></tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label>  </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label> </td> </tr>';
+            strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
+            strT += ' </table>';
+            strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
+
 
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
@@ -231,38 +264,48 @@
 
         function buildBoard(PlayerList, numRows) {
 
-            str = "<table class='CSSTableGenerator'>";
+            st = ''
 
-            str += "<tr>";
-            str += "<td>";
-            str += "</td>";
-            str += "<td>Username";
-            str += "</td> ";
-            str += "</tr>";
+
+
+            str += '<div id="chatlist" class="mousescroll"><ul class="ca-menup">';
+
             for (row = 0; row < numRows; row++) {
-
-                str += "<tr>";
-                str += "<td>";
-                str += row + 1;
-                str += "</td>";
-
+                str += '<li><div class="ca-contentp"><table><tr><td><h3 class="ca-subp">';
                 if (PlayerList[row] != undefined) {
-                    str += "<td>";
+                    str += row + 1;
+                    str += '</h3>';
+                    str += '</td><td>';
+                    str += '<h2 class="ca-mainp">';
                     str += PlayerList[row];
-                    str += "</td>";
+                    str += '</h2></td> </tr> </table> </div> </li>';
                 }
                 else {
-                    str += "<td>";
-                    str += "-";
-                    str += "</td>";
+                    str += row + 1;
+                    str += '</h3>';
+                    str += '</td><td>';
+                    str += '<h2 class="ca-mainp1">';
+                    str += 'available';
+                    str += '</h2></td> </tr> </table> </div> </li>';
                 }
 
-                str += "</tr>";
             }
+            str += '</ul></div>';
 
-            str += "</table>";
 
-            return str;
+            document.getElementById("prtis").innerHTML = str;
+
+            return st;
+
+
+
+
+
+
+
+
+
+
         } //buildBoard
 
     </script>
