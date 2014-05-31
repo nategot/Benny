@@ -58,7 +58,6 @@ public partial class MyEvents : System.Web.UI.Page
     }
 
 
-
     //edit the gridview coulom
     protected void EditGridView()
     {
@@ -87,10 +86,12 @@ public partial class MyEvents : System.Web.UI.Page
         GridView1.HeaderRow.Cells[6].Text = "Age";
         GridView1.HeaderRow.Cells[7].Text = "";
         AddImage();
+        
+
 
     }
 
-    //chek date if today or tomorrow
+    //check date if today or tomorrow
     protected void Chekdate(int i)
     {
         DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
@@ -141,30 +142,20 @@ public partial class MyEvents : System.Web.UI.Page
 
         GridView1.Rows[i].Cells[2].Text = NumOfRegister + "/" + NumOfParticipants;
 
-        if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
-        {
-            //GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
-            Image ImageFUll = new Image();
-            ImageFUll.ImageUrl = "Images/Full.png";
-            GridView1.Rows[i].Cells[7].Controls.Clear();
-            GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
-        }
-
-        //else if ((int.Parse(NumOfParticipants)) - (int.Parse(NumOfRegister)) <= 2)//if event is allmost full
-        //{ GridView1.Rows[i].BackColor = System.Drawing.Color.Blue; }
-
-        //else if (int.Parse(NumOfRegister) == 1)//if event is new 
+        //if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
         //{
-        //    GridView1.Rows[i].BackColor = System.Drawing.Color.Green;
+        //    Image ImageFUll = new Image();
+        //    ImageFUll.ImageUrl = "Images/Full.png";
+        //    GridView1.Rows[i].Cells[7].Controls.Clear();
+        //    GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
         //}
-
     }
 
     //adding the join btn
     protected void AddJoinBtn(int i)
     {
         string idEv = dt.Rows[i]["EventNumber"].ToString();
-        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  join </a>";
+        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  View Detail </a>";
     }
 
     //adding the image
@@ -178,10 +169,9 @@ public partial class MyEvents : System.Web.UI.Page
         }
     }
 
-    //go to join event  and sends the event num
+    //go to join event  and sends the event num    // למחוק???
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
-        //CategoryFilter();
         if (Session["Fname"] != null)
         {
             Eventnum = (eventNumHF.Value);
@@ -217,7 +207,6 @@ public partial class MyEvents : System.Web.UI.Page
     }
 
     //changing from map view to table view
-
     protected void MapviewBTN_Click(object sender, EventArgs e)
     {
         if (GridView1.Visible)
@@ -289,4 +278,26 @@ public partial class MyEvents : System.Web.UI.Page
 
 
 
+    protected void LeaveBtn_Click(object sender, EventArgs e)
+    {
+            Eventnum = (eventNumHF.Value);
+
+            if (Session["UserDeatail"] == null) return;
+            DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+
+            User U1 = new User();
+            U1.Email = dt.Rows[0]["Email"].ToString();
+            int num = U1.deleteUserFromEvent(Eventnum.ToString());
+            //pop register
+            if (num >= 1)
+            {
+                ShowPopup("you have removed from the event Successfully");
+            }
+            else if (num == 0)
+            {
+                ShowPopup("Error register faild  please try agin later");
+            }
+        }
+     
+    
 }

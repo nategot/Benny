@@ -107,12 +107,21 @@ public class User
         DBservices dbs = new DBservices();
         return dbs.CheckUserName(this);
     }
-
+    //delete user from event
+    public int deleteUserFromEvent(string eventnum)
+    {
+        DBservices dbs = new DBservices();
+        return dbs.deleteUserFromEvent(this,eventnum);
+    }
+    
+    //insert user to event
     public int InsertToEvent(string eventnum)
     {
         DBservices dbs = new DBservices();
         return dbs.InsertToEvent(this,eventnum);
     }
+
+
     //read the Myevent table
     public DataTable ReadMyEvent()
     {

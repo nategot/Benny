@@ -20,6 +20,7 @@ public class DBservices
     public DBservices()
     {
     }
+
     public SqlConnection connect(String conString)
     {
         string cStr = WebConfigurationManager.ConnectionStrings[conString].ConnectionString;
@@ -27,6 +28,18 @@ public class DBservices
         con.Open();
         return con;
     }
+
+    private SqlCommand CreateCommand(String CommandSTR, SqlConnection con)
+    {
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = CommandSTR;
+        cmd.CommandTimeout = 10;
+        cmd.CommandType = System.Data.CommandType.Text;
+        return cmd;
+    }
+
 
     //insert event to DB
     public int insert(EventOnAir p)
@@ -197,6 +210,7 @@ public class DBservices
 
     }
 
+
     //bulid insert commad for user to event
     private String BuildInsertCommand(User u, string eventNum)//build insert command for User
     {
@@ -208,64 +222,6 @@ public class DBservices
         command = prefix + sb.ToString();
 
         return command;
-    }
-
-    private SqlCommand CreateCommand(String CommandSTR, SqlConnection con)
-    {
-
-        SqlCommand cmd = new SqlCommand();
-        cmd.Connection = con;
-        cmd.CommandText = CommandSTR;
-        cmd.CommandTimeout = 10;
-        cmd.CommandType = System.Data.CommandType.Text;
-        return cmd;
-    }
-
-    //check password
-    public DataTable CheckPassword(User u)
-    {
-        SqlConnection con;
-        con = connect("bgroup14_test1ConnectionString");
-        DataSet tblpassword = new DataSet();
-        SqlDataAdapter adpt1;
-
-        SqlCommand MySPCommand = new SqlCommand("GetUserPassword", con);
-        MySPCommand.CommandType = CommandType.StoredProcedure;
-
-        SqlParameter parEmail = new SqlParameter("@Email", SqlDbType.VarChar, 50);
-        parEmail.Value = (u.Email);
-        parEmail.Direction = ParameterDirection.Input;
-        MySPCommand.Parameters.Add(parEmail);
-
-        adpt1 = new SqlDataAdapter(MySPCommand);
-
-        adpt1.Fill(tblpassword, "T1");
-        con.Close();
-        return tblpassword.Tables["T1"];
-
-    }
-    //check admin name
-    public DataTable CheckUserName(User u)
-    {
-        SqlConnection con;
-        con = connect(conectionStr);
-        DataSet tblGetAdminName = new DataSet();
-        SqlDataAdapter adpt1;
-
-        SqlCommand MySPCommand = new SqlCommand("GetAdminName", con);
-        MySPCommand.CommandType = CommandType.StoredProcedure;
-
-        SqlParameter parEmail = new SqlParameter("@AdminId", SqlDbType.Int);
-        parEmail.Value = (u.UserId);
-        parEmail.Direction = ParameterDirection.Input;
-        MySPCommand.Parameters.Add(parEmail);
-
-        adpt1 = new SqlDataAdapter(MySPCommand);
-
-        adpt1.Fill(tblGetAdminName, "T2");
-        con.Close();
-        return tblGetAdminName.Tables["T2"];
-
     }
 
     // Read from the DB into a table (Mtevent)
@@ -371,6 +327,90 @@ public class DBservices
             }
         }
     }
+
+
+    // proc
+
+
+    //check password
+    public DataTable CheckPassword(User u)
+    {
+        SqlConnection con;
+        con = connect("bgroup14_test1ConnectionString");
+        DataSet tblpassword = new DataSet();
+        SqlDataAdapter adpt1;
+
+        SqlCommand MySPCommand = new SqlCommand("GetUserPassword", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEmail = new SqlParameter("@Email", SqlDbType.VarChar, 50);
+        parEmail.Value = (u.Email);
+        parEmail.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEmail);
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+
+        adpt1.Fill(tblpassword, "T1");
+        con.Close();
+        return tblpassword.Tables["T1"];
+
+    }
+
+    //check admin name
+    public DataTable CheckUserName(User u)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        DataSet tblGetAdminName = new DataSet();
+        SqlDataAdapter adpt1;
+
+        SqlCommand MySPCommand = new SqlCommand("GetAdminName", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEmail = new SqlParameter("@AdminId", SqlDbType.Int);
+        parEmail.Value = (u.UserId);
+        parEmail.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEmail);
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+
+        adpt1.Fill(tblGetAdminName, "T2");
+        con.Close();
+        return tblGetAdminName.Tables["T2"];
+
+    }
+    
+    //delete user from event
+    public int deleteUserFromEvent(User u,string eventnum)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        DataSet tblGetAdminName = new DataSet();
+        SqlDataAdapter adpt1;
+
+        SqlCommand MySPCommand = new SqlCommand("deleteUserFromEvent", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEventN = new SqlParameter("@EventNumber", SqlDbType.Int);
+        parEventN.Value = eventnum;
+        parEventN.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEventN);
+
+        SqlParameter parEmail = new SqlParameter("@Email", SqlDbType.VarChar);
+        parEmail.Value = u.Email;
+        parEmail.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEmail);
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+        adpt1.Fill(tblGetAdminName, "T2");
+        con.Close();
+
+
+        return 1;
+
+    }
+
+
 
 
 

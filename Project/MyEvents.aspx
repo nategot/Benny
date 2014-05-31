@@ -100,7 +100,8 @@
                     </div>
                     <div id="map-canvas" class="map">
                     </div>
-                    <asp:Button ID="joinBtn" class="btnjoin" runat="server" Text="join" OnClick="JoinBtn_Click" />
+                    <asp:Button ID="LeaveBtn" class="btnjoin" runat="server" Text="Leave event" 
+                        onclick="LeaveBtn_Click"  />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -223,7 +224,6 @@
                 map: map,
                 title: ''
             });
-
 
             return strT;
 
