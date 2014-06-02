@@ -3,7 +3,10 @@
 /*
     Main carousel wrapper.
 */
-
+#wrapper
+{
+ 
+}
 .kc-wrap
 {
     
@@ -20,6 +23,7 @@
     width: 98%; /* This makes wrapper scale vertically in proportion to width */
     padding-top:15%;
     padding-bottom:15%;
+    
 }
 .kc-horizon
 {

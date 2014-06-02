@@ -132,10 +132,11 @@ first child of the left and right table columns */
 
 .main
 {
+    
     padding: 0px 12px;
     margin: 12px 8px 8px 8px;
     height: 70%;
-    
+    width:100%;
 }
 .leftCol
 {
@@ -147,11 +148,8 @@ first child of the left and right table columns */
 
 .footer
 {
-    position:absolute;
     text-align: center;
     line-height: normal;
-    padding-left: 90%;
-    padding-top: 7%;
     
 }
 
@@ -329,6 +327,7 @@ div.accountInfo
 
 .myButton
 {
+    background-image: url('../Images/bluefadetovivid_small.jpg');
     font-size: medium;
     -moz-box-shadow: 5px 5px 10px 0px #276873;
     -webkit-box-shadow: 5px 5px 10px 0px #bfcbd6;
