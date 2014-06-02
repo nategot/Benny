@@ -18,7 +18,8 @@
     position: absolute;
     background-position: center;
     width: 98%; /* This makes wrapper scale vertically in proportion to width */
-    padding-top:25%;
+    padding-top:15%;
+    padding-bottom:15%;
 }
 .kc-horizon
 {
