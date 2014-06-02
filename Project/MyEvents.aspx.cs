@@ -18,10 +18,14 @@ public partial class MyEvents : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        // if the user is not login go to login
+        //// if the user is not login go to login
+
+        //ClientScript.RegisterStartupScript(this.GetType(), "FB", "Login();", true);
         if (Session["Fname"] == null)
         {
+            
             Response.Redirect("MessagePage.aspx?ans=notLogin");
+            //Response.Redirect("Default.aspx");
         }
 
         LoadTable();
@@ -79,12 +83,19 @@ public partial class MyEvents : System.Web.UI.Page
             AddNumOfRegister(i);
             Chekdate(i);
         }
-
-        GridView1.HeaderRow.Cells[0].Text = "";
-        GridView1.HeaderRow.Cells[2].Text = "Participants";
-        GridView1.HeaderRow.Cells[4].Text = "Frequency";
-        GridView1.HeaderRow.Cells[6].Text = "Age";
-        GridView1.HeaderRow.Cells[7].Text = "";
+        if (GridView1.Rows.Count==0)
+        {
+            ShowPopup("you dont have any events");
+        }
+        else
+        {
+            GridView1.HeaderRow.Cells[0].Text = "";
+            GridView1.HeaderRow.Cells[2].Text = "Participants";
+            GridView1.HeaderRow.Cells[4].Text = "Frequency";
+            GridView1.HeaderRow.Cells[6].Text = "Age";
+            GridView1.HeaderRow.Cells[7].Text = "";
+        }
+      
         AddImage();
         
 
@@ -269,7 +280,6 @@ public partial class MyEvents : System.Web.UI.Page
 
     protected void ShowPopup(string message) //popup message
     {
-        //ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);
         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
 

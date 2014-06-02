@@ -31,9 +31,10 @@
             </div>--%>
             <div id="facebookLogin" style="float: right;">
                 <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true"
-                    data-auto-logout-link="true" onclick="Login()">
+                    data-auto-logout-link="true">
                 </div>
-                <div id="status" style="text-align: left; display: none;">
+           
+                <div id="status" style="text-align: left;">
                 </div>
             </div>
         </div>
