@@ -8,6 +8,7 @@ using System.Web.Configuration;
 using System.Text;
 using System.Windows.Forms;
 
+
 /// <summary>
 /// Summary description for DBservices
 /// </summary>
@@ -329,8 +330,7 @@ public class DBservices
     }
 
 
-    // proc
-
+    // Procedures
 
     //check password
     public DataTable CheckPassword(User u)
@@ -387,7 +387,7 @@ public class DBservices
         con = connect(conectionStr);
         DataSet tblGetAdminName = new DataSet();
         SqlDataAdapter adpt1;
-
+        
         SqlCommand MySPCommand = new SqlCommand("deleteUserFromEvent", con);
         MySPCommand.CommandType = CommandType.StoredProcedure;
 
@@ -409,8 +409,6 @@ public class DBservices
         return 1;
 
     }
-
-
 
 
 
