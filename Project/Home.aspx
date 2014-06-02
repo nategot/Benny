@@ -35,13 +35,7 @@
     </asp:ToolkitScriptManager>
     <div id="Div1" style="display: none">
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-   <br />
-    <br />
-    <br />
+    <br /><br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
