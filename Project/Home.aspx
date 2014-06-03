@@ -21,14 +21,7 @@
     <style>
 
     </style>
-    <script type="text/javascript">
-        $(document).ready(function ($) {
-            $('#description').perfectScrollbar({
-                wheelSpeed: 200,
-                wheelPropagation: false
-            });
-        });
-    </script>
+   
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
