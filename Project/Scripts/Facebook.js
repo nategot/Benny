@@ -10,22 +10,23 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         //testAPI();
-        //getUserInfo();
-        //alert(1111);
-        //Login();
+        //getUserInfo();     
+        Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
-        //alert(2222);
+        alert(2222);
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
         //alert(3333);
+        LogOut();
+      
     }
-    Login();
+ // Login();
 
 }
 
@@ -37,6 +38,8 @@ function checkLoginState() {
         statusChangeCallback(response);
     });
 }
+
+
 
 window.fbAsyncInit = function () { 
     FB.init({
@@ -103,6 +106,7 @@ function Login() {
         }
         else {
             console.log('User cancelled login or did not fully authorize.');
+                
         }
     },
         { scope: 'email,user_photos,user_videos' });
@@ -110,44 +114,36 @@ function Login() {
 
 function getUserInfo() {
     FB.api('/me', function (response) {
-//        var str = "<b>Name</b> : " + response.name + "<br>";
-//        str += "<b>Link: </b>" + response.link + "<br>";
-//        str += "<b>Username:</b> " + response.username + "<br>";
-//        str += "<b>id: </b>" + response.id + "<br>";
-//        str += "<b>Email:</b> " + response.email + "<br>";
-//        str += "<input type='button' value='Get Photo' onclick='getPhoto();'/>";
-//        str += "<input type='button' value='Logout' onclick='Logout();'/>";
-//        document.getElementById('status').innerHTML = str;
+        //        var str = "<b>Name</b> : " + response.name + "<br>";
+        //        str += "<b>Link: </b>" + response.link + "<br>";
+        //        str += "<b>Username:</b> " + response.username + "<br>";
+        //        str += "<b>id: </b>" + response.id + "<br>";
+        //        str += "<b>Email:</b> " + response.email + "<br>";
+        //        str += "<input type='button' value='Get Photo' onclick='getPhoto();'/>";
+        //        str += "<input type='button' value='Logout' onclick='Logout();'/>";
+        //        document.getElementById('status').innerHTML = str;
         document.getElementById('status').innerHTML = 'Hello, ' + response.pic_small_with_logo + '!';
-        
-
         firstName = response.first_name;
         lastName = response.last_name;
         age = 27;
         city = response.hometown_location;
-        userName = response.username;
+        // userName = response.username;
+        userName = firstName + " " + lastName;
         email = response.email;
-      //  email = "555@gmail.com";
         password = response.id;
         imageUrl = response.pic;
-        //alert(firstName);
-        var a = document.getElementById("loginF");
-        a.value = email;
-
-        AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
-        
-        //alert(a.value);
-    });
-
-    
+//        var a = document.getElementById("loginF");
+//        a.value = email;
+        AddUser(firstName, lastName, age, city, userName, email, password, imageUrl); 
+    });  
 }
 
 function AddUser(firstName, lastName, age, city, userName, email, Password, imageUrl) {
-    //alert(firstName + lastName + age + city + userName + email + Password + imageUrl);
+   
     var dataString = '{UserName:"' + userName + '",' + 'Password:"' + Password + '",' + 'FirstName:"' + firstName + '",' + 'LastName:"' + lastName + '",' + 'Age:' + age + ',' + 'City:"' + city + '",' + 'Email:"' + email + '",' + 'imageUrl:"' + imageUrl + '"}';
 
     $.ajax({ // ajax call starts
-        url: 'http://localhost:63588/Project/WebService.asmx/Adduser', // server side method
+        url: 'WebService.asmx/Adduser', // server side method
         data: dataString,    // the parameters sent to the server
         type: 'POST',
         dataType: 'json', // Choosing a JSON datatype
@@ -159,8 +155,26 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
               
             }
             else {
-                //alert("Register faild"); ;
+       //alert("Register faild"); ;
             }
+
+        }, // end of success
+        error: function (e) {
+            alert("error in jason");
+        } // end of error
+    }) // end of ajax call
+}
+
+function LogOut() {
+
+    $.ajax({ // ajax call starts
+        url: 'WebService.asmx/LogOut', // server side method
+        type: 'POST',
+        dataType: 'json', // Choosing a JSON datatype
+        contentType: 'application/json; charset = utf-8',
+        success: function (data) // Variable data contains the data we get from serverside
+        {
+       //     window.location.assign("Default.aspx");
 
         }, // end of success
         error: function (e) {

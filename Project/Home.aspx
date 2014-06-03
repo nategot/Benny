@@ -19,7 +19,7 @@
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
     <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
     <style>
-
+        
     </style>
    
 </asp:Content>
@@ -28,11 +28,6 @@
     </asp:ToolkitScriptManager>
     <div id="Div1" style="display: none">
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-   <br />
     <br />
     <br />
     <asp:PlaceHolder ID="searchPholder" runat="server">
@@ -125,15 +120,15 @@
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
-                    <div style="width:100%;  height:250px;"> &nbsp;
-                    </div> 
+                    <div style="width: 100%; height: 250px;">
+                        &nbsp;
+                    </div>
                     <a href="#" class="topopup">
-                        <asp:Button  CssClass="btnjoin1" runat="server" Text="Participants" /></a>
-                         <asp:Button ID="joinBtn" class="btnjoin2" runat="server" Text="join" OnClick="JoinBtn_Click" />
+                        <asp:Button CssClass="btnjoin1" runat="server" Text="Participants" /></a>
+                    <asp:Button ID="joinBtn" class="btnjoin2" runat="server" Text="join" OnClick="JoinBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
-            
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

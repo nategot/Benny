@@ -38,6 +38,7 @@ public class WebService : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //gets all events
     public string getEvents()
     {
         EventOnAir ev = new EventOnAir();
@@ -73,10 +74,10 @@ public class WebService : System.Web.Services.WebService
 
 
     //mobile
-    //add event
+    
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-
+    //add event
     public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments)
     {
         EventOnAir ev = new EventOnAir();
@@ -107,10 +108,11 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
-    //add user
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
+  
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //add user
     public int Adduser(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
     {
         User U1 = new User();
@@ -124,13 +126,30 @@ public class WebService : System.Web.Services.WebService
         U1.ImageUrl = "Images\\" + imageUrl;
 
         int numEfect = U1.InsertNewUser();
+        DataTable dt = U1.CheckPass();
+        if (dt.Rows.Count != 0)
+        {
+            if (dt.Rows[0]["UserPassword"].ToString() == U1.UserPassword)
+            {
+                HttpContext.Current.Session["Fname"] = dt.Rows[0]["Fname"].ToString();
+                HttpContext.Current.Session["UserDeatail"] = dt;
+            }
+        }
         return numEfect;
     }
 
+    //Log Out
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+      public void LogOut()
+      {
+          HttpContext.Current.Session["Fname"] = null;
+          HttpContext.Current.Session["UserDeatail"] = null;
+      }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-
+    //login
     public string Login(string Email, string Password)
     {
         User u = new User();
@@ -156,10 +175,11 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
+    
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-
+    //add user to event
     public string UserToEvent(string Email, string EventNum)
     {
 
@@ -189,7 +209,7 @@ public class WebService : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-
+    //get one event for popup
     public string getOneEvent(string eventNum)
     {
 
