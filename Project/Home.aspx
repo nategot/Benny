@@ -18,9 +18,8 @@
         rel="stylesheet" type="text/css" />
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
     <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
-    <style>
-        
-    </style>
+  
+  
    
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
@@ -30,6 +29,13 @@
     </div>
     <br />
     <br />
+    
+    
+        <tr>
+            <td>
+            </td>
+        </tr>
+    </table>
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
@@ -116,7 +122,7 @@
                     </div>
                     <div id="backgroundPopup">
                     </div>
-                    <div id="contect" style="float: left">
+                    <div id="contect" style="float: left;width:50%">
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
@@ -204,7 +210,7 @@
         function buildListItem(poiPoint) {
 
             var strT = "";
-            strT += ' <table>';
+            strT += '  <table>';
             strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="title"> ' + poiPoint.Description + '</asp:Label> <img src = "' + poiPoint.ImageUrl + '"style="width: 30px" class="imgtitel"/> </td> </tr>';
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp; <asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td> </tr>';
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>  </td> </tr>';

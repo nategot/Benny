@@ -131,7 +131,7 @@
                     </div>
                     <div id="backgroundPopup">
                     </div>
-                    <div id="contect" style="float: left">
+                    <div id="contect" style="float: left;width:50%">
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
