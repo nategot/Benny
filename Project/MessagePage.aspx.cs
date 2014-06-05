@@ -23,13 +23,15 @@ public partial class MessagePage : System.Web.UI.Page
                 BackeBtn.Visible = true;
               break;
             case "MyEvents":
-                  massageLBL.Text = "Loading......";
+                  massageLBL.Text = "";
+                  NoRecords.Visible = true;
                   MyEventsTimer.Enabled = true;
                
               break;
 
             case "NewEvent":
-                  massageLBL.Text = "Loading......";
+                  massageLBL.Text = "";
+                  NoRecords.Visible = true;
                   NewEventTimer.Enabled = true;
               break;
                 

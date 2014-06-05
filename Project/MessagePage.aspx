@@ -23,7 +23,15 @@
     <br />
     <br />
     <br />
+   
     <asp:Label ID="massageLBL" runat="server" CssClass="ErroerLBL"></asp:Label>
+    <div id="NoRecords" class="container" visible="false" runat="server">
+        <div class='ring blue'>
+        </div>
+        <div id="contenttt">
+            <span>LOADING</span>
+        </div>
+    </div>
     <div>
         <asp:Button ID="RegisterBTN" runat="server" Text="Log In" Visible="false" CssClass="myButton"
             OnClick="RegisterBTN_Click" />
