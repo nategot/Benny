@@ -30,11 +30,6 @@ public class WebService : System.Web.Services.WebService
         //InitializeComponent(); 
     }
 
-    [WebMethod]
-    public string HelloWorld()
-    {
-        return "Hello World";
-    }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -74,7 +69,6 @@ public class WebService : System.Web.Services.WebService
 
 
     //mobile
-    
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     //add event
@@ -108,11 +102,48 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //read the Myevent table
+    public string ReadMyEvent(string UserEmail)
+    {
+        List<EventOnAir> MyeventsList = new List<EventOnAir>();
+        DBservices dbs = new DBservices();
+        User U = new User();
+        U.Email = UserEmail;
 
-  
+        DataTable dtUserEvents = dbs.ReadMyEvent(U);
+
+        for (int i = 0; i < dtUserEvents.Rows.Count; i++)
+        {
+            EventOnAir evTemp = new EventOnAir();
+            evTemp.Point = new Point(double.Parse(dtUserEvents.Rows[i]["Lat"].ToString()), double.Parse(dtUserEvents.Rows[i]["Lng"].ToString()));
+            evTemp.Address = dtUserEvents.Rows[i]["Address"].ToString();
+            evTemp.MaxAge = int.Parse(dtUserEvents.Rows[i]["MaxAge"].ToString());
+            evTemp.MinAge = int.Parse(dtUserEvents.Rows[i]["MinAge"].ToString());
+            evTemp.NumOfParti = int.Parse(dtUserEvents.Rows[i]["NumOfParticipants"].ToString());
+            evTemp.ImageUrl = dtUserEvents.Rows[i]["ImageUrl"].ToString();
+            evTemp.AdminID = int.Parse(dtUserEvents.Rows[0]["AdminId"].ToString());
+            evTemp.IsPrivate1 = bool.Parse(dtUserEvents.Rows[0]["Private"].ToString());
+            evTemp.DateTime = DateTime.Parse(dtUserEvents.Rows[i]["Time"].ToString());
+            evTemp.DateTimeStr = (dtUserEvents.Rows[i]["Time"].ToString());
+            evTemp.Description = dtUserEvents.Rows[i]["Description"].ToString();
+            evTemp.Comments = dtUserEvents.Rows[i]["Comments"].ToString();
+            evTemp.EventNum = dtUserEvents.Rows[i]["EventNumber"].ToString();
+
+
+            //add the  event to the list
+            MyeventsList.Add(evTemp);
+        }
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(MyeventsList);
+        return jsonString;
+    }
+
+
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    //add user
+    //add user---- log in
     public int Adduser(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
     {
         User U1 = new User();
@@ -141,41 +172,11 @@ public class WebService : System.Web.Services.WebService
     //Log Out
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-      public void LogOut()
-      {
-          HttpContext.Current.Session["Fname"] = null;
-          HttpContext.Current.Session["UserDeatail"] = null;
-      }
-
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    //login
-    public string Login(string Email, string Password)
+    public void LogOut()
     {
-        User u = new User();
-        u.UserPassword = Password;
-        u.Email = Email;
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string jsonString = js.Serialize("Worng Email or Password ");
-        try
-        {
-            DataTable dt = u.CheckPass();
-            if (dt.Rows.Count != 0)
-            {
-                if (dt.Rows[0]["UserPassword"].ToString() == u.UserPassword)
-                { jsonString = js.Serialize("ok"); }
-            }
-
-
-        }
-        catch (Exception ex)
-        {
-            jsonString = js.Serialize("error in treasure.Login --- " + ex.Message);
-        }
-        return jsonString;
+        HttpContext.Current.Session["Fname"] = null;
+        HttpContext.Current.Session["UserDeatail"] = null;
     }
-
-    
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -266,7 +267,33 @@ public class WebService : System.Web.Services.WebService
     }
 
 
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //login old not facebook
+    public string Login(string Email, string Password)
+    {
+        User u = new User();
+        u.UserPassword = Password;
+        u.Email = Email;
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("Worng Email or Password ");
+        try
+        {
+            DataTable dt = u.CheckPass();
+            if (dt.Rows.Count != 0)
+            {
+                if (dt.Rows[0]["UserPassword"].ToString() == u.UserPassword)
+                { jsonString = js.Serialize("ok"); }
+            }
 
+
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("error in treasure.Login --- " + ex.Message);
+        }
+        return jsonString;
+    }
 
 
 }

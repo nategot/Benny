@@ -98,8 +98,8 @@ public class DBservices
         dateStr += p.DateTime.Month.ToString() + "/" + p.DateTime.Day.ToString() + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
 
 
-        sb.AppendFormat("Values({0}, {1} ,{2}, {3},'{4}',{5},{6},'{7}',{8},'{9}','{10}','{11}')", p.NumOfParti, p.Catedory, p.Frequency, isprivate, dateStr, p.MinAge, p.MaxAge, p.Comments, p.AdminID, p.Address, p.Point.Lat, p.Point.Lng);
-        String prefix = "INSERT INTO EventsOnAir " + "( NumOfParticipants, CategoryId, FrequencyId, [Private],[Time],MinAge,MaxAge,Comments,AdminId,Address,Lat,Lng)";
+        sb.AppendFormat("Values({0}, {1} ,{2}, {3},'{4}',{5},{6},'{7}',{8},'{9}','{10}','{11}',0)", p.NumOfParti, p.Catedory, p.Frequency, isprivate, dateStr, p.MinAge, p.MaxAge, p.Comments, p.AdminID, p.Address, p.Point.Lat, p.Point.Lng);
+        String prefix = "INSERT INTO EventsOnAir " + "( NumOfParticipants, CategoryId, FrequencyId, [Private],[Time],MinAge,MaxAge,Comments,AdminId,Address,Lat,Lng,NumOfRegister)";
         command = prefix + sb.ToString();
 
         return command;
@@ -248,6 +248,7 @@ public class DBservices
         return tblGetAdminName.Tables["T2"];
 
     }
+
 
     // Read from the DB into a table (home-event)
     public DBservices ReadFromDataBase(string conString, string tableName)
