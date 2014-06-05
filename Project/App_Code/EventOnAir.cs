@@ -154,6 +154,13 @@ public class EventOnAir
         int numAffected = dbs.insert(this);
         return numAffected;
     }
+    //update envent
+    public int update()
+    {
+        DBservices dbs = new DBservices();
+        int numAffected = dbs.update(this);
+        return numAffected;
+    }
 
     //read the event Table
     public DataTable readTable()

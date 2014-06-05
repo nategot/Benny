@@ -85,6 +85,49 @@ public class DBservices
 
     }
 
+
+    // update event
+    public int update(EventOnAir p)
+    {
+        SqlConnection con;
+        SqlCommand cmd;
+
+        try
+        {
+            con = connect(conectionStr);
+        }
+        catch (Exception)
+        {
+            return 0;
+
+        }
+
+        String cStr = BuildupdateCommand(p);      // helper method to build the insert string
+
+        cmd = CreateCommand(cStr, con);             // create the command
+
+        try
+        {
+            int numEffected = cmd.ExecuteNonQuery(); // execute the command
+            return numEffected;
+        }
+        catch (Exception ex)
+        {
+            return 0;
+            // write to log
+            MessageBox.Show("the Event wasnt added" + ex, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        }
+
+        finally
+        {
+            if (con != null)
+            {
+                // close the db connection
+                con.Close();
+            }
+        }
+
+    }
     //build insert command for event
     private String BuildInsertCommand(EventOnAir p)
     {
@@ -105,7 +148,21 @@ public class DBservices
         return command;
     }
 
+    //build insert update for event
+    private String BuildupdateCommand(EventOnAir p)
+    {
+        int isprivate = 0;
+        string dateStr = " ";
+        if (p.IsPrivate1)
+            isprivate = 1;
+        dateStr += p.DateTime.Month.ToString() + "/" + p.DateTime.Day.ToString() + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
+        String command;
+        StringBuilder sb = new StringBuilder();
+        String com = "UPDATE EventsOnAir SET NumOfParticipants=" + p.NumOfParti + ",CategoryId=" + p.Catedory + ",FrequencyId=" + p.Frequency + ", Private=" + isprivate + ", Time=" + dateStr + ",MinAge=" + p.MinAge + ",MaxAge=" + p.MaxAge + ",Comments=" + p.Comments + ",AdminId=" + p.AdminID + ",Address=" + p.Address + ",Lat=" + p.Point.Lat +",Lng="+p.Point.Lng+" WHERE EventNumber=" + p.EventNum;
+        command = com;
 
+        return command;
+    }
     //insert user to useres Table
     public int insert(User u)
     {

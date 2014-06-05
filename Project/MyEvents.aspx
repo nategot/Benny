@@ -22,7 +22,8 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
-    <asp:HiddenField ID="adminIDHIde" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="adminEmailHIde" runat="server"></asp:HiddenField>
+     <asp:HiddenField ID="adminIDHIde" runat="server"></asp:HiddenField>
     <div id="Div1" name="popupdiv" style="display: none">
     </div>
     <br />
@@ -103,17 +104,7 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-            <%-- <div id="myModal" class="reveal-modal" style="float: left">
-                <div>
-                    <div id="contect">
-                    </div>
-                    <div id="map-canvas" class="map">
-                    </div>
-                    <asp:Button ID="LeaveBtn" class="btnjoin" runat="server" Text="Leave event" 
-                        onclick="LeaveBtn_Click"  />
-                </div>
-                <a class="close-reveal-modal">&#215;</a>
-            </div>--%>
+  
             <div id="myModal" class="reveal-modal" style="float: left">
                 <div>
                     <div id="toPopup">
@@ -137,8 +128,8 @@
                         &nbsp;
                     </div>
                     <a href="#" class="topopup">
-                        <asp:Button ID="Button1" CssClass="btnjoin1" runat="server" Text="Participants" /></a>
-                    <asp:Button ID="LeaveBtn" class="btnjoin2" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
+                     <asp:Button ID="Participantsbtn" CssClass="btnjoin1" runat="server" Text="Participants" /></a>
+                     <asp:Button ID="LeaveBtn" class="btnjoin2" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -161,7 +152,7 @@
             EventPos.long = lng;
             var pos = new google.maps.LatLng(EventPos.lat, EventPos.long);
 
-            var contster = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes" onclick="JoinBtn_Click" /><div/>';
+            var contster = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes"  /><div/>';
 
             infowindow2 = new google.maps.InfoWindow({
                 content: contster,
@@ -225,15 +216,16 @@
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label> </td> </tr>';
             strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
             strT += ' </table>';
+     
             strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
 
+           
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
-            //load table
-
-            //                      
-
+         
+            
+         
             //build map
             var ruppinPos = new Object();
             var latH = poiPoint.Point.Lat;
@@ -254,6 +246,12 @@
                 map: map,
                 title: ''
             });
+
+            //check if user is admin to add edit event btn 
+            var b = document.getElementById("MainContent_adminIDHIde");
+            if (poiPoint.AdminID == b.value) {
+                strT += '<asp:Button ID="EditEventBTn" class="btnjoin1" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
+            }
 
             return strT;
 

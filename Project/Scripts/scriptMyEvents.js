@@ -18,8 +18,9 @@ function initialize() {
         map: map,
         title: 'Ruppin'
     });
-    var a = document.getElementById("MainContent_adminIDHIde");
-    alert(a.value);
+    var a = document.getElementById("MainContent_adminEmailHIde");
+    
+    getPOIList(a.value)
 
 }
 
@@ -68,7 +69,7 @@ function showPOI(poiPoint) {
     });
 
     var contentString = '<div id="content" > <img src ="' + poiPoint.ImageUrl + '" style="width: 80px"/></br><h1>' + poiPoint.Description + '</h1><div id="bodyContent" style="color:Black">'
-              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</p>' + '</div><input type="button" class="myButton" onclick="JoinEvent(' + poiPoint.EventNum + ',' + poiPoint.Point.Lat + ',' + poiPoint.Point.Lng + ')" id="btnJoinMap" value="Join"/><p>' + '</div>';
+              + '<p>Age Range: ' + poiPoint.MaxAge + '-' + poiPoint.MinAge + '</p>' + '<p>Address: ' + poiPoint.Address + '</p>' + '<p>Date & Time: ' + poiPoint.DateTimeStr + '</div>';
 
     var infowindow1 = new google.maps.InfoWindow({
         content: contentString

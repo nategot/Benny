@@ -36,6 +36,8 @@
                     <asp:ListItem Value="5">Cycling</asp:ListItem>
                     <asp:ListItem Value="6">Swimming</asp:ListItem>
                     <asp:ListItem Value="7">Volleyball</asp:ListItem>
+                    <asp:ListItem Value="8">Surfing</asp:ListItem>
+                    
                 </asp:DropDownList>
             </td>
         </tr>
@@ -110,10 +112,6 @@
                
             </td>
             <td colspan="3">
-                <%--<asp:RadioButtonList ID="EventTypeRBL" runat="server" RepeatDirection="Horizontal" CssClass="ListItem1">
-                    <asp:ListItem  Value="false" Selected="True" >Public</asp:ListItem>
-                    <asp:ListItem  Value="true">Private</asp:ListItem>
-                </asp:RadioButtonList>--%>
 
                 <asp:DropDownList ID="EventTypeRBL" Width="200px" runat="server" CssClass="addeventinput">
                     <asp:ListItem Value="false">Public</asp:ListItem>
@@ -131,11 +129,7 @@
                 
             </td>
             <td colspan="3">
-               <%-- <asp:RadioButtonList ID="FrequRBL"  runat="server" RepeatDirection="Horizontal"  style="width:290px;color:White">
-                    <asp:ListItem  Value="1" Selected="True">Once</asp:ListItem >
-                    <asp:ListItem  Value="2">Every Week</asp:ListItem>
-                    <asp:ListItem Value="3">Every Month</asp:ListItem>
-                </asp:RadioButtonList>--%>
+ 
 
                 <asp:DropDownList ID="FrequRBL"  Width="200px" runat="server" CssClass="addeventinput">
                     <asp:ListItem Value="1">Once</asp:ListItem>
@@ -163,6 +157,7 @@
                 <br />
                 <asp:Button ID="confirmBTN" CssClass="myButton" runat="server" Text="Confirm & Publish"
                     OnClick="confirmBTN_Click" />
+
             </td>
             <td colspan="3">
                 <br />

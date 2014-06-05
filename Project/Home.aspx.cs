@@ -164,7 +164,7 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-    //go to join event  and sends the event num
+    // join user to event  
     protected void JoinBtn_Click(object sender, EventArgs e)
     {
         //CategoryFilter();

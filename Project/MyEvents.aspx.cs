@@ -12,7 +12,8 @@ using System.Collections.Specialized;
 
 public partial class MyEvents : System.Web.UI.Page
 {
-    DataTable dt;
+    DataTable dtMyEvent;
+    DataTable dtuser;
     EventOnAir Ev = new EventOnAir();
     string Eventnum;
 
@@ -38,24 +39,22 @@ public partial class MyEvents : System.Web.UI.Page
     protected void LoadTable()
     {
         MapPlaceHolder.Visible = false;
+        //check if iser log in
         if (Session["UserDeatail"] == null) return;
-        DataTable dtuser = (DataTable)HttpContext.Current.Session["UserDeatail"];
-
+        dtuser = (DataTable)HttpContext.Current.Session["UserDeatail"];
+        
         User U1 = new User();
         U1.Email = dtuser.Rows[0]["Email"].ToString();
-        adminIDHIde.Value = U1.Email;
-        dt = U1.ReadMyEvent();
-        GridView1.DataSource = dt;
+        adminIDHIde.Value = dtuser.Rows[0]["UserId"].ToString();
+        adminEmailHIde.Value = U1.Email;
+        
+        dtMyEvent = U1.ReadMyEvent();
+        GridView1.DataSource = dtMyEvent;
         GridView1.DataBind();
 
         //load the user age
-        if (Session["UserDeatail"] != null)
-        {
-            DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
-            ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
-        }
-        else
-            ageTXT.Text = "0";
+        ageTXT.Text = dtuser.Rows[0]["Age"].ToString();
+  
     }
 
 
@@ -63,11 +62,11 @@ public partial class MyEvents : System.Web.UI.Page
     protected void EditGridView()
     {
         string ageRange;
-        for (int i = 0; i < dt.Rows.Count; i++)
+        for (int i = 0; i < dtMyEvent.Rows.Count; i++)
         {
             //edit the age range
-            ageRange = dt.Rows[i]["MinAge"].ToString();
-            ageRange += "-" + dt.Rows[i]["MaxAge"].ToString();
+            ageRange = dtMyEvent.Rows[i]["MinAge"].ToString();
+            ageRange += "-" + dtMyEvent.Rows[i]["MaxAge"].ToString();
             GridView1.Rows[i].Cells[6].Text = ageRange;
 
             //hide EventNumber & Comments & private& lat lng& Email
@@ -80,6 +79,8 @@ public partial class MyEvents : System.Web.UI.Page
             AddNumOfRegister(i);
             Chekdate(i);
         }
+     
+
         if (GridView1.Rows.Count == 0)
         {
             ShowPopup("you dont have any events");
@@ -94,15 +95,12 @@ public partial class MyEvents : System.Web.UI.Page
         }
 
         AddImage();
-
-
-
     }
 
     //check date if today or tomorrow
     protected void Chekdate(int i)
     {
-        DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+        DateTime time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
         if (DateTime.Today == time)
         {
             GridView1.Rows[i].Cells[3].Text = "Today!";
@@ -145,74 +143,29 @@ public partial class MyEvents : System.Web.UI.Page
     //adding the number of register player
     protected void AddNumOfRegister(int i)
     {
-        string NumOfRegister = dt.Rows[i]["NumOfRegister"].ToString();
-        string NumOfParticipants = dt.Rows[i]["NumOfParticipants"].ToString();
-
+        string NumOfRegister = dtMyEvent.Rows[i]["NumOfRegister"].ToString();
+        string NumOfParticipants = dtMyEvent.Rows[i]["NumOfParticipants"].ToString();
         GridView1.Rows[i].Cells[2].Text = NumOfRegister + "/" + NumOfParticipants;
-
-        //if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
-        //{
-        //    Image ImageFUll = new Image();
-        //    ImageFUll.ImageUrl = "Images/Full.png";
-        //    GridView1.Rows[i].Cells[7].Controls.Clear();
-        //    GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
-        //}
     }
 
     //adding the join btn
     protected void AddJoinBtn(int i)
     {
-        string idEv = dt.Rows[i]["EventNumber"].ToString();
+        string idEv = dtMyEvent.Rows[i]["EventNumber"].ToString();
         GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  View Detail </a>";
     }
 
     //adding the image
     protected void AddImage()
     {
-        for (int i = 0; i < dt.Rows.Count; i++)
+        for (int i = 0; i < dtMyEvent.Rows.Count; i++)
         {
             Image imsel = new Image();
-            imsel.ImageUrl = dt.Rows[i]["imageUrl"].ToString();
+            imsel.ImageUrl = dtMyEvent.Rows[i]["imageUrl"].ToString();
             GridView1.Rows[i].Cells[0].Controls.Add(imsel);
         }
     }
 
-    //go to join event  and sends the event num    // למחוק???
-    protected void JoinBtn_Click(object sender, EventArgs e)
-    {
-        if (Session["Fname"] != null)
-        {
-            Eventnum = (eventNumHF.Value);
-
-            if (Session["UserDeatail"] == null) return;
-            DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
-
-            User U1 = new User();
-            U1.Email = dt.Rows[0]["Email"].ToString();
-            int num = U1.InsertToEvent(Eventnum);
-            //pop register
-            if (num >= 1)
-            {
-                ShowPopup("you have added to the event Successfully");
-            }
-            else if (num == -1)
-            {
-                ShowPopup("You Are already register to this event");
-            }
-            else if (num == 0)
-            {
-                ShowPopup("Error register faild  please try agin later");
-            }
-
-            //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            //HttpContext.Current.Session["EventNumber"] = Eventnum;
-            //Response.Redirect("joinEvent.aspx");
-        }
-        else
-        {
-            Response.Redirect("MessagePage.aspx?ans=notLogin");
-        }
-    }
 
     //changing from map view to table view
     protected void MapviewBTN_Click(object sender, EventArgs e)
@@ -239,9 +192,9 @@ public partial class MyEvents : System.Web.UI.Page
         //sort by city
         string cityStr = freeSearch.Text;
 
-        for (int i = 0; i < dt.Rows.Count; i++)
+        for (int i = 0; i < dtMyEvent.Rows.Count; i++)
         {
-            if (!(System.Text.RegularExpressions.Regex.IsMatch(dt.Rows[i]["Address"].ToString(), cityStr)))
+            if (!(System.Text.RegularExpressions.Regex.IsMatch(dtMyEvent.Rows[i]["Address"].ToString(), cityStr)))
             { GridView1.Rows[i].Visible = false; }
             else
             {
@@ -253,11 +206,11 @@ public partial class MyEvents : System.Web.UI.Page
 
         string catgory = catgoryDdl.SelectedItem.ToString();
         int num = 0;
-        for (int i = 0; i < dt.Rows.Count; i++)
+        for (int i = 0; i < dtMyEvent.Rows.Count; i++)
         {
             if (catgory == "All")
             { return; }
-            if (catgory != dt.Rows[i][1].ToString())
+            if (catgory != dtMyEvent.Rows[i][1].ToString())
             { GridView1.Rows[i].Visible = false; num++; }
         }
 
@@ -266,9 +219,9 @@ public partial class MyEvents : System.Web.UI.Page
         {
             int age = int.Parse(ageTXT.Text);
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (int i = 0; i < dtMyEvent.Rows.Count; i++)
             {
-                if (age < int.Parse(dt.Rows[i]["MinAge"].ToString()) || age > int.Parse(dt.Rows[i]["MaxAge"].ToString()))
+                if (age < int.Parse(dtMyEvent.Rows[i]["MinAge"].ToString()) || age > int.Parse(dtMyEvent.Rows[i]["MaxAge"].ToString()))
                 { GridView1.Rows[i].Visible = false; }
             }
         }
@@ -283,7 +236,15 @@ public partial class MyEvents : System.Web.UI.Page
     #endregion
 
 
-
+    //go to join event  and sends the event num    // למחוק???
+    protected void EditEventBTn_Click(object sender, EventArgs e)
+    {
+        Eventnum = (eventNumHF.Value);
+        HttpContext.Current.Session["MyEventsDT"] =dtMyEvent;
+        HttpContext.Current.Session["Eventnum"] = Eventnum;
+        Response.Redirect("NewEvent.aspx?edit=Yes");
+      
+    }
 
     protected void LeaveBtn_Click(object sender, EventArgs e)
     {
