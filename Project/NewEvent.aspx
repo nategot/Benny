@@ -14,12 +14,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
-     <br /><br /> <br /> <br /><br /><br />
+     <br />
     <h1 class="addeventtitle">
         Create New Event</h1>
     <br />
     <br />
-    <div id="dialog" style="display: none">
+    <div id="dialog" >
     </div>
     <table class="addeventable"  style="float: left" >
         <tr>

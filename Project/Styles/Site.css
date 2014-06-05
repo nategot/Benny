@@ -94,7 +94,7 @@ first child of the left and right table columns */
 #imgLogo
 {
     width:auto;
-    height: 110px;
+    height: 120px;
 }
 .page
 {
@@ -328,11 +328,9 @@ div.accountInfo
 .myButton
 {
     background-image: url('../Images/bluefadetovivid_small.jpg');
-    font-size: medium;
     -moz-box-shadow: 5px 5px 10px 0px #276873;
     -webkit-box-shadow: 5px 5px 10px 0px #bfcbd6;
     box-shadow: 5px 5px 10px 0px #5C646B;
-    background-color: #3a4f63;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     border-radius: 20px;
@@ -341,8 +339,6 @@ div.accountInfo
     color: #ECF0F5;
     font-family: Trebuchet MS;
     font-weight: bold;
-    font-style: italic;
-    text-decoration: none;
 }
 
 .myButton:hover
@@ -455,12 +451,11 @@ div.accountInfo
 
 .addeventtitle
 {
-    text-align: center;
-    font-size: 45px;
+    text-align:center;
+    font-size:25px;
     color: White;
     font-weight: bold;
     line-height: 1em;
-    
 }
 
 .addeventable
@@ -476,7 +471,6 @@ div.accountInfo
     border: 0 !important; /*Removes border*/
     -webkit-appearance: none; /*Removes default chrome and safari style*/
     -moz-appearance: none; /* Removes Default Firefox style*/
-    background: #33CCFF url(pic/body.png) no-repeat 90% center;
     width: 120px; /*Width of select dropdown to give space for arrow image*/
     text-indent: 0.01px; /* Removes default arrow from firefox*/
     text-overflow: ""; /*Removes default arrow from firefox*/ /*My custom style for fonts*/
