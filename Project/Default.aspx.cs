@@ -15,8 +15,6 @@ public partial class _Default : System.Web.UI.Page
 
     }
 
- 
-
     protected void CategoryFilter(object sender, EventArgs e)
     {
         ImageButton ansBTN = (ImageButton)sender;
@@ -24,6 +22,7 @@ public partial class _Default : System.Web.UI.Page
         Response.Redirect("Home.aspx?ans=" + ans);
     }
 
+  
 
    
 }

@@ -25,6 +25,7 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
+    <script src="Scripts/Facebook.js" type="text/javascript"></script>
     <div id="Div1" style="display: none">
     </div>
     <br />

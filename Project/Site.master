@@ -58,7 +58,7 @@
                             All Events</h3>
                     </div>
                 </a></li>
-                <li><a href="MyEvents.aspx"><span class="ca-icon">
+                <li><a href="MessagePage.aspx?ans=MyEvents"><span class="ca-icon">
                     <img class="ca-icon" src="Styles/menuCss/calendar_month_checkmark.png" /></span>
                     <div class="ca-content">
                         <h2 class="ca-main">
@@ -67,7 +67,7 @@
                             My Events</h3>
                     </div>
                 </a></li>
-                <li><a href="NewEvent.aspx"><span class="ca-icon">
+                <li><a href="MessagePage.aspx?ans=NewEvent"><span class="ca-icon">
                     <img class="ca-icon" src="Styles/menuCss/new_event.png" /></span>
                     <div class="ca-content">
                         <h2 class="ca-main">
@@ -93,17 +93,6 @@
         <div class="clear">
         </div>
         <div class="footer">
-            <%--Copyright &copy; 2014 Netanel Gottfried & Omer Liverant. Design by Ido Machnes for
-            <a href="http://www.ruppin.ac.il/">Ruppin</a>--%>
-            
-            <%--<div class='social-wrap'>
-            <ul>
-                <li><a class='facebook' href='http://www.facebook.com/' target='_blaank'>Facebook</a></li>
-                <li><a class='twitter' href='http://twitter.com/' target='_blaank'>Twitter</a></li>
-                <li><a class='google-p' href='https://plus.google.com/' target='_blaank'>Google Plus</a></li>
-                <li><a class='rss' href='#' target='_blaank'>Rss</a></li>
-            </ul>
-        </div>--%>
         </div>
     </div>
     </form>

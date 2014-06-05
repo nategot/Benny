@@ -10,8 +10,8 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         //testAPI();
-        //getUserInfo();     
-        Login();
+        getUserInfo();     
+        //Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -68,13 +68,13 @@ window.fbAsyncInit = function () {
 };
 
 // Load the SDK asynchronously
-//(function (d, s, id) {
-//    var js, fjs = d.getElementsByTagName(s)[0];
-//    if (d.getElementById(id)) return;
-//    js = d.createElement(s); js.id = id;
-//    js.src = "//connect.facebook.net/en_US/sdk.js";
-//    fjs.parentNode.insertBefore(js, fjs);
-//} (document, 'script', 'facebook-jssdk'));
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+} (document, 'script', 'facebook-jssdk'));
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
@@ -114,26 +114,15 @@ function Login() {
 
 function getUserInfo() {
     FB.api('/me', function (response) {
-        //        var str = "<b>Name</b> : " + response.name + "<br>";
-        //        str += "<b>Link: </b>" + response.link + "<br>";
-        //        str += "<b>Username:</b> " + response.username + "<br>";
-        //        str += "<b>id: </b>" + response.id + "<br>";
-        //        str += "<b>Email:</b> " + response.email + "<br>";
-        //        str += "<input type='button' value='Get Photo' onclick='getPhoto();'/>";
-        //        str += "<input type='button' value='Logout' onclick='Logout();'/>";
-        //        document.getElementById('status').innerHTML = str;
         document.getElementById('status').innerHTML = 'Hello, ' + response.pic_small_with_logo + '!';
         firstName = response.first_name;
         lastName = response.last_name;
         age = 27;
         city = response.hometown_location;
-        // userName = response.username;
         userName = firstName + " " + lastName;
         email = response.email;
         password = response.id;
         imageUrl = response.pic;
-//        var a = document.getElementById("loginF");
-//        a.value = email;
         AddUser(firstName, lastName, age, city, userName, email, password, imageUrl); 
     });  
 }

@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections.Specialized;
+using System.Data.SqlClient;
+using System.Data;
+
 
 public partial class MessagePage : System.Web.UI.Page
 {
@@ -19,6 +22,18 @@ public partial class MessagePage : System.Web.UI.Page
                 RegisterBTN.Visible = true;
                 BackeBtn.Visible = true;
               break;
+            case "MyEvents":
+                  massageLBL.Text = "Loading......";
+                  MyEventsTimer.Enabled = true;
+               
+              break;
+
+            case "NewEvent":
+                  massageLBL.Text = "Loading......";
+                  NewEventTimer.Enabled = true;
+              break;
+                
+
         }          
             
     }
@@ -32,4 +47,16 @@ public partial class MessagePage : System.Web.UI.Page
         Response.Redirect("Home.aspx");
 
     }
+    protected void MyEventsTimer_Tick(object sender, EventArgs e)
+    {
+        MyEventsTimer.Enabled = false;
+        Response.Redirect("MyEvents.aspx");
+    }
+
+    protected void NewEventTimer_Tick(object sender, EventArgs e)
+    {
+        NewEventTimer.Enabled = false;
+        Response.Redirect("NewEvent.aspx");
+    }
+    
 }

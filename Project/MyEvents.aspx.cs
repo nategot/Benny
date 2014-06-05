@@ -19,11 +19,8 @@ public partial class MyEvents : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //// if the user is not login go to login
-
-        //ClientScript.RegisterStartupScript(this.GetType(), "FB", "Login();", true);
         if (Session["Fname"] == null)
         {
-            
             Response.Redirect("MessagePage.aspx?ans=notLogin");
             //Response.Redirect("Default.aspx");
         }
