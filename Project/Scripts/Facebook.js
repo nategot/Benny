@@ -9,14 +9,15 @@ function statusChangeCallback(response) {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
-        //testAPI();
+        //testAPI(); 
+        
         getUserInfo();     
         //Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
-        alert(2222);
+       
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
@@ -99,7 +100,7 @@ function testAPI() {
 /*--------------NIR-----------------*/
 
 function Login() {
-
+    
     FB.login(function (response) {
         if (response.authResponse) {
             getUserInfo();

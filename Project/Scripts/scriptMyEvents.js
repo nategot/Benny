@@ -18,19 +18,21 @@ function initialize() {
         map: map,
         title: 'Ruppin'
     });
-    getPOIList();
+    var a = document.getElementById("MainContent_adminIDHIde");
+    alert(a.value);
 
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
 //-----------------------------------------------------------------------
-// get the getPOIList 
+// get the myevents 
 //-----------------------------------------------------------------------
-function getPOIList() {
-    var dataString = '{ss:"sssd"}'; ;
+function getPOIList(email) {
+    var dataString = '{UserEmail:"' + email + '"}';
     $.ajax({ // ajax call starts
-        url: 'WebService.asmx/getEvents',   // server side method
+        url: 'WebService.asmx/ReadMyEvent',   // server side method
+        data: dataString,
         // parameters passed to the server
         type: 'POST',
         dataType: 'json', // Choosing a JSON datatype
@@ -51,7 +53,7 @@ function getPOIList() {
 }
 
 //--------------------------------------
-// show the POI on the map
+// show the my events on the map
 //--------------------------------------
 function showPOI(poiPoint) {
 

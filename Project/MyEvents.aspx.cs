@@ -22,7 +22,6 @@ public partial class MyEvents : System.Web.UI.Page
         if (Session["Fname"] == null)
         {
             Response.Redirect("MessagePage.aspx?ans=notLogin");
-            //Response.Redirect("Default.aspx");
         }
 
         LoadTable();
@@ -37,13 +36,14 @@ public partial class MyEvents : System.Web.UI.Page
 
 
     protected void LoadTable()
-    {   
+    {
         MapPlaceHolder.Visible = false;
         if (Session["UserDeatail"] == null) return;
         DataTable dtuser = (DataTable)HttpContext.Current.Session["UserDeatail"];
 
         User U1 = new User();
         U1.Email = dtuser.Rows[0]["Email"].ToString();
+        adminIDHIde.Value = U1.Email;
         dt = U1.ReadMyEvent();
         GridView1.DataSource = dt;
         GridView1.DataBind();
@@ -80,7 +80,7 @@ public partial class MyEvents : System.Web.UI.Page
             AddNumOfRegister(i);
             Chekdate(i);
         }
-        if (GridView1.Rows.Count==0)
+        if (GridView1.Rows.Count == 0)
         {
             ShowPopup("you dont have any events");
         }
@@ -92,9 +92,9 @@ public partial class MyEvents : System.Web.UI.Page
             GridView1.HeaderRow.Cells[6].Text = "Age";
             GridView1.HeaderRow.Cells[7].Text = "";
         }
-      
+
         AddImage();
-        
+
 
 
     }
@@ -111,11 +111,11 @@ public partial class MyEvents : System.Web.UI.Page
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
         }
-        else if (DateTime.Today > time )
+        else if (DateTime.Today > time)
         {
             Image ImageFUll = new Image();
             ImageFUll.ImageUrl = "pic/Date over.jpg";
-            ImageFUll.Width=80;
+            ImageFUll.Width = 80;
             ImageFUll.Height = 30;
 
             GridView1.Rows[i].Cells[7].Controls.Clear();
@@ -287,24 +287,24 @@ public partial class MyEvents : System.Web.UI.Page
 
     protected void LeaveBtn_Click(object sender, EventArgs e)
     {
-            Eventnum = (eventNumHF.Value);
+        Eventnum = (eventNumHF.Value);
 
-            if (Session["UserDeatail"] == null) return;
-            DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
+        if (Session["UserDeatail"] == null) return;
+        DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
 
-            User U1 = new User();
-            U1.Email = dt.Rows[0]["Email"].ToString();
-            int num = U1.deleteUserFromEvent(Eventnum.ToString());
-            //pop register
-            if (num >= 1)
-            {
-                ShowPopup("you have removed from the event Successfully");
-            }
-            else if (num == 0)
-            {
-                ShowPopup("Error register faild  please try agin later");
-            }
+        User U1 = new User();
+        U1.Email = dt.Rows[0]["Email"].ToString();
+        int num = U1.deleteUserFromEvent(Eventnum.ToString());
+        //pop register
+        if (num >= 1)
+        {
+            ShowPopup("you have removed from the event Successfully");
         }
-     
-    
+        else if (num == 0)
+        {
+            ShowPopup("Error register faild  please try agin later");
+        }
+    }
+
+
 }

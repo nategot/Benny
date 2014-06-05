@@ -12,13 +12,9 @@
         var FinalPositon;
         var addressTXT;
         var flag = true;
-    
-  
-       
 
 //        window.onload = start();
 //        
-
 
         function start() {
            

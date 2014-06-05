@@ -6,7 +6,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=he"
         type="text/javascript"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="Scripts/MapScriptHome.js" type="text/javascript"></script>
+    <script src="Scripts/scriptMyEvents.js" type="text/javascript"></script>
     <link href="Styles/HomeCss.css" rel="stylesheet" type="text/css" />
     <link href="Styles/reveal.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery.reveal.js" type="text/javascript"></script>
@@ -15,18 +15,15 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
         rel="stylesheet" type="text/css" />
-    
-    
     <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
-      <link href="Styles/listOfuSERS.css" rel="stylesheet" type="text/css" />
-
+    <link href="Styles/listOfuSERS.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
-    <script src="Scripts/Facebook.js" type="text/javascript"></script>
-    <div id="Div1" style="display: none">
+    <asp:HiddenField ID="adminIDHIde" runat="server"></asp:HiddenField>
+    <div id="Div1" name="popupdiv" style="display: none">
     </div>
     <br />
     <br />
@@ -132,7 +129,7 @@
                     </div>
                     <div id="backgroundPopup">
                     </div>
-                    <div id="contect" style="float: left;width:50%">
+                    <div id="contect" style="float: left; width: 50%">
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
