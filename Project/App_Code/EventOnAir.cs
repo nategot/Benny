@@ -34,7 +34,9 @@ public class EventOnAir
     private string eventNum;
     private string adminFullName;
     public List<string> playerList = new List<string>();
+    private List<User> playerUserList = new List<User>();
 
+ 
 
     //prop
     #region
@@ -43,6 +45,15 @@ public class EventOnAir
         get { return frequencyStr; }
         set { frequencyStr = value; }
     }
+
+    public List<User> PlayerUserList
+    {
+        get { return playerUserList; }
+        set { playerUserList = value; }
+    }
+
+ 
+
     public string AdminFullName
     {
         get { return adminFullName; }

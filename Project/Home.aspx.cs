@@ -97,7 +97,7 @@ public partial class Home : System.Web.UI.Page
         time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
         TimeSpan diff2 = time.Subtract(now);
 
-        if (diff2.Days == 0)
+        if (diff2.Days == 0 && time.Day == now.Day)
         {
             GridView1.Rows[i].Cells[3].Text = "Today!";
         }

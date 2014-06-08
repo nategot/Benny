@@ -359,8 +359,8 @@ public class DBservices
         {
             con = dbS.connect(conString); // open the connection to the database/
 
-            String selectStr = "SELECT  [UserName] FROM [View_UserInEvent] WHERE EventNumber =" + eventNm; // create the select that will be used by the adapter to select data from the DB
-
+            String selectStr = "SELECT  [UserName] ,[Fname] , [Lname] , [Age] ,[Rating] ,[City],[Picture] FROM [View_UserInEvent] WHERE EventNumber =" + eventNm; // create the select that will be used by the adapter to select data from the DB
+    
             SqlDataAdapter da = new SqlDataAdapter(selectStr, con); // create the data adapter
 
             DataSet ds = new DataSet(); // create a DataSet and give it a name (not mandatory) as defualt it will be the same name as the DB

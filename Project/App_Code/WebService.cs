@@ -251,9 +251,17 @@ public class WebService : System.Web.Services.WebService
                 }
 
                 DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
+                
                 for (int r = 0; r < dtUS.Rows.Count; r++)
-                {
-                    evTemp.PlayerList.Add(dtUS.Rows[r][0].ToString());
+                {   User utemp = new User();
+                    utemp.UserName=dtUS.Rows[r]["UserName"].ToString();
+                    utemp.Fname=dtUS.Rows[r]["Fname"].ToString();
+                    utemp.Lname=dtUS.Rows[r]["Lname"].ToString();
+                    utemp.Age=int.Parse(dtUS.Rows[r]["Age"].ToString());
+                    utemp.Rating=int.Parse(dtUS.Rows[r]["Rating"].ToString());
+                    utemp.City=dtUS.Rows[r]["City"].ToString();
+                    utemp.ImageUrl=dtUS.Rows[r]["Picture"].ToString();
+                    evTemp.PlayerUserList.Add(utemp);
                 }
 
                 eventsList.Add(evTemp);   //add the  event to the list
