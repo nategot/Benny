@@ -18,9 +18,7 @@
         rel="stylesheet" type="text/css" />
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
     <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
-  
-  
-   
+    <link href="Styles/accordion.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
@@ -29,12 +27,10 @@
     </div>
     <br />
     <br />
-    
-    
-        <tr>
-            <td>
-            </td>
-        </tr>
+    <tr>
+        <td>
+        </td>
+    </tr>
     </table>
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
@@ -93,10 +89,9 @@
         </Triggers>
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" 
-                ForeColor="Black" HorizontalAlign="Center"
-                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" 
-                BorderStyle="None" BackColor="White" BorderWidth="1px">
+                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" ForeColor="Black" HorizontalAlign="Center"
+                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" BorderStyle="None"
+                BackColor="White" BorderWidth="1px">
                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                 <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -122,7 +117,7 @@
                     </div>
                     <div id="backgroundPopup">
                     </div>
-                    <div id="contect" style="float: left;width:50%">
+                    <div id="contect" style="float: left; width: 50%">
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
@@ -259,31 +254,55 @@
         function buildBoard(PlayerList, numRows) {
 
             st = '';
-            str += '<div id="chatlist" class="mousescroll"><ul class="ca-menup">';
+            //            str += '<div id="chatlist" class="mousescroll"><ul class="ca-menup">';
 
+            //            for (row = 0; row < numRows; row++) {
+            //                str += '<li><div class="ca-contentp"><table><tr><td><h3 class="ca-subp">';
+            //                if (PlayerList[row] != undefined) {
+            //                    str += row + 1;
+            //                    str += '</h3>';
+            //                    str += '</td><td>';
+            //                    str += '<h2 class="ca-mainp">';
+            //                    str += PlayerList[row];
+            //                    str += '</h2></td> </tr> </table> </div> </li>';
+            //                }
+            //                else {
+            //                    str += row + 1;
+            //                    str += '</h3>';
+            //                    str += '</td><td>';
+            //                    str += '<h2 class="ca-mainp1">';
+            //                    str += 'available';
+            //                    str += '</h2></td> </tr> </table> </div> </li>';
+            //                }
+
+            //            }
+            //            str += '</ul></div>';
+
+
+            str += ' <div id="chatlist" class="mousescroll"><div id="containerAccordion"><section id="accordion">';
             for (row = 0; row < numRows; row++) {
-                str += '<li><div class="ca-contentp"><table><tr><td><h3 class="ca-subp">';
                 if (PlayerList[row] != undefined) {
-                    str += row + 1;
-                    str += '</h3>';
-                    str += '</td><td>';
-                    str += '<h2 class="ca-mainp">';
-                    str += PlayerList[row];
-                    str += '</h2></td> </tr> </table> </div> </li>';
+                    str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row] + '</label>';
+                    str += ' <article>	';
+                    str += ' <p>' + PlayerList[row] + ' </p>';
+                    str += ' </article></div>';
                 }
                 else {
-                    str += row + 1;
-                    str += '</h3>';
-                    str += '</td><td>';
-                    str += '<h2 class="ca-mainp1">';
-                    str += 'available';
-                    str += '</h2></td> </tr> </table> </div> </li>';
+                    str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + '. Available</label>';
+                    str += ' <article>	';
+                    str += '';
+                    str += ' </article></div>';
                 }
-
             }
-            str += '</ul></div>';
+            str += ' </section></div></div>'
 
+            //            else {
+            //             str += ' <div><input type="checkbox" id="check-1" /> <label for="check-1">פנוי</label>';
+            //            str += ' <article>	';
+            //          
+            //            str += '  </article></div>	</section></div>';
 
+            //            }
             document.getElementById("prtis").innerHTML = str;
 
             return st;
