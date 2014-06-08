@@ -18,6 +18,9 @@ public partial class Home : System.Web.UI.Page
     string Eventnum;
     int NumOfRegister;
     int NumOfParticipants;
+    DateTime time;
+    DateTime now;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -51,9 +54,6 @@ public partial class Home : System.Web.UI.Page
     }
 
 
-
-
-
     //edit the gridview coulom
     protected void EditGridView()
     {
@@ -78,8 +78,8 @@ public partial class Home : System.Web.UI.Page
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
+            ProbabilityForGame(i); 
             Chekdate(i);
-            ProbabilityForGame(i);
         }
 
         GridView1.HeaderRow.Cells[0].Text = "";
@@ -94,12 +94,14 @@ public partial class Home : System.Web.UI.Page
     //chek date if today or tomorrow
     protected void Chekdate(int i)
     {
-        DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
-        if (DateTime.Today == time)
+        time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+        TimeSpan diff2 = time.Subtract(now);
+
+        if (diff2.Days == 0)
         {
             GridView1.Rows[i].Cells[3].Text = "Today!";
         }
-        else if (DateTime.Today == DateTime.Today.AddDays(1))
+        else if (diff2.Days == 1)
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
         }
@@ -111,9 +113,9 @@ public partial class Home : System.Web.UI.Page
     {
         double prob = 100;
         //calculat by date
-        DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
-        DateTime dateOne = DateTime.Now;
-        TimeSpan diff = time.Subtract(dateOne);
+         time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+        now = DateTime.Now;
+        TimeSpan diff = time.Subtract(now);
 
         if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
         {
