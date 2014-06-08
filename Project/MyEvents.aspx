@@ -24,15 +24,11 @@
     </asp:ToolkitScriptManager>
     <asp:HiddenField ID="adminEmailHIde" runat="server"></asp:HiddenField>
      <asp:HiddenField ID="adminIDHIde" runat="server"></asp:HiddenField>
+       <br />
+    <br />
     <div id="Div1" name="popupdiv" style="display: none">
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+ 
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>

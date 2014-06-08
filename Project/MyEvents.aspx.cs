@@ -16,6 +16,9 @@ public partial class MyEvents : System.Web.UI.Page
     DataTable dtuser;
     EventOnAir Ev = new EventOnAir();
     string Eventnum;
+    int NumOfRegister;
+    int NumOfParticipants;
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -70,7 +73,7 @@ public partial class MyEvents : System.Web.UI.Page
             GridView1.Rows[i].Cells[6].Text = ageRange;
 
             //hide EventNumber & Comments & private& lat lng& Email
-            for (int r = 8; r < 16; r++)
+            for (int r = 9; r < 17; r++)
             {
                 GridView1.Rows[i].Cells[r].Visible = false;
                 GridView1.HeaderRow.Cells[r].Visible = false;
@@ -78,6 +81,7 @@ public partial class MyEvents : System.Web.UI.Page
             AddJoinBtn(i);
             AddNumOfRegister(i);
             Chekdate(i);
+            ProbabilityForGame(i);
         }
      
 
@@ -121,6 +125,53 @@ public partial class MyEvents : System.Web.UI.Page
         }
     }
 
+    // Probability calculat 
+    protected void ProbabilityForGame(int i)
+    {
+        double prob = 100;
+        //calculat by date
+        DateTime time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
+        DateTime dateOne = DateTime.Now;
+        TimeSpan diff = time.Subtract(dateOne);
+
+        if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
+        {
+            if (diff.Days == 0 && diff.Hours <= 2)
+            {
+                if (NumOfRegister / NumOfParticipants < 0.5)//if less then 50% has registerd
+                {
+                    prob = 60;
+                }
+                else if (NumOfRegister / NumOfParticipants > 0.8)//if more then 80% has registerd
+                {
+                    prob = 100;
+                }
+                else //between 50%-80%
+                {
+                    prob = 70;
+                }
+
+            }
+            else//less then 3 hours more then 2
+            {
+                if (NumOfRegister / NumOfParticipants > 0.5)//if more then 50% has registerd
+                {
+                    if (diff.Days == 0 && diff.Hours < 1.5 && NumOfRegister / NumOfParticipants < 0.8)//if less then  80% has registerd and less then 1.5  hours to start time
+                    { prob = 80; }
+                }
+                else //if less then 50% has registerd less then 3 hours to start time
+                {
+                    prob = 90;
+                }
+            }
+        }
+
+        GridView1.Rows[i].Cells[8].Text = prob.ToString() + "%";
+
+
+    }
+
+
     //onmouse over color 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -143,9 +194,11 @@ public partial class MyEvents : System.Web.UI.Page
     //adding the number of register player
     protected void AddNumOfRegister(int i)
     {
-        string NumOfRegister = dtMyEvent.Rows[i]["NumOfRegister"].ToString();
-        string NumOfParticipants = dtMyEvent.Rows[i]["NumOfParticipants"].ToString();
+        NumOfRegister = int.Parse(dtMyEvent.Rows[i]["NumOfRegister"].ToString());
+        NumOfParticipants = int.Parse(dtMyEvent.Rows[i]["NumOfParticipants"].ToString());
+
         GridView1.Rows[i].Cells[2].Text = NumOfRegister + "/" + NumOfParticipants;
+
     }
 
     //adding the join btn

@@ -18,7 +18,7 @@ public partial class Home : System.Web.UI.Page
     string Eventnum;
     int NumOfRegister;
     int NumOfParticipants;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -29,7 +29,7 @@ public partial class Home : System.Web.UI.Page
             CategoryFilter();
         }
     }
- 
+
     #region
 
 
@@ -66,20 +66,20 @@ public partial class Home : System.Web.UI.Page
             GridView1.Rows[i].Cells[6].Text = ageRange;
 
             //hide if private
-            CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[10].Controls[0];
+            CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[11].Controls[0];
             if (cb.Checked)
             { GridView1.Rows[i].Visible = false; }
 
             //hide EventNumber & Comments & private& lat lng
-            for (int r = 8; r < 15; r++)
+            for (int r = 9; r < 16; r++)
             {
                 GridView1.Rows[i].Cells[r].Visible = false;
                 GridView1.HeaderRow.Cells[r].Visible = false;
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
-            ProbabilityForGame(i);
             Chekdate(i);
+            ProbabilityForGame(i);
         }
 
         GridView1.HeaderRow.Cells[0].Text = "";
@@ -93,7 +93,7 @@ public partial class Home : System.Web.UI.Page
 
     //chek date if today or tomorrow
     protected void Chekdate(int i)
-    {  
+    {
         DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
         if (DateTime.Today == time)
         {
@@ -115,24 +115,40 @@ public partial class Home : System.Web.UI.Page
         DateTime dateOne = DateTime.Now;
         TimeSpan diff = time.Subtract(dateOne);
 
-        if (diff.Days==0 && diff.Hours <=3 )//if less then 3 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
         {
-            if (NumOfRegister / NumOfParticipants > 0.5)//id more the
+            if (diff.Days == 0 && diff.Hours <= 2)
             {
-            //    NumOfRegister;
-            //    NumOfParticipants;
+                if (NumOfRegister / NumOfParticipants < 0.5)//if less then 50% has registerd
+                {
+                    prob = 60;
+                }
+                else if (NumOfRegister / NumOfParticipants > 0.8)//if more then 80% has registerd
+                {
+                     prob = 100;
+                }
+                else //between 50%-80%
+                {
+                    prob = 70;
+                }
 
             }
-             GridView1.Rows[i].Cells[4].Text = prob.ToString();
+            else//less then 3 hours more then 2
+            {
+                if (NumOfRegister / NumOfParticipants > 0.5)//if more then 50% has registerd
+                {
+                    if (diff.Days == 0 && diff.Hours < 1.5 && NumOfRegister / NumOfParticipants < 0.8)//if less then  80% has registerd and less then 1.5  hours to start time
+                    { prob = 80; }
+                }
+                else //if less then 50% has registerd less then 3 hours to start time
+                {
+                    prob = 90;
+                }
+            }
         }
-        //var res = String.Format("{0}:{1}:{2}", diff.Hours,diff.Minutes,diff.Seconds);
 
-        //if (DateTime.Today. - time==0)
-        //{ 
-        //    GridView1.Rows[i].Cells[3].Text = "Today!";
-        //}
+        GridView1.Rows[i].Cells[8].Text = prob.ToString() + "%";
 
-       
 
     }
 
@@ -158,8 +174,8 @@ public partial class Home : System.Web.UI.Page
     //adding the number of register player
     protected void AddNumOfRegister(int i)
     {
-         NumOfRegister = int.Parse(dt.Rows[i]["NumOfRegister"].ToString());
-         NumOfParticipants = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
+        NumOfRegister = int.Parse(dt.Rows[i]["NumOfRegister"].ToString());
+        NumOfParticipants = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
 
         GridView1.Rows[i].Cells[2].Text = NumOfRegister + "/" + NumOfParticipants;
 
@@ -198,7 +214,7 @@ public partial class Home : System.Web.UI.Page
         //CategoryFilter();
         if (Session["Fname"] != null)
         {
-           Eventnum = (eventNumHF.Value);
+            Eventnum = (eventNumHF.Value);
 
             if (Session["UserDeatail"] == null) return;
             DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
@@ -207,19 +223,19 @@ public partial class Home : System.Web.UI.Page
             U1.Email = dt.Rows[0]["Email"].ToString();
             int num = U1.InsertToEvent(Eventnum);
             //pop register
-            if (num>=1)
+            if (num >= 1)
             {
-                ShowPopup("you have added to the event Successfully");  
+                ShowPopup("you have added to the event Successfully");
             }
-            else if (num==-1)
+            else if (num == -1)
             {
-                ShowPopup("You Are already register to this event"); 
+                ShowPopup("You Are already register to this event");
             }
-            else if (num==0)
+            else if (num == 0)
             {
                 ShowPopup("Error register faild  please try agin later");
             }
-            
+
             //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
             //HttpContext.Current.Session["EventNumber"] = Eventnum;
             Response.Redirect("MyEvents.aspx");
@@ -294,13 +310,13 @@ public partial class Home : System.Web.UI.Page
 
     protected void ShowPopup(string message) //popup message
     {
-       
-         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
+
+        ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
-     
-    #endregion  
+
+    #endregion
 
 
 
- 
+
 }
