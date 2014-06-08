@@ -168,7 +168,7 @@
             </td>
         </tr>
     </table>
-    <body onload="start()">
+    <body>
         <div id="mapholder" style="border: 1px ridge #999999; height: 300px; width: 433px;">
         </div>
     </body>

@@ -16,6 +16,8 @@ public partial class Home : System.Web.UI.Page
     DataTable dt;
     EventOnAir Ev = new EventOnAir();
     string Eventnum;
+    int NumOfRegister;
+    int NumOfParticipants;
     
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -50,6 +52,8 @@ public partial class Home : System.Web.UI.Page
 
 
 
+
+
     //edit the gridview coulom
     protected void EditGridView()
     {
@@ -74,6 +78,7 @@ public partial class Home : System.Web.UI.Page
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
+            ProbabilityForGame(i);
             Chekdate(i);
         }
 
@@ -100,6 +105,37 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
+
+    // Probability calculat 
+    protected void ProbabilityForGame(int i)
+    {
+        double prob = 100;
+        //calculat by date
+        DateTime time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+        DateTime dateOne = DateTime.Now;
+        TimeSpan diff = time.Subtract(dateOne);
+
+        if (diff.Days==0 && diff.Hours <=3 )//if less then 3 hours to start time
+        {
+            if (NumOfRegister / NumOfParticipants > 0.5)//id more the
+            {
+            //    NumOfRegister;
+            //    NumOfParticipants;
+
+            }
+             GridView1.Rows[i].Cells[4].Text = prob.ToString();
+        }
+        //var res = String.Format("{0}:{1}:{2}", diff.Hours,diff.Minutes,diff.Seconds);
+
+        //if (DateTime.Today. - time==0)
+        //{ 
+        //    GridView1.Rows[i].Cells[3].Text = "Today!";
+        //}
+
+       
+
+    }
+
     //onmouse over color 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -122,12 +158,12 @@ public partial class Home : System.Web.UI.Page
     //adding the number of register player
     protected void AddNumOfRegister(int i)
     {
-        string NumOfRegister = dt.Rows[i]["NumOfRegister"].ToString();
-        string NumOfParticipants = dt.Rows[i]["NumOfParticipants"].ToString();
+         NumOfRegister = int.Parse(dt.Rows[i]["NumOfRegister"].ToString());
+         NumOfParticipants = int.Parse(dt.Rows[i]["NumOfParticipants"].ToString());
 
         GridView1.Rows[i].Cells[2].Text = NumOfRegister + "/" + NumOfParticipants;
 
-        if (int.Parse(NumOfParticipants) <= int.Parse(NumOfRegister))//if event is full
+        if (NumOfParticipants <= NumOfRegister)//if event is full
         {
             //GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
             Image ImageFUll = new Image();
@@ -135,14 +171,6 @@ public partial class Home : System.Web.UI.Page
             GridView1.Rows[i].Cells[7].Controls.Clear();
             GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
         }
-
-        //else if ((int.Parse(NumOfParticipants)) - (int.Parse(NumOfRegister)) <= 2)//if event is allmost full
-        //{ GridView1.Rows[i].BackColor = System.Drawing.Color.Blue; }
-
-        //else if (int.Parse(NumOfRegister) == 1)//if event is new 
-        //{
-        //    GridView1.Rows[i].BackColor = System.Drawing.Color.Green;
-        //}
 
     }
 
