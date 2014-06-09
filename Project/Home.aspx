@@ -10,7 +10,7 @@
     <link href="Styles/HomeCss.css" rel="stylesheet" type="text/css" />
     <link href="Styles/reveal.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery.reveal.js" type="text/javascript"></script>
-    <link href="Styles/listOfuSERS.css" rel="stylesheet" type="text/css" />
+    <%-- <link href="Styles/listOfuSERS.css" rel="stylesheet" type="text/css" />--%>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
     <link href="Styles/JoinEventStyle.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
@@ -18,9 +18,7 @@
         rel="stylesheet" type="text/css" />
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
     <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
-  
-  
-
+    <link href="Styles/accordion.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
@@ -29,9 +27,11 @@
     </div>
     <br />
     <br />
-    
-    
-
+    <tr>
+        <td>
+        </td>
+    </tr>
+    </table>
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
@@ -89,10 +89,9 @@
         </Triggers>
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" 
-                ForeColor="Black" HorizontalAlign="Center"
-                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" 
-                BorderStyle="None" BackColor="White" BorderWidth="1px">
+                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" ForeColor="Black" HorizontalAlign="Center"
+                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" BorderStyle="None"
+                BackColor="White" BorderWidth="1px">
                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                 <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -118,7 +117,7 @@
                     </div>
                     <div id="backgroundPopup">
                     </div>
-                    <div id="contect" style="float: left;width:50%">
+                    <div id="contect" style="float: left; width: 50%">
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
@@ -126,7 +125,7 @@
                         &nbsp;
                     </div>
                     <a href="#" class="topopup">
-                        <asp:Button CssClass="btnjoin1" runat="server" Text="Participants" /></a>
+                        <asp:Button ID="Button1" CssClass="btnjoin1" runat="server" Text="Participants" /></a>
                     <asp:Button ID="joinBtn" class="btnjoin2" runat="server" Text="join" OnClick="JoinBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
@@ -140,181 +139,163 @@
         <</asp:PlaceHolder>
     <div id="dialog" style="display: none">
     </div>
-      <script type="text/javascript">
+    <script type="text/javascript">
 
-          function JoinEvent(num, lat, lng) {
+        function JoinEvent(num, lat, lng) {
 
-              var a = document.getElementById("MainContent_eventNumHF");
-              a.value = num;
-              var EventPos = new Object();
-              EventPos.lat = lat;
-              EventPos.long = lng;
-              var pos = new google.maps.LatLng(EventPos.lat, EventPos.long);
+            var a = document.getElementById("MainContent_eventNumHF");
+            a.value = num;
+            var EventPos = new Object();
+            EventPos.lat = lat;
+            EventPos.long = lng;
+            var pos = new google.maps.LatLng(EventPos.lat, EventPos.long);
 
-              var contster = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes" onclick="JoinBtn_Click" /><div/>';
+            var contster = '<div style="height:100px" id="content" ><h5> Are you sure you want to join? <h5/> <input type="button" class="myButton" onclick="CloseInfo()" id="btnNo" value="No"/> <asp:Button ID="joinBtnInfo2" class="myButton" runat="server" Text="Yes" onclick="JoinBtn_Click" /><div/>';
 
-              infowindow2 = new google.maps.InfoWindow({
-                  content: contster,
-                  position: pos
+            infowindow2 = new google.maps.InfoWindow({
+                content: contster,
+                position: pos
 
-              });
+            });
 
-              infowindow2.open(map);
-          }
+            infowindow2.open(map);
+        }
 
-          google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);
 
-          function findme(pathList2) {
-              pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
-              map.setCenter(pos);
-          }
+        function findme(pathList2) {
+            pos = new google.maps.LatLng(pathList2[0].Lat, pathList2[0].Lng);
+            map.setCenter(pos);
+        }
 
-          ////join event popup
-          function loadEventDetail(num) {
-              getOneEvent(num);
-          }
+        ////join event popup
+        function loadEventDetail(num) {
+            getOneEvent(num);
+        }
 
-          function getOneEvent(eventNum) {
-              var dataString = '{eventNum:"' + eventNum + '"}';
-              $.ajax({ // ajax call starts
-                  url: 'WebService.asmx/getOneEvent',   // server side method
-                  // parameters passed to the server
-                  type: 'POST',
-                  data: dataString,
-                  dataType: 'json', // Choosing a JSON datatype
-                  contentType: 'application/json; charset = utf-8',
-                  success: function (data) // Variable data contains the data we get from server side
-                  {
-                      poiList = $.parseJSON(data.d);
-                      document.getElementById('contect').innerHTML = "";
-                      str = '';
-                      //load deatil
-                      str = buildListItem(poiList[0]); // add item to the list in the main events page
-                      $("#contect").append(str);
-                      $("#contect").collapsibleset('refresh');
-
-
-                  }, // end of success
-                  error: function (e) {
-                      alert("failed in getTarget :( " + e.responseText);
-                  } // end of error
-              }) // end of ajax call
-          }
+        function getOneEvent(eventNum) {
+            var dataString = '{eventNum:"' + eventNum + '"}';
+            $.ajax({ // ajax call starts
+                url: 'WebService.asmx/getOneEvent',   // server side method
+                // parameters passed to the server
+                type: 'POST',
+                data: dataString,
+                dataType: 'json', // Choosing a JSON datatype
+                contentType: 'application/json; charset = utf-8',
+                success: function (data) // Variable data contains the data we get from server side
+                {
+                    poiList = $.parseJSON(data.d);
+                    document.getElementById('contect').innerHTML = "";
+                    str = '';
+                    //load deatil
+                    str = buildListItem(poiList[0]); // add item to the list in the main events page
+                    $("#contect").append(str);
+                    $("#contect").collapsibleset('refresh');
 
 
-
-          function buildListItem(poiPoint) {
-
-              var strT = "";
-              strT += '  <table>';
-              strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="title"> ' + poiPoint.Description + '</asp:Label> <img src = "' + poiPoint.ImageUrl + '"style="width: 30px" class="imgtitel"/> </td> </tr>';
-              strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp; <asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td> </tr>';
-              strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>  </td> </tr>';
-              strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Date & Time:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.DateTimeStr + ' </asp:Label>  </td> </tr>';
-              strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Age Range:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb">' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</asp:Label> </td></tr>';
-              strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label>  </td> </tr>';
-              strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label> </td> </tr>';
-              strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
-              strT += ' </table>';
-              strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);
+                }, // end of success
+                error: function (e) {
+                    alert("failed in getTarget :( " + e.responseText);
+                } // end of error
+            }) // end of ajax call
+        }
 
 
-              //save the event num
-              var a = document.getElementById("MainContent_eventNumHF");
-              a.value = poiPoint.EventNum;
-              //load table
 
-              //                      
+        function buildListItem(poiPoint) {
 
-              //build map
-              var ruppinPos = new Object();
-              var latH = poiPoint.Point.Lat;
-              var lngH = poiPoint.Point.Lng;
-              ruppinPos.lat = latH;
-              ruppinPos.long = lngH;
-              var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
-              var mapOptions = {
-                  zoom: 11,
-                  center: myLatlng,
-                  mapTypeId: google.maps.MapTypeId.Map
-
-              }
-              map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-              var marker1 = new google.maps.Marker({
-                  position: myLatlng,
-                  map: map,
-                  title: ''
-              });
+            var strT = "";
+            strT += '  <table>';
+            strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="title"> ' + poiPoint.Description + '</asp:Label> <img src = "' + poiPoint.ImageUrl + '"style="width: 30px" class="imgtitel"/> </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp; <asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>  </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Date & Time:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.DateTimeStr + ' </asp:Label>  </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Age Range:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb">' + poiPoint.MinAge + '-' + poiPoint.MaxAge + '</asp:Label> </td></tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Location:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Address + '</asp:Label>  </td> </tr>';
+            strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label> </td> </tr>';
+            strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
+            strT += ' </table>';
+            strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);
 
 
-              return strT;
+            //save the event num
+            var a = document.getElementById("MainContent_eventNumHF");
+            a.value = poiPoint.EventNum;
+            //load table
 
-          }
+            //                      
 
-          function buildBoard(PlayerList, numRows) {
+            //build map
+            var ruppinPos = new Object();
+            var latH = poiPoint.Point.Lat;
+            var lngH = poiPoint.Point.Lng;
+            ruppinPos.lat = latH;
+            ruppinPos.long = lngH;
+            var myLatlng = new google.maps.LatLng(ruppinPos.lat, ruppinPos.long);
+            var mapOptions = {
+                zoom: 11,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.Map
 
-              st = '';
-              //            str += '<div id="chatlist" class="mousescroll"><ul class="ca-menup">';
+            }
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-              //            for (row = 0; row < numRows; row++) {
-              //                str += '<li><div class="ca-contentp"><table><tr><td><h3 class="ca-subp">';
-              //                if (PlayerList[row] != undefined) {
-              //                    str += row + 1;
-              //                    str += '</h3>';
-              //                    str += '</td><td>';
-              //                    str += '<h2 class="ca-mainp">';
-              //                    str += PlayerList[row];
-              //                    str += '</h2></td> </tr> </table> </div> </li>';
-              //                }
-              //                else {
-              //                    str += row + 1;
-              //                    str += '</h3>';
-              //                    str += '</td><td>';
-              //                    str += '<h2 class="ca-mainp1">';
-              //                    str += 'available';
-              //                    str += '</h2></td> </tr> </table> </div> </li>';
-              //                }
-
-              //            }
-              //            str += '</ul></div>';
+            var marker1 = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: ''
+            });
 
 
-              str += ' <div id="chatlist" class="mousescroll"><div id="containerAccordion"><section id="accordion">';
-              for (row = 0; row < numRows; row++) {
-                  if (PlayerList[row] != undefined) {
-                      str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
-                      str += ' <article>	';
-                      str += ' <p>' + PlayerList[row].Fname + ' </p>';
-                      str += ' <p>' + PlayerList[row].Lname + ' </p>';
-                      str += ' <p>' + PlayerList[row].Age + ' </p>';
-//                      str += ' <p>' + PlayerList[row].City + ' </p>';
-                      str += ' <p>' + PlayerList[row].Rating + ' </p>';
-                      str += '<img class="_s0 _rw img" src="' + PlayerList[row].ImageUrl + '" >' ; 
-                      
-                      str += ' </article></div>';
-                  }
-                  else {
-                      str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + '. Available</label>';
-                      str += ' <article>	';
-                      str += '';
-                      str += ' </article></div>';
-                  }
-              }
-              str += ' </section></div></div>'
+            return strT;
 
-              //            else {
-              //             str += ' <div><input type="checkbox" id="check-1" /> <label for="check-1">פנוי</label>';
-              //            str += ' <article>	';
-              //          
-              //            str += '  </article></div>	</section></div>';
+        }
 
-              //            }
-              document.getElementById("prtis").innerHTML = str;
+        function buildBoard(PlayerList, numRows) {
 
-              return st;
+            st = '';
 
-          } //buildBoard
+            str += ' <div id="chatlist" class="mousescroll"><div id="containerAccordion"><section id="accordion">';
+            for (row = 0; row < numRows; row++) {
+                if (PlayerList[row] != undefined) {
+
+                    str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
+                    str += ' <article>	';
+                    str += '<asp:Label  runat="server" CssClass="aa" Text="Name: "></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Fname + '   </asp:Label>';
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Lname + '</asp:Label></br>';
+                    str += '<img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>';
+                    str += '<asp:Label  runat="server" CssClass="aa" Text="Age: "></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Age + ' </asp:Label></br>';
+
+                    str += '<asp:Label  runat="server" CssClass="aa" Text="Rating: "></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+
+                    // str += ' <p class="aa">' + PlayerList[row].City + ' </p>';
+
+                    str += ' </article></div>';
+                }
+                else {
+                    str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + '. Available</label>';
+                    str += ' <article>	';
+                    str += '';
+                    str += ' </article></div>';
+                }
+            }
+            str += ' </section></div></div>'
+
+            //            else {
+            //             str += ' <div><input type="checkbox" id="check-1" /> <label for="check-1">פנוי</label>';
+            //            str += ' <article>	';
+            //          
+            //            str += '  </article></div>	</section></div>';
+
+            //            }
+            document.getElementById("prtis").innerHTML = str;
+
+            return st;
+
+        } //buildBoard
 
     </script>
 </asp:Content>
