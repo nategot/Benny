@@ -10,14 +10,14 @@ function statusChangeCallback(response) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         //testAPI(); 
-        
-        getUserInfo();     
+
+        getUserInfo();
         //Login();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
-       
+
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
@@ -25,9 +25,9 @@ function statusChangeCallback(response) {
         'into Facebook.';
         //alert(3333);
         LogOut();
-      
+
     }
- // Login();
+    // Login();
 
 }
 
@@ -42,7 +42,7 @@ function checkLoginState() {
 
 
 
-window.fbAsyncInit = function () { 
+window.fbAsyncInit = function () {
     FB.init({
         appId: '295645690612011',
         cookie: true,  // enable cookies to allow the server to access 
@@ -100,21 +100,21 @@ function testAPI() {
 /*--------------NIR-----------------*/
 
 function Login() {
-    
+
     FB.login(function (response) {
         if (response.authResponse) {
             getUserInfo();
         }
         else {
             console.log('User cancelled login or did not fully authorize.');
-                
+
         }
     },
         { scope: 'email,user_photos,user_videos' });
 }
 
 function getUserInfo() {
-    
+
     FB.api('/me', function (response) {
         document.getElementById('status').innerHTML = 'Hi, ' + response.first_name + '!';
         firstName = response.first_name;
@@ -125,18 +125,25 @@ function getUserInfo() {
         email = response.email;
         password = response.id;
 
-    FB.api('/me/picture?type=normal', function (response) {
-        imageUrl = response.data.url;
-        //alert(imageUrl);
-    
-    AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
-    });
+        FB.api('/me/picture?type=normal', function (response) {
+            if (response.data.url == undefined) {
+                imageUrl = 'pic/EmptyProfile.jpg';
+
+            }
+            else {
+                imageUrl = response.data.url;
+            }
+
+            //alert(imageUrl);
+
+            AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
+        });
 
     });
 }
 
 function AddUser(firstName, lastName, age, city, userName, email, Password, imageUrl) {
-    
+
     var dataString = '{UserName:"' + userName + '",' + 'Password:"' + Password + '",' + 'FirstName:"' + firstName + '",' + 'LastName:"' + lastName + '",' + 'Age:' + age + ',' + 'City:"' + city + '",' + 'Email:"' + email + '",' + 'imageUrl:"' + imageUrl + '"}';
 
     $.ajax({ // ajax call starts
@@ -149,10 +156,10 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
         {
             ans = $.parseJSON(data.d);
             if (ans == 1) {
-              
+
             }
             else {
-       //alert("Register faild"); ;
+                //alert("Register faild"); ;
             }
 
         }, // end of success
@@ -171,7 +178,7 @@ function LogOut() {
         contentType: 'application/json; charset = utf-8',
         success: function (data) // Variable data contains the data we get from serverside
         {
-       //     window.location.assign("Default.aspx");
+            //     window.location.assign("Default.aspx");
 
         }, // end of success
         error: function (e) {

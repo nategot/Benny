@@ -18,17 +18,17 @@
     <script src="Scripts/DIVPOPUPscript.js" type="text/javascript"></script>
     <link href="Styles/listOfuSERS.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
+    <link href="Styles/accordion.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
     <asp:HiddenField ID="adminEmailHIde" runat="server"></asp:HiddenField>
-     <asp:HiddenField ID="adminIDHIde" runat="server"></asp:HiddenField>
-       <br />
+    <asp:HiddenField ID="adminIDHIde" runat="server"></asp:HiddenField>
+    <br />
     <br />
     <div id="Div1" name="popupdiv" style="display: none">
     </div>
- 
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
@@ -100,7 +100,6 @@
                 <SortedDescendingCellStyle BackColor="#FFFDF8" />
                 <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
-  
             <div id="myModal" class="reveal-modal" style="float: left">
                 <div>
                     <div id="toPopup">
@@ -124,8 +123,8 @@
                         &nbsp;
                     </div>
                     <a href="#" class="topopup">
-                     <asp:Button ID="Participantsbtn" CssClass="btnjoin1" runat="server" Text="Participants" /></a>
-                     <asp:Button ID="LeaveBtn" class="btnjoin2" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
+                        <asp:Button ID="Participantsbtn" CssClass="btnjoin1" runat="server" Text="Participants" /></a>
+                    <asp:Button ID="LeaveBtn" class="btnjoin2" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -212,16 +211,16 @@
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label> </td> </tr>';
             strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
             strT += ' </table>';
-     
-            strT += buildBoard(poiPoint.PlayerList, poiPoint.NumOfParti);
 
-           
+            strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);
+
+
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
-         
-            
-         
+
+
+
             //build map
             var ruppinPos = new Object();
             var latH = poiPoint.Point.Lat;
@@ -256,36 +255,48 @@
         function buildBoard(PlayerList, numRows) {
 
             st = '';
-            str += '<div id="chatlist" class="mousescroll"><ul class="ca-menup">';
 
+            str += ' <div id="chatlist" class="mousescroll"><div id="containerAccordion"><section id="accordion">';
             for (row = 0; row < numRows; row++) {
-                str += '<li><div class="ca-contentp"><table><tr><td><h3 class="ca-subp">';
                 if (PlayerList[row] != undefined) {
-                    str += row + 1;
-                    str += '</h3>';
-                    str += '</td><td>';
-                    str += '<h2 class="ca-mainp">';
-                    str += PlayerList[row];
-                    str += '</h2></td> </tr> </table> </div> </li>';
+
+                    str += ' <div> <input type="button"   id="btnNo787" value="No"/><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
+                    str += ' <article>	';
+                    str += '<asp:Label  runat="server" CssClass="aa" Text="Name: "></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Fname + '   </asp:Label>';
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Lname + '</asp:Label></br>';
+                    str += '<img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>';
+                    str += '<asp:Label  runat="server" CssClass="aa" Text="Age: "></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Age + ' </asp:Label></br>';
+
+                    str += '<asp:Label  runat="server" CssClass="aa" Text="Rating: "></asp:Label>&nbsp;'
+                    str += '<asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+                    str += '<asp:Button  runat="server" Text="Editassasasssas"  />';//
+                    str += '<input type="button"   id="btnNo78" value="No"/>';
+                    // str += ' <p class="aa">' + PlayerList[row].City + ' </p>';
+                    str += ' </article></div>';
+
                 }
                 else {
-                    str += row + 1;
-                    str += '</h3>';
-                    str += '</td><td>';
-                    str += '<h2 class="ca-mainp1">';
-                    str += 'available';
-                    str += '</h2></td> </tr> </table> </div> </li>';
+                    str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + '. Available</label>';
+                    str += ' <article>	';
+                    str += '';
+                    str += ' </article></div>';
                 }
-
             }
-            str += '</ul></div>';
+            str += ' </section></div></div>'
 
+            //            else {
+            //             str += ' <div><input type="checkbox" id="check-1" /> <label for="check-1">פנוי</label>';
+            //            str += ' <article>	';
+            //          
+            //            str += '  </article></div>	</section></div>';
 
+            //            }
             document.getElementById("prtis2").innerHTML = str;
 
             return st;
 
         } //buildBoard
-
     </script>
 </asp:Content>
