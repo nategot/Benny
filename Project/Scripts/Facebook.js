@@ -114,8 +114,9 @@ function Login() {
 }
 
 function getUserInfo() {
+    
     FB.api('/me', function (response) {
-        document.getElementById('status').innerHTML = 'Hello, ' + response.pic_small_with_logo + '!';
+        document.getElementById('status').innerHTML = 'Hi, ' + response.first_name + '!';
         firstName = response.first_name;
         lastName = response.last_name;
         age = 27;
@@ -123,13 +124,19 @@ function getUserInfo() {
         userName = firstName + " " + lastName;
         email = response.email;
         password = response.id;
-        imageUrl = response.pic;
-        AddUser(firstName, lastName, age, city, userName, email, password, imageUrl); 
-    });  
+
+    FB.api('/me/picture?type=normal', function (response) {
+        imageUrl = response.data.url;
+        //alert(imageUrl);
+    
+    AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
+    });
+
+    });
 }
 
 function AddUser(firstName, lastName, age, city, userName, email, Password, imageUrl) {
-   
+    
     var dataString = '{UserName:"' + userName + '",' + 'Password:"' + Password + '",' + 'FirstName:"' + firstName + '",' + 'LastName:"' + lastName + '",' + 'Age:' + age + ',' + 'City:"' + city + '",' + 'Email:"' + email + '",' + 'imageUrl:"' + imageUrl + '"}';
 
     $.ajax({ // ajax call starts

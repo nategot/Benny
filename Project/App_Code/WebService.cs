@@ -154,7 +154,7 @@ public class WebService : System.Web.Services.WebService
         U1.Age = Age;
         U1.City = City;
         U1.Email = Email;
-        U1.ImageUrl = "Images\\" + imageUrl;
+        U1.ImageUrl = imageUrl;
 
         int numEfect = U1.InsertNewUser();
         DataTable dt = U1.CheckPass();
