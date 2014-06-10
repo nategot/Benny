@@ -47,19 +47,19 @@ public partial class MyEvents : System.Web.UI.Page
         //check if iser log in
         if (Session["UserDeatail"] == null) return;
         dtuser = (DataTable)HttpContext.Current.Session["UserDeatail"];
-        
+
         User U1 = new User();
         U1.Email = dtuser.Rows[0]["Email"].ToString();
         adminIDHIde.Value = dtuser.Rows[0]["UserId"].ToString();
         adminEmailHIde.Value = U1.Email;
-        
+
         dtMyEvent = U1.ReadMyEvent();
         GridView1.DataSource = dtMyEvent;
         GridView1.DataBind();
 
         //load the user age
         ageTXT.Text = dtuser.Rows[0]["Age"].ToString();
-  
+
     }
 
 
@@ -85,7 +85,7 @@ public partial class MyEvents : System.Web.UI.Page
             Chekdate(i);
             ProbabilityForGame(i);
         }
-     
+
 
         if (GridView1.Rows.Count == 0)
         {
@@ -136,8 +136,8 @@ public partial class MyEvents : System.Web.UI.Page
     {
         double prob = 100;
         //calculat by date
-         time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
-         now = DateTime.Now;
+        time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
+        now = DateTime.Now;
         TimeSpan diff = time.Subtract(now);
 
         if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
@@ -299,10 +299,10 @@ public partial class MyEvents : System.Web.UI.Page
     protected void EditEventBTn_Click(object sender, EventArgs e)
     {
         Eventnum = (eventNumHF.Value);
-        HttpContext.Current.Session["MyEventsDT"] =dtMyEvent;
+        HttpContext.Current.Session["MyEventsDT"] = dtMyEvent;
         HttpContext.Current.Session["Eventnum"] = Eventnum;
         Response.Redirect("NewEvent.aspx?edit=Yes");
-      
+
     }
 
     protected void LeaveBtn_Click(object sender, EventArgs e)
@@ -325,6 +325,7 @@ public partial class MyEvents : System.Web.UI.Page
             ShowPopup("Error register faild  please try agin later");
         }
     }
+
 
 
 }
