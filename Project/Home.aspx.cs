@@ -184,10 +184,11 @@ public partial class Home : System.Web.UI.Page
         if (NumOfParticipants <= NumOfRegister)//if event is full
         {
             //GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
-            Image ImageFUll = new Image();
-            ImageFUll.ImageUrl = "Images/Full.png";
+            //Image ImageFUll = new Image();
+            //ImageFUll.ImageUrl = "Images/Full.png";
             GridView1.Rows[i].Cells[7].Controls.Clear();
-            GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
+            //GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
+            GridView1.Rows[i].Cells[7].Text = "<div class='btnFullEvent' >Full!</div>";
         }
 
     }
@@ -196,7 +197,7 @@ public partial class Home : System.Web.UI.Page
     protected void AddJoinBtn(int i)
     {
         string idEv = dt.Rows[i]["EventNumber"].ToString();
-        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  join </a>";
+        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  <input class='btnjoinevent' type='button' value='Join!' />  </a>";
     }
 
     //adding the image

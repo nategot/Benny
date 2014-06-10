@@ -669,3 +669,56 @@ div.accountInfo
   background: -o-linear-gradient(#e166e1,transparent,#e166e1);
   background: linear-gradient(#e166e1,transparent,#e166e1)
 }
+
+.btnjoinevent
+{
+   margin-left:10px;
+   border-radius: 3px; color: white;
+  display: inline-block; font-size: 15px;
+  padding: 2px 4px; text-decoration: none;
+  text-shadow: 0 1px 1px dimgrey; background-color: royalblue;
+  border: 1px solid black; font-family: Berkshire Swash;
+  -webkit-filter: drop-shadow(1.5px 1.5px 1.5px black) ;
+  width:70px;
+  height:25px;
+}
+
+.btnjoinevent:hover
+{
+     background: #246a8f;
+    text-decoration: none;
+}
+
+
+.btnFullEvent
+{
+   
+   margin-left:10px;
+   border-radius: 3px; color: white;
+  display: inline-block; font-size: 15px;
+  text-shadow: 0 1px 1px dimgrey; background-color: #A80000 ;
+  border: 1px solid black; font-family: Berkshire Swash;
+  -webkit-filter: drop-shadow(1.5px 1.5px 1.5px black) ;
+  width:70px;
+  height:20px;
+}
+
+
+.btnViewDetails
+{
+   margin-left:10px;
+   border-radius: 3px; color: white;
+  display: inline-block; font-size: 15px;
+  padding: 2px 4px; text-decoration: none;
+  text-shadow: 0 1px 1px dimgrey; background-color: royalblue;
+  border: 1px solid black; font-family: Berkshire Swash;
+  -webkit-filter: drop-shadow(1.5px 1.5px 1.5px black) ;
+  width:95px;
+  height:25px;
+}
+
+.btnViewDetails:hover
+{
+     background: #246a8f;
+    text-decoration: none;
+}
