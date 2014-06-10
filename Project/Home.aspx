@@ -202,30 +202,31 @@
             switch (categ) {
 
                 case "Soccer":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/1.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/1.jpg)';
                     break;
                 case "Basketball":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     
                     break;
                 case "Tennis":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundPosition = '100% 100%';
                     break;
                 case "Running":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     break;
                 case "Swimming":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     break;
                 case "Cycling":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     //document.getElementById('gggg').style.color = 'Green';
                     break;
                 case "Surfing":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     break;
                 case "Volleyball":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     break;
                 default:
 
