@@ -111,11 +111,15 @@ public partial class Home : System.Web.UI.Page
     // Probability calculat 
     protected void ProbabilityForGame(int i)
     {
-        double prob = 100;
+        int rating;
+        double averageRating;
+        double prob = 99;
         //calculat by date
-         time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+        time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
         now = DateTime.Now;
         TimeSpan diff = time.Subtract(now);
+        ////by time and num of register
+        #region
 
         if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
         {
@@ -127,7 +131,7 @@ public partial class Home : System.Web.UI.Page
                 }
                 else if (NumOfRegister / NumOfParticipants > 0.8)//if more then 80% has registerd
                 {
-                     prob = 100;
+                     prob = 99;
                 }
                 else //between 50%-80%
                 {
@@ -148,10 +152,32 @@ public partial class Home : System.Web.UI.Page
                 }
             }
         }
+#endregion  
+        //by average rating
+       
+        Ev.EventNum= dt.Rows[i]["EventNumber"].ToString();
+         rating=Ev.GetRating();
+         averageRating = rating / NumOfRegister;
 
+         if (averageRating>90)//if average rating is more then 90 add but last then 99 add 20%
+         {
+             if (prob !=99)
+             {
+                 prob *= 1.2;
+             }
+             if (prob >99)
+             {prob=99;}
+         }
+         else if (averageRating > 70)//if average rating is  between 70-90 less 10% for prob
+         {
+             prob *= 0.9;
+         }
+         else//if average rating is   less  then 70  less 20% for prob
+         {
+             prob *= 0.8;
+         }
+    
         GridView1.Rows[i].Cells[8].Text = prob.ToString() + "%";
-
-
     }
 
     //onmouse over color 

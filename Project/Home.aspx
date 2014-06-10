@@ -137,7 +137,8 @@
     <div id="dialog" style="display: none">
     </div>
     <script type="text/javascript">
-
+        var url = 'WebService.asmx/';
+        
         function JoinEvent(num, lat, lng) {
 
             var a = document.getElementById("MainContent_eventNumHF");
@@ -173,7 +174,7 @@
         function getOneEvent(eventNum) {
             var dataString = '{eventNum:"' + eventNum + '"}';
             $.ajax({ // ajax call starts
-                url: 'WebService.asmx/getOneEvent',   // server side method
+                url: url+'getOneEvent',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,

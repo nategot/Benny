@@ -135,6 +135,7 @@
     </div>
     <script type="text/javascript">
         var isAdmin = false;
+        var url = 'WebService.asmx/';
         function JoinEvent(num, lat, lng) {
             alert("ddddddddddddd");
             var a = document.getElementById("MainContent_eventNumHF");
@@ -170,7 +171,7 @@
         function getOneEvent(eventNum) {
             var dataString = '{eventNum:"' + eventNum + '"}';
             $.ajax({ // ajax call starts
-                url: 'WebService.asmx/getOneEvent',   // server side method
+                url: url+'/getOneEvent',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -345,7 +346,7 @@
 
             var dataString = '{id:"' + id + '"}';
             $.ajax({ // ajax call starts
-                url: 'WebService.asmx/RatingDown',   // server side method
+                url: url+'RatingDown',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -367,7 +368,7 @@
 
             var dataString = '{id:"' + id + '"}';
             $.ajax({ // ajax call starts
-                url: 'WebService.asmx/RatingUp',   // server side method
+                url: url+'RatingUp',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
