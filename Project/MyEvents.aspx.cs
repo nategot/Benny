@@ -125,9 +125,9 @@ public partial class MyEvents : System.Web.UI.Page
             ImageFUll.ImageUrl = "pic/Date over.jpg";
             ImageFUll.Width = 80;
             ImageFUll.Height = 30;
-
-            GridView1.Rows[i].Cells[7].Controls.Clear();
-            GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
+            //GridView1.Rows[i].Cells[3].BackColor = System.Drawing.Color.Red;
+            GridView1.Rows[i].Cells[8].Controls.Clear();
+            GridView1.Rows[i].Cells[8].Controls.Add(ImageFUll);
         }
     }
 
