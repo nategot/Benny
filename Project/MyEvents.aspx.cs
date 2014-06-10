@@ -134,7 +134,9 @@ public partial class MyEvents : System.Web.UI.Page
     // Probability calculat 
     protected void ProbabilityForGame(int i)
     {
-        double prob = 100;
+        int rating;
+        double averageRating;
+        double prob = 99;
         //calculat by date
         time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
         now = DateTime.Now;
@@ -170,6 +172,29 @@ public partial class MyEvents : System.Web.UI.Page
                     prob = 90;
                 }
             }
+        }
+        //by average rating
+
+        Ev.EventNum = dtMyEvent.Rows[i]["EventNumber"].ToString();
+        rating = Ev.GetRating();
+        averageRating = rating / NumOfRegister;
+
+        if (averageRating > 90)//if average rating is more then 90 add but last then 99 add 20%
+        {
+            if (prob != 99)
+            {
+                prob *= 1.2;
+            }
+            if (prob > 99)
+            { prob = 99; }
+        }
+        else if (averageRating > 70)//if average rating is  between 70-90 less 10% for prob
+        {
+            prob *= 0.9;
+        }
+        else//if average rating is   less  then 70  less 20% for prob
+        {
+            prob *= 0.8;
         }
 
         GridView1.Rows[i].Cells[8].Text = prob.ToString() + "%";

@@ -271,7 +271,7 @@ public partial class Home : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("MessagePage.aspx?ans=notLogin");
+            Response.Redirect("MessagePage.aspx?ans=NotLoginME");
         }
     }
 

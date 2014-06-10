@@ -153,13 +153,13 @@ public class DBservices
     private String BuildupdateCommand(EventOnAir p)
     {
         int isprivate = 0;
-        string dateStr = " ";
+        string dateStr = "";
         if (p.IsPrivate1)
             isprivate = 1;
         dateStr += p.DateTime.Month.ToString() + "/" + p.DateTime.Day.ToString() + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
         String command;
         StringBuilder sb = new StringBuilder();
-        String com = "UPDATE EventsOnAir SET NumOfParticipants=" + p.NumOfParti + ",CategoryId=" + p.Catedory + ",FrequencyId=" + p.Frequency + ", Private=" + isprivate + ", Time=" + dateStr + ",MinAge=" + p.MinAge + ",MaxAge=" + p.MaxAge + ",Comments=" + p.Comments + ",AdminId=" + p.AdminID + ",Address=" + p.Address + ",Lat=" + p.Point.Lat +",Lng="+p.Point.Lng+" WHERE EventNumber=" + p.EventNum;
+        String com = "UPDATE EventsOnAir SET NumOfParticipants=" + p.NumOfParti + ",CategoryId=" + p.Catedory + ",FrequencyId=" + p.Frequency + ", Private=" + isprivate + ", Time='" + dateStr + "',MinAge=" + p.MinAge + ",MaxAge=" + p.MaxAge + ",Comments='" + p.Comments + "',AdminId=" + p.AdminID + ",Address='" + p.Address + "',Lat=" + p.Point.Lat + ",Lng=" + p.Point.Lng + "WHERE EventNumber=" + p.EventNum;
         command = com;
 
         return command;

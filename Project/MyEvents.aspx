@@ -120,8 +120,9 @@
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
                     <a href="#" class="topopup">
-                        <asp:Button ID="Participantsbtn" CssClass="myButton" runat="server" Text="Participants" /></a>
+                    <asp:Button ID="Participantsbtn" CssClass="myButton" runat="server" Text="Participants" /></a>
                     <asp:Button ID="LeaveBtn" class="myButton" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
+                    <div id="try">   </div>
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -171,7 +172,7 @@
         function getOneEvent(eventNum) {
             var dataString = '{eventNum:"' + eventNum + '"}';
             $.ajax({ // ajax call starts
-                url: url+'/getOneEvent',   // server side method
+                url: url+'getOneEvent',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -256,8 +257,7 @@
 
 
             strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);
-
-
+            
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
@@ -285,8 +285,10 @@
 
 
             if (isAdmin) {
-                strT += '<asp:Button ID="EditEventBTn" class="btnjoin1" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
+                var a = document.getElementById("try");
+                a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
             }
+
 
             return strT;
 

@@ -4,11 +4,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&language=he"></script>
-    <script src="Scripts/MapScriptNewEvent2.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
         rel="stylesheet" type="text/css" />
+    <script src="Scripts/MapScriptNewEvent2.js" type="text/javascript"></script>
     <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -148,9 +148,9 @@
             </td>
         </tr>
     </table>
-    <body>
-        <div id="mapholder" style="border: 1px ridge #999999; height: 300px; width: 433px;
-            float: left; margin-left: 10%;">
+      <body onload="start()">
+        <div id="mapholder" style="border: 1px ridge #999999; height: 300px; width: 433px; ">
+           
         </div>
     </body>
 </asp:Content>
