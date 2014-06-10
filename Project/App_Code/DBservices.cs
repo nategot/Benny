@@ -520,4 +520,30 @@ public class DBservices
         return 1;
 
     }
+
+    //GetRating get the sum of rating
+    public int GetRating(EventOnAir e)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        DataSet tblGetAdminName = new DataSet();
+        SqlDataAdapter adpt1;
+
+        SqlCommand MySPCommand = new SqlCommand("GetRating", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEventN = new SqlParameter("@EventNum", SqlDbType.Int);
+        parEventN.Value = e.EventNum;
+        parEventN.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEventN);
+
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+        adpt1.Fill(tblGetAdminName, "T2");
+        con.Close();
+        DataTable TTemp = tblGetAdminName.Tables["T2"];
+
+        return int.Parse(TTemp.Rows[0][0].ToString());
+
+    }
 }
