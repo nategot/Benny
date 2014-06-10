@@ -255,6 +255,7 @@ public class WebService : System.Web.Services.WebService
                 for (int r = 0; r < dtUS.Rows.Count; r++)
                 {   User utemp = new User();
                     utemp.UserName=dtUS.Rows[r]["UserName"].ToString();
+                    utemp.UserId = int.Parse(dtUS.Rows[r]["UserId"].ToString());
                     utemp.Fname=dtUS.Rows[r]["Fname"].ToString();
                     utemp.Lname=dtUS.Rows[r]["Lname"].ToString();
                     utemp.Age=int.Parse(dtUS.Rows[r]["Age"].ToString());
@@ -272,6 +273,30 @@ public class WebService : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize(eventsList);
         return jsonString;
+    }
+
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //rating Down
+    public void RatingDown(string id)
+    {
+
+        User u = new User();
+        u.UserId = int.Parse(id);
+        u.RatingDown();
+
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //rating up
+    public void RatingUp(string id)
+    {
+        User u = new User();
+        u.UserId = int.Parse(id);
+        u.RatingUp();
+
     }
 
 
@@ -304,7 +329,7 @@ public class WebService : System.Web.Services.WebService
     }
 
 
-
+    
     
 
 }

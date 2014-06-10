@@ -359,7 +359,7 @@ public class DBservices
         {
             con = dbS.connect(conString); // open the connection to the database/
 
-            String selectStr = "SELECT  [UserName] ,[Fname] , [Lname] , [Age] ,[Rating] ,[City],[Picture] FROM [View_UserInEvent] WHERE EventNumber =" + eventNm; // create the select that will be used by the adapter to select data from the DB
+            String selectStr = "SELECT  [UserName] ,[Fname] , [Lname] , [Age] ,[Rating] ,[City],[UserId],[Picture] FROM [View_UserInEvent] WHERE EventNumber =" + eventNm; // create the select that will be used by the adapter to select data from the DB
     
             SqlDataAdapter da = new SqlDataAdapter(selectStr, con); // create the data adapter
 
@@ -470,5 +470,54 @@ public class DBservices
     }
 
 
+    //RatingDown
+    public int RatingDown(User u)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        DataSet tblGetAdminName = new DataSet();
+        SqlDataAdapter adpt1;
 
+        SqlCommand MySPCommand = new SqlCommand("RatingDown", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEventN = new SqlParameter("@UserID", SqlDbType.Int);
+        parEventN.Value = u.UserId;
+        parEventN.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEventN);
+
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+        adpt1.Fill(tblGetAdminName, "T2");
+        con.Close();
+
+
+        return 1;
+
+    }
+    //RatingUp
+    public int RatingUp(User u)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        DataSet tblGetAdminName = new DataSet();
+        SqlDataAdapter adpt1;
+
+        SqlCommand MySPCommand = new SqlCommand("RatingUp", con);
+        MySPCommand.CommandType = CommandType.StoredProcedure;
+
+        SqlParameter parEventN = new SqlParameter("@UserID", SqlDbType.Int);
+        parEventN.Value = u.UserId;
+        parEventN.Direction = ParameterDirection.Input;
+        MySPCommand.Parameters.Add(parEventN);
+
+
+        adpt1 = new SqlDataAdapter(MySPCommand);
+        adpt1.Fill(tblGetAdminName, "T2");
+        con.Close();
+
+
+        return 1;
+
+    }
 }

@@ -137,9 +137,9 @@
     <div id="dialog" style="display: none">
     </div>
     <script type="text/javascript">
-
+        var isAdmin = false;
         function JoinEvent(num, lat, lng) {
-
+            alert("ddddddddddddd");
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = num;
             var EventPos = new Object();
@@ -199,6 +199,14 @@
 
 
         function buildListItem(poiPoint) {
+            //check if user is admin to add edit event btn 
+            var b = document.getElementById("MainContent_adminIDHIde");
+            if (poiPoint.AdminID == b.value) {
+                isAdmin = true;
+            }
+            else {
+                isAdmin = false;
+            }
 
             var strT = "";
             strT += ' <table>';
@@ -212,14 +220,13 @@
             strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
             strT += ' </table>';
 
+
             strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);
 
 
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
-
-
 
             //build map
             var ruppinPos = new Object();
@@ -242,9 +249,8 @@
                 title: ''
             });
 
-            //check if user is admin to add edit event btn 
-            var b = document.getElementById("MainContent_adminIDHIde");
-            if (poiPoint.AdminID == b.value) {
+
+            if (isAdmin) {
                 strT += '<asp:Button ID="EditEventBTn" class="btnjoin1" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
             }
 
@@ -260,20 +266,23 @@
             for (row = 0; row < numRows; row++) {
                 if (PlayerList[row] != undefined) {
 
-                    str += ' <div> <input type="button"   id="btnNo787" value="No"/><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
-                    str += ' <article>	';
+                    str += ' <div> <input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
+                    str += ' <article>';
+                    if (isAdmin) {
+                        if (PlayerList[row].Rating < 100) {
+                            str += '<input type="button" class="myButton" onclick="RatingUp(' + PlayerList[row].UserId + ')" id="btnup" value="up"/>';
+                        }
+                        str += '<input type="button" class="myButton" onclick="RatingDown(' + PlayerList[row].UserId + ')" id="btndown" value="down"/>';
+                    }
                     str += '<asp:Label  runat="server" CssClass="aa" Text="Name: "></asp:Label>&nbsp;'
                     str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Fname + '   </asp:Label>';
                     str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Lname + '</asp:Label></br>';
                     str += '<img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>';
                     str += '<asp:Label  runat="server" CssClass="aa" Text="Age: "></asp:Label>&nbsp;'
                     str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Age + ' </asp:Label></br>';
-
                     str += '<asp:Label  runat="server" CssClass="aa" Text="Rating: "></asp:Label>&nbsp;'
                     str += '<asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Rating + ' </asp:Label></br>';
-                    str += '<asp:Button  runat="server" Text="Editassasasssas"  />';//
-                    str += '<input type="button"   id="btnNo78" value="No"/>';
-                    // str += ' <p class="aa">' + PlayerList[row].City + ' </p>';
+                    str += ' <p class="aa">' + PlayerList[row].City + ' </p>';
                     str += ' </article></div>';
 
                 }
@@ -298,5 +307,49 @@
             return st;
 
         } //buildBoard
+
+        function RatingDown(id) {
+
+            var dataString = '{id:"' + id + '"}';
+            $.ajax({ // ajax call starts
+                url: 'WebService.asmx/RatingDown',   // server side method
+                // parameters passed to the server
+                type: 'POST',
+                data: dataString,
+                dataType: 'json', // Choosing a JSON datatype
+                contentType: 'application/json; charset = utf-8',
+                success: function (data) // Variable data contains the data we get from server side
+                {
+                    poiList = $.parseJSON(data.d);
+
+
+                }, // end of success
+                error: function (e) {
+                    alert("failed in getTarget :( " + e.responseText);
+                } // end of error
+            }) // end of ajax call
+        }
+
+        function RatingUp(id) {
+
+            var dataString = '{id:"' + id + '"}';
+            $.ajax({ // ajax call starts
+                url: 'WebService.asmx/RatingUp',   // server side method
+                // parameters passed to the server
+                type: 'POST',
+                data: dataString,
+                dataType: 'json', // Choosing a JSON datatype
+                contentType: 'application/json; charset = utf-8',
+                success: function (data) // Variable data contains the data we get from server side
+                {
+                    poiList = $.parseJSON(data.d);
+
+
+                }, // end of success
+                error: function (e) {
+                    alert("failed in getTarget :( " + e.responseText);
+                } // end of error
+            }) // end of ajax call
+        }
     </script>
 </asp:Content>

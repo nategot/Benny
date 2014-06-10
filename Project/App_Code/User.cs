@@ -129,5 +129,17 @@ public class User
         return dbs.ReadMyEvent(this);
     }
 
+    //rating down 
+    public int RatingDown()
+    {
+        DBservices dbs = new DBservices();
+        return dbs.RatingDown(this);
+    }
+    public int RatingUp()
+    {
+        DBservices dbs = new DBservices();
+        return dbs.RatingUp(this);
+    }
+    
     
 }
