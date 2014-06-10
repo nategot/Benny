@@ -193,5 +193,12 @@ public class EventOnAir
         return dbs.dt;
     }
 
+    public int GetRating()
+    {
+        DBservices dbs = new DBservices();
+        return dbs.GetRating(this);
+    }
+    
+
 
 }

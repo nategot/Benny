@@ -211,7 +211,7 @@ public partial class MyEvents : System.Web.UI.Page
     protected void AddJoinBtn(int i)
     {
         string idEv = dtMyEvent.Rows[i]["EventNumber"].ToString();
-        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  View Detail </a>";
+        GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  <input class='btnViewDetails' type='button' value='View Details!' /> </a>";
     }
 
     //adding the image
