@@ -18,11 +18,11 @@
 .reveal-modal
 {
     visibility: hidden;
-    top: 50px;
-    left: 40%;
+    top: 15%;
+    left: 45%;
     margin-left: -350px;
     width: 60%;
-    height: 320px;
+    height: 50%;
     background: #0099FF url(modal-gloss.png) no-repeat -200px -80px;
     position: absolute;
     z-index: 101;
@@ -84,14 +84,15 @@
 	</div>
 	
 	*/
-.title
+.titlePop
 {
-    text-align: center; /*Apply this class to some text to unlock the secrets of the third dimension!*/
+    display:block;
+    height:85px;
     font-family: 'Times New Roman' , Times, sans-serif;
     line-height: 1em;
     color: #faf5fa;
     font-weight: bold;
-    font-size: 60px;
+    font-size: 50px;
     text-shadow: 0px 0px 0 rgb(162,157,162),1px 1px 0 rgb(128,123,128),2px 2px 0 rgb(94,89,94),3px 3px 0 rgb(60,55,60), 4px 4px 0 rgb(26,21,26),5px 5px 4px rgba(0,0,0,0.2),5px 5px 1px rgba(0,0,0,0.5),0px 0px 4px rgba(0,0,0,.2);
 }
 
@@ -148,10 +149,6 @@
     text-decoration: none;
 }
 
-
-
-
-
 .btnParticipants
 {
     margin-left: 280px;
@@ -173,12 +170,14 @@
 
 .map
 {
+    
     border: 2px ridge #999999;
     height: 100px;
     width: 20px;
     float: left;
-    margin-left: 20px;
-    padding-left: 10px;
+    margin-top: 10%;
+    margin-bottom:1%
+    
 }
 
 #map-canvas

@@ -16,10 +16,10 @@ public partial class NewEvent : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        // if the user is not login go to login
+        // if the user did not login
         if (Session["Fname"] == null)
         {
-            Response.Redirect("MessagePage.aspx?ans=notLogin");
+            Response.Redirect("MessagePage.aspx?ans=NotLoginNE");
         }
 
         if (!Page.IsPostBack)

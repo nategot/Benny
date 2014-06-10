@@ -17,27 +17,29 @@ public partial class MessagePage : System.Web.UI.Page
         String ans = coll["ans"];
 
         switch (ans)
-        { case "notLogin" :
-                massageLBL.Text = "You have to log in in order to join event";
-                RegisterBTN.Visible = true;
-                BackeBtn.Visible = true;
-              break;
+        {
+            case "NotLoginME":
+                massageLBL.Text = "Please log in, in order to join event.";
+                break;
+            case "NotLoginNE":
+                massageLBL.Text = "Please log in, in order to create new event.";
+                break;
             case "MyEvents":
-                  massageLBL.Text = "";
-                  NoRecords.Visible = true;
-                  MyEventsTimer.Enabled = true;
-               
-              break;
+                massageLBL.Text = "";
+                NoRecords.Visible = true;
+                MyEventsTimer.Enabled = true;
+
+                break;
 
             case "NewEvent":
-                  massageLBL.Text = "";
-                  NoRecords.Visible = true;
-                  NewEventTimer.Enabled = true;
-              break;
-                
+                massageLBL.Text = "";
+                NoRecords.Visible = true;
+                NewEventTimer.Enabled = true;
+                break;
 
-        }          
-            
+
+        }
+
     }
     protected void RegisterBTN_Click(object sender, EventArgs e)
     {
@@ -60,5 +62,5 @@ public partial class MessagePage : System.Web.UI.Page
         NewEventTimer.Enabled = false;
         Response.Redirect("NewEvent.aspx");
     }
-    
+
 }
