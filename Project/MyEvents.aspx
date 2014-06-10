@@ -119,12 +119,9 @@
                     </div>
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
-                    <div style="width: 100%; height: 250px;">
-                        &nbsp;
-                    </div>
                     <a href="#" class="topopup">
-                        <asp:Button ID="Participantsbtn" CssClass="btnjoin1" runat="server" Text="Participants" /></a>
-                    <asp:Button ID="LeaveBtn" class="btnjoin2" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
+                        <asp:Button ID="Participantsbtn" CssClass="myButton" runat="server" Text="Participants" /></a>
+                    <asp:Button ID="LeaveBtn" class="myButton" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -196,6 +193,41 @@
             }) // end of ajax call
         }
 
+        function backgroundImage(categ) {
+
+            switch (categ) {
+
+                case "Soccer":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/1.jpg)';
+                    break;
+                case "Basketball":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+
+                    break;
+                case "Tennis":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    break;
+                case "Running":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    break;
+                case "Swimming":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    break;
+                case "Cycling":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    //document.getElementById('gggg').style.color = 'Green';
+                    break;
+                case "Surfing":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    break;
+                case "Volleyball":
+                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    break;
+                default:
+
+            }
+
+        }
 
 
         function buildListItem(poiPoint) {
@@ -209,8 +241,8 @@
             }
 
             var strT = "";
-            strT += ' <table>';
-            strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="title"> ' + poiPoint.Description + '</asp:Label> <img src = "' + poiPoint.ImageUrl + '"style="width: 30px" class="imgtitel"/> </td> </tr>';
+            strT += '  <table>';
+            strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="titlePop"> ' + poiPoint.Description + '</asp:Label> </td> </tr>';
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp; <asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td> </tr>';
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Max Participants:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.NumOfParti + '</asp:Label>  </td> </tr>';
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Date & Time:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.DateTimeStr + ' </asp:Label>  </td> </tr>';
@@ -219,6 +251,7 @@
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Frequency:"></asp:Label>&nbsp;&nbsp;<asp:Label  runat="server" CssClass="bbb" >' + poiPoint.FrequencyStr + '</asp:Label> </td> </tr>';
             strT += ' <tr>  <td><asp:Label runat="server" CssClass="aa" Text="Admin Comments:"></asp:Label>&nbsp;&nbsp; <asp:Label  runat="server" CssClass="bbb" >' + poiPoint.Comments + '</asp:Label></td> </tr>';
             strT += ' </table>';
+            backgroundImage(poiPoint.Description);
 
 
             strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);

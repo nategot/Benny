@@ -86,23 +86,30 @@
 	*/
 .titlePop
 {
-    display:block;
-    height:85px;
-    font-family: 'Times New Roman' , Times, sans-serif;
+    display: block;
+    height: 85px;
+    font-family: Narkisim;
     line-height: 1em;
-    color: #faf5fa;
-    font-weight: bold;
-    font-size: 50px;
-    text-shadow: 0px 0px 0 rgb(162,157,162),1px 1px 0 rgb(128,123,128),2px 2px 0 rgb(94,89,94),3px 3px 0 rgb(60,55,60), 4px 4px 0 rgb(26,21,26),5px 5px 4px rgba(0,0,0,0.2),5px 5px 1px rgba(0,0,0,0.5),0px 0px 4px rgba(0,0,0,.2);
+    color: white;
+    font-size: 60px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-size: 60px;
+    font-weight: bolder;
 }
 
 
 .aa
 {
-    color: Black;
-    font-size: 18px;
-    font-family: 'Times New Roman' , Times, sans-serif;
-    font-weight: bold;
+    color: white;
+    
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+    font-size: :18px;
+    font-weight:bold;
+   
 }
 
 
@@ -202,14 +209,16 @@
 
 .bbb
 {
-    font-family: Garamond, serif;
-    line-height: 1em;
-    color: #faf5fa;
-    font-weight: bold;
-    font-size: 21px;
-    text-shadow: 0px 0px 0 rgb(147,147,147),1px -1px 0 rgb(73,73,73),2px -2px 0 rgb(-2,-2,-2), 1px -1px 0 rgb(-77,-77,-77),2px -2px 1px rgba(0,0,0,0.5),2px -2px 1px rgba(0,0,0,0.5),0px 0px 3px rgba(0,0,0,.2);
+    color:#D0D0D0    ;
+    
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+    font-size: :18px;
+    font-weight:bold;
 }
-
 
 
 
