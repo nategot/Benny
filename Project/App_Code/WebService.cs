@@ -251,17 +251,18 @@ public class WebService : System.Web.Services.WebService
                 }
 
                 DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
-                
+
                 for (int r = 0; r < dtUS.Rows.Count; r++)
-                {   User utemp = new User();
-                    utemp.UserName=dtUS.Rows[r]["UserName"].ToString();
+                {
+                    User utemp = new User();
+                    utemp.UserName = dtUS.Rows[r]["UserName"].ToString();
                     utemp.UserId = int.Parse(dtUS.Rows[r]["UserId"].ToString());
-                    utemp.Fname=dtUS.Rows[r]["Fname"].ToString();
-                    utemp.Lname=dtUS.Rows[r]["Lname"].ToString();
-                    utemp.Age=int.Parse(dtUS.Rows[r]["Age"].ToString());
-                    utemp.Rating=int.Parse(dtUS.Rows[r]["Rating"].ToString());
-                    utemp.City=dtUS.Rows[r]["City"].ToString();
-                    utemp.ImageUrl=dtUS.Rows[r]["Picture"].ToString();
+                    utemp.Fname = dtUS.Rows[r]["Fname"].ToString();
+                    utemp.Lname = dtUS.Rows[r]["Lname"].ToString();
+                    utemp.Age = int.Parse(dtUS.Rows[r]["Age"].ToString());
+                    utemp.Rating = int.Parse(dtUS.Rows[r]["Rating"].ToString());
+                    utemp.City = dtUS.Rows[r]["City"].ToString();
+                    utemp.ImageUrl = dtUS.Rows[r]["Picture"].ToString();
                     evTemp.PlayerUserList.Add(utemp);
                 }
 
@@ -329,7 +330,7 @@ public class WebService : System.Web.Services.WebService
     }
 
 
-    
-    
+
+
 
 }

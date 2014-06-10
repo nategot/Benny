@@ -1,4 +1,5 @@
-﻿
+﻿var url = 'WebService.asmx/';
+        
 function initialize() {
     var poiList;
     // center the map in Ruppin
@@ -30,7 +31,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function getPOIList() {
     var dataString = '{ss:"sssd"}'; ;
     $.ajax({ // ajax call starts
-        url: 'WebService.asmx/getEvents',   // server side method
+        url: url+'getEvents',   // server side method
         // parameters passed to the server
         type: 'POST',
         dataType: 'json', // Choosing a JSON datatype
