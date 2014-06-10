@@ -206,27 +206,26 @@
                     break;
                 case "Basketball":
                     document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
-                    
                     break;
                 case "Tennis":
-                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
-                    document.getElementById('myModal').style.backgroundPosition = '100% 100%';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/3.jpg)';
+                    //document.getElementById('myModal').style.backgroundPosition = '95% 40%';
                     break;
                 case "Running":
-                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/4.jpg)';
                     break;
                 case "Swimming":
-                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/5.jpg)';
                     break;
                 case "Cycling":
-                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
-                    //document.getElementById('gggg').style.color = 'Green';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/6.jpg)';
+                    //document.getElementById('myModal').style.backgroundPosition = '30% 60%';
                     break;
                 case "Surfing":
-                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/7.jpg)';
                     break;
                 case "Volleyball":
-                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/8.jpg)';
                     break;
                 default:
 

@@ -59,7 +59,7 @@
             <td colspan="3">
                 <input type="text" value="" style="width: 160px" class="addeventinput" id="locationTB"
                     placeholder="Enter a location" />
-                <input type="button" id="getPosition" class="myButton" value="Find" />
+                <input type="button" id="getPosition" class="myButton" value="Find" style="width: 70px; height: 25px" />
             </td>
         </tr>
         <tr>
@@ -137,7 +137,7 @@
             <td>
                 <br />
                 <asp:Button ID="confirmBTN" CssClass="myButton" runat="server" Text="Confirm & Publish"
-                    OnClick="confirmBTN_Click" />
+                    OnClick="confirmBTN_Click" Width="150px" />
             </td>
             <td colspan="3">
                 <br />
