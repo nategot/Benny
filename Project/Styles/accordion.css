@@ -1,6 +1,6 @@
 ﻿#containerAccordion {
     margin: 0 auto;
-    width: 80%;
+    width: 90%;
     height:100%;
 }
 #accordion input[type="checkbox"] {
@@ -39,7 +39,7 @@
 	margin-bottom: 0;
 }
 #accordion article {
-	background: #FFFFCC;
+	background: #F5F5F5;
 	height:0px;
 	overflow:hidden;
 	z-index:10;
@@ -72,7 +72,7 @@
     height:70px;
     text-align:center;
     max-height:100px;
-    
+    margin-top:10px;
 
     border:dashed 0px #000000;
     -moz-border-radius-topleft: 75px;
@@ -95,3 +95,20 @@
    
 }
 
+.fontacor{
+color:#1E90FF;
+    font-size: :20px;
+    font-weight:bolder;
+    font-family:Narkisim;
+
+}
+
+.fontacor1
+{
+    
+color:Black;
+    font-size: :20px;
+    font-weight:bolder;
+    font-family:Narkisim;
+
+}

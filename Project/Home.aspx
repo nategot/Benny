@@ -294,18 +294,22 @@
                 if (PlayerList[row] != undefined) {
 
                     str += ' <div><input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
-                    str += ' <article>	';
-                    str += '<asp:Label  runat="server" CssClass="aa" Text="Name: "></asp:Label>&nbsp;'
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Fname + '   </asp:Label>';
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Lname + '</asp:Label></br>';
-                    str += '<img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>';
-                    str += '<asp:Label  runat="server" CssClass="aa" Text="Age: "></asp:Label>&nbsp;'
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Age + ' </asp:Label></br>';
+                    str += ' <article>';
+                    str += '<div style="width:100%"><div style="width:65%; float:left"></br>&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Name:"></asp:Label>'
+                    str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Fname + '</asp:Label>';
+                    str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Lname + '</asp:Label></br>';
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Age:"></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Age + ' </asp:Label></br>';
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label>&nbsp;'
+                    str += '<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="City:"></asp:Label>&nbsp;'
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].City + ' </asp:Label></br>';
+                    str += '</br></div><div style="width:35%; float:left"><img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>'
+                    str += '</div></div>';
 
-                    str += '<asp:Label  runat="server" CssClass="aa" Text="Rating: "></asp:Label>&nbsp;'
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Rating + ' </asp:Label></br>';
 
-                    // str += ' <p class="aa">' + PlayerList[row].City + ' </p>';
+
+
 
                     str += ' </article></div>';
                 }

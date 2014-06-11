@@ -120,9 +120,10 @@
                     <div id="map-canvas" class="map" style="float: left">
                     </div>
                     <a href="#" class="topopup">
-                    <asp:Button ID="Participantsbtn" CssClass="myButton" runat="server" Text="Participants" /></a>
+                        <asp:Button ID="Participantsbtn" CssClass="myButton" runat="server" Text="Participants" /></a>
                     <asp:Button ID="LeaveBtn" class="myButton" runat="server" Text="Leave event" OnClick="LeaveBtn_Click" />
-                    <div id="try">   </div>
+                    <div id="try">
+                    </div>
                 </div>
                 <a class="close-reveal-modal">&#215;</a>
             </div>
@@ -172,7 +173,7 @@
         function getOneEvent(eventNum) {
             var dataString = '{eventNum:"' + eventNum + '"}';
             $.ajax({ // ajax call starts
-                url: url+'getOneEvent',   // server side method
+                url: url + 'getOneEvent',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -257,7 +258,7 @@
 
 
             strT += buildBoard(poiPoint.PlayerUserList, poiPoint.NumOfParti);
-            
+
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
@@ -304,21 +305,31 @@
 
                     str += ' <div> <input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
                     str += ' <article>';
+                    str += '<div style="width:100%"><div style="width:65%; float:left"></br>&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Name:"></asp:Label>'
+                    str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Fname + '</asp:Label>';
+                    str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Lname + '</asp:Label></br>';
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Age:"></asp:Label>&nbsp;'
+                    str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Age + ' </asp:Label></br>';
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label>&nbsp;'
+                    str += '<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="City:"></asp:Label>&nbsp;'
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].City + ' </asp:Label></br>';
                     if (isAdmin) {
+                        str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rat this User: "></asp:Label>&nbsp;';
                         if (PlayerList[row].Rating < 100) {
-                            str += '<input type="button" class="myButton" onclick="RatingUp(' + PlayerList[row].UserId + ')" id="btnup" value="up"/>';
+                            str += '<input type="button" class="ratingbutton" onclick="RatingUp(' + PlayerList[row].UserId + ')" id="btnup" value="+"/>';
                         }
-                        str += '<input type="button" class="myButton" onclick="RatingDown(' + PlayerList[row].UserId + ')" id="btndown" value="down"/>';
+                        str += '<input type="button" class="ratingbutton" onclick="RatingDown(' + PlayerList[row].UserId + ')" id="btndown" value="-"/>';
                     }
-                    str += '<asp:Label  runat="server" CssClass="aa" Text="Name: "></asp:Label>&nbsp;'
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Fname + '   </asp:Label>';
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Lname + '</asp:Label></br>';
-                    str += '<img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>';
-                    str += '<asp:Label  runat="server" CssClass="aa" Text="Age: "></asp:Label>&nbsp;'
-                    str += ' <asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Age + ' </asp:Label></br>';
-                    str += '<asp:Label  runat="server" CssClass="aa" Text="Rating: "></asp:Label>&nbsp;'
-                    str += '<asp:Label  runat="server" CssClass="aa" >' + PlayerList[row].Rating + ' </asp:Label></br>';
-                    str += ' <p class="aa">' + PlayerList[row].City + ' </p>';
+
+
+                    str += '</br></div><div style="width:35%; float:left"><img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>'
+                    str += '</div></div>';
+
+
+
+
+
                     str += ' </article></div>';
 
                 }
@@ -348,7 +359,7 @@
 
             var dataString = '{id:"' + id + '"}';
             $.ajax({ // ajax call starts
-                url: url+'RatingDown',   // server side method
+                url: url + 'RatingDown',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -370,7 +381,7 @@
 
             var dataString = '{id:"' + id + '"}';
             $.ajax({ // ajax call starts
-                url: url+'RatingUp',   // server side method
+                url: url + 'RatingUp',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,

@@ -295,7 +295,7 @@
     margin-left: -402px;
     position: fixed;
     top: 20%;
-    width: 350px;
+    width: 380px;
     height: 280px;
     z-index: 2;
 }
@@ -364,7 +364,7 @@ div#popup_content
 
 div#chatlist
 {
-    width: 320px;
+    width: 350px;
     height: 250px;
     border: 0px solid black;
 }
@@ -381,4 +381,32 @@ div.mousescroll:hover
 {
     border: 1px solid #ccc;
     margin: 10px;
+}
+
+
+.ratingbutton {
+  color:Black;
+  text-shadow:0 1px 0 #484f58;
+  margin-bottom: 20px;
+  margin-right: 5px;
+  border:1px solid #202124;
+  box-shadow: 0 1px 0 #616a74 inset,0 1px 5px #212528;
+  background: -webkit-linear-gradient(top,#E0FFFF,#1E90FF);
+  background: -moz-linear-gradient(top,#E0FFFF,#1E90FF);
+  background: -ms-linear-gradient(top,#E0FFFF,#1E90FF);
+  background: -o-linear-gradient(top,#E0FFFF,#1E90FF);
+  background: linear-gradient(top,#E0FFFF,#1E90FF);
+  border-radius: 50px;
+  width:20PX;
+  height:20PX;
+}
+
+.ratingbutton:hover {
+  background: #eee;
+}
+
+.ratingbutton:active {
+  background: #ccc;
+  box-shadow: none;
+  transform: translate(0, 6px);
 }
