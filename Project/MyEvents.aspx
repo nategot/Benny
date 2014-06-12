@@ -84,6 +84,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="searchBtn" />
         </Triggers>
+        
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
                 Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" HorizontalAlign="Center"
@@ -138,6 +139,8 @@
     <script type="text/javascript">
         var isAdmin = false;
         var url = 'WebService.asmx/';
+        var idUser = 0;
+
         function JoinEvent(num, lat, lng) {
             alert("ddddddddddddd");
             var a = document.getElementById("MainContent_eventNumHF");
@@ -262,7 +265,7 @@
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
-
+            
             //build map
             var ruppinPos = new Object();
             var latH = poiPoint.Point.Lat;
@@ -288,6 +291,7 @@
             if (isAdmin) {
                 var a = document.getElementById("try");
                 a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
+               
             }
 
 
@@ -311,25 +315,19 @@
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Age:"></asp:Label>&nbsp;'
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Age + ' </asp:Label></br>';
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label>&nbsp;'
-                    str += '<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+                    str += '<asp:Label id="rating"  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="City:"></asp:Label>&nbsp;'
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].City + ' </asp:Label></br>';
                     if (isAdmin) {
                         str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rat this User: "></asp:Label>&nbsp;';
-                        if (PlayerList[row].Rating < 100) {
-                            str += '<input type="button" class="ratingbutton" onclick="RatingUp(' + PlayerList[row].UserId + ')" id="btnup" value="+"/>';
-                        }
-                        str += '<input type="button" class="ratingbutton" onclick="RatingDown(' + PlayerList[row].UserId + ')" id="btndown" value="-"/>';
+                        str += '<input type="button" class="ratingbutton" onclick="RatingUp(' + PlayerList[row].UserId + ',' + PlayerList[row].Rating + ')" id="btnup" value="+"/>';
+                        str += '<input type="button" class="ratingbutton" onclick="RatingDown(' + PlayerList[row].UserId + ',' + PlayerList[row].Rating + ')" id="btndown" value="-"/>';
                     }
 
 
                     str += '</br></div><div style="width:35%; float:left"><img class="accordionimg" src="' + PlayerList[row].ImageUrl + '" ></br>'
                     str += '</div></div>';
-
-
-
-
-
                     str += ' </article></div>';
 
                 }
@@ -340,63 +338,60 @@
                     str += ' </article></div>';
                 }
             }
-            str += ' </section></div></div>'
-
-            //            else {
-            //             str += ' <div><input type="checkbox" id="check-1" /> <label for="check-1">פנוי</label>';
-            //            str += ' <article>	';
-            //          
-            //            str += '  </article></div>	</section></div>';
-
-            //            }
+            str += ' </section></div></div>';
             document.getElementById("prtis2").innerHTML = str;
 
             return st;
 
         } //buildBoard
 
-        function RatingDown(id) {
-
-            var dataString = '{id:"' + id + '"}';
-            $.ajax({ // ajax call starts
-                url: url + 'RatingDown',   // server side method
-                // parameters passed to the server
-                type: 'POST',
-                data: dataString,
-                dataType: 'json', // Choosing a JSON datatype
-                contentType: 'application/json; charset = utf-8',
-                success: function (data) // Variable data contains the data we get from server side
-                {
-                    poiList = $.parseJSON(data.d);
-
-
-                }, // end of success
-                error: function (e) {
-                    alert("failed in getTarget :( " + e.responseText);
-                } // end of error
-            }) // end of ajax call
+        function RatingDown(id,rating) {
+            if (rating > 0 && idUser != id) {
+                  idUser=id;
+                  alert("Down");
+                var dataString = '{id:"' + id + '"}';
+                $.ajax({ // ajax call starts
+                    url: url + 'RatingDown',   // server side method
+                    // parameters passed to the server
+                    type: 'POST',
+                    data: dataString,
+                    dataType: 'json', // Choosing a JSON datatype
+                    contentType: 'application/json; charset = utf-8',
+                    success: function (data) // Variable data contains the data we get from server side
+                    {
+                        poiList = $.parseJSON(data.d);
+                       
+                    }, // end of success
+                    error: function (e) {
+                        alert("failed in getTarget :( " + e.responseText);
+                    } // end of error
+                }) // end of ajax call
+            }
         }
 
-        function RatingUp(id) {
-
-            var dataString = '{id:"' + id + '"}';
-            $.ajax({ // ajax call starts
-                url: url + 'RatingUp',   // server side method
-                // parameters passed to the server
-                type: 'POST',
-                data: dataString,
-                dataType: 'json', // Choosing a JSON datatype
-                contentType: 'application/json; charset = utf-8',
-                success: function (data) // Variable data contains the data we get from server side
-                {
-                    poiList = $.parseJSON(data.d);
-
-
-                }, // end of success
-                error: function (e) {
-                    alert("failed in getTarget :( " + e.responseText);
-                } // end of error
-            }) // end of ajax call
+        function RatingUp(id, rating) {
+            if (rating < 100 && idUser != id) {
+                idUser = id;
+                var dataString = '{id:"' + id + '"}';
+                $.ajax({ // ajax call starts
+                    url: url + 'RatingUp',   // server side method
+                    // parameters passed to the server
+                    type: 'POST',
+                    data: dataString,
+                    dataType: 'json', // Choosing a JSON datatype
+                    contentType: 'application/json; charset = utf-8',
+                    success: function (data) // Variable data contains the data we get from server side
+                    {
+                        poiList = $.parseJSON(data.d);
+                        var b = document.getElementById("MainContent_rating");
+                        b.value = b + 5;
+                        
+                    }, // end of success
+                    error: function (e) {
+                        alert("failed in getTarget :( " + e.responseText);
+                    } // end of error
+                }) // end of ajax call
+            }
         }
     </script>
 </asp:Content>
