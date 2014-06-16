@@ -111,6 +111,9 @@
                         </div>
                         <div id="prtis2">
                         </div>
+                           
+                            
+                        
                     </div>
                     <div class="loader">
                     </div>
@@ -309,13 +312,25 @@
 
                     str += ' <div> <input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
                     str += ' <article>';
-                    str += '<div style="width:100%"><div style="width:65%; float:left"></br>&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Name:"></asp:Label>'
+                    
+                    str += '<div style="width:100%"><div style="width:65%; float:left"></br>'
+
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Name:"></asp:Label>'
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Fname + '</asp:Label>';
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Lname + '</asp:Label></br>';
-                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Age:"></asp:Label>&nbsp;'
+                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Age:"></asp:Label>'
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Age + ' </asp:Label></br>';
-                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label>&nbsp;'
-                    str += '<asp:Label id="rating"  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + ' </asp:Label></br>';
+
+
+                    str += '<table style="whith:100%;"><tr >';
+                    str += '   <td> <asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label></td>';
+                    str += '   <td >  <legend id="ratinglab" class="fontacorrr">' + PlayerList[row].Rating + '</legend></td> ';  
+                     str += '   </tr> </table>';
+
+//                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label>'
+//                    str += '<legend id="ratinglab" class="fontacor">' + PlayerList[row].Rating + '</legend>';
+                     // str += '<asp:Label id="ratinglab"  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + '</asp:Label></br>';
+
 
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="City:"></asp:Label>&nbsp;'
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].City + ' </asp:Label></br>';
@@ -345,10 +360,11 @@
 
         } //buildBoard
 
-        function RatingDown(id,rating) {
+        function RatingDown(id, rating) {
             if (rating > 0 && idUser != id) {
                   idUser=id;
-                  alert("Down");
+                 
+                  var rat = rating - 5;
                 var dataString = '{id:"' + id + '"}';
                 $.ajax({ // ajax call starts
                     url: url + 'RatingDown',   // server side method
@@ -360,13 +376,20 @@
                     success: function (data) // Variable data contains the data we get from server side
                     {
                         poiList = $.parseJSON(data.d);
+                        
                        
                     }, // end of success
                     error: function (e) {
                         alert("failed in getTarget :( " + e.responseText);
                     } // end of error
                 }) // end of ajax call
+                document.getElementById("ratinglab").innerHTML = rating - 5; 
             }
+
+
+           
+            
+            
         }
 
         function RatingUp(id, rating) {
@@ -386,11 +409,14 @@
                         var b = document.getElementById("MainContent_rating");
                         b.value = b + 5;
                         
+                        
                     }, // end of success
                     error: function (e) {
                         alert("failed in getTarget :( " + e.responseText);
                     } // end of error
+
                 }) // end of ajax call
+                document.getElementById("ratinglab").innerHTML = rating + 5; 
             }
         }
     </script>
