@@ -87,19 +87,19 @@
         
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="None" ForeColor="#333333" HorizontalAlign="Center"
-                OnRowDataBound="GridView1_RowDataBound" BorderColor="#999999" BorderStyle="Solid">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-                <EditRowStyle BackColor="#999999" />
-                <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
-                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" 
+                ForeColor="Black" HorizontalAlign="Center"
+                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" 
+                BorderStyle="None" BackColor="White" BorderWidth="1px">
+                <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                <RowStyle HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                <SortedDescendingHeaderStyle BackColor="#242121" />
             </asp:GridView>
             <div id="myModal" class="reveal-modal" style="float: left">
                 <div>
@@ -207,30 +207,30 @@
             switch (categ) {
 
                 case "Soccer":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/1.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/1.jpg)';
                     break;
                 case "Basketball":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
-
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/2.jpg)';
                     break;
                 case "Tennis":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/3.jpg)';
+                    //document.getElementById('myModal').style.backgroundPosition = '95% 40%';
                     break;
                 case "Running":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/4.jpg)';
                     break;
                 case "Swimming":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/5.jpg)';
                     break;
                 case "Cycling":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
-                    //document.getElementById('gggg').style.color = 'Green';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/6.jpg)';
+                    //document.getElementById('myModal').style.backgroundPosition = '30% 60%';
                     break;
                 case "Surfing":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/7.jpg)';
                     break;
                 case "Volleyball":
-                    document.getElementById('myModal').style.backgroundImage = 'url(http://localhost:63588/Project/Styles/pic/2.jpg)';
+                    document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/8.jpg)';
                     break;
                 default:
 
