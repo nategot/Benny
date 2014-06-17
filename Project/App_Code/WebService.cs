@@ -22,6 +22,7 @@ using System.Data;
 
 public class WebService : System.Web.Services.WebService
 {
+    private DataTable dtUserEvents;
 
     public WebService()
     {
@@ -210,10 +211,9 @@ public class WebService : System.Web.Services.WebService
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    //get one event for popup
+    //get one event for popup  in home
     public string getOneEvent(string eventNum)
     {
-
         EventOnAir ev = new EventOnAir();
         List<EventOnAir> eventsList = new List<EventOnAir>();
         DataTable dt = ev.readTable();
@@ -240,6 +240,75 @@ public class WebService : System.Web.Services.WebService
 
                 User u = new User();
                 u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
+                DataTable dtName = u.CheckUserName();
+                if (dtName.Rows.Count == 1)
+                {
+                    evTemp.AdminFullName = dtName.Rows[0]["Fname"].ToString() + " " + dtName.Rows[0]["Lname"].ToString();
+                }
+                else
+                {
+                    evTemp.AdminFullName = "";
+                }
+
+                DataTable dtUS = evTemp.ReadUserInEvent(eventNum);
+
+                for (int r = 0; r < dtUS.Rows.Count; r++)
+                {
+                    User utemp = new User();
+                    utemp.UserName = dtUS.Rows[r]["UserName"].ToString();
+                    utemp.UserId = int.Parse(dtUS.Rows[r]["UserId"].ToString());
+                    utemp.Fname = dtUS.Rows[r]["Fname"].ToString();
+                    utemp.Lname = dtUS.Rows[r]["Lname"].ToString();
+                    utemp.Age = int.Parse(dtUS.Rows[r]["Age"].ToString());
+                    utemp.Rating = int.Parse(dtUS.Rows[r]["Rating"].ToString());
+                    utemp.City = dtUS.Rows[r]["City"].ToString();
+                    utemp.ImageUrl = dtUS.Rows[r]["Picture"].ToString();
+                    evTemp.PlayerUserList.Add(utemp);
+                }
+
+                eventsList.Add(evTemp);   //add the  event to the list
+
+            }
+        }
+
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize(eventsList);
+        return jsonString;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //get one event for popup in my event
+    public string getOneMyEvent(string eventNum, string UserEmail)
+    {
+        List<EventOnAir> eventsList = new List<EventOnAir>();
+        DBservices dbs = new DBservices();
+        User U = new User();
+        U.Email = UserEmail;
+        DataTable dtUserEvents = dbs.ReadMyEvent(U);
+
+        for (int i = 0; i < dtUserEvents.Rows.Count; i++)
+        {
+            if (dtUserEvents.Rows[i]["EventNumber"].ToString() == eventNum)
+            {
+                EventOnAir evTemp = new EventOnAir();
+                evTemp.Point = new Point(double.Parse(dtUserEvents.Rows[i]["Lat"].ToString()), double.Parse(dtUserEvents.Rows[i]["Lng"].ToString()));
+                evTemp.Address = dtUserEvents.Rows[i]["Address"].ToString();
+                evTemp.MaxAge = int.Parse(dtUserEvents.Rows[i]["MaxAge"].ToString());
+                evTemp.MinAge = int.Parse(dtUserEvents.Rows[i]["MinAge"].ToString());
+                evTemp.NumOfParti = int.Parse(dtUserEvents.Rows[i]["NumOfParticipants"].ToString());
+                evTemp.ImageUrl = dtUserEvents.Rows[i]["ImageUrl"].ToString();
+                evTemp.AdminID = int.Parse(dtUserEvents.Rows[0]["AdminId"].ToString());
+                evTemp.IsPrivate1 = bool.Parse(dtUserEvents.Rows[0]["Private"].ToString());
+                evTemp.DateTime = DateTime.Parse(dtUserEvents.Rows[i]["Time"].ToString());
+                evTemp.DateTimeStr = (dtUserEvents.Rows[i]["Time"].ToString());
+                evTemp.Description = dtUserEvents.Rows[i]["Description"].ToString();
+                evTemp.FrequencyStr = dtUserEvents.Rows[i]["Frequency"].ToString();
+                evTemp.Comments = dtUserEvents.Rows[i]["Comments"].ToString();
+                evTemp.EventNum = dtUserEvents.Rows[i]["EventNumber"].ToString();
+
+                User u = new User();
+                u.UserId = int.Parse(dtUserEvents.Rows[i]["AdminId"].ToString());
                 DataTable dtName = u.CheckUserName();
                 if (dtName.Rows.Count == 1)
                 {

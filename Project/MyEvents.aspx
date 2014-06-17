@@ -84,13 +84,11 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="searchBtn" />
         </Triggers>
-        
         <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server" RowStyle-VerticalAlign="Middle" Font-Bold="True"
-                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" 
-                ForeColor="Black" HorizontalAlign="Center"
-                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" 
-                BorderStyle="None" BackColor="White" BorderWidth="1px">
+                Font-Size="Medium" CellPadding="4" GridLines="Horizontal" ForeColor="Black" HorizontalAlign="Center"
+                OnRowDataBound="GridView1_RowDataBound" BorderColor="#CCCCCC" BorderStyle="None"
+                BackColor="White" BorderWidth="1px">
                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                 <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -111,9 +109,6 @@
                         </div>
                         <div id="prtis2">
                         </div>
-                           
-                            
-                        
                     </div>
                     <div class="loader">
                     </div>
@@ -145,7 +140,7 @@
         var idUser = 0;
 
         function JoinEvent(num, lat, lng) {
-            alert("ddddddddddddd");
+
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = num;
             var EventPos = new Object();
@@ -173,13 +168,15 @@
 
         ////join event popup
         function loadEventDetail(num) {
-            getOneEvent(num);
+            email = document.getElementById("MainContent_adminEmailHIde").value;
+            alert(email);
+            getOneEvent(num, email);
         }
 
-        function getOneEvent(eventNum) {
-            var dataString = '{eventNum:"' + eventNum + '"}';
+        function getOneEvent(eventNum, UserEmail) {
+            var dataString = '{eventNum:"' + eventNum + '",UserEmail:"' + UserEmail + '"}';
             $.ajax({ // ajax call starts
-                url: url + 'getOneEvent',   // server side method
+                url: url + 'getOneMyEvent',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -268,7 +265,7 @@
             //save the event num
             var a = document.getElementById("MainContent_eventNumHF");
             a.value = poiPoint.EventNum;
-            
+
             //build map
             var ruppinPos = new Object();
             var latH = poiPoint.Point.Lat;
@@ -294,7 +291,7 @@
             if (isAdmin) {
                 var a = document.getElementById("try");
                 a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
-               
+
             }
 
 
@@ -312,7 +309,7 @@
 
                     str += ' <div> <input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
                     str += ' <article>';
-                    
+
                     str += '<div style="width:100%"><div style="width:65%; float:left"></br>'
 
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Name:"></asp:Label>'
@@ -324,12 +321,8 @@
 
                     str += '<table style="whith:100%;"><tr >';
                     str += '   <td> <asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label></td>';
-                    str += '   <td >  <legend id="ratinglab" class="fontacorrr">' + PlayerList[row].Rating + '</legend></td> ';  
-                     str += '   </tr> </table>';
-
-//                    str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label>'
-//                    str += '<legend id="ratinglab" class="fontacor">' + PlayerList[row].Rating + '</legend>';
-                     // str += '<asp:Label id="ratinglab"  runat="server" CssClass="fontacor" >' + PlayerList[row].Rating + '</asp:Label></br>';
+                    str += '   <td >  <legend id="ratinglab" class="fontacorrr">' + PlayerList[row].Rating + '</legend></td> ';
+                    str += '   </tr> </table>';
 
 
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="City:"></asp:Label>&nbsp;'
@@ -362,9 +355,9 @@
 
         function RatingDown(id, rating) {
             if (rating > 0 && idUser != id) {
-                  idUser=id;
-                 
-                  var rat = rating - 5;
+                idUser = id;
+
+                var rat = rating - 5;
                 var dataString = '{id:"' + id + '"}';
                 $.ajax({ // ajax call starts
                     url: url + 'RatingDown',   // server side method
@@ -376,20 +369,15 @@
                     success: function (data) // Variable data contains the data we get from server side
                     {
                         poiList = $.parseJSON(data.d);
-                        
-                       
+
+
                     }, // end of success
                     error: function (e) {
                         alert("failed in getTarget :( " + e.responseText);
                     } // end of error
                 }) // end of ajax call
-                document.getElementById("ratinglab").innerHTML = rating - 5; 
+                document.getElementById("ratinglab").innerHTML = rating - 5;
             }
-
-
-           
-            
-            
         }
 
         function RatingUp(id, rating) {
@@ -408,15 +396,14 @@
                         poiList = $.parseJSON(data.d);
                         var b = document.getElementById("MainContent_rating");
                         b.value = b + 5;
-                        
-                        
+
                     }, // end of success
                     error: function (e) {
                         alert("failed in getTarget :( " + e.responseText);
                     } // end of error
 
                 }) // end of ajax call
-                document.getElementById("ratinglab").innerHTML = rating + 5; 
+                document.getElementById("ratinglab").innerHTML = rating + 5;
             }
         }
     </script>
