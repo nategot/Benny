@@ -33,6 +33,7 @@ public class EventOnAir
     private string description;
     private string eventNum;
     private string adminFullName;
+    private string numOfRegis;
     public List<string> playerList = new List<string>();
     private List<User> playerUserList = new List<User>();
 
@@ -40,6 +41,12 @@ public class EventOnAir
 
     //prop
     #region
+
+    public string NumOfRegis
+    {
+        get { return numOfRegis; }
+        set { numOfRegis = value; }
+    }
     public string FrequencyStr
     {
         get { return frequencyStr; }

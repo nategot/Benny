@@ -111,6 +111,12 @@ public partial class Home : System.Web.UI.Page
     // Probability calculat 
     protected void ProbabilityForGame(int i)
     {
+        if (NumOfRegister == NumOfParticipants)
+        {
+            GridView1.Rows[i].Cells[8].Text = "99%";
+            return;
+        }
+
         int rating;
         double averageRating;
         double prob = 99;

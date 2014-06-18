@@ -237,6 +237,7 @@ public class WebService : System.Web.Services.WebService
                 evTemp.Description = dt.Rows[i]["Description"].ToString();
                 evTemp.Comments = dt.Rows[i]["Comments"].ToString();
                 evTemp.EventNum = dt.Rows[i]["EventNumber"].ToString();
+                evTemp.NumOfRegis = dt.Rows[i]["NumOfRegister"].ToString();
 
                 User u = new User();
                 u.UserId = int.Parse(dt.Rows[i]["AdminId"].ToString());
@@ -306,6 +307,8 @@ public class WebService : System.Web.Services.WebService
                 evTemp.FrequencyStr = dtUserEvents.Rows[i]["Frequency"].ToString();
                 evTemp.Comments = dtUserEvents.Rows[i]["Comments"].ToString();
                 evTemp.EventNum = dtUserEvents.Rows[i]["EventNumber"].ToString();
+                evTemp.NumOfRegis = dtUserEvents.Rows[i]["NumOfRegister"].ToString();
+                
 
                 User u = new User();
                 u.UserId = int.Parse(dtUserEvents.Rows[i]["AdminId"].ToString());
