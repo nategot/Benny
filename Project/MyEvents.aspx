@@ -169,7 +169,6 @@
         ////join event popup
         function loadEventDetail(num) {
             email = document.getElementById("MainContent_adminEmailHIde").value;
-            alert(email);
             getOneEvent(num, email);
         }
 
@@ -293,10 +292,7 @@
                 a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
 
             }
-
-
             return strT;
-
         }
 
         function buildBoard(PlayerList, numRows) {
@@ -321,7 +317,7 @@
 
                     str += '<table style="whith:100%;"><tr >';
                     str += '   <td> <asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label></td>';
-                    str += '   <td >  <legend id="ratinglab" class="fontacorrr">' + PlayerList[row].Rating + '</legend></td> ';
+                    str += '   <td >  <legend id="ratinglab' + PlayerList[row].UserId + '" class="fontacorrr">' + PlayerList[row].Rating + '</legend></td> ';
                     str += '   </tr> </table>';
 
 
@@ -355,9 +351,9 @@
 
         function RatingDown(id, rating) {
             if (rating > 0 && idUser != id) {
+                alert("RatingDown");
                 idUser = id;
-
-                var rat = rating - 5;
+                idstr = "ratinglab" + id;
                 var dataString = '{id:"' + id + '"}';
                 $.ajax({ // ajax call starts
                     url: url + 'RatingDown',   // server side method
@@ -370,19 +366,20 @@
                     {
                         poiList = $.parseJSON(data.d);
 
-
                     }, // end of success
                     error: function (e) {
                         alert("failed in getTarget :( " + e.responseText);
                     } // end of error
                 }) // end of ajax call
-                document.getElementById("ratinglab").innerHTML = rating - 5;
+                document.getElementById(idstr).innerHTML = document.getElementById(idstr).innerHTML - 5;
             }
         }
 
         function RatingUp(id, rating) {
+
             if (rating < 100 && idUser != id) {
-                idUser = id;
+                idUser = id; alert("RatingUp");
+                idstr = "ratinglab" + id;
                 var dataString = '{id:"' + id + '"}';
                 $.ajax({ // ajax call starts
                     url: url + 'RatingUp',   // server side method
@@ -394,8 +391,6 @@
                     success: function (data) // Variable data contains the data we get from server side
                     {
                         poiList = $.parseJSON(data.d);
-                        var b = document.getElementById("MainContent_rating");
-                        b.value = b + 5;
 
                     }, // end of success
                     error: function (e) {
@@ -403,7 +398,8 @@
                     } // end of error
 
                 }) // end of ajax call
-                document.getElementById("ratinglab").innerHTML = rating + 5;
+                var num = parseInt(document.getElementById(idstr).innerHTML)
+                document.getElementById(idstr).innerHTML = num + 5;
             }
         }
     </script>

@@ -298,8 +298,8 @@ public class WebService : System.Web.Services.WebService
                 evTemp.MinAge = int.Parse(dtUserEvents.Rows[i]["MinAge"].ToString());
                 evTemp.NumOfParti = int.Parse(dtUserEvents.Rows[i]["NumOfParticipants"].ToString());
                 evTemp.ImageUrl = dtUserEvents.Rows[i]["ImageUrl"].ToString();
-                evTemp.AdminID = int.Parse(dtUserEvents.Rows[0]["AdminId"].ToString());
-                evTemp.IsPrivate1 = bool.Parse(dtUserEvents.Rows[0]["Private"].ToString());
+                evTemp.AdminID = int.Parse(dtUserEvents.Rows[i]["AdminId"].ToString());
+                evTemp.IsPrivate1 = bool.Parse(dtUserEvents.Rows[i]["Private"].ToString());
                 evTemp.DateTime = DateTime.Parse(dtUserEvents.Rows[i]["Time"].ToString());
                 evTemp.DateTimeStr = (dtUserEvents.Rows[i]["Time"].ToString());
                 evTemp.Description = dtUserEvents.Rows[i]["Description"].ToString();
