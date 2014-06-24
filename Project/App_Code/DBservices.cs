@@ -546,4 +546,16 @@ public class DBservices
         return int.Parse(TTemp.Rows[0][0].ToString());
 
     }
+
+    //get all user list
+    public DataTable GetAllUsers()
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        da = new SqlDataAdapter("select Picture ,Fname,Lname,Email from dbo.Users",con);
+        DataTable UserT = new DataTable();
+        da.Fill(UserT);
+        return UserT;
+        
+    }
 }

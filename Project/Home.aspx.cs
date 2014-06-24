@@ -21,7 +21,7 @@ public partial class Home : System.Web.UI.Page
     int NumOfParticipants;
     DateTime time;
     DateTime now;
-    
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -55,7 +55,7 @@ public partial class Home : System.Web.UI.Page
             else
                 ageTXT.Text = "0";
         }
-    
+
     }
 
 
@@ -83,7 +83,7 @@ public partial class Home : System.Web.UI.Page
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
-            ProbabilityForGame(i); 
+            ProbabilityForGame(i);
             Chekdate(i);
         }
 
@@ -142,7 +142,7 @@ public partial class Home : System.Web.UI.Page
                 }
                 else if (NumOfRegister / NumOfParticipants > 0.8)//if more then 80% has registerd
                 {
-                     prob = 99;
+                    prob = 99;
                 }
                 else //between 50%-80%
                 {
@@ -163,31 +163,31 @@ public partial class Home : System.Web.UI.Page
                 }
             }
         }
-#endregion  
+        #endregion
         //by average rating
-       
-        Ev.EventNum= dt.Rows[i]["EventNumber"].ToString();
-         rating=Ev.GetRating();
-         averageRating = rating / NumOfRegister;
 
-         if (averageRating>90)//if average rating is more then 90 add but last then 99 add 20%
-         {
-             if (prob !=99)
-             {
-                 prob *= 1.2;
-             }
-             if (prob >99)
-             {prob=99;}
-         }
-         else if (averageRating > 70)//if average rating is  between 70-90 less 10% for prob
-         {
-             prob *= 0.9;
-         }
-         else//if average rating is   less  then 70  less 20% for prob
-         {
-             prob *= 0.8;
-         }
-    
+        Ev.EventNum = dt.Rows[i]["EventNumber"].ToString();
+        rating = Ev.GetRating();
+        averageRating = rating / NumOfRegister;
+
+        if (averageRating > 90)//if average rating is more then 90 add but last then 99 add 20%
+        {
+            if (prob != 99)
+            {
+                prob *= 1.2;
+            }
+            if (prob > 99)
+            { prob = 99; }
+        }
+        else if (averageRating > 70)//if average rating is  between 70-90 less 10% for prob
+        {
+            prob *= 0.9;
+        }
+        else//if average rating is   less  then 70  less 20% for prob
+        {
+            prob *= 0.8;
+        }
+
         GridView1.Rows[i].Cells[8].Text = prob.ToString() + "%";
     }
 
@@ -261,10 +261,10 @@ public partial class Home : System.Web.UI.Page
             //pop register
             if (num >= 1)
             {
-               
-                SendMail(U1.Email, Eventnum);
 
+                SendMail(U1.Email, Eventnum);
                 ShowPopup("you have added to the event Successfully");
+                Response.Redirect("MyEvents.aspx");
             }
             else if (num == -1)
             {
@@ -274,7 +274,7 @@ public partial class Home : System.Web.UI.Page
             {
                 ShowPopup("Error register faild  please try agin later");
             }
-            Response.Redirect("MyEvents.aspx");
+
         }
         else
         {
@@ -342,43 +342,44 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-   //popup func
+    //popup func
     protected void ShowPopup(string message) //popup message
     {
 
         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
 
-    protected void SendMail(string email,string eventnum)
-    { int rownum=0;
+    //send mail
+    protected void SendMail(string email, string eventnum)
+    {
+        int rownum = 0;
         for (int i = 0; i < dt.Rows.Count; i++)
         {
             if (dt.Rows[i]["EventNumber"].ToString() == eventnum)
                 rownum = i;
         }
-        
+
         try
         {
             MailMessage Msg = new MailMessage();
             // Sender e-mail address.
             Msg.From = new MailAddress("LetsPlay.ruppin@gmail.com");
             // Recipient e-mail address.
-            Msg.To.Add(email);// צריך לעשות דנמי
+            Msg.To.Add(email);
             Msg.Subject = "You have joined to a new event";
             // File Upload path
             string mailbody = "<h3 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>Hello,You have joined a new event!</h3><br/>";
-
             mailbody += "<h1 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>" + dt.Rows[rownum]["Description"].ToString() + "</h1>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Max Participants:  " + dt.Rows[rownum]["NumOfRegister"].ToString() + "/" + dt.Rows[rownum]["NumOfParticipants"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Date & Time: " + dt.Rows[rownum]["Time"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Age Range:  " + dt.Rows[rownum]["MinAge"].ToString() + "-" + dt.Rows[rownum]["MaxAge"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Location:  " + dt.Rows[rownum]["Address"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Admin Comments:  " + dt.Rows[rownum]["Comments"].ToString() + "</h3>";
-            mailbody += "<br /><br /><br />";
-            mailbody += "<p><img style='width:100px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
-            mailbody += "<br /><br />";
+            mailbody += "<br />";
+            mailbody += "<p><img style='width:200px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
+            mailbody += "<br/>";
             mailbody += "<p style='color:blue; font-size:large; font-weight:bold; font-family:Guttman;'>Let's Play </p><p> LetsPlay.ruppin@gmail.com</p>";
-           
+
             // Create HTML view
             AlternateView htmlMail = AlternateView.CreateAlternateViewFromString(mailbody, null, "text/html");
             // Set ContentId property. Value of ContentId property must be the same as
@@ -391,8 +392,7 @@ public partial class Home : System.Web.UI.Page
             smtp.Credentials = new System.Net.NetworkCredential("LetsPlay.ruppin@gmail.com", "bgroup14");
             smtp.EnableSsl = true;
             smtp.Send(Msg);
-            //Msg = null;
-            //Page.RegisterStartupScript("UserMsg", "<script>alert('Mail sent thank you...');if(alert){ window.location='SendMail.aspx';}</script>");
+
         }//try
         catch (Exception ex)
         {
