@@ -149,9 +149,9 @@ public partial class MyEvents : System.Web.UI.Page
         now = DateTime.Now;
         TimeSpan diff = time.Subtract(now);
 
-        if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
         {
-            if (diff.Days == 0 && diff.Hours <= 2)
+            if (diff.Days == 0 && diff.Hours <= 3)
             {
                 if (NumOfRegister / NumOfParticipants < 0.5)//if less then 50% has registerd
                 {

@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Text;
 using System.Collections.Specialized;
+using System.Net.Mail;
 
 
 
@@ -131,9 +132,9 @@ public partial class Home : System.Web.UI.Page
         ////by time and num of register
         #region
 
-        if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
         {
-            if (diff.Days == 0 && diff.Hours <= 2)
+            if (diff.Days == 0 && diff.Hours <= 3)
             {
                 if (NumOfRegister / NumOfParticipants < 0.5)//if less then 50% has registerd
                 {
@@ -149,7 +150,7 @@ public partial class Home : System.Web.UI.Page
                 }
 
             }
-            else//less then 3 hours more then 2
+            else//less then 4 hours more then 2
             {
                 if (NumOfRegister / NumOfParticipants > 0.5)//if more then 50% has registerd
                 {
@@ -260,6 +261,9 @@ public partial class Home : System.Web.UI.Page
             //pop register
             if (num >= 1)
             {
+               
+                SendMail(U1.Email, Eventnum);
+
                 ShowPopup("you have added to the event Successfully");
             }
             else if (num == -1)
@@ -338,13 +342,63 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-
+   //popup func
     protected void ShowPopup(string message) //popup message
     {
 
         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
 
+    protected void SendMail(string email,string eventnum)
+    { int rownum=0;
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (dt.Rows[i]["EventNumber"].ToString() == eventnum)
+                rownum = i;
+        }
+        
+        try
+        {
+            MailMessage Msg = new MailMessage();
+            // Sender e-mail address.
+            Msg.From = new MailAddress("LetsPlay.ruppin@gmail.com");
+            // Recipient e-mail address.
+            Msg.To.Add(email);// צריך לעשות דנמי
+            Msg.Subject = "You have joined to a new event";
+            // File Upload path
+            string mailbody = "<h3 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>Hello,You have joined a new event!</h3><br/>";
+
+            mailbody += "<h1 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>" + dt.Rows[rownum]["Description"].ToString() + "</h1>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Max Participants:  " + dt.Rows[rownum]["NumOfRegister"].ToString() + "/" + dt.Rows[rownum]["NumOfParticipants"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Date & Time: " + dt.Rows[rownum]["Time"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Age Range:  " + dt.Rows[rownum]["MinAge"].ToString() + "-" + dt.Rows[rownum]["MaxAge"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Location:  " + dt.Rows[rownum]["Address"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Admin Comments:  " + dt.Rows[rownum]["Comments"].ToString() + "</h3>";
+            mailbody += "<br /><br /><br />";
+            mailbody += "<p><img style='width:100px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
+            mailbody += "<br /><br />";
+            mailbody += "<p style='color:blue; font-size:large; font-weight:bold; font-family:Guttman;'>Let's Play </p><p> LetsPlay.ruppin@gmail.com</p>";
+           
+            // Create HTML view
+            AlternateView htmlMail = AlternateView.CreateAlternateViewFromString(mailbody, null, "text/html");
+            // Set ContentId property. Value of ContentId property must be the same as
+            // the src attribute of image tag in email body. 
+            Msg.AlternateViews.Add(htmlMail);
+            // your remote SMTP server IP.
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.Credentials = new System.Net.NetworkCredential("LetsPlay.ruppin@gmail.com", "bgroup14");
+            smtp.EnableSsl = true;
+            smtp.Send(Msg);
+            //Msg = null;
+            //Page.RegisterStartupScript("UserMsg", "<script>alert('Mail sent thank you...');if(alert){ window.location='SendMail.aspx';}</script>");
+        }//try
+        catch (Exception ex)
+        {
+            Console.WriteLine("{0} Exception caught.", ex);
+        }//catch
+    }
     #endregion
 
 

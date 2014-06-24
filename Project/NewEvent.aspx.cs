@@ -35,6 +35,7 @@ public partial class NewEvent : System.Web.UI.Page
             EditEvent();
         }
 
+
     }
 
     //insert new event 
@@ -56,10 +57,17 @@ public partial class NewEvent : System.Web.UI.Page
             string address = CityHIde.Value;
 
             //insert to the Event class
-            ev.Point = new Point(double.Parse(latlagArr[0]), double.Parse(latlagArr[1]));
-            ev.Address = address;
+            
+	     	 ev.Point = new Point(double.Parse(latlagArr[0]), double.Parse(latlagArr[1]));
+             ev.Address = address;
+    
         }
-
+        //else
+        //{
+        //    ev.Point = new Point(32.3416709563994, 34.9140563956462);
+        //    ev.Address = "5711, ישראל";
+        //}
+     
         try
         {
             DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
@@ -151,28 +159,34 @@ public partial class NewEvent : System.Web.UI.Page
     //edit event-load the event detail
     protected void EditEvent()
     {
-        if (Session["MyEventsDT"] == null) return;
-        DataTable dtEvent = (DataTable)HttpContext.Current.Session["MyEventsDT"];
-
         if (Session["Eventnum"] == null) return;
-         eventnum = (string)HttpContext.Current.Session["Eventnum"];
+        eventnum = (string)HttpContext.Current.Session["Eventnum"];
 
-        for (int i = 0; i < dtEvent.Rows.Count; i++)
+        if (!(Page.IsPostBack))
         {
-            if (dtEvent.Rows[i]["EventNumber"].ToString() == eventnum)
-            { 
-                NOP.Text = dtEvent.Rows[i]["NumOfParticipants"].ToString();
-                MaxAgeTxt.Text = dtEvent.Rows[i]["MaxAge"].ToString();
-                MinAgeTxt.Text = dtEvent.Rows[i]["MinAge"].ToString();
-                FrequRBL.SelectedValue = checkFrec(dtEvent.Rows[i]["Frequency"].ToString());
-                EventTypeRBL.SelectedValue = dtEvent.Rows[i]["Private"].ToString();
-                categoryDDL.SelectedValue = CheckCategoryNum(dtEvent.Rows[i]["Description"].ToString());
-                commentsTB.Text = dtEvent.Rows[i]["Comments"].ToString();
-                string dataStr = dtEvent.Rows[i]["Time"].ToString();
-                string[] dataStrArr = new string[2];
-                dataStrArr = dataStr.Split(' ');
-                dateTB.Text = dataStrArr[0];
-                timeTB.Text = dataStrArr[1].Remove(dataStrArr[1].Length - 3, 3);
+            if (Session["MyEventsDT"] == null) return;
+            DataTable dtEvent = (DataTable)HttpContext.Current.Session["MyEventsDT"];
+
+
+            for (int i = 0; i < dtEvent.Rows.Count; i++)
+            {
+                if (dtEvent.Rows[i]["EventNumber"].ToString() == eventnum)
+                {
+                    NOP.Text = dtEvent.Rows[i]["NumOfParticipants"].ToString();
+                    MaxAgeTxt.Text = dtEvent.Rows[i]["MaxAge"].ToString();
+                    MinAgeTxt.Text = dtEvent.Rows[i]["MinAge"].ToString();
+                    FrequRBL.SelectedValue = checkFrec(dtEvent.Rows[i]["Frequency"].ToString());
+                    EventTypeRBL.SelectedValue = dtEvent.Rows[i]["Private"].ToString();
+                    categoryDDL.SelectedValue = CheckCategoryNum(dtEvent.Rows[i]["Description"].ToString());
+                    commentsTB.Text = dtEvent.Rows[i]["Comments"].ToString();
+                    string dataStr = dtEvent.Rows[i]["Time"].ToString();
+                    string[] dataStrArr = new string[2];
+                    dataStrArr = dataStr.Split(' ');
+                    dateTB.Text = dataStrArr[0];
+                    timeTB.Text = dataStrArr[1].Remove(dataStrArr[1].Length - 3, 3);
+                    CityHIde.Value = dtEvent.Rows[i]["Address"].ToString();
+                    LatLOngHIde.Value = "("+dtEvent.Rows[i]["Lat"].ToString()+","+dtEvent.Rows[i]["Lng"].ToString()+")";
+                }
             }
         }
     }
