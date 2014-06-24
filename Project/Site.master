@@ -38,7 +38,8 @@
                 </div>
             </div>
         </div>
-        <div id="menu">
+
+        <div id="menu"  >
             <ul class="ca-menu">
                 <li><a href="Default.aspx"><span class="ca-icon">
                     <img class="ca-icon" src="Styles/menuCss/home.png" /></span>

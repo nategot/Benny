@@ -21,23 +21,19 @@
     <link href="Styles/accordion.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent" ClientIDMode="Inherit">
-    <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
+    &nbsp;<asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="True">
     </asp:ToolkitScriptManager>
     <div id="Div1" style="display: none">
     </div>
     <br />
     <br />
-    <tr>
-        <td>
-        </td>
-    </tr>
-    </table>
+
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
                 <tr>
                     <td>
-                        Category:
+                        <asp:Label CssClass="lblHome"  runat="server" Text=" Category:"> Category: &nbsp</asp:Label> 
                     </td>
                     <td>
                         <asp:DropDownList ID="catgoryDdl" runat="server" CssClass="ggg">
@@ -54,7 +50,8 @@
                         &nbsp&nbsp&nbsp
                     </td>
                     <td>
-                        Age:
+                    <asp:Label  CssClass="lblHome" runat="server"   Text="Age: "> Age: &nbsp</asp:Label> 
+                        
                     </td>
                     <td>
                         <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="ageTXT"
@@ -65,15 +62,18 @@
                         <asp:ImageButton ID="upArrow" src="pic/up.gif" CssClass="btnCh" runat="server" />&nbsp&nbsp&nbsp
                     </td>
                     <td>
-                        City:
+                       
+
+                          <asp:Label CssClass="lblHome" runat="server"   Text=" City: "> City: &nbsp</asp:Label> 
                     </td>
                     <td>
                         <asp:TextBox ID="freeSearch" runat="server"></asp:TextBox>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> 
         <div style="float: left">
+        &nbsp&nbsp&nbsp
             <asp:Button ID="searchBtn" class="myButton" runat="server" Text="Search" OnClick="searchBtn_Click"
                 Height="35px" Width="100px" />&nbsp&nbsp</div>
     </asp:PlaceHolder>
