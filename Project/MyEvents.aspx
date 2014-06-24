@@ -34,7 +34,7 @@
             <table>
                 <tr>
                     <td>
-                        Category:
+                      <asp:Label CssClass="lblHome"  runat="server" Text=" Category:"> Category: &nbsp</asp:Label> 
                     </td>
                     <td>
                         <asp:DropDownList ID="catgoryDdl" runat="server" CssClass="ggg">
@@ -51,7 +51,7 @@
                         &nbsp&nbsp&nbsp
                     </td>
                     <td>
-                        Age:
+                        <asp:Label   CssClass="lblHome" runat="server"   Text="Age: "> Age: &nbsp</asp:Label> 
                     </td>
                     <td>
                         <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="ageTXT"
@@ -62,7 +62,7 @@
                         <asp:ImageButton ID="upArrow" src="pic/up.gif" CssClass="btnCh" runat="server" />&nbsp&nbsp&nbsp
                     </td>
                     <td>
-                        City:
+                       <asp:Label CssClass="lblHome" runat="server"   Text=" City: "> City: &nbsp</asp:Label> 
                     </td>
                     <td>
                         <asp:TextBox ID="freeSearch" runat="server"></asp:TextBox>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp

@@ -414,8 +414,21 @@ div.accountInfo
     -moz-transition: all 0.7s ease 0s;
     -o-transition: all 0.7s ease 0s;
     transition: all 0.7s ease 0s;
-    background: transparent;
+    background-color:transparent;
+     -webkit-appearance: none; /*Removes default chrome and safari style*/
+    -moz-appearance: none; /* Removes Default Firefox style*/
+    text-indent: 0.01px; /* Removes default arrow from firefox*/
+    text-overflow: ""; /*Removes default arrow from firefox*/ /*My custom style for fonts*/
 }
+
+
+
+
+
+
+
+
+
 .helloediv
 {
     background-color: #6633FF;
@@ -721,4 +734,9 @@ div.accountInfo
 {
      background: #246a8f;
     text-decoration: none;
+}
+
+.lblHome
+{
+    color:White;
 }

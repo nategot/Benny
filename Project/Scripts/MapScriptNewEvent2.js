@@ -23,8 +23,6 @@
         function start() {
            
             showMap();
-           
-           
             document.getElementById("getPosition").addEventListener("click", showTown);
         }
 

@@ -44,13 +44,17 @@ public partial class Home : System.Web.UI.Page
         GridView1.DataBind();
 
         //load the user age
-        if (Session["UserDeatail"] != null)
+        if (!(Page.IsPostBack))
         {
-            DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
-            ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
+            if (Session["UserDeatail"] != null)
+            {
+                DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
+                ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
+            }
+            else
+                ageTXT.Text = "0";
         }
-        else
-            ageTXT.Text = "0";
+    
     }
 
 
@@ -127,9 +131,9 @@ public partial class Home : System.Web.UI.Page
         ////by time and num of register
         #region
 
-        if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
         {
-            if (diff.Days == 0 && diff.Hours <= 2)
+            if (diff.Days == 0 && diff.Hours <= 3)
             {
                 if (NumOfRegister / NumOfParticipants < 0.5)//if less then 50% has registerd
                 {
@@ -145,7 +149,7 @@ public partial class Home : System.Web.UI.Page
                 }
 
             }
-            else//less then 3 hours more then 2
+            else//less then 4 hours more then 2
             {
                 if (NumOfRegister / NumOfParticipants > 0.5)//if more then 50% has registerd
                 {
@@ -215,11 +219,7 @@ public partial class Home : System.Web.UI.Page
 
         if (NumOfParticipants <= NumOfRegister)//if event is full
         {
-            //GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
-            //Image ImageFUll = new Image();
-            //ImageFUll.ImageUrl = "Images/Full.png";
             GridView1.Rows[i].Cells[7].Controls.Clear();
-            //GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
             GridView1.Rows[i].Cells[7].Text = "<div class='btnFullEvent' >Full!</div>";
         }
 
@@ -270,9 +270,6 @@ public partial class Home : System.Web.UI.Page
             {
                 ShowPopup("Error register faild  please try agin later");
             }
-
-            //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            //HttpContext.Current.Session["EventNumber"] = Eventnum;
             Response.Redirect("MyEvents.aspx");
         }
         else
@@ -318,7 +315,6 @@ public partial class Home : System.Web.UI.Page
         }
 
         //sort by catgory 
-
         string catgory = catgoryDdl.SelectedItem.ToString();
         int num = 0;
         for (int i = 0; i < dt.Rows.Count; i++)

@@ -13,13 +13,18 @@
 {
     margin-top:1%;
     margin-bottom:10%;
+    align:center;
+    width:100%;
+   
+    
 }
 .ca-menu
 {
     margin-top: 10px;
 margin-bottom: 0px;
-padding-left: 0px;
+padding-left: 115px;
     text-align:center;
+    
 }
 .ca-menu li
 {
@@ -128,4 +133,5 @@ padding-left: 0px;
 }
 .ca-menu li:hover .ca-sub{
     opacity: 0.8;
+   
 }
