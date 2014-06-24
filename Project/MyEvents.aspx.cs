@@ -58,8 +58,10 @@ public partial class MyEvents : System.Web.UI.Page
         GridView1.DataBind();
 
         //load the user age
-        ageTXT.Text = dtuser.Rows[0]["Age"].ToString();
-
+        if (!(Page.IsPostBack))
+        {
+            ageTXT.Text = dtuser.Rows[0]["Age"].ToString();
+        }
     }
 
 

@@ -44,13 +44,17 @@ public partial class Home : System.Web.UI.Page
         GridView1.DataBind();
 
         //load the user age
-        if (Session["UserDeatail"] != null)
+        if (!(Page.IsPostBack))
         {
-            DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
-            ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
+            if (Session["UserDeatail"] != null)
+            {
+                DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
+                ageTXT.Text = dtUser.Rows[0]["Age"].ToString();
+            }
+            else
+                ageTXT.Text = "0";
         }
-        else
-            ageTXT.Text = "0";
+    
     }
 
 
@@ -215,11 +219,7 @@ public partial class Home : System.Web.UI.Page
 
         if (NumOfParticipants <= NumOfRegister)//if event is full
         {
-            //GridView1.Rows[i].BackColor = System.Drawing.Color.Red;
-            //Image ImageFUll = new Image();
-            //ImageFUll.ImageUrl = "Images/Full.png";
             GridView1.Rows[i].Cells[7].Controls.Clear();
-            //GridView1.Rows[i].Cells[7].Controls.Add(ImageFUll);
             GridView1.Rows[i].Cells[7].Text = "<div class='btnFullEvent' >Full!</div>";
         }
 
@@ -270,9 +270,6 @@ public partial class Home : System.Web.UI.Page
             {
                 ShowPopup("Error register faild  please try agin later");
             }
-
-            //HttpContext.Current.Session["gridTable"] = GridView1.DataSource;
-            //HttpContext.Current.Session["EventNumber"] = Eventnum;
             Response.Redirect("MyEvents.aspx");
         }
         else
@@ -318,7 +315,6 @@ public partial class Home : System.Web.UI.Page
         }
 
         //sort by catgory 
-
         string catgory = catgoryDdl.SelectedItem.ToString();
         int num = 0;
         for (int i = 0; i < dt.Rows.Count; i++)
