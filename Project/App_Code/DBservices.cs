@@ -319,7 +319,7 @@ public class DBservices
         {
             con = dbS.connect(conString); // open the connection to the database/
 
-            String selectStr = "SELECT  [imageUrl], [Description], [NumOfParticipants], [Time], [Frequncy],[Address],[MinAge], [MaxAge],[probability],[EventNumber], [Comments],[Private],[AdminId] ,[Lat] , [Lng], [NumOfRegister] FROM [View_EventsOnAir]"; // create the select that will be used by the adapter to select data from the DB
+            String selectStr = "SELECT  [imageUrl], [Description], [NumOfParticipants], [Time], [Frequncy],[Address],[MinAge], [MaxAge],[probability],[EventNumber], [Comments],[Private],[AdminId] ,[Lat] , [Lng], [NumOfRegister] FROM [View_EventsOnAir] ORDER BY Time"; // create the select that will be used by the adapter to select data from the DB
 
             SqlDataAdapter da = new SqlDataAdapter(selectStr, con); // create the data adapter
 
