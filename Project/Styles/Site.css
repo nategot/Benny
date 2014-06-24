@@ -414,7 +414,7 @@ div.accountInfo
     -moz-transition: all 0.7s ease 0s;
     -o-transition: all 0.7s ease 0s;
     transition: all 0.7s ease 0s;
-    background-color:transparent;
+    background-color:White;
      -webkit-appearance: none; /*Removes default chrome and safari style*/
     -moz-appearance: none; /* Removes Default Firefox style*/
     text-indent: 0.01px; /* Removes default arrow from firefox*/
