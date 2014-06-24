@@ -131,9 +131,9 @@ public partial class Home : System.Web.UI.Page
         ////by time and num of register
         #region
 
-        if (diff.Days == 0 && diff.Hours <= 3)//if less then 3 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
         {
-            if (diff.Days == 0 && diff.Hours <= 2)
+            if (diff.Days == 0 && diff.Hours <= 3)
             {
                 if (NumOfRegister / NumOfParticipants < 0.5)//if less then 50% has registerd
                 {
@@ -149,7 +149,7 @@ public partial class Home : System.Web.UI.Page
                 }
 
             }
-            else//less then 3 hours more then 2
+            else//less then 4 hours more then 2
             {
                 if (NumOfRegister / NumOfParticipants > 0.5)//if more then 50% has registerd
                 {

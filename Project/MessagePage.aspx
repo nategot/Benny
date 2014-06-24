@@ -14,10 +14,10 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <script src="Scripts/Facebook.js" type="text/javascript"></script>
-    <asp:Timer ID="MyEventsTimer" runat="server" OnTick="MyEventsTimer_Tick" Interval="1500"
+    <asp:Timer ID="MyEventsTimer" runat="server" OnTick="MyEventsTimer_Tick" Interval="800"
         Enabled="False">
     </asp:Timer>
-    <asp:Timer ID="NewEventTimer" runat="server" OnTick="NewEventTimer_Tick" Interval="1500"
+    <asp:Timer ID="NewEventTimer" runat="server" OnTick="NewEventTimer_Tick" Interval="800"
         Enabled="False">
     </asp:Timer>
     <br /> <br /> <br /> <br />
