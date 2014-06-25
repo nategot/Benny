@@ -140,6 +140,17 @@ public class User
         DBservices dbs = new DBservices();
         return dbs.RatingUp(this);
     }
-    
+
+
+    public void  BulidGroup(List<string> emailListe, string groupname)
+    {
+        DBservices db = new DBservices();
+
+        for (int i = 0; i < emailListe.Count; i++)
+			{
+                db.InsertToGroup(emailListe[i], groupname, this.UserId);
+			}
+       
+    }
     
 }

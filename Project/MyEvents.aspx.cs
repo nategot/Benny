@@ -360,4 +360,11 @@ public partial class MyEvents : System.Web.UI.Page
 
 
 
+    protected void InviteBTn_Click(object sender, EventArgs e)
+    {
+        Eventnum = (eventNumHF.Value);
+        HttpContext.Current.Session["Eventnum"] = Eventnum;
+        Response.Redirect("MyFriends.aspx");
+
+    }
 }

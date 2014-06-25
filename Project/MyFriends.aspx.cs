@@ -13,24 +13,27 @@ public partial class MyFriends : System.Web.UI.Page
     List<string> emailList = new List<string>();
     DataTable usetT;
     DataTable dt;
+    string eventnum;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadUserTable();
-        
+        if (Session["Eventnum"] == null) return;
+        eventnum = HttpContext.Current.Session["Eventnum"].ToString();
+
     }
-  
+
 
 
     public void LoadUserTable()
-    {
+    { 
         DBservices db = new DBservices();
         usetT = db.GetAllUsers();
         userGride.DataSource = usetT;
         userGride.DataBind();
         AddImage();
         AddCheckBox();
-
+        
         //load events
         EventOnAir ev = new EventOnAir();
         dt = ev.readTable();
@@ -47,7 +50,7 @@ public partial class MyFriends : System.Web.UI.Page
             imsel.Attributes.Add("hight", "30px");
             userGride.Rows[i].Cells[0].Controls.Add(imsel);
         }
-    
+
     }
 
     //add check box
@@ -61,33 +64,92 @@ public partial class MyFriends : System.Web.UI.Page
 
     }
 
+    //send email from gride
     protected void Button1_Click(object sender, EventArgs e)
     {
-        for (int i = 0; i < userGride.Rows.Count; i++)
-        {
-            CheckBox check =(CheckBox)userGride.Rows[i].Cells[3].Controls[0];
-            if (check.Checked)
-            {
-                SendMail(usetT.Rows[i]["Email"].ToString());
-            }
-        }
-
-    }
-   
-    //send mail
-    protected void SendMail(string email)
-    {    
-        string eventnum = "185";
         int rownum = 0;
 
-        if (Session["UserDeatail"] == null) return;
-        DataTable dtuser = (DataTable)HttpContext.Current.Session["UserDeatail"];
-      
+        //find the row num of the event
         for (int i = 0; i < dt.Rows.Count; i++)
         {
             if (dt.Rows[i]["EventNumber"].ToString() == eventnum)
                 rownum = i;
         }
+
+
+        for (int i = 0; i < userGride.Rows.Count; i++)
+        {
+            CheckBox check = (CheckBox)userGride.Rows[i].Cells[3].Controls[0];
+            if (check.Checked)
+            {
+                SendMail(usetT.Rows[i]["Email"].ToString(), rownum);
+            }
+        }
+
+    }
+
+
+    //add email to send list
+    protected void AddBtn_Click(object sender, EventArgs e)
+    {
+        ListItem stelt = new ListItem(emailTb.Text);
+        stelt.Selected = true;
+        userBuletListe.Items.Add(stelt);
+    }
+
+    //send list to send mail 
+    protected void SendBTn_Click(object sender, EventArgs e)
+    {
+        int rownum = 0;
+        //find the row num of the event
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (dt.Rows[i]["EventNumber"].ToString() == eventnum)
+                rownum = i;
+        }
+
+        for (int i = 0; i < userBuletListe.Items.Count; i++)
+        {
+            SendMail(userBuletListe.Items[i].Text, rownum);
+        }
+    }
+
+    //add to checkbox list
+    protected void Button1_Click1(object sender, EventArgs e)
+    {
+        ListItem cheitem = new ListItem(emailaddtb.Text);
+        cheitem.Selected = true;
+        CheckBoxList1.Items.Add(cheitem);
+
+    }
+
+
+    protected void creategroupBtn_Click(object sender, EventArgs e)
+    {
+        List<string> userList=new List<string>();
+
+        //insert a emails to a list.
+        for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+        {
+            if (CheckBoxList1.Items[i].Selected)
+            {
+                userList.Add(CheckBoxList1.Items[i].Text);
+            }
+         }
+
+        DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
+        User U1 = new User();
+        U1.UserId = int.Parse(dtUser.Rows[0]["UserID"].ToString());
+       
+        U1.BulidGroup(userList,groupnameTb.Text);
+      
+    }
+
+    //send mail func
+    protected void SendMail(string email, int rownum)
+    {
+        if (Session["UserDeatail"] == null) return;
+        DataTable dtuser = (DataTable)HttpContext.Current.Session["UserDeatail"];
 
         try
         {
@@ -105,7 +167,7 @@ public partial class MyFriends : System.Web.UI.Page
             mailbody += "<h3 style='Guttman Yad-Brush;'>Age Range:  " + dt.Rows[rownum]["MinAge"].ToString() + "-" + dt.Rows[rownum]["MaxAge"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Location:  " + dt.Rows[rownum]["Address"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Admin Comments:  " + dt.Rows[rownum]["Comments"].ToString() + "</h3>";
-            mailbody +=  "<a href='http://proj.ruppin.ac.il/bgroup14/prod/tar6/'><h3>to join the event push here!</h3></a>";
+            mailbody += "<a href='http://proj.ruppin.ac.il/bgroup14/prod/tar6/'><h3>to join the event push here!</h3></a>";
             mailbody += "<br />";
             mailbody += "<p><img style='width:200px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
             mailbody += "<br/>";
@@ -130,4 +192,5 @@ public partial class MyFriends : System.Web.UI.Page
             Console.WriteLine("{0} Exception caught.", ex);
         }//catch
     }
+
 }

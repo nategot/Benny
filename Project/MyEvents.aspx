@@ -29,6 +29,7 @@
     <br />
     <div id="Div1" name="popupdiv" style="display: none">
     </div>
+   
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
@@ -138,6 +139,7 @@
         var isAdmin = false;
         var url = 'WebService.asmx/';
         var idUser = 0;
+        var eventNum;
 
         function JoinEvent(num, lat, lng) {
 
@@ -169,6 +171,7 @@
         ////join event popup
         function loadEventDetail(num) {
             email = document.getElementById("MainContent_adminEmailHIde").value;
+            eventNum = num;
             getOneEvent(num, email);
         }
 
@@ -220,7 +223,6 @@
                     break;
                 case "Cycling":
                     document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/6.jpg)';
-                    //document.getElementById('myModal').style.backgroundPosition = '30% 60%';
                     break;
                 case "Surfing":
                     document.getElementById('myModal').style.backgroundImage = 'url(Styles/pic/7.jpg)';
@@ -289,7 +291,7 @@
 
             if (isAdmin) {
                 var a = document.getElementById("try");
-                a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" />';
+                a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" /><asp:Button ID="InvitBtn" class="myButton" runat="server" Text="Invite From List" onclick="InviteBTn_Click" />';
 
             }
             return strT;
@@ -305,22 +307,16 @@
 
                     str += ' <div> <input type="checkbox" id="check-' + row + 1 + '" /> <label for="check-' + row + 1 + '">' + (row + 1) + ". " + PlayerList[row].UserName + '</label>';
                     str += ' <article>';
-
                     str += '<div style="width:100%"><div style="width:65%; float:left"></br>'
-
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Name:"></asp:Label>'
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Fname + '</asp:Label>';
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Lname + '</asp:Label></br>';
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="Age:"></asp:Label>'
                     str += ' <asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].Age + ' </asp:Label></br>';
-
-
                     str += '<table style="whith:100%;"><tr >';
                     str += '   <td> <asp:Label  runat="server" CssClass="fontacor1" Text="Rating:"></asp:Label></td>';
                     str += '   <td >  <legend id="ratinglab' + PlayerList[row].UserId + '" class="fontacorrr">' + PlayerList[row].Rating + '</legend></td> ';
                     str += '   </tr> </table>';
-
-
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor1" Text="City:"></asp:Label>&nbsp;'
                     str += '&nbsp;<asp:Label  runat="server" CssClass="fontacor" >' + PlayerList[row].City + ' </asp:Label></br>';
                     if (isAdmin) {
@@ -365,7 +361,6 @@
                     success: function (data) // Variable data contains the data we get from server side
                     {
                         poiList = $.parseJSON(data.d);
-
                     }, // end of success
                     error: function (e) {
                         alert("failed in getTarget :( " + e.responseText);
