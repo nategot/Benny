@@ -46,8 +46,9 @@ public partial class MyFriends : System.Web.UI.Page
         {
             Image imsel = new Image();
             imsel.ImageUrl = usetT.Rows[i]["Picture"].ToString();
-            imsel.Attributes.Add("width", "30px");
-            imsel.Attributes.Add("hight", "30px");
+            //imsel.Attributes.Add("width", "30px");
+            //imsel.Attributes.Add("hight", "30px");
+            imsel.CssClass = "imgFrinds";
             userGride.Rows[i].Cells[0].Controls.Add(imsel);
         }
 
