@@ -1,10 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="MyFriends.aspx.cs" Inherits="MyFriends" %>
-
-
-    
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
  
@@ -36,9 +31,6 @@
         });
     </script>
 
-
-
-    
         <div id="buildGroupsDiv" runat="server" style="float: right; padding-right: 30px;">
             <asp:Label ID="Label1" runat="server" Text="Create new group"></asp:Label>
             <br />
@@ -52,6 +44,17 @@
             <asp:Button ID="Addtochek" runat="server" Text="Add" OnClick="Button1_Click1" />
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
                 SelectCommand="SELECT [Email], [Fname], [Lname] FROM [Users]"></asp:SqlDataSource>
+            <asp:DropDownList ID="DropDownList1" runat="server" 
+                DataSourceID="SqlDataSourcegroup" DataTextField="GroupName" 
+                DataValueField="GroupName">
+            </asp:DropDownList>
+            <asp:SqlDataSource ID="SqlDataSourcegroup" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>" 
+                SelectCommand="SELECT [GroupName] FROM [Groups] WHERE ([AdminId] = @AdminId)">
+                <SelectParameters>
+                    <asp:SessionParameter Name="AdminId" SessionField="UserId" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
         </div>
    
 
@@ -69,7 +72,6 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
-        <asp:Button ID="SendFListbtn" runat="server" Text="Invite" OnClick="Button1_Click" />
     </div>
     <div id="tbInvite" style="float: left" runat="server">
         <asp:TextBox ID="emailTb" runat="server"></asp:TextBox>
@@ -77,7 +79,8 @@
         <asp:CheckBoxList ID="userBuletListe" runat="server" BorderStyle="Solid" BulletImageUrl="~/pic/blue-dot.png"
             Font-Bold="True" Font-Italic="True" BorderColor="White" ForeColor="White">
         </asp:CheckBoxList>
-        <asp:Button ID="SendBTn" runat="server" Text="Send To List" OnClick="SendBTn_Click" />
+      <%--  <asp:Button ID="SendBTn" runat="server" Text="Send To List" OnClick="SendBTn_Click" />--%>
+     <p>     <asp:Button ID="SendFListbtn" runat="server" Text="Invite" OnClick="Button1_Click" /></p>
     </div>
      </div>
 </asp:Content>

@@ -165,6 +165,7 @@ public class WebService : System.Web.Services.WebService
             {
                 HttpContext.Current.Session["Fname"] = dt.Rows[0]["Fname"].ToString();
                 HttpContext.Current.Session["UserDeatail"] = dt;
+                HttpContext.Current.Session["UserId"] = dt.Rows[0]["UserId"].ToString(); ;
             }
         }
         return numEfect;

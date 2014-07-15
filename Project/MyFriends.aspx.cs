@@ -77,7 +77,7 @@ public partial class MyFriends : System.Web.UI.Page
                 rownum = i;
         }
 
-
+        //send from grid
         for (int i = 0; i < userGride.Rows.Count; i++)
         {
             CheckBox check = (CheckBox)userGride.Rows[i].Cells[3].Controls[0];
@@ -85,6 +85,12 @@ public partial class MyFriends : System.Web.UI.Page
             {
                 SendMail(usetT.Rows[i]["Email"].ToString(), rownum);
             }
+        }
+        
+        //send from list
+        for (int i = 0; i < userBuletListe.Items.Count; i++)
+        {
+            SendMail(userBuletListe.Items[i].Text, rownum);
         }
 
     }
@@ -124,7 +130,7 @@ public partial class MyFriends : System.Web.UI.Page
 
     }
 
-
+    //create new group
     protected void creategroupBtn_Click(object sender, EventArgs e)
     {
         List<string> userList=new List<string>();
