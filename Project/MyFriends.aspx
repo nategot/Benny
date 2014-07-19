@@ -44,20 +44,58 @@
             <asp:Button ID="Addtochek" runat="server" Text="Add" OnClick="Button1_Click1" />
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
                 SelectCommand="SELECT [Email], [Fname], [Lname] FROM [Users]"></asp:SqlDataSource>
-            <asp:DropDownList ID="DropDownList1" runat="server" 
+          
+        </div>
+       
+     <div id="group" style="float: right">
+<asp:GridView ID="userIngroupGv" runat="server" AutoGenerateColumns="False" 
+                DataSourceID="userInGroup" DataKeyNames="Num">
+    <Columns>
+        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+        <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+    </Columns>
+    </asp:GridView>
+            <asp:SqlDataSource ID="userInGroup" runat="server" 
+                ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>" 
+                
+             SelectCommand="SELECT [Email], [Num] FROM [Groups] WHERE ([GroupName] = @GroupName)" 
+             DeleteCommand="DELETE FROM [Groups] WHERE [Num] = @Num" 
+             InsertCommand="INSERT INTO [Groups] ([Email]) VALUES (@Email)" 
+             UpdateCommand="UPDATE [Groups] SET [Email] = @Email WHERE [Num] = @Num">
+                <DeleteParameters>
+                    <asp:Parameter Name="Num" Type="Int32" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="Email" Type="String" />
+                </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="groupnameDDL" Name="GroupName" 
+                        PropertyName="SelectedValue" Type="String" />
+                </SelectParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="Email" Type="String" />
+                    <asp:Parameter Name="Num" Type="Int32" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
+         <asp:Label Text="group name:" runat="server" />
+              <asp:DropDownList ID="groupnameDDL" runat="server" 
                 DataSourceID="SqlDataSourcegroup" DataTextField="GroupName" 
-                DataValueField="GroupName">
+                DataValueField="GroupName" 
+                onselectedindexchanged="groupnameDDL_SelectedIndexChanged" 
+                ontextchanged="groupnameDDL_SelectedIndexChanged" AutoPostBack="true">
             </asp:DropDownList>
             <asp:SqlDataSource ID="SqlDataSourcegroup" runat="server" 
                 ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>" 
-                SelectCommand="SELECT [GroupName] FROM [Groups] WHERE ([AdminId] = @AdminId)">
+                
+                SelectCommand="SELECT DISTINCT [GroupName] FROM [Groups] WHERE ([AdminId] = @AdminId)">
                 <SelectParameters>
                     <asp:SessionParameter Name="AdminId" SessionField="UserId" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
-        </div>
-   
 
+         <asp:Button Text="invite group" runat="server" onclick="Unnamed2_Click" />
+        </div>
+ 
     <div id="description">
     <div id="userGvdiv" style="float: left; margin-left:4px;" runat="server">
         <asp:GridView ID="userGride" runat="server" BackColor="White" RowStyle-BorderColor="Black"    

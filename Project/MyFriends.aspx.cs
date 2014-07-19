@@ -18,22 +18,25 @@ public partial class MyFriends : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadUserTable();
+        HttpContext.Current.Session["UserId"] = 10;// בדיקה להוריד כשיש לוג אין פייס  
+
         if (Session["Eventnum"] == null) return;
         eventnum = HttpContext.Current.Session["Eventnum"].ToString();
+
 
     }
 
 
 
     public void LoadUserTable()
-    { 
+    {
         DBservices db = new DBservices();
         usetT = db.GetAllUsers();
         userGride.DataSource = usetT;
         userGride.DataBind();
         AddImage();
         AddCheckBox();
-        
+
         //load events
         EventOnAir ev = new EventOnAir();
         dt = ev.readTable();
@@ -86,7 +89,7 @@ public partial class MyFriends : System.Web.UI.Page
                 SendMail(usetT.Rows[i]["Email"].ToString(), rownum);
             }
         }
-        
+
         //send from list
         for (int i = 0; i < userBuletListe.Items.Count; i++)
         {
@@ -133,7 +136,7 @@ public partial class MyFriends : System.Web.UI.Page
     //create new group
     protected void creategroupBtn_Click(object sender, EventArgs e)
     {
-        List<string> userList=new List<string>();
+        List<string> userList = new List<string>();
 
         //insert a emails to a list.
         for (int i = 0; i < CheckBoxList1.Items.Count; i++)
@@ -142,14 +145,14 @@ public partial class MyFriends : System.Web.UI.Page
             {
                 userList.Add(CheckBoxList1.Items[i].Text);
             }
-         }
+        }
 
         DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
         User U1 = new User();
         U1.UserId = int.Parse(dtUser.Rows[0]["UserID"].ToString());
-       
-        U1.BulidGroup(userList,groupnameTb.Text);
-      
+
+        U1.BulidGroup(userList, groupnameTb.Text);
+
     }
 
     //send mail func
@@ -200,4 +203,31 @@ public partial class MyFriends : System.Web.UI.Page
         }//catch
     }
 
+    protected void groupnameDDL_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        userIngroupGv.DataBind();
+    }
+
+
+
+    protected void Unnamed2_Click(object sender, EventArgs e)
+    {
+        int rownum = 0;
+
+        //find the row num of the event
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (dt.Rows[i]["EventNumber"].ToString() == eventnum)
+                rownum = i;
+        }
+
+        //send from grid
+        for (int i = 0; i < userIngroupGv.Rows.Count; i++)
+        {
+
+
+            SendMail(userIngroupGv.Rows[i].Cells[1].Text, rownum);
+
+        }
+    }
 }
