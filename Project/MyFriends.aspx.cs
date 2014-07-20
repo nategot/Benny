@@ -98,7 +98,6 @@ public partial class MyFriends : System.Web.UI.Page
 
     }
 
-
     //add email to send list
     protected void AddBtn_Click(object sender, EventArgs e)
     {
@@ -203,13 +202,16 @@ public partial class MyFriends : System.Web.UI.Page
         }//catch
     }
 
+    //view the user in group (dropdownlist)
     protected void groupnameDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
         userIngroupGv.DataBind();
+        newEmailTb.Visible = true;
+        addNewTogroup.Visible = true;
     }
 
 
-
+    //invite group
     protected void Unnamed2_Click(object sender, EventArgs e)
     {
         int rownum = 0;
@@ -229,5 +231,20 @@ public partial class MyFriends : System.Web.UI.Page
             SendMail(userIngroupGv.Rows[i].Cells[1].Text, rownum);
 
         }
+    }
+   
+    //insert new email to group
+    protected void addNewTogroup_Click(object sender, EventArgs e)
+    {
+        List<string> newUserList = new List<string>();
+
+        //insert a emails to a list.
+        newUserList.Add(newEmailTb.Text);
+        DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
+        User U1 = new User();
+        U1.UserId = int.Parse(dtUser.Rows[0]["UserID"].ToString());
+
+        U1.BulidGroup(newUserList,groupnameDDL.SelectedItem.Text);
+
     }
 }
