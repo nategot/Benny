@@ -19,14 +19,35 @@ public partial class MyFriends : System.Web.UI.Page
     {
         LoadUserTable();
         HttpContext.Current.Session["UserId"] = 10;// בדיקה להוריד כשיש לוג אין פייס  
+        LoadNewUserTalbe();
+     
+        
 
         if (Session["Eventnum"] == null) return;
         eventnum = HttpContext.Current.Session["Eventnum"].ToString();
 
 
+
     }
 
+    public void LoadNewUserTalbe()
+    {
+        addtogroupGV.DataSource = usetT;
+        addtogroupGV.DataBind();
+      
+        for (int i = 0; i < addtogroupGV.Rows.Count; i++)
+        {
+            Image imsel = new Image();
+            imsel.ImageUrl = usetT.Rows[i]["Picture"].ToString();
+            imsel.CssClass = "imgFrinds";
+            addtogroupGV.Rows[i].Cells[0].Controls.Add(imsel);
 
+
+            CheckBox check2 = new CheckBox();
+            addtogroupGV.Rows[i].Cells[3].Controls.Add(check2);
+        }
+
+    }
 
     public void LoadUserTable()
     {
@@ -49,8 +70,6 @@ public partial class MyFriends : System.Web.UI.Page
         {
             Image imsel = new Image();
             imsel.ImageUrl = usetT.Rows[i]["Picture"].ToString();
-            //imsel.Attributes.Add("width", "30px");
-            //imsel.Attributes.Add("hight", "30px");
             imsel.CssClass = "imgFrinds";
             userGride.Rows[i].Cells[0].Controls.Add(imsel);
         }
@@ -126,32 +145,43 @@ public partial class MyFriends : System.Web.UI.Page
     //add to checkbox list
     protected void Button1_Click1(object sender, EventArgs e)
     {
-        ListItem cheitem = new ListItem(emailaddtb.Text);
-        cheitem.Selected = true;
-        CheckBoxList1.Items.Add(cheitem);
+        //ListItem cheitem = new ListItem(emailaddtb.Text);
+        //cheitem.Selected = true;
+        //CheckBoxList1.Items.Add(cheitem);
 
     }
 
     //create new group
     protected void creategroupBtn_Click(object sender, EventArgs e)
     {
-        List<string> userList = new List<string>();
+        List<string> EmailList = new List<string>();
+        List<string> FnameList = new List<string>();
+        List<string> LnameList = new List<string>();
+        List<string> UrlList = new List<string>();
 
-        //insert a emails to a list.
-        for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+        //insert all to a lists.
+
+        for (int i = 0; i < userGride.Rows.Count; i++)
         {
-            if (CheckBoxList1.Items[i].Selected)
+            CheckBox check = (CheckBox)userGride.Rows[i].Cells[3].Controls[0];
+            if (check.Checked)
             {
-                userList.Add(CheckBoxList1.Items[i].Text);
+                EmailList.Add(userGride.Rows[i].Cells[3].Text);//save  Mail
+                LnameList.Add(userGride.Rows[i].Cells[2].Text);//save Lname
+                FnameList.Add(userGride.Rows[i].Cells[1].Text);//save  fname
+                UrlList.Add(userGride.Rows[i].Cells[0].Text);//save Url
             }
         }
+
+
 
         DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
         User U1 = new User();
         U1.UserId = int.Parse(dtUser.Rows[0]["UserID"].ToString());
 
-        U1.BulidGroup(userList, groupnameTb.Text);
-
+        U1.BulidGroup(EmailList, FnameList, LnameList, UrlList, groupnameTb.Text);
+        groupnameDDL.DataBind();
+        Page_Load(null, null);
     }
 
     //send mail func
@@ -206,8 +236,6 @@ public partial class MyFriends : System.Web.UI.Page
     protected void groupnameDDL_SelectedIndexChanged(object sender, EventArgs e)
     {
         userIngroupGv.DataBind();
-        newEmailTb.Visible = true;
-        addNewTogroup.Visible = true;
     }
 
 
@@ -228,23 +256,73 @@ public partial class MyFriends : System.Web.UI.Page
         {
 
 
-            SendMail(userIngroupGv.Rows[i].Cells[1].Text, rownum);
+            SendMail(userIngroupGv.Rows[i].Cells[4].Text, rownum);
 
         }
     }
-   
+
     //insert new email to group
     protected void addNewTogroup_Click(object sender, EventArgs e)
     {
-        List<string> newUserList = new List<string>();
 
-        //insert a emails to a list.
-        newUserList.Add(newEmailTb.Text);
+        List<string> NewEmailList = new List<string>();
+        List<string> NewFnameList = new List<string>();
+        List<string> NewLnameList = new List<string>();
+        List<string> NewUrlList = new List<string>();
+
+        //insert all to a lists.
+
+        for (int i = 0; i < addtogroupGV.Rows.Count; i++)
+        {
+            
+            CheckBox check2 = (CheckBox)addtogroupGV.Rows[i].Cells[3].Controls[0];
+            if (check2.Checked)
+            {
+                NewEmailList.Add(userGride.Rows[i].Cells[3].Text);//save  Mail
+                NewFnameList.Add(userGride.Rows[i].Cells[2].Text);//save Lname
+                NewLnameList.Add(userGride.Rows[i].Cells[1].Text);//save  fname
+                NewUrlList.Add(userGride.Rows[i].Cells[0].Text);//save Url
+            }
+        }
+
         DataTable dtUser = (DataTable)HttpContext.Current.Session["UserDeatail"];
         User U1 = new User();
         U1.UserId = int.Parse(dtUser.Rows[0]["UserID"].ToString());
 
-        U1.BulidGroup(newUserList,groupnameDDL.SelectedItem.Text);
+        U1.BulidGroup(NewEmailList, NewFnameList, NewLnameList, NewUrlList, groupnameDDL.SelectedItem.Text);
+        addNewTogroup.Visible = false;
+        Page_Load(null,null);
+    }
+
+    //CHANGE VIEW   
+    protected void changeBtn_Click(object sender, EventArgs e)
+    {
+        if (buildgroupPH.Visible)
+        {
+            buildgroupPH.Visible = false;
+            invitPH.Visible = true;
+            changeBtn.Text = "build new group";
+
+        }
+        else
+        {
+            buildgroupPH.Visible = true;
+            invitPH.Visible = false;
+            changeBtn.Text = "Invite from list";
+
+        }
+
+
+    }
+
+  
+    //add new to group open the gride view
+    protected void Unnamed1_Click(object sender, EventArgs e)
+    {
+        addtogroupGV.Visible = true;
+        addNewTogroup.Visible = true;
+
+    
 
     }
 }

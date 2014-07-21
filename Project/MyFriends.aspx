@@ -27,55 +27,49 @@
             });
         });
     </script>
-
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
 
-    
-
-    <div id="buildGroupsDiv" runat="server" style="float: right; padding-right: 30px;">
-        <asp:Label ID="Label1" runat="server" Text="Create new group"></asp:Label>
-        <br />
-        <asp:Label ID="Label2" runat="server" Text="group name:"></asp:Label>
-        <asp:TextBox ID="groupnameTb" runat="server" Text=""></asp:TextBox>
-      
-        <asp:Button ID="creategroupBtn" runat="server" Text="Add group" OnClick="creategroupBtn_Click" />
-          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-            ErrorMessage="group name is a Required Field" ControlToValidate="groupnameTb"></asp:RequiredFieldValidator>
-       
-        <asp:CheckBoxList ID="CheckBoxList1" runat="server" DataSourceID="SqlDataSource1"
-            DataTextField="Email" DataValueField="Email">
-        </asp:CheckBoxList>
-        <asp:TextBox ID="emailaddtb" runat="server"></asp:TextBox>
-        <asp:Button ID="Addtochek" runat="server" Text="Add" OnClick="Button1_Click1" />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
-            SelectCommand="SELECT [Email], [Fname], [Lname] FROM [Users]"></asp:SqlDataSource>
-    </div>
-
-
     <div id="group" style="float: right">
-     <asp:Label ID="Label3" Text="group name:" runat="server" />
+        <asp:Label ID="Label3" Text="group name:" runat="server" />
         <asp:DropDownList ID="groupnameDDL" runat="server" DataSourceID="SqlDataSourcegroup"
             DataTextField="GroupName" DataValueField="GroupName" OnSelectedIndexChanged="groupnameDDL_SelectedIndexChanged"
             OnTextChanged="groupnameDDL_SelectedIndexChanged" AutoPostBack="true">
         </asp:DropDownList>
         <asp:Button ID="Button1" Text="invite group" runat="server" OnClick="Unnamed2_Click" />
         <asp:GridView ID="userIngroupGv" runat="server" AutoGenerateColumns="False" DataSourceID="userInGroup"
-            DataKeyNames="Num">
+            DataKeyNames="Num" BackColor="White" BorderColor="#CCCCCC" 
+            BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" 
+            GridLines="Horizontal">
             <Columns>
                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                <asp:ImageField DataImageUrlField="Picture">
+                    <ControlStyle CssClass="imgFrinds" />
+                </asp:ImageField>
+                <asp:BoundField DataField="Fname" HeaderText="Fname" SortExpression="Fname" />
+                <asp:BoundField DataField="Lname" HeaderText="Lname" SortExpression="Lname" />
                 <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
             </Columns>
+            <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+            <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+            <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#F7F7F7" />
+            <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+            <SortedDescendingCellStyle BackColor="#E5E5E5" />
+            <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
-
         <asp:SqlDataSource ID="userInGroup" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
-            SelectCommand="SELECT [Email], [Num] FROM [Groups] WHERE ([GroupName] = @GroupName)"
-            DeleteCommand="DELETE FROM [Groups] WHERE [Num] = @Num" InsertCommand="INSERT INTO [Groups] ([Email]) VALUES (@Email)"
-            UpdateCommand="UPDATE [Groups] SET [Email] = @Email WHERE [Num] = @Num">
+            SelectCommand="SELECT [Picture], [Fname], [Lname], [Email], [Num] FROM [Groups] WHERE ([GroupName] = @GroupName)"
+            DeleteCommand="DELETE FROM [Groups] WHERE [Num] = @Num" InsertCommand="INSERT INTO [Groups] ([Picture], [Fname], [Lname], [Email]) VALUES (@Picture, @Fname, @Lname, @Email)"       
+            UpdateCommand="UPDATE [Groups] SET [Picture] = @Picture, [Fname] = @Fname, [Lname] = @Lname, [Email] = @Email WHERE [Num] = @Num">
             <DeleteParameters>
                 <asp:Parameter Name="Num" Type="Int32" />
             </DeleteParameters>
             <InsertParameters>
+                <asp:Parameter Name="Picture" Type="String" />
+                <asp:Parameter Name="Fname" Type="String" />
+                <asp:Parameter Name="Lname" Type="String" />
                 <asp:Parameter Name="Email" Type="String" />
             </InsertParameters>
             <SelectParameters>
@@ -83,28 +77,31 @@
                     Type="String" />
             </SelectParameters>
             <UpdateParameters>
+                <asp:Parameter Name="Picture" Type="String" />
+                <asp:Parameter Name="Fname" Type="String" />
+                <asp:Parameter Name="Lname" Type="String" />
                 <asp:Parameter Name="Email" Type="String" />
                 <asp:Parameter Name="Num" Type="Int32" />
             </UpdateParameters>
         </asp:SqlDataSource>
-       
         <asp:SqlDataSource ID="SqlDataSourcegroup" runat="server" ConnectionString="<%$ ConnectionStrings:bgroup14_test1ConnectionString %>"
             SelectCommand="SELECT DISTINCT [GroupName] FROM [Groups] WHERE ([AdminId] = @AdminId)">
             <SelectParameters>
                 <asp:SessionParameter Name="AdminId" SessionField="UserId" Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
-        
-        <asp:TextBox ID="newEmailTb" runat="server" Visible="false"></asp:TextBox>
-        <asp:Button ID="addNewTogroup" runat="server" Text="Add"  Visible="false" 
-            onclick="addNewTogroup_Click"/>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-            ErrorMessage="Email is required field" ControlToValidate="newEmailTb"></asp:RequiredFieldValidator>
-        
+        <asp:Button Text="Add new users to group" runat="server" 
+            onclick="Unnamed1_Click" />
+         <asp:GridView ID="addtogroupGV" runat="server" Visible="false">
+              </asp:GridView>
+        <asp:Button ID="addNewTogroup" runat="server" Text="Add" Visible="false" OnClick="addNewTogroup_Click" />
+      <%--  <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Email is required field"
+            ControlToValidate="newEmailTb"></asp:RequiredFieldValidator>--%>
     </div>
-
+   
 
     <div id="description">
+        <asp:Button ID="changeBtn" Text="create group" runat="server" OnClick="changeBtn_Click" />
         <div id="userGvdiv" style="float: left; margin-left: 4px;" runat="server">
             <asp:GridView ID="userGride" runat="server" BackColor="White" RowStyle-BorderColor="Black"
                 BorderColor="White" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black"
@@ -119,15 +116,33 @@
                 <SortedDescendingHeaderStyle BackColor="#242121" />
             </asp:GridView>
         </div>
-        <div id="tbInvite" style="float: left" runat="server">
-            <asp:TextBox ID="emailTb" runat="server"></asp:TextBox>
-            <asp:Button ID="AddBtn" runat="server" Text="Add" OnClick="AddBtn_Click" />
-            <asp:CheckBoxList ID="userBuletListe" runat="server" BorderStyle="Solid" BulletImageUrl="~/pic/blue-dot.png"
-                Font-Bold="True" Font-Italic="True" BorderColor="White" ForeColor="White">
-            </asp:CheckBoxList>
-            <%--  <asp:Button ID="SendBTn" runat="server" Text="Send To List" OnClick="SendBTn_Click" />--%>
-            <p>
-                <asp:Button ID="SendFListbtn" runat="server" Text="Invite" OnClick="Button1_Click" /></p>
-        </div>
+
+        <asp:PlaceHolder ID="buildgroupPH" runat="server" Visible="false">
+            <div id="buildGroupsDiv" runat="server" style="float: right; padding-right: 30px;">
+                <asp:Label ID="Label1" runat="server" Text="Create new group"></asp:Label>
+                <br />
+                <asp:Label ID="Label2" runat="server" Text="group name:"></asp:Label>
+                <asp:TextBox ID="groupnameTb" runat="server" Text=""></asp:TextBox>
+                <asp:Button ID="creategroupBtn" runat="server" Text="Add group" OnClick="creategroupBtn_Click" />
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="group name is a Required Field"
+                    ControlToValidate="groupnameTb"></asp:RequiredFieldValidator>
+               <%-- <asp:TextBox ID="emailaddtb" runat="server"></asp:TextBox>
+                <asp:Button ID="Addtochek" runat="server" Text="Add" OnClick="Button1_Click1" />--%>
+            </div>
+        </asp:PlaceHolder>
+        <%--build group--%>
+        <asp:PlaceHolder runat="server" ID="invitPH">
+            <div id="tbInvite" style="float: left" runat="server">
+                <asp:TextBox ID="emailTb" runat="server"></asp:TextBox>
+                <asp:Button ID="AddBtn" runat="server" Text="Add" OnClick="AddBtn_Click" />
+                <asp:CheckBoxList ID="userBuletListe" runat="server" BorderStyle="Solid" BulletImageUrl="~/pic/blue-dot.png"
+                    Font-Bold="True" Font-Italic="True" BorderColor="White" ForeColor="White">
+                </asp:CheckBoxList>
+                <%--  <asp:Button ID="SendBTn" runat="server" Text="Send To List" OnClick="SendBTn_Click" />--%>
+                <p>
+                    <asp:Button ID="SendFListbtn" runat="server" Text="Invite" OnClick="Button1_Click" /></p>
+            </div>
+        </asp:PlaceHolder>
+        <%--invite list--%>
     </div>
 </asp:Content>

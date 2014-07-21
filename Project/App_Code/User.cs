@@ -142,13 +142,13 @@ public class User
     }
 
 
-    public void  BulidGroup(List<string> emailListe, string groupname)
+    public void BulidGroup(List<string> emailListe, List<string> FnameList, List<string> LnameList, List<string> UrlList, string groupname)
     {
         DBservices db = new DBservices();
 
         for (int i = 0; i < emailListe.Count; i++)
 			{
-                db.InsertToGroup(emailListe[i], groupname, this.UserId);
+                db.InsertToGroup(emailListe[i], FnameList[i], LnameList[i], UrlList[i], groupname, this.UserId);
 			}
        
     }

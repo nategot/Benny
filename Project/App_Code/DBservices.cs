@@ -560,12 +560,12 @@ public class DBservices
     }
 
     //insert email to group
-    public int InsertToGroup(string email,string groupname,int userid)
+    public int InsertToGroup(string email,string fname,string Lname, string ImageUrl,string groupname,int userid)
     {
         SqlConnection con;
         con = connect(conectionStr);
-        
-        SqlCommand command = new SqlCommand("insert into Groups values(" + userid + ",'" + groupname + "','" + email + "')", con);
+
+        SqlCommand command = new SqlCommand("insert into Groups values(" + userid + ",'" + groupname + "','" + email + "','" + fname + "','" + Lname + "','" + ImageUrl + "')", con);
         return command.ExecuteNonQuery();
        
 
