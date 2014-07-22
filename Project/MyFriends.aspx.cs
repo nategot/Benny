@@ -18,7 +18,7 @@ public partial class MyFriends : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadUserTable();
-        HttpContext.Current.Session["UserId"] = 10;// בדיקה להוריד כשיש לוג אין פייס  
+        //HttpContext.Current.Session["UserId"] = 10;// בדיקה להוריד כשיש לוג אין פייס  
         LoadNewUserTalbe();
      
         

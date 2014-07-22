@@ -137,7 +137,7 @@
     </div>
     <script type="text/javascript">
         var isAdmin = false;
-        var url = 'WebService.asmx/';
+        var url = 'http://proj.ruppin.ac.il/bgroup14/prod/tar6/WebService.asmx/';
         var idUser = 0;
         var eventNum;
 

@@ -1,4 +1,4 @@
-﻿var url = 'WebService.asmx/';
+﻿var url = 'http://proj.ruppin.ac.il/bgroup14/prod/tar6/WebService.asmx/';
         
 function initialize() {
     var poiList;
