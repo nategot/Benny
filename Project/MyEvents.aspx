@@ -242,9 +242,11 @@
             var b = document.getElementById("MainContent_adminIDHIde");
             if (poiPoint.AdminID == b.value) {
                 isAdmin = true;
+                
             }
             else {
                 isAdmin = false;
+                
             }
 
             var strT = "";
@@ -292,6 +294,11 @@
             if (isAdmin) {
                 var a = document.getElementById("try");
                 a.innerHTML = '</br><asp:Button ID="EditEventBTn" class="myButton" runat="server" Text="Edit" onclick="EditEventBTn_Click" /><asp:Button ID="InvitBtn" class="myButton" runat="server" Text="Invite From List" onclick="InviteBTn_Click" />';
+
+            }
+            else {
+                var a = document.getElementById("try");
+                a.innerHTML = "";
 
             }
             return strT;

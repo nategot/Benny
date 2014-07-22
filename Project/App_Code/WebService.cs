@@ -141,7 +141,6 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
-
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     //add user---- log in
@@ -165,7 +164,7 @@ public class WebService : System.Web.Services.WebService
             {
                 HttpContext.Current.Session["Fname"] = dt.Rows[0]["Fname"].ToString();
                 HttpContext.Current.Session["UserDeatail"] = dt;
-                HttpContext.Current.Session["UserId"] = dt.Rows[0]["UserId"].ToString(); ;
+                HttpContext.Current.Session["UserId"] = dt.Rows[0]["UserId"].ToString(); 
             }
         }
         return numEfect;
@@ -402,6 +401,47 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
+
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //add user---- log in mobile
+    public string AdduserMobile(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
+    {
+        User U1 = new User();
+        U1.UserName = UserName;
+        U1.UserPassword = Password;
+        U1.Fname = FirstName;
+        U1.Lname = LastName;
+        U1.Age = Age;
+        U1.City = City;
+        U1.Email = Email;
+        U1.ImageUrl = imageUrl;
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("Wrong Email or Password ");
+
+        int numEfect = U1.InsertNewUser();
+        DataTable dtt = U1.CheckPass();
+        try
+        {
+            if (dtt.Rows.Count != 0)
+            {
+
+                User u = new User();
+                u.Fname = dtt.Rows[0]["Fname"].ToString();
+                u.Email = dtt.Rows[0]["Email"].ToString();
+                u.ImageUrl = dtt.Rows[0]["Picture"].ToString();
+                u.UserName = dtt.Rows[0]["UserName"].ToString();
+                u.UserId = int.Parse(dtt.Rows[0]["UserId"].ToString());
+                jsonString = js.Serialize(u);
+
+            }
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("Error in: " + ex.Message);
+        }
+        return jsonString;
+    }
 
 
 
