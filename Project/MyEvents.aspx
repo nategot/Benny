@@ -354,7 +354,7 @@
 
         function RatingDown(id, rating) {
             if (rating > 0 && idUser != id) {
-                alert("RatingDown");
+               
                 idUser = id;
                 idstr = "ratinglab" + id;
                 var dataString = '{id:"' + id + '"}';
@@ -380,7 +380,7 @@
         function RatingUp(id, rating) {
 
             if (rating < 100 && idUser != id) {
-                idUser = id; alert("RatingUp");
+                idUser = id; 
                 idstr = "ratinglab" + id;
                 var dataString = '{id:"' + id + '"}';
                 $.ajax({ // ajax call starts
