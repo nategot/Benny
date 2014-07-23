@@ -20,8 +20,8 @@ public partial class MyFriends : System.Web.UI.Page
         LoadUserTable();
         //HttpContext.Current.Session["UserId"] = 10;// בדיקה להוריד כשיש לוג אין פייס  
         LoadNewUserTalbe();
-     
-        
+
+
 
         if (Session["Eventnum"] == null) return;
         eventnum = HttpContext.Current.Session["Eventnum"].ToString();
@@ -34,15 +34,13 @@ public partial class MyFriends : System.Web.UI.Page
     {
         addtogroupGV.DataSource = usetT;
         addtogroupGV.DataBind();
-      
+
         for (int i = 0; i < addtogroupGV.Rows.Count; i++)
         {
             Image imsel = new Image();
             imsel.ImageUrl = usetT.Rows[i]["Picture"].ToString();
             imsel.CssClass = "imgFrinds";
             addtogroupGV.Rows[i].Cells[0].Controls.Add(imsel);
-
-
             CheckBox check2 = new CheckBox();
             addtogroupGV.Rows[i].Cells[3].Controls.Add(check2);
         }
@@ -120,9 +118,14 @@ public partial class MyFriends : System.Web.UI.Page
     //add email to send list
     protected void AddBtn_Click(object sender, EventArgs e)
     {
-        ListItem stelt = new ListItem(emailTb.Text);
-        stelt.Selected = true;
-        userBuletListe.Items.Add(stelt);
+        if (emailTb.Text != "")
+        {
+            ListItem stelt = new ListItem(emailTb.Text);
+            stelt.Selected = true;
+            userBuletListe.Items.Add(stelt);
+        }
+
+
     }
 
     //send list to send mail 
@@ -197,16 +200,16 @@ public partial class MyFriends : System.Web.UI.Page
             Msg.From = new MailAddress("LetsPlay.ruppin@gmail.com");
             // Recipient e-mail address.
             Msg.To.Add(email);
-            Msg.Subject = "You are invted to a new event by " + dtuser.Rows[0]["Fname"].ToString() + " " + dtuser.Rows[0]["Lname"].ToString();          
+            Msg.Subject = "You are invted to a new event by " + dtuser.Rows[0]["Fname"].ToString() + " " + dtuser.Rows[0]["Lname"].ToString();
             // File Upload path
-            string mailbody = "<h3 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>Hello,You have  been invited to a new event!</h3><br/>";
+            string mailbody = "<h3 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>Hello,You have  been invited to a new event!</h3>";
             mailbody += "<h1 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>" + dt.Rows[rownum]["Description"].ToString() + "</h1>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Participants:  " + dt.Rows[rownum]["NumOfRegister"].ToString() + "/" + dt.Rows[rownum]["NumOfParticipants"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Date & Time: " + dt.Rows[rownum]["Time"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Age Range:  " + dt.Rows[rownum]["MinAge"].ToString() + "-" + dt.Rows[rownum]["MaxAge"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Location:  " + dt.Rows[rownum]["Address"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Admin Comments:  " + dt.Rows[rownum]["Comments"].ToString() + "</h3>";
-            mailbody += "<a href='http://proj.ruppin.ac.il/bgroup14/prod/tar6/Home.aspx?ans="+dt.Rows[rownum]["Description"].ToString()+"'><h3>to join the event push here!</h3></a>";
+            mailbody += "<a href='http://proj.ruppin.ac.il/bgroup14/prod/tar6/Home.aspx?ans=" + dt.Rows[rownum]["Description"].ToString() + "'><h3>to join the event push here!</h3></a>";
             mailbody += "<br />";
             mailbody += "<p><img style='width:200px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
             mailbody += "<br/>";
@@ -228,7 +231,6 @@ public partial class MyFriends : System.Web.UI.Page
         }//try
         catch (Exception ex)
         {
-
             ShowPopup(ex.Message);
         }
     }
@@ -255,27 +257,22 @@ public partial class MyFriends : System.Web.UI.Page
         //send from grid
         for (int i = 0; i < userIngroupGv.Rows.Count; i++)
         {
-
-
             SendMail(userIngroupGv.Rows[i].Cells[4].Text, rownum);
-
         }
     }
 
     //insert new email to group
     protected void addNewTogroup_Click(object sender, EventArgs e)
     {
-
         List<string> NewEmailList = new List<string>();
         List<string> NewFnameList = new List<string>();
         List<string> NewLnameList = new List<string>();
         List<string> NewUrlList = new List<string>();
 
         //insert all to a lists.
-
         for (int i = 0; i < addtogroupGV.Rows.Count; i++)
         {
-            
+
             CheckBox check2 = (CheckBox)addtogroupGV.Rows[i].Cells[3].Controls[0];
             if (check2.Checked)
             {
@@ -291,8 +288,9 @@ public partial class MyFriends : System.Web.UI.Page
         U1.UserId = int.Parse(dtUser.Rows[0]["UserID"].ToString());
 
         U1.BulidGroup(NewEmailList, NewFnameList, NewLnameList, NewUrlList, groupnameDDL.SelectedItem.Text);
+        addtogroupGV.Visible = false;
         addNewTogroup.Visible = false;
-        Page_Load(null,null);
+        Page_Load(null, null);
     }
 
     //CHANGE VIEW   
@@ -316,15 +314,12 @@ public partial class MyFriends : System.Web.UI.Page
 
     }
 
-  
+
     //add new to group open the gride view
     protected void Unnamed1_Click(object sender, EventArgs e)
     {
         addtogroupGV.Visible = true;
         addNewTogroup.Visible = true;
-
-    
-
     }
 
     //pop up

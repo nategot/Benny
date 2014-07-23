@@ -60,6 +60,9 @@
         font-family: Narkisim;">
         Invite Friends
     </h1>
+    <asp:UpdatePanel runat="server" ID="group">
+
+    <ContentTemplate>
     <div id="group" style="float: right">
         &nbsp;
         <asp:Label ID="Label3" Text="Group name:" CssClass="lbltxtFriends" runat="server" />&nbsp;&nbsp;
@@ -70,6 +73,7 @@
         &nbsp;
         <asp:Button ID="Button1" Text="invite group" CssClass="btnFriendsPage" runat="server"
             OnClick="Unnamed2_Click" />
+        <br />
         <asp:GridView ID="userIngroupGv" runat="server" AutoGenerateColumns="False" DataSourceID="userInGroup"
             DataKeyNames="Num" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
             BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
@@ -143,6 +147,11 @@
         <%--  <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Email is required field"
             ControlToValidate="newEmailTb"></asp:RequiredFieldValidator>--%>
     </div>
+      </ContentTemplate>
+    </asp:UpdatePanel>
+
+
+
     <div id="description">
         <div style="margin-left: 1px;">
             &nbsp;
