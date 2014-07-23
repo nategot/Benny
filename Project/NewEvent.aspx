@@ -45,7 +45,7 @@
             </td>
             <td colspan="3">
                 <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="NOP"
-                    Minimum="0" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
+                    Minimum="2" Maximum="100" TargetButtonDownID="downArrow" TargetButtonUpID="upArrow">
                 </asp:NumericUpDownExtender>
                 <asp:TextBox ID="NOP" Text="8" runat="server" Width="40" CssClass="addeventinput"></asp:TextBox>
                 <input type="image" class="btnCh" id="downArrow" src="pic/down.gif" />
@@ -85,7 +85,7 @@
             <td style="width: 163px; height: 20px; vertical-align: top;">
                 <asp:TextBox ID="sliderTwo" runat="server" />
                 <asp:MultiHandleSliderExtender ID="multiHandleSliderExtenderTwo" runat="server" BehaviorID="multiHandleSliderExtenderTwo"
-                    TargetControlID="sliderTwo" Minimum="0" Maximum="100" TooltipText="{0}" Orientation="Horizontal"
+                    TargetControlID="sliderTwo" Minimum="8" Maximum="70" TooltipText="{0}" Orientation="Horizontal"
                     EnableHandleAnimation="true" EnableKeyboard="false" EnableMouseWheel="false"
                     ShowHandleDragStyle="true" ShowHandleHoverStyle="true" Length="160" IsReadOnly="False">
                     <MultiHandleSliderTargets>

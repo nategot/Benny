@@ -134,8 +134,6 @@ function getUserInfo() {
                 imageUrl = response.data.url;
             }
 
-            //alert(imageUrl);
-
             AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
         });
 
@@ -164,7 +162,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
 
         }, // end of success
         error: function (e) {
-            alert("error in jason");
+            alert("error in facebook");
         } // end of error
     }) // end of ajax call
 }

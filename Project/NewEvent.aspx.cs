@@ -57,17 +57,12 @@ public partial class NewEvent : System.Web.UI.Page
             string address = CityHIde.Value;
 
             //insert to the Event class
-            
-	     	 ev.Point = new Point(double.Parse(latlagArr[0]), double.Parse(latlagArr[1]));
-             ev.Address = address;
-    
+
+            ev.Point = new Point(double.Parse(latlagArr[0]), double.Parse(latlagArr[1]));
+            ev.Address = address;
+
         }
-        //else
-        //{
-        //    ev.Point = new Point(32.3416709563994, 34.9140563956462);
-        //    ev.Address = "5711, ישראל";
-        //}
-     
+
         try
         {
             DataTable dt = (DataTable)HttpContext.Current.Session["UserDeatail"];
@@ -185,7 +180,7 @@ public partial class NewEvent : System.Web.UI.Page
                     dateTB.Text = dataStrArr[0];
                     timeTB.Text = dataStrArr[1].Remove(dataStrArr[1].Length - 3, 3);
                     CityHIde.Value = dtEvent.Rows[i]["Address"].ToString();
-                    LatLOngHIde.Value = "("+dtEvent.Rows[i]["Lat"].ToString()+","+dtEvent.Rows[i]["Lng"].ToString()+")";
+                    LatLOngHIde.Value = "(" + dtEvent.Rows[i]["Lat"].ToString() + "," + dtEvent.Rows[i]["Lng"].ToString() + ")";
                 }
             }
         }

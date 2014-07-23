@@ -27,13 +27,12 @@
     </div>
     <br />
     <br />
-
     <asp:PlaceHolder ID="searchPholder" runat="server">
         <div id="search" class="search" style="margin-left: 155px">
             <table>
                 <tr>
                     <td>
-                        <asp:Label CssClass="lblHome"  runat="server" Text=" Category:"> Category: &nbsp</asp:Label> 
+                        <asp:Label CssClass="lblHome" runat="server" Text=" Category:"> Category: &nbsp</asp:Label>
                     </td>
                     <td>
                         <asp:DropDownList ID="catgoryDdl" runat="server" CssClass="ggg">
@@ -50,8 +49,7 @@
                         &nbsp&nbsp&nbsp
                     </td>
                     <td>
-                    <asp:Label  CssClass="lblHome" runat="server"   Text="Age: "> Age: &nbsp</asp:Label> 
-                        
+                        <asp:Label CssClass="lblHome" runat="server" Text="Age: "> Age: &nbsp</asp:Label>
                     </td>
                     <td>
                         <asp:NumericUpDownExtender ID="NumericUpDownExtender1" runat="server" TargetControlID="ageTXT"
@@ -62,18 +60,16 @@
                         <asp:ImageButton ID="upArrow" src="pic/up.gif" CssClass="btnCh" runat="server" />&nbsp&nbsp&nbsp
                     </td>
                     <td>
-                       
-
-                          <asp:Label CssClass="lblHome" runat="server"   Text=" City: "> City: &nbsp</asp:Label> 
+                        <asp:Label CssClass="lblHome" runat="server" Text=" City: "> City: &nbsp</asp:Label>
                     </td>
                     <td>
                         <asp:TextBox ID="freeSearch" runat="server"></asp:TextBox>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     </td>
                 </tr>
             </table>
-        </div> 
+        </div>
         <div style="float: left">
-        &nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp
             <asp:Button ID="searchBtn" class="myButton" runat="server" Text="Search" OnClick="searchBtn_Click"
                 Height="35px" Width="100px" />&nbsp&nbsp</div>
     </asp:PlaceHolder>
@@ -138,7 +134,7 @@
     </div>
     <script type="text/javascript">
         var url = 'http://proj.ruppin.ac.il/bgroup14/prod/tar6/WebService.asmx/';
-        
+
         function JoinEvent(num, lat, lng) {
 
             var a = document.getElementById("MainContent_eventNumHF");
@@ -174,7 +170,7 @@
         function getOneEvent(eventNum) {
             var dataString = '{eventNum:"' + eventNum + '"}';
             $.ajax({ // ajax call starts
-                url: url+'getOneEvent',   // server side method
+                url: url + 'getOneEvent',   // server side method
                 // parameters passed to the server
                 type: 'POST',
                 data: dataString,
@@ -189,7 +185,7 @@
                     str = buildListItem(poiList[0]); // add item to the list in the main events page
                     $("#contect").append(str);
                     $("#contect").collapsibleset('refresh');
-                    
+
 
                 }, // end of success
                 error: function (e) {
@@ -237,7 +233,7 @@
         function buildListItem(poiPoint) {
 
             var strT = "";
-            
+
             strT += '  <table>';
             strT += ' <tr> <td> <asp:Label ID="Label1" runat="server" CssClass="titlePop"> ' + poiPoint.Description + '</asp:Label> </td> </tr>';
             strT += ' <tr>  <td><asp:Label  runat="server" CssClass="aa" Text="Admin:"></asp:Label>&nbsp;&nbsp; <asp:Label runat="server" CssClass="bbb" >' + poiPoint.AdminFullName + ' </asp:Label></td> </tr>';
