@@ -62,6 +62,10 @@ public partial class Home : System.Web.UI.Page
     //edit the gridview coulom
     protected void EditGridView()
     {
+        try
+        {
+
+        
         string ageRange;
         for (int i = 0; i < dt.Rows.Count; i++)
         {
@@ -87,18 +91,33 @@ public partial class Home : System.Web.UI.Page
             Chekdate(i);
         }
 
-        GridView1.HeaderRow.Cells[0].Text = "";
-        GridView1.HeaderRow.Cells[2].Text = "Participants";
-        GridView1.HeaderRow.Cells[4].Text = "Frequency";
-        GridView1.HeaderRow.Cells[6].Text = "Age";
-        GridView1.HeaderRow.Cells[7].Text = "";
+        if (GridView1.Rows.Count == 0)
+        {
+            ShowPopup("you dont have any events");
+        }
+        else
+        {
+            GridView1.HeaderRow.Cells[0].Text = "";
+            GridView1.HeaderRow.Cells[2].Text = "Participants";
+            GridView1.HeaderRow.Cells[4].Text = "Frequency";
+            GridView1.HeaderRow.Cells[6].Text = "Age";
+            GridView1.HeaderRow.Cells[7].Text = "";
+        }
         AddImage();
+        }
+        catch (Exception ex)
+        {
+
+            ShowPopup(ex.Message);
+        }
 
     }
 
     //chek date if today or tomorrow
     protected void Chekdate(int i)
     {
+        try
+        {
         time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
         TimeSpan diff2 = time.Subtract(now);
 
@@ -109,6 +128,12 @@ public partial class Home : System.Web.UI.Page
         else if (diff2.Days == 1)
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
+        }
+        }
+        catch (Exception ex)
+        {
+
+            ShowPopup(ex.Message);
         }
     }
 
@@ -396,7 +421,7 @@ public partial class Home : System.Web.UI.Page
         }//try
         catch (Exception ex)
         {
-            Console.WriteLine("{0} Exception caught.", ex);
+            ShowPopup(ex.Message);
         }//catch
     }
     #endregion
