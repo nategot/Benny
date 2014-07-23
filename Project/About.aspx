@@ -41,9 +41,5 @@
     </table>
     <br />
     <br />
-    <video controls>
-  <source src="pic/movie/Blank.mp4" type="video/mp4">
-  <source src="pic/movie/Blank.mp4" type="video/ogg">
-  Your browser does not support the video tag.
-</video>
+    <iframe  src="//www.youtube.com/embed/8W3KI1BjlQg" frameborder="0" allowfullscreen></iframe>
 </asp:Content>
