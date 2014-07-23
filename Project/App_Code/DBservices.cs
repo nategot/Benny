@@ -147,7 +147,7 @@ public class DBservices
         if (p.IsPrivate1)
             isprivate = 1;
 
-        dateStr += p.DateTime.Day.ToString() + "/" +p.DateTime.Month.ToString()   + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
+        dateStr += p.DateTime.Month.ToString() + "/" + p.DateTime.Day.ToString() + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
 
 
         sb.AppendFormat("Values({0}, {1} ,{2}, {3},'{4}',{5},{6},'{7}',{8},'{9}','{10}','{11}',0)", p.NumOfParti, p.Catedory, p.Frequency, isprivate, dateStr, p.MinAge, p.MaxAge, p.Comments, p.AdminID, p.Address, p.Point.Lat, p.Point.Lng);
@@ -164,7 +164,7 @@ public class DBservices
         string dateStr = "";
         if (p.IsPrivate1)
             isprivate = 1;
-        dateStr += p.DateTime.Day.ToString() + "/" + p.DateTime.Month.ToString() + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
+        dateStr += p.DateTime.Month.ToString() + "/" + p.DateTime.Day.ToString() + "/" + p.DateTime.Year.ToString() + " " + p.DateTime.Hour.ToString() + ":" + p.DateTime.Minute.ToString() + "0:00";
         String command;
         StringBuilder sb = new StringBuilder();
         String com = "UPDATE EventsOnAir SET NumOfParticipants=" + p.NumOfParti + ",CategoryId=" + p.Catedory + ",FrequencyId=" + p.Frequency + ", Private=" + isprivate + ", Time='" + dateStr + "',MinAge=" + p.MinAge + ",MaxAge=" + p.MaxAge + ",Comments='" + p.Comments + "',AdminId=" + p.AdminID + ",Address='" + p.Address + "',Lat=" + p.Point.Lat + ",Lng=" + p.Point.Lng + "WHERE EventNumber=" + p.EventNum;
