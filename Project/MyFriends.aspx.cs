@@ -314,7 +314,6 @@ public partial class MyFriends : System.Web.UI.Page
 
     }
 
-
     //add new to group open the gride view
     protected void Unnamed1_Click(object sender, EventArgs e)
     {
