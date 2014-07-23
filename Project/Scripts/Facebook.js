@@ -162,7 +162,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
 
         }, // end of success
         error: function (e) {
-            alert("error in facebook");
+            
         } // end of error
     }) // end of ajax call
 }

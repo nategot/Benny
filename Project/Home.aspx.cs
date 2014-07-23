@@ -184,7 +184,7 @@ public partial class Home : System.Web.UI.Page
                 }
                 else //if less then 50% has registerd less then 3 hours to start time
                 {
-                    prob = 90;
+                    prob = 77;
                 }
             }
         }
@@ -193,7 +193,17 @@ public partial class Home : System.Web.UI.Page
 
         Ev.EventNum = dt.Rows[i]["EventNumber"].ToString();
         rating = Ev.GetRating();
-        averageRating = rating / NumOfRegister;
+
+        //if only one is register
+        if (NumOfRegister==1)
+        {
+            averageRating = 60;
+        }
+        else
+        {
+          averageRating = rating / NumOfRegister;
+        }
+        
 
         if (averageRating > 90)//if average rating is more then 90 add but last then 99 add 20%
         {
