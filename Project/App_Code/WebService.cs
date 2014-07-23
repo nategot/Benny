@@ -73,8 +73,11 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     //add event
-    public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments)
+    public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments, int adminId)
     {
+        string strtemp;
+        string[] dateArr = new string[2];
+        string[] dateArrT = new string[3];
         EventOnAir ev = new EventOnAir();
         ev.Point = new Point(lat, lng);
         ev.Address = address;
@@ -83,17 +86,21 @@ public class WebService : System.Web.Services.WebService
         ev.NumOfParti = nop;
         ev.Catedory = category;
         ev.IsPrivate1 = bool.Parse(type.ToString());
-        ev.DateTimeStr = time;
+        dateArr = time.Split(' ');
+        dateArrT=dateArr[0].Split('/');
+        strtemp = dateArrT[1] + "/" + dateArrT[0] + "/" + dateArrT[2];
+        string dateandtime = strtemp + " " + dateArr[1];
+        ev.DateTime = DateTime.Parse(dateandtime); 
         ev.Comments = comments;
         ev.Frequency = frequecy;
-        //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
-
+        ev.AdminID = adminId;
+       
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize("ok");
         try
         {
             ev.insert();
-            jsonString = js.Serialize("ok");
+            jsonString = js.Serialize(dateandtime);
         }
         catch (Exception ex)
         {
