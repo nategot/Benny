@@ -8,6 +8,7 @@
     <script src="Styles/scrolltest/perfect-scrollbar.js" type="text/javascript"></script>
     <link href="Styles/scrolltest/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
     <script src="Styles/scrolltest/jquery.mousewheel.js" type="text/javascript"></script>
+        <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
     
     <style>
         #description
@@ -53,6 +54,8 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <br />
+    <div id="dialog" style="display: none">
+    </div>
     <h1 style="text-align: center; font-size: xx-large; font-weight: bold; color: White;
         font-family: Narkisim;">
         Invite Friends

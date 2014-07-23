@@ -197,7 +197,7 @@ public partial class MyFriends : System.Web.UI.Page
             Msg.From = new MailAddress("LetsPlay.ruppin@gmail.com");
             // Recipient e-mail address.
             Msg.To.Add(email);
-            Msg.Subject = "You are invted to a new event by " + dtuser.Rows[0]["Fname"].ToString() + " " + dtuser.Rows[0]["Lname"].ToString();
+            Msg.Subject = "You are invted to a new event by " + dtuser.Rows[0]["Fname"].ToString() + " " + dtuser.Rows[0]["Lname"].ToString();          
             // File Upload path
             string mailbody = "<h3 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>Hello,You have  been invited to a new event!</h3><br/>";
             mailbody += "<h1 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>" + dt.Rows[rownum]["Description"].ToString() + "</h1>";
@@ -206,7 +206,7 @@ public partial class MyFriends : System.Web.UI.Page
             mailbody += "<h3 style='Guttman Yad-Brush;'>Age Range:  " + dt.Rows[rownum]["MinAge"].ToString() + "-" + dt.Rows[rownum]["MaxAge"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Location:  " + dt.Rows[rownum]["Address"].ToString() + "</h3>";
             mailbody += "<h3 style='Guttman Yad-Brush;'>Admin Comments:  " + dt.Rows[rownum]["Comments"].ToString() + "</h3>";
-            mailbody += "<a href='http://proj.ruppin.ac.il/bgroup14/prod/tar6/'><h3>to join the event push here!</h3></a>";
+            mailbody += "<a href='http://proj.ruppin.ac.il/bgroup14/prod/tar6/Home.aspx?ans="+dt.Rows[rownum]["Description"].ToString()+"'><h3>to join the event push here!</h3></a>";
             mailbody += "<br />";
             mailbody += "<p><img style='width:200px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
             mailbody += "<br/>";
@@ -228,8 +228,9 @@ public partial class MyFriends : System.Web.UI.Page
         }//try
         catch (Exception ex)
         {
-            Console.WriteLine("{0} Exception caught.", ex);
-        }//catch
+
+            ShowPopup(ex.Message);
+        }
     }
 
     //view the user in group (dropdownlist)
@@ -324,5 +325,11 @@ public partial class MyFriends : System.Web.UI.Page
 
     
 
+    }
+
+    //pop up
+    protected void ShowPopup(string message)
+    {
+        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
 }
