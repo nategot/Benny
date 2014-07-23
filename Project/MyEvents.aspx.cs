@@ -149,7 +149,7 @@ public partial class MyEvents : System.Web.UI.Page
         now = DateTime.Now;
         TimeSpan diff = time.Subtract(now);
 
-        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 12)//if less then 4 hours to start time
         {
             if (diff.Days == 0 && diff.Hours <= 3)
             {

@@ -157,7 +157,7 @@ public partial class Home : System.Web.UI.Page
         ////by time and num of register
         #region
 
-        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 12)//if less then 12 hours to start time
         {
             if (diff.Days == 0 && diff.Hours <= 3)
             {

@@ -70,7 +70,8 @@ public partial class NewEvent : System.Web.UI.Page
 
             ev.Catedory = int.Parse(categoryDDL.SelectedValue);
             ev.NumOfParti = int.Parse(NOP.Text);
-            timedate = dateTB.Text + " " + timeTB.Text;
+
+            timedate = FixDate(dateTB.Text) +" " + timeTB.Text;
             ev.DateTime = DateTime.Parse(timedate);
             ev.MinAge = double.Parse(MinAgeTxt.Text);
             ev.MaxAge = double.Parse(MaxAgeTxt.Text);
@@ -98,7 +99,17 @@ public partial class NewEvent : System.Web.UI.Page
 
     }
 
+    //fix date format
+    protected string FixDate(string date)
+    {
+        string strtemp;
 
+        string[] dateArr = new string[3];
+
+        dateArr = date.Split('/');
+        strtemp=dateArr[1] + "/" + dateArr[0] + "/" + dateArr[2];
+        return strtemp;
+    }
 
     //insert event
     protected void insertEvent(EventOnAir ev)
