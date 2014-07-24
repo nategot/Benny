@@ -157,7 +157,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
 
             }
             else {
-                //alert("Register faild"); ;
+                alert("Register faild"); ;
             }
 
         }, // end of success

@@ -86,11 +86,13 @@ public class WebService : System.Web.Services.WebService
         ev.NumOfParti = nop;
         ev.Catedory = category;
         ev.IsPrivate1 = bool.Parse(type.ToString());
+
         dateArr = time.Split(' ');
-        dateArrT=dateArr[0].Split('/');
+        dateArrT = dateArr[0].Split('/');
         strtemp = dateArrT[1] + "/" + dateArrT[0] + "/" + dateArrT[2];
         string dateandtime = strtemp + " " + dateArr[1];
         ev.DateTime = DateTime.Parse(dateandtime); 
+
         ev.Comments = comments;
         ev.Frequency = frequecy;
         ev.AdminID = adminId;
@@ -100,7 +102,7 @@ public class WebService : System.Web.Services.WebService
         try
         {
             ev.insert();
-            jsonString = js.Serialize(dateandtime);
+            jsonString = js.Serialize("dateandtime");
         }
         catch (Exception ex)
         {
