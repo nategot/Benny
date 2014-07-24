@@ -121,7 +121,32 @@ public partial class MyEvents : System.Web.UI.Page
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
         }
-        else if (DateTime.Today > time)
+            else
+        {
+            string date = GridView1.Rows[i].Cells[3].Text;
+            string newdate = "";
+            string AMPM = "";
+            AMPM = date.Substring(date.Length - 2, 2);
+            if (AMPM == "AM")
+            {
+                newdate = date.Remove(date.Length - 6, 6);
+                GridView1.Rows[i].Cells[3].Text = newdate;
+            }
+            else
+            {
+                string[] dateArr = new string[2];
+                newdate = date.Remove(date.Length - 6, 6);
+                dateArr = newdate.Split(' ');
+                string temp = dateArr[1].Substring(0, 1);
+                double hour = double.Parse(temp);
+                hour += 12;
+                newdate = FixDate(dateArr[0]) + " " + hour.ToString() + dateArr[1].Remove(0, 1);
+                GridView1.Rows[i].Cells[3].Text = newdate;
+            }
+        }
+
+
+         if (DateTime.Today > time)
         {
             Image ImageFUll = new Image();
             ImageFUll.ImageUrl = "pic/Date over.jpg";
@@ -131,6 +156,20 @@ public partial class MyEvents : System.Web.UI.Page
             GridView1.Rows[i].Cells[8].Controls.Clear();
             GridView1.Rows[i].Cells[8].Controls.Add(ImageFUll);
         }
+        
+
+    }
+
+    //fix date format
+    protected string FixDate(string date)
+    {
+        string strtemp;
+
+        string[] dateArr = new string[3];
+
+        dateArr = date.Split('/');
+        strtemp = dateArr[1] + "/" + dateArr[0] + "/" + dateArr[2];
+        return strtemp;
     }
 
     // Probability calculat 
@@ -176,7 +215,7 @@ public partial class MyEvents : System.Web.UI.Page
                 }
                 else //if less then 50% has registerd less then 3 hours to start time
                 {
-                    prob = 90;
+                    prob = 75;
                 }
             }
         }
@@ -184,7 +223,16 @@ public partial class MyEvents : System.Web.UI.Page
 
         Ev.EventNum = dtMyEvent.Rows[i]["EventNumber"].ToString();
         rating = Ev.GetRating();
-        averageRating = rating / NumOfRegister;
+        //if only one is register
+        if (NumOfRegister == 1)
+        {
+            averageRating = 60;
+        }
+        else
+        {
+            averageRating = rating / NumOfRegister;
+        }
+        
 
         if (averageRating > 90)//if average rating is more then 90 add but last then 99 add 20%
         {

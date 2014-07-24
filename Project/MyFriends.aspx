@@ -8,6 +8,7 @@
     <script src="Styles/scrolltest/perfect-scrollbar.js" type="text/javascript"></script>
     <link href="Styles/scrolltest/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
     <script src="Styles/scrolltest/jquery.mousewheel.js" type="text/javascript"></script>
+        <script src="Scripts/SmallPopUpScript.js" type="text/javascript"></script>
     
     <style>
         #description
@@ -53,10 +54,15 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <br />
+    <div id="dialog" style="display: none">
+    </div>
     <h1 style="text-align: center; font-size: xx-large; font-weight: bold; color: White;
         font-family: Narkisim;">
         Invite Friends
     </h1>
+    <asp:UpdatePanel runat="server" ID="group">
+
+    <ContentTemplate>
     <div id="group" style="float: right">
         &nbsp;
         <asp:Label ID="Label3" Text="Group name:" CssClass="lbltxtFriends" runat="server" />&nbsp;&nbsp;
@@ -67,6 +73,7 @@
         &nbsp;
         <asp:Button ID="Button1" Text="invite group" CssClass="btnFriendsPage" runat="server"
             OnClick="Unnamed2_Click" />
+        <br />
         <asp:GridView ID="userIngroupGv" runat="server" AutoGenerateColumns="False" DataSourceID="userInGroup"
             DataKeyNames="Num" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
             BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
@@ -140,6 +147,11 @@
         <%--  <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Email is required field"
             ControlToValidate="newEmailTb"></asp:RequiredFieldValidator>--%>
     </div>
+      </ContentTemplate>
+    </asp:UpdatePanel>
+
+
+
     <div id="description">
         <div style="margin-left: 1px;">
             &nbsp;

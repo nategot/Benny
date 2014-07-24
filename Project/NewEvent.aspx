@@ -35,7 +35,7 @@
                     <asp:ListItem Value="5">Cycling</asp:ListItem>
                     <asp:ListItem Value="6">Swimming</asp:ListItem>
                     <asp:ListItem Value="7">Volleyball</asp:ListItem>
-                    <asp:ListItem Value="8">Surfing</asp:ListItem>
+                    <asp:ListItem Value="14">Surfing</asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>

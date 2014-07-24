@@ -10,7 +10,6 @@ using System.Data.SqlClient;
 using System.Data;
 
 
-
 /// <summary>
 /// Summary description for WebService
 /// </summary>
@@ -73,8 +72,11 @@ public class WebService : System.Web.Services.WebService
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     //add event
-    public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments)
+    public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments, int adminId)
     {
+        string strtemp;
+        string[] dateArr = new string[2];
+        string[] dateArrT = new string[3];
         EventOnAir ev = new EventOnAir();
         ev.Point = new Point(lat, lng);
         ev.Address = address;
@@ -83,17 +85,22 @@ public class WebService : System.Web.Services.WebService
         ev.NumOfParti = nop;
         ev.Catedory = category;
         ev.IsPrivate1 = bool.Parse(type.ToString());
-        ev.DateTimeStr = time;
+
+        dateArr = time.Split(' ');
+        dateArrT = dateArr[0].Split('-');
+        strtemp = dateArrT[2] + "/" + dateArrT[1] + "/" + dateArrT[0];
+        string dateandtime = strtemp + " " + dateArr[1];
+        ev.DateTime = DateTime.Parse(dateandtime);
         ev.Comments = comments;
         ev.Frequency = frequecy;
-        //ev.AdminID = int.Parse(dt.Rows[0]["AdminId"].ToString());
+        ev.AdminID = adminId;
 
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize("ok");
         try
         {
             ev.insert();
-            jsonString = js.Serialize("ok");
+            jsonString = js.Serialize("dateandtime");
         }
         catch (Exception ex)
         {
@@ -164,7 +171,7 @@ public class WebService : System.Web.Services.WebService
             {
                 HttpContext.Current.Session["Fname"] = dt.Rows[0]["Fname"].ToString();
                 HttpContext.Current.Session["UserDeatail"] = dt;
-                HttpContext.Current.Session["UserId"] = dt.Rows[0]["UserId"].ToString(); 
+                HttpContext.Current.Session["UserId"] = dt.Rows[0]["UserId"].ToString();
             }
         }
         return numEfect;
@@ -308,7 +315,7 @@ public class WebService : System.Web.Services.WebService
                 evTemp.Comments = dtUserEvents.Rows[i]["Comments"].ToString();
                 evTemp.EventNum = dtUserEvents.Rows[i]["EventNumber"].ToString();
                 evTemp.NumOfRegis = dtUserEvents.Rows[i]["NumOfRegister"].ToString();
-                
+
 
                 User u = new User();
                 u.UserId = int.Parse(dtUserEvents.Rows[i]["AdminId"].ToString());
@@ -443,7 +450,83 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
+    //login mobile
+    //[WebMethod]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+
+    //public string LoginMobile(string Email, string Password)
+    //{
+    //    User u = new User();
+    //    u.UserPassword = Password;
+    //    u.Email = Email;
+    //    JavaScriptSerializer js = new JavaScriptSerializer();
+    //    string jsonString = js.Serialize("Wrong Email or Password ");
+    //    try
+    //    {
+    //        DataTable dt = u.CheckPass();
+    //        if (dt.Rows.Count != 0)
+    //        {
+
+    //            User U1 = new User();
+    //            U1.Fname = dt.Rows[0]["Fname"].ToString();
+    //            U1.Email = dt.Rows[0]["Email"].ToString();
+    //            U1.ImageUrl = dt.Rows[0]["Picture"].ToString();
+    //            U1.UserName = dt.Rows[0]["UserName"].ToString();
+    //            U1.UserId = int.Parse(dt.Rows[0]["UserId"].ToString());
+    //            jsonString = js.Serialize(U1);
+
+    //        }
+
+
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        jsonString = js.Serialize("Error in: " + ex.Message);
+    //    }
+    //    return jsonString;
+    //}
 
 
 
+
+    //[WebMethod(EnableSession = true)]
+    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    ////add user---- log in mobile
+    //public string AdduserMobile(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
+    //{
+    //    User U1 = new User();
+    //    U1.UserName = UserName;
+    //    U1.UserPassword = Password;
+    //    U1.Fname = FirstName;
+    //    U1.Lname = LastName;
+    //    U1.Age = Age;
+    //    U1.City = City;
+    //    U1.Email = Email;
+    //    U1.ImageUrl = imageUrl;
+    //    JavaScriptSerializer js = new JavaScriptSerializer();
+    //    string jsonString = js.Serialize("Wrong Email or Password ");
+
+    //    int numEfect = U1.InsertNewUser();
+    //    DataTable dtt = U1.CheckPass();
+    //    try
+    //    {
+    //        if (dtt.Rows.Count != 0)
+    //        {
+
+    //            User u = new User();
+    //            u.Fname = dtt.Rows[0]["Fname"].ToString();
+    //            u.Email = dtt.Rows[0]["Email"].ToString();
+    //            u.ImageUrl = dtt.Rows[0]["Picture"].ToString();
+    //            u.UserName = dtt.Rows[0]["UserName"].ToString();
+    //            u.UserId = int.Parse(dtt.Rows[0]["UserId"].ToString());
+    //            jsonString = js.Serialize(u);
+
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        jsonString = js.Serialize("Error in: " + ex.Message);
+    //    }
+    //    return jsonString;
+    //}
 }
