@@ -118,18 +118,46 @@ public partial class Home : System.Web.UI.Page
     {
         try
         {
-        time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
-        TimeSpan diff2 = time.Subtract(now);
+            time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
+            TimeSpan diff2 = time.Subtract(now);
 
-        if (diff2.Days == 0 && time.Day == now.Day)
-        {
-            GridView1.Rows[i].Cells[3].Text = "Today!";
+            if (diff2.Days == 0 && time.Day == now.Day)
+            {
+                GridView1.Rows[i].Cells[3].Text = "Today!";
+            }
+            else if (diff2.Days == 1)
+            {
+                GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
+            }
+            else
+            {
+            string date = GridView1.Rows[i].Cells[3].Text;
+            string newdate = "";
+            string AMPM = "";
+            AMPM = date.Substring(date.Length - 2, 2);
+            if (AMPM == "AM")
+            {
+                newdate = date.Remove(date.Length - 6, 6);
+                GridView1.Rows[i].Cells[3].Text = newdate;
+            }
+            else
+            {
+                    string[] dateArr = new string[2];
+
+                   newdate = date.Remove(date.Length - 6, 6);
+                   dateArr= newdate.Split(' ');
+                   string temp = dateArr[1].Substring(0, 1);
+                   double hour= double.Parse(temp);
+                   hour += 12;
+                   newdate = dateArr[0] + " " + hour.ToString() + dateArr[1].Remove(0,1);
+                   GridView1.Rows[i].Cells[3].Text = newdate;
+             }
+                
+            }
+
         }
-        else if (diff2.Days == 1)
-        {
-            GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
-        }
-        }
+
+
         catch (Exception ex)
         {
 
