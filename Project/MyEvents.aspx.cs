@@ -131,6 +131,42 @@ public partial class MyEvents : System.Web.UI.Page
             GridView1.Rows[i].Cells[8].Controls.Clear();
             GridView1.Rows[i].Cells[8].Controls.Add(ImageFUll);
         }
+        else
+        {
+            string date = GridView1.Rows[i].Cells[3].Text;
+            string newdate = "";
+            string AMPM = "";
+            AMPM = date.Substring(date.Length - 2, 2);
+            if (AMPM == "AM")
+            {
+                newdate = date.Remove(date.Length - 6, 6);
+                GridView1.Rows[i].Cells[3].Text = newdate;
+            }
+            else
+            {
+                string[] dateArr = new string[2];
+                newdate = date.Remove(date.Length - 6, 6);
+                dateArr = newdate.Split(' ');
+                string temp = dateArr[1].Substring(0, 1);
+                double hour = double.Parse(temp);
+                hour += 12;
+                newdate = FixDate(dateArr[0]) + " " + hour.ToString() + dateArr[1].Remove(0, 1);
+                GridView1.Rows[i].Cells[3].Text = newdate;
+            }
+        }
+
+    }
+
+    //fix date format
+    protected string FixDate(string date)
+    {
+        string strtemp;
+
+        string[] dateArr = new string[3];
+
+        dateArr = date.Split('/');
+        strtemp = dateArr[1] + "/" + dateArr[0] + "/" + dateArr[2];
+        return strtemp;
     }
 
     // Probability calculat 
