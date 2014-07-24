@@ -11,7 +11,7 @@ body
     padding: 0px;
     color: #696969;
     background-image: url('../Images/bluefadetovivid.jpeg');
-    background-size:contain; 
+    background-size:120%; 
     background-repeat:no-repeat;
 }
 

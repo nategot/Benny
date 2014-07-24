@@ -121,17 +121,7 @@ public partial class MyEvents : System.Web.UI.Page
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
         }
-        else if (DateTime.Today > time)
-        {
-            Image ImageFUll = new Image();
-            ImageFUll.ImageUrl = "pic/Date over.jpg";
-            ImageFUll.Width = 80;
-            ImageFUll.Height = 30;
-            //GridView1.Rows[i].Cells[3].BackColor = System.Drawing.Color.Red;
-            GridView1.Rows[i].Cells[8].Controls.Clear();
-            GridView1.Rows[i].Cells[8].Controls.Add(ImageFUll);
-        }
-        else
+            else
         {
             string date = GridView1.Rows[i].Cells[3].Text;
             string newdate = "";
@@ -154,6 +144,19 @@ public partial class MyEvents : System.Web.UI.Page
                 GridView1.Rows[i].Cells[3].Text = newdate;
             }
         }
+
+
+         if (DateTime.Today > time)
+        {
+            Image ImageFUll = new Image();
+            ImageFUll.ImageUrl = "pic/Date over.jpg";
+            ImageFUll.Width = 80;
+            ImageFUll.Height = 30;
+            //GridView1.Rows[i].Cells[3].BackColor = System.Drawing.Color.Red;
+            GridView1.Rows[i].Cells[8].Controls.Clear();
+            GridView1.Rows[i].Cells[8].Controls.Add(ImageFUll);
+        }
+        
 
     }
 
