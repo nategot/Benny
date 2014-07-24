@@ -68,7 +68,6 @@ public class WebService : System.Web.Services.WebService
         return jsonString;
     }
 
-
     //mobile
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -453,82 +452,82 @@ public class WebService : System.Web.Services.WebService
     }
 
     //login mobile
-    //[WebMethod]
-    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
 
-    //public string LoginMobile(string Email, string Password)
-    //{
-    //    User u = new User();
-    //    u.UserPassword = Password;
-    //    u.Email = Email;
-    //    JavaScriptSerializer js = new JavaScriptSerializer();
-    //    string jsonString = js.Serialize("Wrong Email or Password ");
-    //    try
-    //    {
-    //        DataTable dt = u.CheckPass();
-    //        if (dt.Rows.Count != 0)
-    //        {
+    public string LoginMobile(string Email, string Password)
+    {
+        User u = new User();
+        u.UserPassword = Password;
+        u.Email = Email;
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("Wrong Email or Password ");
+        try
+        {
+            DataTable dt = u.CheckPass();
+            if (dt.Rows.Count != 0)
+            {
 
-    //            User U1 = new User();
-    //            U1.Fname = dt.Rows[0]["Fname"].ToString();
-    //            U1.Email = dt.Rows[0]["Email"].ToString();
-    //            U1.ImageUrl = dt.Rows[0]["Picture"].ToString();
-    //            U1.UserName = dt.Rows[0]["UserName"].ToString();
-    //            U1.UserId = int.Parse(dt.Rows[0]["UserId"].ToString());
-    //            jsonString = js.Serialize(U1);
+                User U1 = new User();
+                U1.Fname = dt.Rows[0]["Fname"].ToString();
+                U1.Email = dt.Rows[0]["Email"].ToString();
+                U1.ImageUrl = dt.Rows[0]["Picture"].ToString();
+                U1.UserName = dt.Rows[0]["UserName"].ToString();
+                U1.UserId = int.Parse(dt.Rows[0]["UserId"].ToString());
+                jsonString = js.Serialize(U1);
 
-    //        }
-
-
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        jsonString = js.Serialize("Error in: " + ex.Message);
-    //    }
-    //    return jsonString;
-    //}
+            }
 
 
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("Error in: " + ex.Message);
+        }
+        return jsonString;
+    }
 
 
-    //[WebMethod(EnableSession = true)]
-    //[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    ////add user---- log in mobile
-    //public string AdduserMobile(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
-    //{
-    //    User U1 = new User();
-    //    U1.UserName = UserName;
-    //    U1.UserPassword = Password;
-    //    U1.Fname = FirstName;
-    //    U1.Lname = LastName;
-    //    U1.Age = Age;
-    //    U1.City = City;
-    //    U1.Email = Email;
-    //    U1.ImageUrl = imageUrl;
-    //    JavaScriptSerializer js = new JavaScriptSerializer();
-    //    string jsonString = js.Serialize("Wrong Email or Password ");
+
+
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    //add user---- log in mobile
+    public string AdduserMobile(string UserName, string Password, string FirstName, string LastName, int Age, string City, string Email, string imageUrl)
+    {
+        User U1 = new User();
+        U1.UserName = UserName;
+        U1.UserPassword = Password;
+        U1.Fname = FirstName;
+        U1.Lname = LastName;
+        U1.Age = Age;
+        U1.City = City;
+        U1.Email = Email;
+        U1.ImageUrl = imageUrl;
+        JavaScriptSerializer js = new JavaScriptSerializer();
+        string jsonString = js.Serialize("Wrong Email or Password ");
         
-    //    int numEfect = U1.InsertNewUser();
-    //    DataTable dtt = U1.CheckPass();
-    //    try
-    //    {
-    //        if (dtt.Rows.Count != 0)
-    //        {
+        int numEfect = U1.InsertNewUser();
+        DataTable dtt = U1.CheckPass();
+        try
+        {
+            if (dtt.Rows.Count != 0)
+            {
 
-    //            User u = new User();
-    //            u.Fname = dtt.Rows[0]["Fname"].ToString();
-    //            u.Email = dtt.Rows[0]["Email"].ToString();
-    //            u.ImageUrl = dtt.Rows[0]["Picture"].ToString();
-    //            u.UserName = dtt.Rows[0]["UserName"].ToString();
-    //            u.UserId = int.Parse(dtt.Rows[0]["UserId"].ToString());
-    //            jsonString = js.Serialize(u);
+                User u = new User();
+                u.Fname = dtt.Rows[0]["Fname"].ToString();
+                u.Email = dtt.Rows[0]["Email"].ToString();
+                u.ImageUrl = dtt.Rows[0]["Picture"].ToString();
+                u.UserName = dtt.Rows[0]["UserName"].ToString();
+                u.UserId = int.Parse(dtt.Rows[0]["UserId"].ToString());
+                jsonString = js.Serialize(u);
 
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        jsonString = js.Serialize("Error in: " + ex.Message);
-    //    }
-    //    return jsonString;
-    //}
+            }
+        }
+        catch (Exception ex)
+        {
+            jsonString = js.Serialize("Error in: " + ex.Message);
+        }
+        return jsonString;
+    }
 }
