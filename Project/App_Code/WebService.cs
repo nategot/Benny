@@ -160,6 +160,10 @@ public class WebService : System.Web.Services.WebService
         U1.Lname = LastName;
         U1.Age = Age;
         U1.City = City;
+        if (Email=="undefined")
+        {
+            Email = FirstName + LastName + "2@gmail.com";
+        }
         U1.Email = Email;
         U1.ImageUrl = imageUrl;
 

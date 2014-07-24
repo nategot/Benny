@@ -141,14 +141,6 @@ function getUserInfo() {
 }
 
 function AddUser(firstName, lastName, age, city, userName, email, Password, imageUrl) {
-    alert(firstName);
-    alert(lastName);
-    alert(age);
-    alert(city);
-    alert(userName);
-    alert(email)
-    alert(Password)
-    alert(imageUrl)
 
 
     var dataString = '{UserName:"' + userName + '",' + 'Password:"' + Password + '",' + 'FirstName:"' + firstName + '",' + 'LastName:"' + lastName + '",' + 'Age:' + age + ',' + 'City:"' + city + '",' + 'Email:"' + email + '",' + 'imageUrl:"' + imageUrl + '"}';
@@ -166,7 +158,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
 
             }
             else {
-                alert("Register faild"); ;
+                //alert("Register faild"); ;
             }
 
         }, // end of success
