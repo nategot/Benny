@@ -68,13 +68,13 @@
 
 .accordionimg
 {
-    width:70px;
-    height:70px;
+    width:75px;
+    height:75px;
     text-align:center;
     max-height:100px;
-    margin-top:10px;
-
-    border:dashed 0px #000000;
+    margin-top:13px;
+   border:3px solid #808080;
+   
     -moz-border-radius-topleft: 75px;
     -moz-border-radius-topright:75px;
     -moz-border-radius-bottomleft:75px;

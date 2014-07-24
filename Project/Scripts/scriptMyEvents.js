@@ -32,7 +32,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function getPOIList(email) {
     var dataString = '{UserEmail:"' + email + '"}';
     $.ajax({ // ajax call starts
-        url: 'WebService.asmx/ReadMyEvent',   // server side method
+        url: 'http://proj.ruppin.ac.il/bgroup14/prod/tar6/WebService.asmx/ReadMyEvent',   // server side method
         data: dataString,
         // parameters passed to the server
         type: 'POST',

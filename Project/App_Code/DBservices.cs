@@ -7,6 +7,14 @@ using System.Data;
 using System.Web.Configuration;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
+using System.Windows.Forms;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Collections.Specialized;
+
+
 
 
 /// <summary>
@@ -203,6 +211,7 @@ public class DBservices
                 con.Close();
             }
         }
+        
 
     }
 
@@ -546,4 +555,32 @@ public class DBservices
         return int.Parse(TTemp.Rows[0][0].ToString());
 
     }
+
+    //get all user list
+    public DataTable GetAllUsers()
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+        da = new SqlDataAdapter("select Picture ,Fname,Lname,Email from dbo.Users",con);
+        DataTable UserT = new DataTable();
+        da.Fill(UserT);
+        return UserT;
+        
+    }
+
+    //insert email to group
+    public int InsertToGroup(string email,string fname,string Lname, string ImageUrl,string groupname,int userid)
+    {
+        SqlConnection con;
+        con = connect(conectionStr);
+
+        SqlCommand command = new SqlCommand("insert into Groups values(" + userid + ",'" + groupname + "','" + email + "','" + fname + "','" + Lname + "','" + ImageUrl + "')", con);
+        return command.ExecuteNonQuery();
+      
+
+    }
+
+    
+
+  
 }

@@ -134,8 +134,6 @@ function getUserInfo() {
                 imageUrl = response.data.url;
             }
 
-            //alert(imageUrl);
-
             AddUser(firstName, lastName, age, city, userName, email, password, imageUrl);
         });
 
@@ -147,7 +145,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
     var dataString = '{UserName:"' + userName + '",' + 'Password:"' + Password + '",' + 'FirstName:"' + firstName + '",' + 'LastName:"' + lastName + '",' + 'Age:' + age + ',' + 'City:"' + city + '",' + 'Email:"' + email + '",' + 'imageUrl:"' + imageUrl + '"}';
 
     $.ajax({ // ajax call starts
-        url: 'WebService.asmx/Adduser', // server side method
+        url: 'http://proj.ruppin.ac.il/bgroup14/prod/tar6/WebService.asmx/Adduser', // server side method
         data: dataString,    // the parameters sent to the server
         type: 'POST',
         dataType: 'json', // Choosing a JSON datatype
@@ -164,7 +162,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
 
         }, // end of success
         error: function (e) {
-            alert("error in jason");
+            
         } // end of error
     }) // end of ajax call
 }
@@ -172,7 +170,7 @@ function AddUser(firstName, lastName, age, city, userName, email, Password, imag
 function LogOut() {
 
     $.ajax({ // ajax call starts
-        url: 'WebService.asmx/LogOut', // server side method
+        url: 'http://proj.ruppin.ac.il/bgroup14/prod/tar6/WebService.asmx/LogOut', // server side method
         type: 'POST',
         dataType: 'json', // Choosing a JSON datatype
         contentType: 'application/json; charset = utf-8',

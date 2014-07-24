@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Text;
 using System.Collections.Specialized;
+using System.Net.Mail;
 
 
 
@@ -20,7 +21,7 @@ public partial class Home : System.Web.UI.Page
     int NumOfParticipants;
     DateTime time;
     DateTime now;
-    
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -54,13 +55,17 @@ public partial class Home : System.Web.UI.Page
             else
                 ageTXT.Text = "0";
         }
-    
+
     }
 
 
     //edit the gridview coulom
     protected void EditGridView()
     {
+        try
+        {
+
+        
         string ageRange;
         for (int i = 0; i < dt.Rows.Count; i++)
         {
@@ -82,22 +87,37 @@ public partial class Home : System.Web.UI.Page
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
-            ProbabilityForGame(i); 
+            ProbabilityForGame(i);
             Chekdate(i);
         }
 
-        GridView1.HeaderRow.Cells[0].Text = "";
-        GridView1.HeaderRow.Cells[2].Text = "Participants";
-        GridView1.HeaderRow.Cells[4].Text = "Frequency";
-        GridView1.HeaderRow.Cells[6].Text = "Age";
-        GridView1.HeaderRow.Cells[7].Text = "";
+        if (GridView1.Rows.Count == 0)
+        {
+            ShowPopup("you dont have any events");
+        }
+        else
+        {
+            GridView1.HeaderRow.Cells[0].Text = "";
+            GridView1.HeaderRow.Cells[2].Text = "Participants";
+            GridView1.HeaderRow.Cells[4].Text = "Frequency";
+            GridView1.HeaderRow.Cells[6].Text = "Age";
+            GridView1.HeaderRow.Cells[7].Text = "";
+        }
         AddImage();
+        }
+        catch (Exception ex)
+        {
+
+            ShowPopup(ex.Message);
+        }
 
     }
 
     //chek date if today or tomorrow
     protected void Chekdate(int i)
     {
+        try
+        {
         time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
         TimeSpan diff2 = time.Subtract(now);
 
@@ -108,6 +128,12 @@ public partial class Home : System.Web.UI.Page
         else if (diff2.Days == 1)
         {
             GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
+        }
+        }
+        catch (Exception ex)
+        {
+
+            ShowPopup(ex.Message);
         }
     }
 
@@ -131,7 +157,7 @@ public partial class Home : System.Web.UI.Page
         ////by time and num of register
         #region
 
-        if (diff.Days == 0 && diff.Hours <= 4)//if less then 4 hours to start time
+        if (diff.Days == 0 && diff.Hours <= 12)//if less then 12 hours to start time
         {
             if (diff.Days == 0 && diff.Hours <= 3)
             {
@@ -141,7 +167,7 @@ public partial class Home : System.Web.UI.Page
                 }
                 else if (NumOfRegister / NumOfParticipants > 0.8)//if more then 80% has registerd
                 {
-                     prob = 99;
+                    prob = 99;
                 }
                 else //between 50%-80%
                 {
@@ -158,35 +184,45 @@ public partial class Home : System.Web.UI.Page
                 }
                 else //if less then 50% has registerd less then 3 hours to start time
                 {
-                    prob = 90;
+                    prob = 77;
                 }
             }
         }
-#endregion  
+        #endregion
         //by average rating
-       
-        Ev.EventNum= dt.Rows[i]["EventNumber"].ToString();
-         rating=Ev.GetRating();
-         averageRating = rating / NumOfRegister;
 
-         if (averageRating>90)//if average rating is more then 90 add but last then 99 add 20%
-         {
-             if (prob !=99)
-             {
-                 prob *= 1.2;
-             }
-             if (prob >99)
-             {prob=99;}
-         }
-         else if (averageRating > 70)//if average rating is  between 70-90 less 10% for prob
-         {
-             prob *= 0.9;
-         }
-         else//if average rating is   less  then 70  less 20% for prob
-         {
-             prob *= 0.8;
-         }
-    
+        Ev.EventNum = dt.Rows[i]["EventNumber"].ToString();
+        rating = Ev.GetRating();
+
+        //if only one is register
+        if (NumOfRegister==1)
+        {
+            averageRating = 60;
+        }
+        else
+        {
+          averageRating = rating / NumOfRegister;
+        }
+        
+
+        if (averageRating > 90)//if average rating is more then 90 add but last then 99 add 20%
+        {
+            if (prob != 99)
+            {
+                prob *= 1.2;
+            }
+            if (prob > 99)
+            { prob = 99; }
+        }
+        else if (averageRating > 70)//if average rating is  between 70-90 less 10% for prob
+        {
+            prob *= 0.9;
+        }
+        else//if average rating is   less  then 70  less 20% for prob
+        {
+            prob *= 0.8;
+        }
+
         GridView1.Rows[i].Cells[8].Text = prob.ToString() + "%";
     }
 
@@ -260,7 +296,10 @@ public partial class Home : System.Web.UI.Page
             //pop register
             if (num >= 1)
             {
+
+                SendMail(U1.Email, Eventnum);
                 ShowPopup("you have added to the event Successfully");
+                Response.Redirect("MyEvents.aspx");
             }
             else if (num == -1)
             {
@@ -270,7 +309,7 @@ public partial class Home : System.Web.UI.Page
             {
                 ShowPopup("Error register faild  please try agin later");
             }
-            Response.Redirect("MyEvents.aspx");
+
         }
         else
         {
@@ -338,13 +377,63 @@ public partial class Home : System.Web.UI.Page
         }
     }
 
-
+    //popup func
     protected void ShowPopup(string message) //popup message
     {
 
         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "Popup", "ShowPopup('" + message + "');", true);
     }
 
+    //send mail
+    protected void SendMail(string email, string eventnum)
+    {
+        int rownum = 0;
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (dt.Rows[i]["EventNumber"].ToString() == eventnum)
+                rownum = i;
+        }
+
+        try
+        {
+            MailMessage Msg = new MailMessage();
+            // Sender e-mail address.
+            Msg.From = new MailAddress("LetsPlay.ruppin@gmail.com");
+            // Recipient e-mail address.
+            Msg.To.Add(email);
+            Msg.Subject = "You have joined to a new event";
+            // File Upload path
+            string mailbody = "<h3 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>Hello,You have joined a new event!</h3><br/>";
+            mailbody += "<h1 style='color:Navy;font-size:xx-large; font-weight:bold; font-family:Guttman Yad-Brush;'>" + dt.Rows[rownum]["Description"].ToString() + "</h1>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Max Participants:  " + dt.Rows[rownum]["NumOfRegister"].ToString() + "/" + dt.Rows[rownum]["NumOfParticipants"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Date & Time: " + dt.Rows[rownum]["Time"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Age Range:  " + dt.Rows[rownum]["MinAge"].ToString() + "-" + dt.Rows[rownum]["MaxAge"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Location:  " + dt.Rows[rownum]["Address"].ToString() + "</h3>";
+            mailbody += "<h3 style='Guttman Yad-Brush;'>Admin Comments:  " + dt.Rows[rownum]["Comments"].ToString() + "</h3>";
+            mailbody += "<br />";
+            mailbody += "<p><img style='width:200px;' src='http://proj.ruppin.ac.il/bgroup14/prod/tar6/pic/logo_black.png'/></p>";
+            mailbody += "<br/>";
+            mailbody += "<p style='color:blue; font-size:large; font-weight:bold; font-family:Guttman;'>Let's Play </p><p> LetsPlay.ruppin@gmail.com</p>";
+
+            // Create HTML view
+            AlternateView htmlMail = AlternateView.CreateAlternateViewFromString(mailbody, null, "text/html");
+            // Set ContentId property. Value of ContentId property must be the same as
+            // the src attribute of image tag in email body. 
+            Msg.AlternateViews.Add(htmlMail);
+            // your remote SMTP server IP.
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.Credentials = new System.Net.NetworkCredential("LetsPlay.ruppin@gmail.com", "bgroup14");
+            smtp.EnableSsl = true;
+            smtp.Send(Msg);
+
+        }//try
+        catch (Exception ex)
+        {
+            ShowPopup(ex.Message);
+        }//catch
+    }
     #endregion
 
 
