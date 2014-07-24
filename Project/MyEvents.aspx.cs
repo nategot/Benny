@@ -84,8 +84,9 @@ public partial class MyEvents : System.Web.UI.Page
             }
             AddJoinBtn(i);
             AddNumOfRegister(i);
-            Chekdate(i);
             ProbabilityForGame(i);
+            Chekdate(i);
+            
         }
 
 
@@ -106,60 +107,56 @@ public partial class MyEvents : System.Web.UI.Page
     }
 
     //check date if today or tomorrow
-    protected void Chekdate(int i)
+     protected void Chekdate(int i)
     {
-        DateTime time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
+        try
+        {
+            time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
+            TimeSpan diff2 = time.Subtract(now);
 
-        time = DateTime.Parse(dtMyEvent.Rows[i]["Time"].ToString());
-        TimeSpan diff2 = time.Subtract(now);
-
-        if (diff2.Days == 0)
-        {
-            GridView1.Rows[i].Cells[3].Text = "Today!";
-        }
-        else if (diff2.Days == 1)
-        {
-            GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
-        }
-            else
-        {
             string date = GridView1.Rows[i].Cells[3].Text;
             string newdate = "";
             string AMPM = "";
             AMPM = date.Substring(date.Length - 2, 2);
-            if (AMPM == "AM")
+            string[] dateArr = new string[2];
+            newdate = date.Remove(date.Length - 6, 6);
+            dateArr = newdate.Split(' ');
+            string temp = dateArr[1].Substring(0, 1);
+
+            if (AMPM != "AM")
             {
-                newdate = date.Remove(date.Length - 6, 6);
-                GridView1.Rows[i].Cells[3].Text = newdate;
-            }
-            else
-            {
-                string[] dateArr = new string[2];
-                newdate = date.Remove(date.Length - 6, 6);
-                dateArr = newdate.Split(' ');
-                string temp = dateArr[1].Substring(0, 1);
                 double hour = double.Parse(temp);
                 hour += 12;
-                newdate = FixDate(dateArr[0]) + " " + hour.ToString() + dateArr[1].Remove(0, 1);
-                GridView1.Rows[i].Cells[3].Text = newdate;
+                temp = hour.ToString();
+            }
+
+            newdate = FixDate(dateArr[0]) + " " + temp + dateArr[1].Remove(0, 1);
+            GridView1.Rows[i].Cells[3].Text = newdate;
+
+            if (diff2.Days == 0 && time.Day == now.Day)
+            {
+                GridView1.Rows[i].Cells[3].Text = "Today at " + temp + dateArr[1].Remove(0, 1) + "!";
+            }
+            else if (diff2.Days == 1 || diff2.Days == 0)
+            {
+                GridView1.Rows[i].Cells[3].Text = "Tomorrow at " + temp + dateArr[1].Remove(0, 1) + "!";
+            }
+            if (DateTime.Today > time)
+            {
+                GridView1.Rows[i].Cells[8].BackColor = System.Drawing.Color.Gray;
+                GridView1.Rows[i].Cells[8].Text = "Event closed";
             }
         }
 
 
-         if (DateTime.Today > time)
+        catch (Exception ex)
         {
-            Image ImageFUll = new Image();
-            ImageFUll.ImageUrl = "pic/Date over.jpg";
-            ImageFUll.Width = 80;
-            ImageFUll.Height = 30;
-            //GridView1.Rows[i].Cells[3].BackColor = System.Drawing.Color.Red;
-            GridView1.Rows[i].Cells[8].Controls.Clear();
-            GridView1.Rows[i].Cells[8].Controls.Add(ImageFUll);
-        }
-        
 
+            ShowPopup(ex.Message);
+        }
     }
 
+    
     //fix date format
     protected string FixDate(string date)
     {
@@ -257,7 +254,6 @@ public partial class MyEvents : System.Web.UI.Page
 
     }
 
-
     //onmouse over color 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -292,6 +288,7 @@ public partial class MyEvents : System.Web.UI.Page
     {
         string idEv = dtMyEvent.Rows[i]["EventNumber"].ToString();
         GridView1.Rows[i].Cells[7].Text = "<a href='#' class='' data-reveal-id='myModal'  onclick='loadEventDetail(" + idEv + ")'>  <input class='btnViewDetails' type='button' value='View Details!' /> </a>";
+        
     }
 
     //adding the image
@@ -405,8 +402,6 @@ public partial class MyEvents : System.Web.UI.Page
             ShowPopup("Error register faild  please try agin later");
         }
     }
-
-
 
     protected void InviteBTn_Click(object sender, EventArgs e)
     {

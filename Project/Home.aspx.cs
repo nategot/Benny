@@ -144,7 +144,7 @@ public partial class Home : System.Web.UI.Page
             {
                 GridView1.Rows[i].Cells[3].Text = "Today at " + temp + dateArr[1].Remove(0, 1) + "!";
             }
-            else if (diff2.Days == 1)
+            else if (diff2.Days == 1 || diff2.Days == 0)
             {
                 GridView1.Rows[i].Cells[3].Text = "Tomorrow at " + temp + dateArr[1].Remove(0, 1) + "!";
             }
