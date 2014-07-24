@@ -13,6 +13,7 @@ body
     background-image: url('../Images/bluefadetovivid.jpeg');
     background-size:cover;
     background-repeat:no-repeat;
+    width:95%;
 }
 
 a:link, a:visited
