@@ -88,11 +88,10 @@ public class WebService : System.Web.Services.WebService
         ev.IsPrivate1 = bool.Parse(type.ToString());
 
         dateArr = time.Split(' ');
-        dateArrT = dateArr[0].Split('/');
-        strtemp = dateArrT[1] + "/" + dateArrT[0] + "/" + dateArrT[2];
+        dateArrT = dateArr[0].Split('-');
+        strtemp = dateArrT[2] + "/" + dateArrT[1] + "/" + dateArrT[0];
         string dateandtime = strtemp + " " + dateArr[1];
         ev.DateTime = DateTime.Parse(dateandtime);
-
         ev.Comments = comments;
         ev.Frequency = frequecy;
         ev.AdminID = adminId;
