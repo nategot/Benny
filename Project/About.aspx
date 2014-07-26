@@ -22,7 +22,7 @@
             </td>
             <td class="tdabout">
                 <div class="Aboutdiv">
-                    <img class="imgabot" src="http://proj.ruppin.ac.il/bgroup14/prod/Docs/images/omer_liverant.png" /><br />
+                    <img class="imgabot" src="http://proj.ruppin.ac.il/bgroup14/prod/Docs/images/omer_liverant.jpg" /><br />
                     <br />
                     <asp:Label runat="server" CssClass="Aboutxt" Text="Omer Liverant"></asp:Label>
                     <a href="mailto:omerliverant@gmail.com?Subject=Hello%20Omer" target="_top"><br />
@@ -40,6 +40,6 @@
         </tr>
     </table>
     <br />
-    <br />
-    <iframe  src="//www.youtube.com/embed/8W3KI1BjlQg" frameborder="0" allowfullscreen></iframe>
+    <br /> 
+    <iframe  src="//www.youtube.com/embed/jKX_6TR_hpk"  frameborder="0" allowfullscreen></iframe>
 </asp:Content>
