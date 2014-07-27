@@ -98,7 +98,7 @@ public class WebService : System.Web.Services.WebService
         string jsonString = js.Serialize("ok");
         try
         {     ev.insert();
-        jsonString = time + "-----" + dateandtime;
+        jsonString = time + "-----" + "dateandtime";
             //jsonString = ev.insert().ToString();
                
         }
