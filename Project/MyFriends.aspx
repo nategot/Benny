@@ -60,9 +60,7 @@
         font-family: Narkisim;">
         Invite Friends
     </h1>
-    <asp:UpdatePanel runat="server" ID="group">
-
-    <ContentTemplate>
+   
     <div id="group" style="float: right">
         &nbsp;
         <asp:Label ID="Label3" Text="Group name:" CssClass="lbltxtFriends" runat="server" />&nbsp;&nbsp;
@@ -147,10 +145,7 @@
         <%--  <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Email is required field"
             ControlToValidate="newEmailTb"></asp:RequiredFieldValidator>--%>
     </div>
-      </ContentTemplate>
-    </asp:UpdatePanel>
-
-
+    
 
     <div id="description">
         <div style="margin-left: 1px;">

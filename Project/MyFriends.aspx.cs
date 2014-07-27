@@ -301,6 +301,7 @@ public partial class MyFriends : System.Web.UI.Page
             buildgroupPH.Visible = false;
             invitPH.Visible = true;
             changeBtn.Text = "build new group";
+            Label3.Text = "Invite from list";
 
         }
         else
@@ -308,6 +309,7 @@ public partial class MyFriends : System.Web.UI.Page
             buildgroupPH.Visible = true;
             invitPH.Visible = false;
             changeBtn.Text = "Invite from list";
+            Label3.Text = "build new group";
 
         }
 
