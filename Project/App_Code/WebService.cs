@@ -86,10 +86,9 @@ public class WebService : System.Web.Services.WebService
         ev.NumOfParti = nop;
         ev.Catedory = category;
         ev.IsPrivate1 = bool.Parse(type.ToString());
-
         dateArr = time.Split(' ');
-        dateArrT = dateArr[0].Split('-');
-        strtemp = dateArrT[2] + "/" + dateArrT[1] + "/" + dateArrT[0];
+        dateArrT = dateArr[0].Split('/');
+        strtemp = dateArrT[1] + "/" + dateArrT[0] + "/" + dateArrT[2];
         string dateandtime = strtemp + " " + dateArr[1];
         ev.DateTime = DateTime.Parse(dateandtime);
         ev.Comments = comments;
@@ -99,13 +98,14 @@ public class WebService : System.Web.Services.WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string jsonString = js.Serialize("ok");
         try
-        {
-            ev.insert();
-            jsonString = js.Serialize("dateandtime");
+        {     ev.insert();
+        jsonString = time + "-----" + dateandtime;
+            //jsonString = ev.insert().ToString();
+               
         }
         catch (Exception ex)
         {
-            jsonString = js.Serialize("error in treasure.setPOI --- " + ex.Message);
+            jsonString = js.Serialize("error in setPOI --- " + ex.Message);
         }
 
         return jsonString;
