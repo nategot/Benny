@@ -14,6 +14,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <div>
+
         <asp:Label ID="EventNameLbl" CssClass="EventNameLbl" runat="server" Font-Size="XX-Large"
             Font-Italic="True" Font-Bold="True"></asp:Label>
         <asp:Image ID="iconImg" runat="server" />
