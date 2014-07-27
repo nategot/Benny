@@ -65,45 +65,45 @@ public partial class Home : System.Web.UI.Page
         try
         {
 
-        
-        string ageRange;
-        for (int i = 0; i < dt.Rows.Count; i++)
-        {
-            //edit the age range
-            ageRange = dt.Rows[i]["MinAge"].ToString();
-            ageRange += "-" + dt.Rows[i]["MaxAge"].ToString();
-            GridView1.Rows[i].Cells[6].Text = ageRange;
 
-            //hide if private
-            CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[11].Controls[0];
-            if (cb.Checked)
-            { GridView1.Rows[i].Visible = false; }
-
-            //hide EventNumber & Comments & private& lat lng
-            for (int r = 9; r < 16; r++)
+            string ageRange;
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                GridView1.Rows[i].Cells[r].Visible = false;
-                GridView1.HeaderRow.Cells[r].Visible = false;
-            }
-            AddJoinBtn(i);
-            AddNumOfRegister(i);
-            ProbabilityForGame(i);
-            Chekdate(i);
-        }
+                //edit the age range
+                ageRange = dt.Rows[i]["MinAge"].ToString();
+                ageRange += "-" + dt.Rows[i]["MaxAge"].ToString();
+                GridView1.Rows[i].Cells[6].Text = ageRange;
 
-        if (GridView1.Rows.Count == 0)
-        {
-            ShowPopup("you dont have any events");
-        }
-        else
-        {
-            GridView1.HeaderRow.Cells[0].Text = "";
-            GridView1.HeaderRow.Cells[2].Text = "Participants";
-            GridView1.HeaderRow.Cells[4].Text = "Frequency";
-            GridView1.HeaderRow.Cells[6].Text = "Age";
-            GridView1.HeaderRow.Cells[7].Text = "";
-        }
-        AddImage();
+                //hide if private
+                CheckBox cb = (CheckBox)GridView1.Rows[i].Cells[11].Controls[0];
+                if (cb.Checked)
+                { GridView1.Rows[i].Visible = false; }
+
+                //hide EventNumber & Comments & private& lat lng
+                for (int r = 9; r < 16; r++)
+                {
+                    GridView1.Rows[i].Cells[r].Visible = false;
+                    GridView1.HeaderRow.Cells[r].Visible = false;
+                }
+                AddJoinBtn(i);
+                AddNumOfRegister(i);
+                ProbabilityForGame(i);
+                Chekdate(i);
+            }
+
+            if (GridView1.Rows.Count == 0)
+            {
+                ShowPopup("you dont have any events");
+            }
+            else
+            {
+                GridView1.HeaderRow.Cells[0].Text = "";
+                GridView1.HeaderRow.Cells[2].Text = "Participants";
+                GridView1.HeaderRow.Cells[4].Text = "Frequency";
+                GridView1.HeaderRow.Cells[6].Text = "Age";
+                GridView1.HeaderRow.Cells[7].Text = "";
+            }
+            AddImage();
         }
         catch (Exception ex)
         {
@@ -121,37 +121,34 @@ public partial class Home : System.Web.UI.Page
             time = DateTime.Parse(dt.Rows[i]["Time"].ToString());
             TimeSpan diff2 = time.Subtract(now);
 
-            if (diff2.Days == 0 && time.Day == now.Day)
-            {
-                GridView1.Rows[i].Cells[3].Text = "Today!";
-            }
-            else if (diff2.Days == 1)
-            {
-                GridView1.Rows[i].Cells[3].Text = "Tomorrow!";
-            }
-            else
-            {
             string date = GridView1.Rows[i].Cells[3].Text;
             string newdate = "";
             string AMPM = "";
             AMPM = date.Substring(date.Length - 2, 2);
-            if (AMPM == "AM")
+            string[] dateArr = new string[2];
+            newdate = date.Remove(date.Length - 6, 6);
+            dateArr = newdate.Split(' ');
+            string temp = dateArr[1].Substring(0, 1);
+
+            if (AMPM != "AM")
             {
-                newdate = date.Remove(date.Length - 6, 6);
-                GridView1.Rows[i].Cells[3].Text = newdate;
+                double hour = double.Parse(temp);
+                hour += 12;
+                temp = hour.ToString();
             }
-            else
+
+            newdate = FixDate(dateArr[0]) + " " + temp + dateArr[1].Remove(0, 1);
+            GridView1.Rows[i].Cells[3].Text = newdate;
+
+            if (diff2.Days == 0 && time.Day == now.Day)
             {
-                   string[] dateArr = new string[2];
-                   newdate = date.Remove(date.Length - 6, 6);
-                   dateArr= newdate.Split(' ');
-                   string temp = dateArr[1].Substring(0, 1);
-                   double hour= double.Parse(temp);
-                   hour += 12;
-                   newdate = FixDate(dateArr[0]) +" " + hour.ToString() + dateArr[1].Remove(0, 1);
-                   GridView1.Rows[i].Cells[3].Text = newdate;
-             }   
-           }
+                GridView1.Rows[i].Cells[3].Text = "Today at " + temp + dateArr[1].Remove(0, 1) + "!";
+            }
+            else if (diff2.Days == 1 || diff2.Days == 0)
+            {
+                GridView1.Rows[i].Cells[3].Text = "Tomorrow at " + temp + dateArr[1].Remove(0, 1) + "!";
+            }
+
         }
 
 
@@ -231,15 +228,15 @@ public partial class Home : System.Web.UI.Page
         rating = Ev.GetRating();
 
         //if only one is register
-        if (NumOfRegister==1)
+        if (NumOfRegister == 1)
         {
             averageRating = 60;
         }
         else
         {
-          averageRating = rating / NumOfRegister;
+            averageRating = rating / NumOfRegister;
         }
-        
+
 
         if (averageRating > 90)//if average rating is more then 90 add but last then 99 add 20%
         {

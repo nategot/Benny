@@ -13,7 +13,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
-    <script src="Scripts/Facebook.js" type="text/javascript"></script>
     <asp:Timer ID="MyEventsTimer" runat="server" OnTick="MyEventsTimer_Tick" Interval="200"
         Enabled="False">
     </asp:Timer>
