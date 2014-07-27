@@ -1,6 +1,6 @@
 ﻿body 
 {
-    width:95%;
+    width:95% 140%;
 }
 
 .tdabout
@@ -70,7 +70,6 @@ iframe
 {
     width:50%;
     height:inherit;
-   text-align:center;
    padding-left:20%;
 /*------------------------------------------------------------*/
 
