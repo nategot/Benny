@@ -74,7 +74,7 @@ public class WebService : System.Web.Services.WebService
     //add event
     public string setPOI(double lat, double lng, int nop, int category, string type, int frequecy, int minAge, int maxAge, string address, string time, string comments, int adminId)
     {
-        string strtemp;
+        //string strtemp;
         string[] dateArr = new string[2];
         string[] dateArrT = new string[3];
         EventOnAir ev = new EventOnAir();
@@ -85,11 +85,11 @@ public class WebService : System.Web.Services.WebService
         ev.NumOfParti = nop;
         ev.Catedory = category;
         ev.IsPrivate1 = bool.Parse(type.ToString());
-        dateArr = time.Split(' ');
-        dateArrT = dateArr[0].Split('/');
-        strtemp = dateArrT[1] + "/" + dateArrT[0] + "/" + dateArrT[2];
-        string dateandtime = strtemp + " " + dateArr[1];
-        ev.DateTime = DateTime.Parse(dateandtime);
+        //dateArr = time.Split(' ');
+        //dateArrT = dateArr[0].Split('-');
+        //strtemp = dateArrT[2] + "/" + dateArrT[0] + "/" + dateArrT[1];
+        //string dateandtime = strtemp + " " + dateArr[1];
+        ev.DateTime = DateTime.Parse("07/28/2014 20:00");
         ev.Comments = comments;
         ev.Frequency = frequecy;
         ev.AdminID = adminId;
